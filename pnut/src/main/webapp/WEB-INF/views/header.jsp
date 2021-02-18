@@ -6,7 +6,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initialscale=1">
-<!-- path가 ch06 절대경로를 만들기 위해 사용 -->
 <c:set var="path" value="${pageContext.request.contextPath }"></c:set>
 <link rel="stylesheet" type="text/css" 
 	href="${path}/resources/bootstrap/css/bootstrap.min.css">
