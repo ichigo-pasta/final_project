@@ -14,12 +14,12 @@
 	<table class="table table-bordered table-hover">
 		<tr>
 			<td>아이디<span class="glyphicon glyphicon-user"></span></td>
-			<td><input type="text" name="id" 
+			<td><input type="text" name="m_id" 
 				required="required" autofocus="autofocus"></td>
 		</tr>
 		<tr>
 			<td>비밀번호<span class="glyphicon glyphicon-lock"></span></td>
-			<td><input type="password" name="password" 
+			<td><input type="password" name="m_pw" 
 				required="required"></td>
 		</tr>
 		<tr>
