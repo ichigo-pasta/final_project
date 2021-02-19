@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ include file="header.jsp" %>
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="UTF-8">
+<title>P-Nut</title>
+</head>
+<body>
+<div class="container">
+<table class="table table-bordered">
+	<tr height="80">
+		<td><img alt="" src="/resources/images/P-Nut.png" onclick="">
+		<td><tiles:insertAttribute name="body"/>상단 고정</td>
+	</tr>
+	<tr>
+		<td width="25%"><tiles:insertAttribute name=""/>메뉴</td>
+		<td><tiles:insertAttribute name="body"/>본문</td>
+	</tr>
+</table>
+</div>
+</body>
+</html>
