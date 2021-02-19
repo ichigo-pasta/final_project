@@ -9,8 +9,7 @@
 		<put-attribute name="body" 		value="" />
 	</definition>
 	<definition name="nolayout" template="/WEB-INF/views/nolayout.jsp">
-	<!-- 레이아웃 미적용  -->
-		<put-attribute name="header" value="" />
+	<!-- 레이아웃 미적용  -->		
 		<put-attribute name="menu" value="" />
 	</definition>	
 	<!-- (1) nolay폴더 안의 {1}은 jsp이름-->

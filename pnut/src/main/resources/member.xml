@@ -14,10 +14,10 @@
 		<result property="m_del" column="m_del"/>
 	</resultMap>
 	<select id="select" parameterType="string" resultMap="memberResult">
-		select * from member where m_id=#{m_id}
+		select * from pn_member where m_id=#{m_id}
 	</select>
 	<insert id="insert" parameterType="member">
-		insert into member values (#{m_id}, #{m_pw}, #{m_name},
+		insert into pn_member values (#{m_id}, #{m_pw}, #{m_name},
 			#{m_email},#{m_tel},sysdate,'n',null,null)
 	</insert>
 </mapper>
