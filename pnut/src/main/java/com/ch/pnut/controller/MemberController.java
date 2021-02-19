@@ -56,8 +56,5 @@ public class MemberController {
 		model.addAttribute("result", result);
 		return "login";
 	}
-	@RequestMapping("home/timeline")
-	public String timeline() {
-		return "home/timeline";
-	}
+	
 }

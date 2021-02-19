@@ -1,6 +1,6 @@
 -- 테이블 삭제
-DROP table member CASCADE CONSTRAINTS;
-drop table member;
+DROP table pn_member CASCADE CONSTRAINTS;
+-- 회원 테이블 생성
 create table pn_member (
 	m_id		varchar2(20)	primary key,	-- 회원 ID
 	m_pw		varchar2(20)	not null,	-- 회원 비밀번호
@@ -13,8 +13,8 @@ create table pn_member (
 	m_bg 		varchar2(80)    -- 배경사진 파일명
 );
 
-select * from member;
-select * from member where m_id='k2';
+select * from pn_member;
+select * from pn_member where m_id='k2';
 
 
-insert into member values ('k1', '1','탁','k1@k.com','010-1111-1111',sysdate,'n',null,null); 
+insert into pn_member values ('k1', '1','탁','k1@k.com','010-1111-1111',sysdate,'n',null,null); 

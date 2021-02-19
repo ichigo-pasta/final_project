@@ -13,12 +13,12 @@
 <form action="login.do">
 	<table class="table table-bordered table-hover">
 		<tr>
-			<td>아이디<span class="glyphicon glyphicon-user"></span></td>
+			<td>아이디<i class="bi-person-fill"></i></td>
 			<td><input type="text" name="m_id" 
 				required="required" autofocus="autofocus"></td>
 		</tr>
 		<tr>
-			<td>비밀번호<span class="glyphicon glyphicon-lock"></span></td>
+			<td>비밀번호<i class="bi-lock-fill"></i></td>
 			<td><input type="password" name="m_pw" 
 				required="required"></td>
 		</tr>
@@ -28,7 +28,8 @@
 	</table>
 </form>
 <div align="center">
-	<a href="joinForm.do" class="btn btn-success">회원가입</a>
+	<a href="joinForm.do" class="btn btn-success">
+		<i class="bi-person-fill">회원가입</i></a>
 </div>
 </div>
 </body>
