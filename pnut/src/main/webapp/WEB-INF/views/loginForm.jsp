@@ -30,5 +30,6 @@
 <div align="center">
 	<a href="joinForm.do" class="btn btn-success">회원가입</a>
 </div>
+</div>
 </body>
 </html>
