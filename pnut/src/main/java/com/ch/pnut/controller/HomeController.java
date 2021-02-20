@@ -9,4 +9,28 @@ public class HomeController {
 	public String timeline() {
 		return "home/timeline";
 	}
+	@RequestMapping("home/search")
+	public String search() {
+		return "home/search";
+	}
+	@RequestMapping("home/notice")
+	public String notice() {
+		return "home/notice";
+	}
+	@RequestMapping("home/message")
+	public String message() {
+		return "home/message";
+	}
+	@RequestMapping("home/bookmark")
+	public String bookmark() {
+		return "home/bookmark";
+	}
+	@RequestMapping("home/profile")
+	public String profile() {
+		return "home/profile";
+	}
+	@RequestMapping("home/write")
+	public String write() {
+		return "home/write";
+	}
 }

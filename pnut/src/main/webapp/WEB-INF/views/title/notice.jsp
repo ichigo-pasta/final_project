@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-타임라인
+<h3>알림</h3>
 </body>
-</html> 
+</html>

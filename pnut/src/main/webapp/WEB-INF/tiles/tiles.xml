@@ -19,6 +19,8 @@
 	</definition>
 	<!-- (2) {1}은 폴더명, {2}는 jsp명 -->
 	<definition name="*/*" extends="tilesbase">
+		<put-attribute name="title"
+			value="/WEB-INF/views/{1}/{2}.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>

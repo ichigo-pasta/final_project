@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-타임라인
+<h3>메시지</h3>
 </body>
-</html> 
+</html>
