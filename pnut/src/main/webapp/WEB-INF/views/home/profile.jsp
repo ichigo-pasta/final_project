@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-타임라인
+프로필
 </body>
-</html> 
+</html>

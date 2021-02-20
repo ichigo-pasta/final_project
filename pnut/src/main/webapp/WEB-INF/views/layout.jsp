@@ -13,11 +13,11 @@
 <table class="table table-bordered">
 	<tr height="50">
 		<td><img alt="" src="${path }/resources/images/P-Nut.png" height="50" onclick="">
-		<td>상단 고정</td>
+		<td><tiles:insertAttribute name="title"/></td>
 	</tr>
 	<tr>
 		<td width="25%"><tiles:insertAttribute name="menu"/></td>
-		<td><tiles:insertAttribute name="body"/>본문</td>
+		<td><tiles:insertAttribute name="body"/></td>
 	</tr>
 </table>
 </div>
