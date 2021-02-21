@@ -29,6 +29,10 @@ public class HomeController {
 	public String profile() {
 		return "home/profile";
 	}
+	@RequestMapping("home/writeForm")
+	public String writeForm() {
+		return "home/writeForm";
+	}
 	@RequestMapping("home/write")
 	public String write() {
 		return "home/write";

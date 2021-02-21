@@ -112,9 +112,7 @@ create table pn_message (
 
 
 
-
-
-select * from pn_member;
+select * from member;
 select * from pn_member where m_id='k2';
 select * from pn_master;
 select * from pn_peanuts;
