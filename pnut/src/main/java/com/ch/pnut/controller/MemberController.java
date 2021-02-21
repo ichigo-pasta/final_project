@@ -49,7 +49,7 @@ public class MemberController {
 		Member mem = ms.select(member.getM_id());
 		if (mem == null || mem.getM_del().equals("y"))
 			result = -1;  // 없는 아이디
-		else if (mem.getM_pw().contentEquals(member.getM_pw())) {
+		else if (mem.getM_pw().equals(member.getM_pw())) {
 			result = 1;  // 성공
 			session.setAttribute("id", member.getM_id());
 		}
