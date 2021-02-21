@@ -3,7 +3,11 @@ DROP table pn_member CASCADE CONSTRAINTS;
 DROP table pn_master CASCADE CONSTRAINTS;
 DROP table pn_peanuts CASCADE CONSTRAINTS;
 DROP table pn_replies CASCADE CONSTRAINTS;
-
+DROP table pn_follow CASCADE CONSTRAINTS;
+DROP table pn_block CASCADE CONSTRAINTS;
+DROP table pn_bookmark CASCADE CONSTRAINTS;
+DROP table pn_notice CASCADE CONSTRAINTS;
+DROP table pn_message CASCADE CONSTRAINTS;
 
 -- 회원 테이블 생성
 create table pn_member (
@@ -20,8 +24,8 @@ create table pn_member (
 
 -- 관리자 테이블 생성
 create table pn_master (
-	mas_id	varchar2(20)	primary key,	-- 관리자 ID(pk)	
-	mas_pw	varchar2(20)	not null		-- 관리자 비밀번호
+	mas_id	varchar2(20)	primary key,		-- 관리자 ID(pk)	
+	mas_pw	varchar2(20)	not null			-- 관리자 비밀번호
 );
 
 -- 게시글 테이블 생성
@@ -56,8 +60,8 @@ create table pn_replies (
 
 -- 팔로우 테이블 생성
 create table pn_follow (
-	active number,								-- 내가 팔로우 한 사람
-	passive number,								-- 나를 팔로우 한 사람
+	active 	varchar2(20),						-- 내가 팔로우 한 사람
+	passive varchar2(20),						-- 나를 팔로우 한 사람
 	primary key (active, passive),
 	foreign key (active) references pn_member(m_id),
 	foreign key (passive) references pn_member(m_id)
@@ -65,8 +69,8 @@ create table pn_follow (
 
 -- 차단 테이블 생성
 create table pn_block (
-	active 	number,								-- 내가 차단 한 사람
-	passive number,								-- 나를 차단 한 사람
+	active 	varchar2(20),						-- 내가 차단 한 사람
+	passive varchar2(20),						-- 나를 차단 한 사람
 	primary key (active, passive),
 	foreign key (active) references pn_member(m_id),
 	foreign key (passive) references pn_member(m_id)
@@ -74,8 +78,8 @@ create table pn_block (
 
 -- 북마크 테이블 생성
 create table pn_bookmark (
-	peanut_no 	number,								-- 게시글 번호
-	bm_user 	number,								-- 북마크 유저
+	peanut_no 	number,							-- 게시글 번호
+	bm_user 	varchar2(20),					-- 북마크 유저
 	primary key (peanut_no, bm_user),
 	foreign key (peanut_no) references pn_peanuts(peanut_no),
 	foreign key (bm_user) references pn_member(m_id)
@@ -83,15 +87,29 @@ create table pn_bookmark (
 
 -- 알림 테이블 생성
 create table pn_notice (
-	--게시글 번호, 알림대상, 댓글 번호
-	peanut_no 	number,								-- 게시글 번호
-	reply_no 	number,								-- 댓글 번호
-	notice_user 	number,								-- 알림대상
+	peanut_no 		number,						-- 게시글 번호
+	reply_no 		number,						-- 댓글 번호
+	notice_user 	varchar2(20),				-- 알림대상
 	primary key (peanut_no, reply_no, notice_user),
 	foreign key (peanut_no) references pn_peanuts(peanut_no),
 	foreign key (reply_no) references pn_replies(reply_no),
 	foreign key (notice_user) references pn_member(m_id)
 );
+
+-- 쪽지 테이블 생성
+create table pn_message (
+	m_id		varchar2(20)	primary key,	-- 회원 아이디(pk)
+	sender		varchar2(20)	not null,		-- 보내는 사람(fk)
+	receiver	varchar2(20)	not null,		-- 받는 사람(fk)
+	content		varchar2(600)	not null,		-- 내용
+	ip			varchar2(20)	not null,		-- ip
+	reg_date	date			not null,		-- 받은 시간
+	checked		char(1)			not null,		-- 확인 여부
+	del			char(1)			not null,		-- 삭제 여부
+	foreign key (sender) references pn_member(m_id),
+	foreign key (receiver) references pn_member(m_id)
+);
+
 
 
 
@@ -101,5 +119,10 @@ select * from pn_member where m_id='k2';
 select * from pn_master;
 select * from pn_peanuts;
 select * from pn_replies;
+select * from pn_follow;
+select * from pn_block;
+select * from pn_bookmark;
+select * from pn_notice;
+select * from pn_message;
 
 insert into pn_member values ('k1', '1','탁','k1@k.com','010-1111-1111',sysdate,'n',null,null); 

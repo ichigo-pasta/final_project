@@ -7,6 +7,7 @@
 		<!-- 레이아웃 적용 -->
 		<put-attribute name="menu" 		value="/WEB-INF/views/menu.jsp" />
 		<put-attribute name="body" 		value="" />
+		<put-attribute name="title" 	value="" />
 	</definition>
 	<definition name="nolayout" template="/WEB-INF/views/nolayout.jsp">
 	<!-- 레이아웃 미적용  -->		
