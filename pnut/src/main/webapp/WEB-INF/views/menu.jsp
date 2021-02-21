@@ -34,7 +34,7 @@
 				<i class="bi-person-fill">프로필</i></a></td>
 	</tr>
 	<tr>
-		<td><a href="${path}/home/write.do" class="btn btn-warning">
+		<td><a href="${path}/home/writeForm.do" class="btn btn-warning">
 				<i class="bi-pencil-fill">글쓰기</i></a></td>
 	</tr>
 </table>
