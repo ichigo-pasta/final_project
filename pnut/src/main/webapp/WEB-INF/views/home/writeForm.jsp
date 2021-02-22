@@ -7,24 +7,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function setThumbnail(event) {
-	   var images = event.target.files;
-	   
-	   for (var i in images) {
-	      var reader = new FileReader();
-	      reader.onload = function(event) {
-	         var img = document.createElement("img");
-	         img.setAttribute("src", event.target.result);
-	         img.setAttribute("width", "50%");
-	         document.querySelector("#img_container").appendChild(img);
-	      };
-	      /* 이 위치에 놓는게 맞는지 모르겠네요 */
-	      if (images.length > 4) {
-	    	   alert('이미지는 최대 4매까지 올릴 수 있습니다');
-	    	   event.target.value = null;            
-	    	   return;
-	    	}
-	      reader.readAsDataURL(images[i]);
+	function setThumbnail(number) {
+		var file = document.getElementById("image"+number).files;
+	   	var reader = new FileReader();
+	   	reader.onload = function() {
+	   		var img = document.createElement("img");
+	   		img.setAttribute("src", file[0].result);
+	   		img.setAttribute("width", "50%");
+	  		reader.readAsDataURL(file[0]);
+	  		console.log(reader.readAsDataURL(file[0]));
+	   		switch (number){
+	   		case "1":
+	   			document.querySelector("#img_container1").appendChild(img);
+	   			break;
+	   		}
 	   }
 	}
 </script>
@@ -39,16 +35,25 @@
 		</tr>
 		<tr>
 			<td>
-				<label><i class="bi bi-card-image" style="font-size: 30px"></i>
-   				<input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" 
-   					name="picture" multiple="multiple" hidden="hidden"></label>
-				<div id="img_container" style="width: 800px"></div>
+				<label>1.&nbsp;<i class="bi bi-card-image" style="font-size: 30px"></i>
+   				<input type="file" id="image1" accept="image/*" onchange="setThumbnail(1);" 
+   					name="picture1" hidden="hidden"></label>
+   				<label>2.&nbsp;<i class="bi bi-card-image" style="font-size: 30px"></i>
+   				<input type="file" id="image2" accept="image/*" onchange="setThumbnail(2);" 
+   					name="picture2" hidden="hidden"></label>
+   				<label>3.&nbsp;<i class="bi bi-card-image" style="font-size: 30px"></i>
+   				<input type="file" id="image3" accept="image/*" onchange="setThumbnail(3);" 
+   					name="picture3" hidden="hidden"></label>
+   				<label>4.&nbsp;<i class="bi bi-card-image" style="font-size: 30px"></i>
+   				<input type="file" id="image4" accept="image/*" onchange="setThumbnail(4);" 
+   					name="picture4" hidden="hidden"></label>
+				<span id="img_container1" style="width: 50%"></span>
+				<span id="img_container2" style="width: 50%"></span><br>
+				<span id="img_container3" style="width: 50%"></span>
+				<span id="img_container4" style="width: 50%"></span><br>
 				<input type="submit" value="피넛" class="btn btn-success"></td>
 		</tr>
 	</table>	
-<a data-fslightbox="gallery" href="${path }/resources/images/P-Nut.png">로고</a>
-<a data-fslightbox="gallery" href="${path }/resources/images/jung.jpg">1</a>
-<script src="fslightbox.js"></script> 
 </form>
 </div>
 </body>
