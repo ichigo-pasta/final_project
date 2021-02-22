@@ -6,24 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	function setThumbnail(number) {
-		var file = document.getElementById("image"+number).files;
-	   	var reader = new FileReader();
-	   	reader.onload = function() {
-	   		var img = document.createElement("img");
-	   		img.setAttribute("src", file[0].result);
-	   		img.setAttribute("width", "50%");
-	  		reader.readAsDataURL(file[0]);
-	  		console.log(reader.readAsDataURL(file[0]));
-	   		switch (number){
-	   		case "1":
-	   			document.querySelector("#img_container1").appendChild(img);
-	   			break;
-	   		}
-	   }
-	}
-</script>
 </head>
 <body>
 <div class="container">
@@ -35,26 +17,92 @@
 		</tr>
 		<tr>
 			<td>
-				<label>1.&nbsp;<i class="bi bi-card-image" style="font-size: 30px"></i>
-   				<input type="file" id="image1" accept="image/*" onchange="setThumbnail(1);" 
-   					name="picture1" hidden="hidden"></label>
-   				<label>2.&nbsp;<i class="bi bi-card-image" style="font-size: 30px"></i>
-   				<input type="file" id="image2" accept="image/*" onchange="setThumbnail(2);" 
-   					name="picture2" hidden="hidden"></label>
-   				<label>3.&nbsp;<i class="bi bi-card-image" style="font-size: 30px"></i>
-   				<input type="file" id="image3" accept="image/*" onchange="setThumbnail(3);" 
-   					name="picture3" hidden="hidden"></label>
-   				<label>4.&nbsp;<i class="bi bi-card-image" style="font-size: 30px"></i>
-   				<input type="file" id="image4" accept="image/*" onchange="setThumbnail(4);" 
-   					name="picture4" hidden="hidden"></label>
-				<span id="img_container1" style="width: 50%"></span>
-				<span id="img_container2" style="width: 50%"></span><br>
-				<span id="img_container3" style="width: 50%"></span>
-				<span id="img_container4" style="width: 50%"></span><br>
+				<button type="button" class="btn btn-info" onclick="img_upload();" >
+					<i class="bi bi-card-image" style="font-size: 30px"></i>사진추가
+				</button>
+				<button type="button" class="btn btn-info" onclick="img_delete();" >
+					<i class="bi bi-card-image" style="font-size: 30px; color: red"></i>사진삭제
+				</button><br>				
+   				<input type="file" accept="image/*" id="file1" name="picture1" hidden="hidden" onchange="setThumbnail(event);">
+   				<input type="file" accept="image/*" id="file2" name="picture2" hidden="hidden" onchange="setThumbnail(event);">
+   				<input type="file" accept="image/*" id="file3" name="picture3" hidden="hidden" onchange="setThumbnail(event);">
+   				<input type="file" accept="image/*" id="file4" name="picture4" hidden="hidden" onchange="setThumbnail(event);">
+				<span id="img_container1"></span>
+				<span id="img_container2"></span><br>
+				<span id="img_container3"></span>
+				<span id="img_container4"></span><br>
 				<input type="submit" value="피넛" class="btn btn-success"></td>
 		</tr>
 	</table>	
 </form>
 </div>
+<script type="text/javascript">
+	function setThumbnail(event) {
+		var evt;
+		switch (event.target.name) {
+		case "picture1":
+			var i_con = document.getElementById('img_container1');
+			while(i_con.hasChildNodes()) {
+				i_con.removeChild(i_con.lastChild);
+			}
+			evt = 1;
+			break;
+		case "picture2":
+			var i_con = document.getElementById('img_container2');
+			while(i_con.hasChildNodes()) {
+				i_con.removeChild(i_con.lastChild);
+			}	
+			evt = 2;
+			break;
+		case "picture3":
+			var i_con = document.getElementById('img_container3');
+			while(i_con.hasChildNodes()) {
+				i_con.removeChild(i_con.lastChild);
+			}
+			evt = 3;
+			break;
+		case "picture4":
+			var i_con = document.getElementById('img_container4');
+			while(i_con.hasChildNodes()) {
+				i_con.removeChild(i_con.lastChild);
+			}
+			evt = 4;
+		}		
+		var image = event.target.files;		
+		var reader = new FileReader();
+		reader.onload = function(event) {			
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			img.setAttribute("width", "45%");
+			document.getElementById('img_container' + evt).appendChild(img);						
+		}
+		reader.readAsDataURL(image[0]);
+	}
+	
+	function img_upload() {
+		if (!document.getElementById('img_container1').hasChildNodes()) {
+			document.getElementById('file1').click();
+		} else if (!document.getElementById('img_container2').hasChildNodes()) {
+			document.getElementById('file2').click();
+		} else if (!document.getElementById('img_container3').hasChildNodes()) {
+			document.getElementById('file3').click();
+		} else if (!document.getElementById('img_container4').hasChildNodes()) {
+			document.getElementById('file4').click();
+		} else {
+			alert('사진은 4장까지만 올릴 수 있습니다');
+		}
+	}
+	
+	function img_delete() {
+		var i_con;
+		for (var i=1; i<=4; i++) {
+			document.getElementById('file' + i).value = "";
+			i_con = document.getElementById('img_container' + i);
+			while(i_con.hasChildNodes()) {
+				i_con.removeChild(i_con.lastChild);
+			}
+		}
+	}
+</script>
 </body>
 </html>
