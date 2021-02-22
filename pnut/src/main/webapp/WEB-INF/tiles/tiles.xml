@@ -7,7 +7,6 @@
 		<!-- 레이아웃 적용 -->
 		<put-attribute name="menu" 		value="/WEB-INF/views/menu.jsp" />
 		<put-attribute name="body" 		value="" />
-		<put-attribute name="title" 	value="" />
 	</definition>
 	<definition name="nolayout" template="/WEB-INF/views/nolayout.jsp">
 	<!-- 레이아웃 미적용  -->		
@@ -20,8 +19,6 @@
 	</definition>
 	<!-- (2) {1}은 폴더명, {2}는 jsp명 -->
 	<definition name="*/*" extends="tilesbase">
-		<put-attribute name="title"
-			value="/WEB-INF/views/{1}/{2}.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>

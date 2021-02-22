@@ -2,6 +2,8 @@ package com.ch.pnut.model;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -11,10 +13,15 @@ public class Peanuts {
 	private String content;		// 게시글 내용
 	private String ip;			// IP
 	private int renut;			// 리넛(을 누르면 팔로워들한테 게시글 전송)
-	private String picture1;	// 사진 1
-	private String picture2;	// 사진 2
-	private String picture3;	// 사진 3
-	private String picture4;	// 사진 4
+	private String picture1;	// 사진 1 파일명
+	private String picture2;	// 사진 2 파일명
+	private String picture3;	// 사진 3 파일명
+	private String picture4;	// 사진 4 파일명
 	private Date regdate;		// 작성일
 	private String del;			// 삭제여부 
+	// 파일 업로드
+	private MultipartFile file1;	// 사진 1
+	private MultipartFile file2;	// 사진 2
+	private MultipartFile file3;	// 사진 3
+	private MultipartFile file4;	// 사진 4
 }

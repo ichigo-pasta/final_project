@@ -9,11 +9,12 @@
 </head>
 <body>
 <div class="container">
-<form action="write.do">
+<form action="write" method="post" enctype="multipart/form-data">
 	<table class="table table-border">
 		<tr>
 			<td rowspan="2">프로필 사진</td>
-			<td><input type="text"></td>
+			<td><textarea cols="55" rows="9" required="required" 
+					name="content" style="resize: none;"></textarea></td>
 		</tr>
 		<tr>
 			<td>
@@ -23,10 +24,10 @@
 				<button type="button" class="btn btn-info" onclick="img_delete();" >
 					<i class="bi bi-card-image" style="font-size: 30px; color: red"></i>사진삭제
 				</button><br>				
-   				<input type="file" accept="image/*" id="file1" name="picture1" hidden="hidden" onchange="setThumbnail(event);">
-   				<input type="file" accept="image/*" id="file2" name="picture2" hidden="hidden" onchange="setThumbnail(event);">
-   				<input type="file" accept="image/*" id="file3" name="picture3" hidden="hidden" onchange="setThumbnail(event);">
-   				<input type="file" accept="image/*" id="file4" name="picture4" hidden="hidden" onchange="setThumbnail(event);">
+   				<input type="file" accept="image/*" id="file1" name="file1" hidden="hidden" onchange="setThumbnail(event);">
+   				<input type="file" accept="image/*" id="file2" name="file2" hidden="hidden" onchange="setThumbnail(event);">
+   				<input type="file" accept="image/*" id="file3" name="file3" hidden="hidden" onchange="setThumbnail(event);">
+   				<input type="file" accept="image/*" id="file4" name="file4" hidden="hidden" onchange="setThumbnail(event);">
 				<span id="img_container1"></span>
 				<span id="img_container2"></span><br>
 				<span id="img_container3"></span>
@@ -38,30 +39,34 @@
 </div>
 <script type="text/javascript">
 	function setThumbnail(event) {
+		if (event.target && event.target.files[0].size > (10 * 1024 * 1024)) {
+			alert("파일 사이즈가 10mb 를 넘습니다.");
+		    event.target.value = null;
+		}
 		var evt;
 		switch (event.target.name) {
-		case "picture1":
+		case "file1":
 			var i_con = document.getElementById('img_container1');
 			while(i_con.hasChildNodes()) {
 				i_con.removeChild(i_con.lastChild);
 			}
 			evt = 1;
 			break;
-		case "picture2":
+		case "file2":
 			var i_con = document.getElementById('img_container2');
 			while(i_con.hasChildNodes()) {
 				i_con.removeChild(i_con.lastChild);
 			}	
 			evt = 2;
 			break;
-		case "picture3":
+		case "file3":
 			var i_con = document.getElementById('img_container3');
 			while(i_con.hasChildNodes()) {
 				i_con.removeChild(i_con.lastChild);
 			}
 			evt = 3;
 			break;
-		case "picture4":
+		case "file4":
 			var i_con = document.getElementById('img_container4');
 			while(i_con.hasChildNodes()) {
 				i_con.removeChild(i_con.lastChild);
@@ -103,6 +108,7 @@
 			}
 		}
 	}
+	
 </script>
 </body>
 </html>
