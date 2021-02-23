@@ -5,8 +5,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="member" type="com.ch.pnut.model.Member" />
+		<typeAlias alias="peanuts" type="com.ch.pnut.model.Peanuts" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="member.xml" />
+		<mapper resource="peanuts.xml" />
 	</mappers>
 </configuration>

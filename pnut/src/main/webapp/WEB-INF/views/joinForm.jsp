@@ -58,6 +58,10 @@
 		<td><input type="text" name="m_name" required="required"></td>
 	</tr>
 	<tr>
+		<td>별명</td>
+		<td><input type="text" name="m_nickname" required="required"></td>
+	</tr>
+	<tr>
 		<td>이메일</td>
 		<td><input type="email" name="m_email" required="required"></td>
 	</tr>

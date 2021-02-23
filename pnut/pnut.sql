@@ -14,6 +14,7 @@ create table pn_member (
 	m_id		varchar2(20)	primary key,	-- 회원 ID(pk)
 	m_pw		varchar2(20)	not null,		-- 회원 비밀번호
 	m_name		varchar2(20)	not null,		-- 회원 이름
+	m_nickname	varchar2(20)	not null,		-- 회원 별명
 	m_email		varchar2(40)	not null,		-- 회원 이메일
 	m_tel		varchar2(20)	not null,		-- 회원 전화번호
 	m_regdate	date			not null,		-- 가입일
@@ -35,10 +36,10 @@ create table pn_peanuts (
 	content		varchar2(600)	not null,		-- 게시글 내용
 	ip			varchar2(40)	null,			-- IP
 	renut		number			null,			-- 리넛(을 누르면 팔로워들한테 게시글 전송)
-	picture1	varchar2(80)	null,			-- 사진 1
-	picture2	varchar2(80)	null,			-- 사진 2
-	picture3	varchar2(80)	null,			-- 사진 3
-	picture4	varchar2(80)	null,			-- 사진 4
+	picture1	varchar2(200)	null,			-- 사진 1
+	picture2	varchar2(200)	null,			-- 사진 2
+	picture3	varchar2(200)	null,			-- 사진 3
+	picture4	varchar2(200)	null,			-- 사진 4
 	regdate		date			not null,		-- 작성일
 	del			char(1)			not null,		-- 삭제여부
 	foreign key (writer) references pn_member(m_id)
@@ -110,6 +111,10 @@ create table pn_message (
 	foreign key (receiver) references pn_member(m_id)
 );
 
+-- 시퀀스 생성
+drop SEQUENCE peanut_no_seq;
+create SEQUENCE peanut_no_seq;
+
 
 
 select * from member;
@@ -122,5 +127,6 @@ select * from pn_block;
 select * from pn_bookmark;
 select * from pn_notice;
 select * from pn_message;
+
 
 insert into pn_member values ('k1', '1','탁','k1@k.com','010-1111-1111',sysdate,'n',null,null); 
