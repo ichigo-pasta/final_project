@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-<form action="write" method="post" enctype="multipart/form-data">
+<form action="${path}/home/write.do" method="post" enctype="multipart/form-data">
 	<table class="table table-border">
 		<tr>
 			<td rowspan="2">프로필 사진</td>
