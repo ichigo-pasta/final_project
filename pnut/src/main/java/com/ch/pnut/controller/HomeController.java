@@ -32,9 +32,5 @@ public class HomeController {
 	@RequestMapping("home/writeForm")
 	public String writeForm() {
 		return "home/writeForm";
-	}
-	@RequestMapping("home/write")
-	public String write() {
-		return "home/write";
-	}
+	}	
 }
