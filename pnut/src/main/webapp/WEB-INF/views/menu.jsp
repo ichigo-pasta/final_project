@@ -10,7 +10,7 @@
 <body>
 <table>
 	<tr>
-		<td><a href="${path}/home/timeline.do" class="btn btn-warning">
+		<td><a href="${path}/home/timeline.do?amt=20" class="btn btn-warning">
 				<i class="bi-house-door-fill">홈</i></a></td>
 	</tr>
 	<tr>

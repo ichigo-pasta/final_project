@@ -10,7 +10,7 @@
 <body>
 <c:if test="${result > 0 }">
 	<script type="text/javascript">
-		location.href = "home/timeline.do";
+		location.href = "home/timeline.do?amt=20";
 	</script>
 </c:if>
 <c:if test="${result == 0 }">
