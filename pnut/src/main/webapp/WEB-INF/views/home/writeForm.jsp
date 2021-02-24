@@ -13,8 +13,14 @@
 	<table class="table table-border">
 		<tr>
 			<td rowspan="2">프로필 사진</td>
-			<td><textarea cols="55" rows="9" required="required" 
-					name="content" style="resize: none;"></textarea></td>
+			<td>
+				<textarea cols="55" rows="9" required="required" 
+					name="content" id="content" style="resize: none;" onchange="checkByte(e);"></textarea>
+				<br>
+				<div align="right">
+					<span id="count">0</span>/<span id="max_count">0</span>					
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -38,6 +44,33 @@
 </form>
 </div>
 <script type="text/javascript">
+	document.getElementById('content').addEventListener('keyup', checkByte);
+	var countSpan = document.getElementById('count');
+	var msg = '';
+	var MAX_MESSAGE_BYTE = 400;
+	document.getElementById('max_count').innerHTML = MAX_MESSAGE_BYTE;
+	
+	function count(msg) {
+		var totalByte = 0;
+		for (var i = 0; i < msg.length; i++) {
+			var currentByte = msg.charCodeAt(i);
+			(currentByte > 128) ? totalByte += 2 : totalByte++;
+		}
+		return totalByte;
+	}
+	
+	function checkByte(e) {
+		const totalByte = count(e.target.value);
+		if (totalByte <= MAX_MESSAGE_BYTE) {
+			countSpan.innerText = totalByte.toString();
+			msg = e.target.value;
+		} else {
+			alert(MAX_MESSAGE_BYTE + '까지만 입력가능합니다');
+			countSpan.innerText = count(msg).toString();
+			e.target.value = msg;
+		}
+	}
+	
 	function setThumbnail(event) {
 		if (event.target && event.target.files[0].size > (10 * 1024 * 1024)) {
 			alert("파일 사이즈가 10mb 를 넘습니다.");
