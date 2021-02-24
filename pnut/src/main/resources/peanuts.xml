@@ -26,4 +26,10 @@
 		<if test="picture4 == null">,null</if><if test="picture4 != null">,#{picture4}</if>
 		,sysdate,'n')
 	</insert>
+	<select id="selectList"	parameterType="hashmap" resultType="peanuts">
+		select * from (select a.*,rownum rn from (
+			select * from pn_peanuts order by regdate desc) a)
+				where writer=#{id} and rn between 1 and #{amt}
+	</select>
+	
 </mapper>

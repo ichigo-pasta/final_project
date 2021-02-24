@@ -12,7 +12,7 @@ public class Peanuts {
 	private String writer;		// 게시글 작성자(fk)
 	private String content;		// 게시글 내용
 	private String ip;			// IP
-	private int renut;			// 리넛(을 누르면 팔로워들한테 게시글 전송)
+	private Integer renut;			// 리넛(을 누르면 팔로워들한테 게시글 전송)
 	private String picture1;	// 사진 1 파일명
 	private String picture2;	// 사진 2 파일명
 	private String picture3;	// 사진 3 파일명

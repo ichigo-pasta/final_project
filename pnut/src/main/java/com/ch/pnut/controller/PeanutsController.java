@@ -3,6 +3,7 @@ package com.ch.pnut.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,5 +75,12 @@ public class PeanutsController {
 		int result = ps.insert(peanut);
 		model.addAttribute("result", result);
 		return "home/write";
+	}
+	@RequestMapping("home/timeline")
+	public String timeline(int amt, Model model, HttpSession session ) {
+		String id = (String)session.getAttribute("id");
+		List<Peanuts> list = ps.selectList(id, amt);
+		model.addAttribute("list", list);
+		return "home/timeline";
 	}
 }
