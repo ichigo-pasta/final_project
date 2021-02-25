@@ -1,5 +1,7 @@
 package com.ch.pnut.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,14 @@ public class MemberController {
 		}
 		model.addAttribute("result", result);
 		return "login";
+	}
+	@RequestMapping("home/profileForm")
+	public String profile(Member member ,Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		member = ms.select(id);
+		System.out.println(member);
+		model.addAttribute("member", member);
+		return "home/profileForm";
 	}
 	
 }
