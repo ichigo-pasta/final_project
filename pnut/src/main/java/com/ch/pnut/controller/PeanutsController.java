@@ -80,7 +80,35 @@ public class PeanutsController {
 	public String timeline(int amt, Model model, HttpSession session ) {
 		String id = (String)session.getAttribute("id");
 		List<Peanuts> list = ps.selectList(id, amt);
+		int listLen = list.size();
+		if (listLen > 0) {
+			for(int i=0; i<listLen; i++) {
+				Peanuts p = list.get(i);
+				String content = p.getContent();				
+				p.setContent(setHashtag(content));				
+				list.set(i, p);
+			}
+		}		
 		model.addAttribute("list", list);
 		return "home/timeline";
+	}
+	
+	private String setHashtag(String content) {		
+		String[] splitContent = content.split(" |\n");
+		int len = splitContent.length;
+		String hashtagedContent = "";
+		for(int i=0; i<len; i++) {			
+			if(splitContent[i].startsWith("#")) {
+				splitContent[i] = "<a href='#'>"+splitContent[i]+"</a>";				
+			}
+			if(splitContent[i].contains("\r")) {
+				hashtagedContent += splitContent[i];
+			} else if(i != len-1){
+				hashtagedContent += splitContent[i] + " ";
+			} else {
+				hashtagedContent += splitContent[i];
+			}
+		}
+		return hashtagedContent;
 	}
 }
