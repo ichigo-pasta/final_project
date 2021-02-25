@@ -30,7 +30,7 @@
 				<i class="bi-bookmark-fill">북마크</i></a></td>
 	</tr>
 	<tr>
-		<td><a href="${path}/home/profile.do" class="btn btn-warning">
+		<td><a href="${path}/home/profileForm.do" class="btn btn-warning">
 				<i class="bi-person-fill">프로필</i></a></td>
 	</tr>
 	<tr>

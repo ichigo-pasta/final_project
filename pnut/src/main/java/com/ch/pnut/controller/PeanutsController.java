@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ch.pnut.model.Member;
 import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.service.MemberService;
 import com.ch.pnut.service.PeanutsService;

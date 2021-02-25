@@ -1,5 +1,7 @@
 package com.ch.pnut.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,4 +20,5 @@ public class MemberDaoImpl implements MemberDao {
 	public int insert(Member member) {
 		return sst.insert("memberns.insert", member);
 	}
+
 }
