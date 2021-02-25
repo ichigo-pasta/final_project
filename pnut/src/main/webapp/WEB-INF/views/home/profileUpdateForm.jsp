@@ -1,22 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	$(function () {
-		$('#peanut').load('${path}/nolay/peanutList.do?amt=20');
-	});
-</script>
 </head>
 <body>
 <div id="container">
+<form action="updateProfile.do" method="post" enctype="multipart/form-data">
 <table class="table table-border">
 	<tr>
-		<td>프로필 사진</td>
+		<td></td>
 		<td colspan="3">배경 사진</td>
 	</tr>
 	<tr>
@@ -44,6 +39,7 @@
 		<td colspan="2">사진 피넛</td>
 	</tr>
 </table>
+</form>
 <div id="peanut"></div>
 </div>
 </body>

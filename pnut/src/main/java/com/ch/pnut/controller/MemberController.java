@@ -62,9 +62,13 @@ public class MemberController {
 	public String profile(Member member ,Model model, HttpSession session) {
 		String id = (String)session.getAttribute("id");
 		member = ms.select(id);
-		System.out.println(member);
 		model.addAttribute("member", member);
 		return "home/profileForm";
 	}
-	
+	@RequestMapping("home/profileUpdateForm")
+	public String profileUpdateForm(String m_id, Model model) {
+		Member member = ms.select(m_id);
+		model.addAttribute("member", member);
+		return "home/profileUpdateForm";
+	}
 }

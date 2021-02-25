@@ -14,6 +14,7 @@ public class Member {
 	private String m_nickname;		// 별명
 	private String m_email;			// 이메일
 	private String m_tel;			// 전화번호
+	private String m_intro;			// 자기소개
 	private Date m_regdate;			// 가입일
 	private String m_del; 			// 탈퇴여부
 	private String m_profile;
