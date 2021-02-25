@@ -20,8 +20,8 @@ create table pn_member (
 	m_intro		varchar2(600),					-- 자기소개
 	m_regdate	date			not null,		-- 가입일
 	m_del		char(1)			not null,		-- 탈퇴여부
-	m_profile   varchar2(80),					-- 사진 파일명 uuid로 길게 생성, 파일명만 데이터베이스에 넣기
-	m_bg 		varchar2(80)    				-- 배경사진 파일명
+	m_profile   varchar2(200),					-- 사진 파일명 uuid로 길게 생성, 파일명만 데이터베이스에 넣기
+	m_bg 		varchar2(200)    				-- 배경사진 파일명
 );
 
 -- 관리자 테이블 생성
@@ -100,7 +100,7 @@ create table pn_notice (
 
 -- 쪽지 테이블 생성
 create table pn_message (
-	m_id		varchar2(20)	primary key,	-- 회원 아이디(pk)
+	message_no	number			primary key,	-- 쪽지 번호(pk)
 	sender		varchar2(20)	not null,		-- 보내는 사람(fk)
 	receiver	varchar2(20)	not null,		-- 받는 사람(fk)
 	content		varchar2(600)	not null,		-- 내용
