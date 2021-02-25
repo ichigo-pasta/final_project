@@ -24,7 +24,7 @@
 				<td>, ${pn.writer}, ${pn.regdate}</td>
 			</tr>
 			<tr>
-				<td>${pn.content }</td>
+				<td><pre>${pn.content}</pre></td>
 			</tr>
 		<c:if test="${pn.picture1 != null}">
 			<tr class="gallery">
@@ -49,6 +49,9 @@
 			</c:if>
 				</td>
 			</tr>
+		</c:if>
+		<c:if test="${pn.picture1 == null}">
+			<tr></tr>
 		</c:if>
 			<tr>
 				<td>댓글, 리넛, 좋아요</td>
