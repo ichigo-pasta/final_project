@@ -59,5 +59,10 @@
 	</c:forEach>
 		</table>
 	</div>	
+<script type="text/javascript">
+	function profile(m_id) {
+		location.href = "${path}/home/profileForm.do?m_id="+m_id;
+	}
+</script>
 </body>
 </html>

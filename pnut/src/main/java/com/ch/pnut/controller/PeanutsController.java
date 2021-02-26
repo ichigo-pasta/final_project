@@ -91,6 +91,7 @@ public class PeanutsController {
 			}
 		}		
 		model.addAttribute("list", list);
+		model.addAttribute("id", id);
 		return "home/timeline";
 	}
 	
@@ -112,4 +113,9 @@ public class PeanutsController {
 		}
 		return hashtagedContent;
 	}
+	
+	 @RequestMapping("/nolay/peanutList") public String peanutList() {
+	 
+	 return "nolay/peanutList"; }
+	 
 }

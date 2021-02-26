@@ -8,17 +8,20 @@
 		<result property="m_id" column="m_id"/>
 		<result property="m_pw" column="m_pw"/>
 		<result property="m_name" column="m_name"/>
-		<result property="m_name" column="m_nickname"/>
+		<result property="m_nickname" column="m_nickname"/>
 		<result property="m_email" column="m_email"/>
 		<result property="m_tel" column="m_tel"/>
+		<result property="m_intro" column="m_intro"/>
 		<result property="m_regdate" column="m_regdate"/>
 		<result property="m_del" column="m_del"/>
+		<result property="m_profile" column="m_profile"/>
+		<result property="m_bg" column="m_bg"/>
 	</resultMap>
 	<select id="select" parameterType="string" resultMap="memberResult">
 		select * from pn_member where m_id=#{m_id}
 	</select>
 	<insert id="insert" parameterType="member">
 		insert into pn_member values (#{m_id}, #{m_pw}, #{m_name}, #{m_nickname},
-			#{m_email},#{m_tel},sysdate,'n',null,null)
+			#{m_email},#{m_tel},null,sysdate,'n',null,null)
 	</insert>
 </mapper>
