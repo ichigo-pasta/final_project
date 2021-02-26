@@ -16,6 +16,20 @@
 		<result property="picture4" column="picture4"/>
 		<result property="regdate" column="regdate"/>
 		<result property="del" column="del"/>
+		<collection property="member" resultMap="memberResult"></collection>
+	</resultMap>
+	<resultMap type="member" id="memberResult">
+		<result property="m_id" column="m_id"/>
+		<result property="m_pw" column="m_pw"/>
+		<result property="m_name" column="m_name"/>
+		<result property="m_nickname" column="m_nickname"/>
+		<result property="m_email" column="m_email"/>
+		<result property="m_tel" column="m_tel"/>
+		<result property="m_intro" column="m_intro"/>
+		<result property="m_regdate" column="m_regdate"/>
+		<result property="m_del" column="m_del"/>
+		<result property="m_profile" column="m_profile"/>
+		<result property="m_bg" column="m_bg"/>
 	</resultMap>
 	<insert id="insert" parameterType="peanuts">
 		insert into pn_peanuts values (peanut_no_seq.nextval, #{writer}, #{content},
