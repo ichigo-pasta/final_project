@@ -16,8 +16,8 @@
 <div id="container">
 <table class="table table-border">
 	<tr>
-		<td>프로필 사진</td>
-		<td colspan="3">배경 사진</td>
+		<td>${member.m_profile }프로필 사진</td>
+		<td colspan="3">${member.m_bg }배경 사진</td>
 	</tr>
 	<tr>
 		<td>${member.m_name }</td>
