@@ -11,11 +11,11 @@
 <form action="updateProfile.do" method="post" enctype="multipart/form-data">
 <table class="table table-border">
 	<tr>
-		<td>${member.m_profile }프로필</td>
-		<td colspan="3">${member.m_bg }배경</td>
+		<td>${member.m_profile }<input type="file" name="m_profile"></td>
+		<td colspan="3">${member.m_bg }<input type="file" name="m_bg"></td>
 	</tr>
 	<tr>
-		<td>${member.m_name }<input type="text" ></td>
+		<td><input type="text" name="m_name" value="${member.m_name }"></td>
 		<td colspan="2"></td>
 		<td><a href="${path}/home/profileUpdate.do?m_id=${member.m_id }">저장</a></td>
 	</tr>
@@ -24,7 +24,7 @@
 		<td colspan="3"></td>
 	</tr>
 	<tr>
-		<td colspan="4"><textarea></textarea>자기소개</td>
+		<td colspan="4"><textarea cols="30" rows="5"></textarea></td>
 	<tr>
 		<td>${member.m_regdate }</td>
 		<td colspan="3"></td>

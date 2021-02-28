@@ -1,5 +1,7 @@
 package com.ch.pnut.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -58,6 +60,11 @@ public class MemberController {
 		model.addAttribute("result", result);
 		return "login";
 	}
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "logout";
+	}
 	@RequestMapping("home/profileForm")
 	public String profile(Member member ,Model model, HttpSession session) {
 		String id = (String)session.getAttribute("id");
@@ -70,5 +77,25 @@ public class MemberController {
 		Member member = ms.select(m_id);
 		model.addAttribute("member", member);
 		return "home/profileUpdateForm";
+	}
+	@RequestMapping("home/updateProfile")
+	public String updateProfile(Member member, Model model, HttpSession session) {
+		int result = 0;
+		String profile = member.getM_profile();
+		String bg = member.getM_bg();
+		if (profile != null && !profile.equals("") ||
+			bg != null && !bg.equals("")) {
+			member.setM_profile(profile);
+			member.setM_bg(bg);
+			String real = session.getServletContext()
+					.getRealPath("/resources/images");
+			/*
+			 * FileOutputStream fos = new FileOutputStream( new File(real+"/"+profile));
+			 * fos.write(member.getM_profile().getBytes()); fos.close();
+			 */
+		} else result = -1; 
+			result = ms.update(member);
+			model.addAttribute("result", result);
+		return "updateProfile";
 	}
 }

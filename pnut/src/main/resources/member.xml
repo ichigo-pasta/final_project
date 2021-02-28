@@ -22,6 +22,12 @@
 	</select>
 	<insert id="insert" parameterType="member">
 		insert into pn_member values (#{m_id}, #{m_pw}, #{m_name}, #{m_nickname},
-			#{m_email},#{m_tel},null,sysdate,'n',null,null)
+			#{m_email},#{m_tel},null,sysdate,'n','P-Nut.png','gray.png')
 	</insert>
+	<update id="update">
+		update pn_member set m_name=#{m_name}, m_profile=#{m_profile}, m_bg=#{m_bg}
+		<if test="profile!=null">, m_profile=#{m_profile}</if>
+		<if test="bg!=null">, m_bg=#{m_bg}</if>
+		where m_id=#{m_id} 
+	</update>
 </mapper>

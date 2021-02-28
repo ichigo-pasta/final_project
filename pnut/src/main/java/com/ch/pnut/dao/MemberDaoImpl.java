@@ -21,4 +21,8 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.insert("memberns.insert", member);
 	}
 
+	public int update(Member member) {
+		return sst.update("memberns.update", member);
+	}
+
 }
