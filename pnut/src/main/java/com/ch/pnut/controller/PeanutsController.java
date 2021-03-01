@@ -26,10 +26,11 @@ public class PeanutsController {
 	private PeanutsService ps;
 	@Autowired
 	private MemberService ms;
+
 	@RequestMapping("home/write")
-	public String write(Peanuts peanut, Model model, HttpSession session,
-			HttpServletRequest request) throws IOException {		
-		int fileCount = 0; 
+	public String write(Peanuts peanut, Model model, HttpSession session, HttpServletRequest request)
+			throws IOException {
+		int fileCount = 0;
 		if (peanut.getFile1().isEmpty()) {
 			fileCount = 0;
 		} else if (peanut.getFile2().isEmpty()) {
@@ -38,74 +39,72 @@ public class PeanutsController {
 			fileCount = 2;
 		} else if (peanut.getFile4().isEmpty()) {
 			fileCount = 3;
-		} else {fileCount = 4;}
+		} else {
+			fileCount = 4;
+		}
 
 		if (fileCount != 0) {
-			MultipartFile [] files = new MultipartFile[fileCount];
-			String [] fileNames = new String[fileCount];
+			MultipartFile[] files = new MultipartFile[fileCount];
+			String[] fileNames = new String[fileCount];
 			switch (fileCount) {
-			case 4: 
+			case 4:
 				files[3] = peanut.getFile4();
-				fileNames[3] = UUID.randomUUID()+"-"+files[3].getOriginalFilename();
+				fileNames[3] = UUID.randomUUID() + "-" + files[3].getOriginalFilename();
 				peanut.setPicture4(fileNames[3]);
-			case 3: 
+			case 3:
 				files[2] = peanut.getFile3();
-				fileNames[2] = UUID.randomUUID()+"-"+files[2].getOriginalFilename();
+				fileNames[2] = UUID.randomUUID() + "-" + files[2].getOriginalFilename();
 				peanut.setPicture3(fileNames[2]);
-			case 2: 
+			case 2:
 				files[1] = peanut.getFile2();
-				fileNames[1] = UUID.randomUUID()+"-"+files[1].getOriginalFilename();
+				fileNames[1] = UUID.randomUUID() + "-" + files[1].getOriginalFilename();
 				peanut.setPicture2(fileNames[1]);
-			case 1: 
+			case 1:
 				files[0] = peanut.getFile1();
-				fileNames[0] = UUID.randomUUID()+"-"+files[0].getOriginalFilename();
+				fileNames[0] = UUID.randomUUID() + "-" + files[0].getOriginalFilename();
 				peanut.setPicture1(fileNames[0]);
 			}
-			String real = session.getServletContext()
-					.getRealPath("/resources/images");
+			String real = session.getServletContext().getRealPath("/resources/images");
 			for (int i = 0; i < fileCount; i++) {
-				FileOutputStream fos = new FileOutputStream(
-						new File(real+"/"+fileNames[i]));
+				FileOutputStream fos = new FileOutputStream(new File(real + "/" + fileNames[i]));
 				fos.write(files[i].getBytes());
 				fos.close();
-			};
-		} 
-		String id = (String)session.getAttribute("id");
+			}
+			;
+		}
+		String id = (String) session.getAttribute("id");
 		peanut.setWriter(id);
 		peanut.setIp(request.getRemoteAddr());
 		int result = ps.insert(peanut);
 		model.addAttribute("result", result);
 		return "home/write";
 	}
+
 	@RequestMapping("home/timeline")
-	public String timeline(int amt, Model model, HttpSession session ) {
-		String id = (String)session.getAttribute("id");
+	public String timeline(int amt, Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
 		List<Peanuts> list = ps.selectList(id, amt);
-		int listLen = list.size();
-		if (listLen > 0) {
-			for(int i=0; i<listLen; i++) {
-				Peanuts p = list.get(i);
-				String content = p.getContent();				
-				p.setContent(setHashtag(content));				
-				list.set(i, p);
+		if (list.size() > 0) {
+			for (Peanuts p : list) {
+				p.setContent(setHashtag(p.getContent()));
 			}
-		}		
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("id", id);
 		return "home/timeline";
 	}
-	
-	private String setHashtag(String content) {		
+
+	private String setHashtag(String content) {
 		String[] splitContent = content.split(" |\n");
 		int len = splitContent.length;
 		String hashtagedContent = "";
-		for(int i=0; i<len; i++) {			
-			if(splitContent[i].startsWith("#")) {
-				splitContent[i] = "<a href='#'>"+splitContent[i]+"</a>";				
+		for (int i = 0; i < len; i++) {
+			if (splitContent[i].startsWith("#")) {
+				splitContent[i] = "<a href='#'>" + splitContent[i] + "</a>";
 			}
-			if(splitContent[i].contains("\r")) {
+			if (splitContent[i].contains("\r")) {
 				hashtagedContent += splitContent[i];
-			} else if(i != len-1){
+			} else if (i != len - 1) {
 				hashtagedContent += splitContent[i] + " ";
 			} else {
 				hashtagedContent += splitContent[i];
@@ -113,9 +112,10 @@ public class PeanutsController {
 		}
 		return hashtagedContent;
 	}
-	
-	 @RequestMapping("/nolay/peanutList") public String peanutList() {
-	 
-	 return "nolay/peanutList"; }
-	 
+
+	@RequestMapping("/nolay/peanutList")
+	public String peanutList() {
+
+		return "nolay/peanutList";
+	}
 }
