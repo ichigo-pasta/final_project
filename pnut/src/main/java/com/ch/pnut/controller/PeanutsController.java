@@ -70,7 +70,6 @@ public class PeanutsController {
 				fos.write(files[i].getBytes());
 				fos.close();
 			}
-			;
 		}
 		String id = (String) session.getAttribute("id");
 		peanut.setWriter(id);
