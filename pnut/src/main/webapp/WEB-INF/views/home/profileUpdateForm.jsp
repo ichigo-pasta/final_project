@@ -1,14 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.pic_container {
+	height: 200px;
+	background-image: url('${path}/resources/images/${member.m_bg}')
+}
+</style>
 </head>
 <body>
 <div id="container">
-<form action="updateProfile.do" method="post" enctype="multipart/form-data">
+<form action="${path}/home/updateProfile.do" 
+	method="post" enctype="multipart/form-data">
+<div class="pic_container d-flex align-items-end">
+	<img alt="" src="${path}/resources/images/${member.m_profile}"
+		width="100" height="100">
+</div> 
 <table class="table table-border">
 	<tr>
 		<td>${member.m_profile }<input type="file" name="m_profile"></td>
@@ -17,7 +29,7 @@
 	<tr>
 		<td><input type="text" name="m_name" value="${member.m_name }"></td>
 		<td colspan="2"></td>
-		<td><a href="${path}/home/profileUpdate.do?m_id=${member.m_id }">저장</a></td>
+		<td><input type="submit" value="저장"></td>
 	</tr>
 	<tr>
 		<td>${member.m_id }</td>

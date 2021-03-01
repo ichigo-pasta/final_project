@@ -20,7 +20,7 @@
 			<tr>
 		</c:if>
 			<tr>
-				<td rowspan="4">프로필사진</td>
+				<td rowspan="4"><img alt="" src="${path}/resources/images/${member.m_profile}"></td>
 				<td>, ${pn.writer}, ${pn.regdate}</td>
 			</tr>
 			<tr>

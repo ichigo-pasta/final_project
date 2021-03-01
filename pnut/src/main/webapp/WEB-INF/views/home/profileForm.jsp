@@ -12,10 +12,10 @@
 	});
 </script>
 <style type="text/css">
-div.relative {
+/* div.relative {
   position: relative;
   width: auto; height: auto;
-  max-width: 100%;
+  max-width: 70%;
   max-height: 200px;
   z-index: 0;
   border: 3px solid #73AD21;
@@ -28,17 +28,25 @@ div.absolute {
   left: 0px;
   max-width: 100px;
   max-height:100px;
-  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   border: 3px solid #73AD21;
+} */
+
+.pic_container {
+	height: 200px;
+	background-image: url('${path}/resources/images/${member.m_bg}')
 }
+
 </style>
 </head>
 <body>
 <div id="container">
-<div class="relative">
-	<img alt="" src="${path}/resources/images/${member.m_bg}">
-		<div class="absolute">
-			<img alt="" src="${path}/resources/images/${member.m_profile}"></div>
+<div class="pic_container d-flex align-items-end">
+	<img alt="" src="${path}/resources/images/${member.m_profile}"
+		width="100" height="100">
 </div> 
 <table class="table table-border">
 	<%-- <tr>

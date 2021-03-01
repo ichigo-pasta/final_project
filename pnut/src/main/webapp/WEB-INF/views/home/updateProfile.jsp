@@ -11,12 +11,12 @@
 <c:if test="${result == 0 }">
 	<script type="text/javascript">
 		alert("연결이 실패하였습니다.");
-		location.href = "${path}/home/profileUpdateForm.do";
+		history.back();
 	</script>
 </c:if>
 <c:if test="${result > 0 }">
 	<script type="text/javascript">
-		location.href = "${path}/home/profileForm.do?amt=20";
+		location.href = "${path}/home/profileForm.do";
 	</script>
 </c:if>
 </body>
