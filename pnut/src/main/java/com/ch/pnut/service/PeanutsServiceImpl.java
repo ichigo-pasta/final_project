@@ -16,7 +16,7 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public int insert(Peanuts peanut) {
 		return pd.insert(peanut);
 	}
-	public List<Peanuts> selectList(String id, int amt) {
-		return pd.selectList(id, amt);
+	public List<Peanuts> selectList(String m_id, int amt) {
+		return pd.selectList(m_id, amt);
 	}
 }

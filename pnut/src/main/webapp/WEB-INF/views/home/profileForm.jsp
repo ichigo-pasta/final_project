@@ -6,21 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function () {
 		$('#peanut').load('${path}/nolay/peanutList.do?amt=20');
 	});
-</script>
+</script> -->
+<style type="text/css">
+.pic_container {
+	height: 200px;
+	background-image: url('${path}/resources/images/${member.m_bg}');
+	background-size: 100% 100%;
+}
+</style>
 </head>
 <body>
 <div id="container">
+<div class="pic_container d-flex align-items-end">
+	<img alt="" src="${path}/resources/images/${member.m_profile}"
+		width="100" height="100">
+</div> 
 <table class="table table-border">
 	<tr>
-		<td>프로필 사진</td>
-		<td colspan="3">배경 사진</td>
-	</tr>
-	<tr>
-		<td>${member.m_name }</td>
+		<td>${member.m_nickname }</td>
 		<td colspan="2"></td>
 		<td><a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a></td>
 	</tr>
@@ -29,7 +36,7 @@
 		<td colspan="3"></td>
 	</tr>
 	<tr>
-		<td colspan="4">자기소개</td>
+		<td colspan="4">${member.m_intro }</td>
 	<tr>
 		<td>${member.m_regdate }</td>
 		<td colspan="3"></td>

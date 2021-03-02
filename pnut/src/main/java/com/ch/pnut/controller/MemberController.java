@@ -1,6 +1,9 @@
 package com.ch.pnut.controller;
 
-import java.util.List;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ch.pnut.model.Member;
 import com.ch.pnut.service.MemberService;
@@ -53,15 +57,19 @@ public class MemberController {
 			result = -1;  // 없는 아이디
 		else if (mem.getM_pw().equals(member.getM_pw())) {
 			result = 1;  // 성공
-			session.setAttribute("id", member.getM_id());
+			session.setAttribute("m_id", member.getM_id());
 		}
 		model.addAttribute("result", result);
 		return "login";
 	}
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "logout";
+	}
 	@RequestMapping("home/profileForm")
-	public String profile(Member member ,Model model, HttpSession session) {
-		String id = (String)session.getAttribute("id");
-		member = ms.select(id);
+	public String profile(String m_id, Model model) {
+		Member member = ms.select(m_id);
 		model.addAttribute("member", member);
 		return "home/profileForm";
 	}
@@ -70,5 +78,34 @@ public class MemberController {
 		Member member = ms.select(m_id);
 		model.addAttribute("member", member);
 		return "home/profileUpdateForm";
+	}
+	@RequestMapping("home/updateProfile")
+	public String updateProfile(Member member, Model model,
+			HttpSession session) throws IOException {
+		String real = session.getServletContext()
+				.getRealPath("/resources/images");
+		if (!member.getFile_b().isEmpty()) {
+			MultipartFile fileB = member.getFile_b();
+			String filenameB = UUID.randomUUID()+"-"+fileB.getOriginalFilename();
+			member.setM_bg(filenameB);
+			FileOutputStream fos = new FileOutputStream(
+			new File(real+"/"+filenameB));
+			fos.write(fileB.getBytes());
+			fos.close();
+		}
+		if (!member.getFile_p().isEmpty()) {
+			MultipartFile fileP = member.getFile_p();
+			String filenameP = UUID.randomUUID()+"-"+fileP.getOriginalFilename();
+			member.setM_profile(filenameP);
+			FileOutputStream fos = new FileOutputStream(
+			new File(real+"/"+filenameP));
+			fos.write(fileP.getBytes());
+			fos.close();
+		} 
+		int	result = ms.update(member);
+		model.addAttribute("m_id", member.getM_id());
+		model.addAttribute("result", result);
+		return "home/updateProfile";
+		
 	}
 }

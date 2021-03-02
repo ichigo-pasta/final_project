@@ -3,6 +3,7 @@ package com.ch.pnut.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -69,10 +70,10 @@ public class PeanutsController {
 				FileOutputStream fos = new FileOutputStream(new File(real + "/" + fileNames[i]));
 				fos.write(files[i].getBytes());
 				fos.close();
-			}
-		}
-		String id = (String) session.getAttribute("id");
-		peanut.setWriter(id);
+			};
+		} 
+		String m_id = (String)session.getAttribute("m_id");
+		peanut.setWriter(m_id);
 		peanut.setIp(request.getRemoteAddr());
 		int result = ps.insert(peanut);
 		model.addAttribute("result", result);
@@ -80,16 +81,20 @@ public class PeanutsController {
 	}
 
 	@RequestMapping("home/timeline")
-	public String timeline(int amt, Model model, HttpSession session) {
-		String id = (String) session.getAttribute("id");
-		List<Peanuts> list = ps.selectList(id, amt);
-		if (list.size() > 0) {
-			for (Peanuts p : list) {
-				p.setContent(setHashtag(p.getContent()));
+	public String timeline(int amt, Model model, HttpSession session ) {
+		String m_id = (String)session.getAttribute("m_id");
+		List<Peanuts> list = ps.selectList(m_id, amt);
+		int listLen = list.size();
+		if (listLen > 0) {
+			for(int i=0; i<listLen; i++) {
+				Peanuts p = list.get(i);
+				String content = p.getContent();				
+				p.setContent(setHashtag(content));				
+				list.set(i, p);
 			}
 		}
 		model.addAttribute("list", list);
-		model.addAttribute("id", id);
+		model.addAttribute("m_id", m_id);
 		return "home/timeline";
 	}
 

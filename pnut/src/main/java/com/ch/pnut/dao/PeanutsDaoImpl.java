@@ -18,9 +18,9 @@ public class PeanutsDaoImpl implements PeanutsDao {
 	public int insert(Peanuts peanut) {
 		return sst.insert("peanutsns.insert", peanut);
 	}
-	public List<Peanuts> selectList(String id, int amt) {
+	public List<Peanuts> selectList(String m_id, int amt) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("id", id);
+		map.put("m_id", m_id);
 		map.put("amt", amt);
 		return sst.selectList("peanutsns.selectList", map);
 	}

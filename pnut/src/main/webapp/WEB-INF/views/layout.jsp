@@ -16,7 +16,7 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td width="25%"><tiles:insertAttribute name="menu"/></td>
+		<td width="20%"><tiles:insertAttribute name="menu"/></td>
 		<td><tiles:insertAttribute name="body"/></td>
 	</tr>
 </table>
