@@ -6,40 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function () {
 		$('#peanut').load('${path}/nolay/peanutList.do?amt=20');
 	});
-</script>
+</script> -->
 <style type="text/css">
-/* div.relative {
-  position: relative;
-  width: auto; height: auto;
-  max-width: 70%;
-  max-height: 200px;
-  z-index: 0;
-  border: 3px solid #73AD21;
-  overflow: hidden;
-} 
-
-div.absolute {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  max-width: 100px;
-  max-height:100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 3px solid #73AD21;
-} */
-
 .pic_container {
 	height: 200px;
-	background-image: url('${path}/resources/images/${member.m_bg}')
+	background-image: url('${path}/resources/images/${member.m_bg}');
+	background-size: 100% 100%;
 }
-
 </style>
 </head>
 <body>
@@ -49,12 +26,8 @@ div.absolute {
 		width="100" height="100">
 </div> 
 <table class="table table-border">
-	<%-- <tr>
-		<td><img alt="" src="${path}/resources/images/${member.m_bg}">
-			<img alt="" src="${path}/resources/images/${member.m_profile}"></td>
-	</tr> --%>
 	<tr>
-		<td>${member.m_name }</td>
+		<td>${member.m_nickname }</td>
 		<td colspan="2"></td>
 		<td><a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a></td>
 	</tr>
@@ -78,7 +51,6 @@ div.absolute {
 		<td colspan="2">사진 피넛</td>
 	</tr>
 </table>
-<a href="${path}/logout.do">로그아웃</a>
 <div id="peanut"></div>
 </div>
 </body>

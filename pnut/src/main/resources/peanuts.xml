@@ -2,34 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- namespace : xml을 구별하기 위한 이름  -->
+<!-- namespace : xml을 구별하기 위한 이름 -->
 <mapper namespace="peanutsns">
 	<resultMap type="peanuts" id="peanutsResult">
-		<result property="peanut_no" column="peanut_no"/>
-		<result property="writer" column="writer"/>
-		<result property="content" column="content"/>
-		<result property="ip" column="ip"/>
-		<result property="renut" column="renut"/>
-		<result property="picture1" column="picture1"/>
-		<result property="picture2" column="picture2"/>
-		<result property="picture3" column="picture3"/>
-		<result property="picture4" column="picture4"/>
-		<result property="regdate" column="regdate"/>
-		<result property="del" column="del"/>
+		<result property="peanut_no" column="peanut_no" />
+		<result property="writer" column="writer" />
+		<result property="content" column="content" />
+		<result property="ip" column="ip" />
+		<result property="renut" column="renut" />
+		<result property="picture1" column="picture1" />
+		<result property="picture2" column="picture2" />
+		<result property="picture3" column="picture3" />
+		<result property="picture4" column="picture4" />
+		<result property="regdate" column="regdate" />
+		<result property="del" column="del" />
+		<result property="re_writer" column="re_writer" />
+		<collection property="member" resultMap="memberResult" />
+	</resultMap>
+	<resultMap type="member" id="memberResult">
+		<result property="m_id" column="m_id" />
+		<result property="m_pw" column="m_pw" />
+		<result property="m_name" column="m_name" />
+		<result property="m_nickname" column="m_nickname" />
+		<result property="m_email" column="m_email" />
+		<result property="m_tel" column="m_tel" />
+		<result property="m_intro" column="m_intro" />
+		<result property="m_regdate" column="m_regdate" />
+		<result property="m_del" column="m_del" />
+		<result property="m_profile" column="m_profile" />
+		<result property="m_bg" column="m_bg" />
+		<result property="re_nick" column="re_nick" />
+		<result property="re_pf" column="re_pf" />
 	</resultMap>
 	<insert id="insert" parameterType="peanuts">
-		insert into pn_peanuts values (peanut_no_seq.nextval, #{writer}, #{content},
-			#{ip},null
-		<if test="picture1 == null">,null</if><if test="picture1 != null">,#{picture1}</if>
-		<if test="picture2 == null">,null</if><if test="picture2 != null">,#{picture2}</if>
-		<if test="picture3 == null">,null</if><if test="picture3 != null">,#{picture3}</if>
-		<if test="picture4 == null">,null</if><if test="picture4 != null">,#{picture4}</if>
+		insert into pn_peanuts values (peanut_no_seq.nextval, #{writer},
+		#{content},
+		#{ip},null
+		<if test="picture1 == null">,null</if>
+		<if test="picture1 != null">,#{picture1}</if>
+		<if test="picture2 == null">,null</if>
+		<if test="picture2 != null">,#{picture2}</if>
+		<if test="picture3 == null">,null</if>
+		<if test="picture3 != null">,#{picture3}</if>
+		<if test="picture4 == null">,null</if>
+		<if test="picture4 != null">,#{picture4}</if>
 		,sysdate,'n')
 	</insert>
-	<select id="selectList"	parameterType="hashmap" resultType="peanuts">
+	<select id="selectList" parameterType="hashmap"
+		resultMap="peanutsResult">
 		select * from (select a.*,rownum rn from (
-			select * from pn_peanuts order by regdate desc) a)
-				where writer=#{id} and rn between 1 and #{amt}
+		select p1.*,m1.m_profile, m1.m_nickname, m2.m_profile re_pf, p2.writer re_writer,
+		m2.m_nickname re_nick
+		from pn_peanuts p1, pn_member m1, pn_peanuts p2, pn_member m2
+		where p1.renut = p2.peanut_no(+) and p2.writer = m2.m_id(+) and p1.writer =
+		m1.m_id order by p1.peanut_no desc) a)
+		where writer=#{m_id} and rn between 1 and #{amt}
 	</select>
-	
+
 </mapper>

@@ -30,13 +30,21 @@
 				<i class="bi-bookmark-fill">북마크</i></a></td>
 	</tr>
 	<tr>
-		<td><a class="btn btn-warning" onclick="profile('${id}')">
+		<td><a class="btn btn-warning" onclick="profile('${m_id}')">
 				<i class="bi-person-fill">프로필</i></a></td>
 	</tr>
 	<tr>
 		<td><a href="${path}/home/writeForm.do" class="btn btn-warning">
 				<i class="bi-pencil-fill">글쓰기</i></a></td>
 	</tr>
+	<tr>
+		<td><a href="${path}/logout.do">로그아웃</a></td>
+	</tr>
 </table>
+<script type="text/javascript">
+	function profile(m_id) {
+		location.href = "${path}/home/profileForm.do?m_id="+m_id;
+	}
+</script>
 </body>
 </html>

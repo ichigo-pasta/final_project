@@ -3,10 +3,8 @@ package com.ch.pnut.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +57,7 @@ public class MemberController {
 			result = -1;  // 없는 아이디
 		else if (mem.getM_pw().equals(member.getM_pw())) {
 			result = 1;  // 성공
-			session.setAttribute("id", member.getM_id());
+			session.setAttribute("m_id", member.getM_id());
 		}
 		model.addAttribute("result", result);
 		return "login";
@@ -70,9 +68,8 @@ public class MemberController {
 		return "logout";
 	}
 	@RequestMapping("home/profileForm")
-	public String profile(Member member ,Model model, HttpSession session) {
-		String id = (String)session.getAttribute("id");
-		member = ms.select(id);
+	public String profile(String m_id, Model model) {
+		Member member = ms.select(m_id);
 		model.addAttribute("member", member);
 		return "home/profileForm";
 	}
@@ -85,40 +82,29 @@ public class MemberController {
 	@RequestMapping("home/updateProfile")
 	public String updateProfile(Member member, Model model,
 			HttpSession session) throws IOException {
-		int fileCount = 0;
-		if (member.getFile_b().isEmpty()) {
-			fileCount = 0;
-		} else if (member.getFile_p().isEmpty()) {
-			fileCount = 1;
-		} else {fileCount = 2; }
-		
-		if(fileCount != 0) {
-			MultipartFile [] files = new MultipartFile[fileCount];
-			String [] fileNames = new String[fileCount];
-			switch (fileCount) {
-			case 2 :
-				files[1] = member.getFile_p();
-				fileNames[1] = UUID.randomUUID()+"-"+files[1].getOriginalFilename();
-				member.setM_profile(fileNames[1]);
-			case 1:
-				files[0] = member.getFile_b();
-				fileNames[0] = UUID.randomUUID()+"-"+files[0].getOriginalFilename();
-				member.setM_bg(fileNames[0]);
-			}
-			String real = session.getServletContext()
+		String real = session.getServletContext()
 				.getRealPath("/resources/images");
-			for (int i = 0; i < fileCount; i++) {
-				FileOutputStream fos = new FileOutputStream(
-					new File(real+"/"+fileNames[i]));
-				fos.write(files[i].getBytes());
-				fos.close();
-			};
+		if (!member.getFile_b().isEmpty()) {
+			MultipartFile fileB = member.getFile_b();
+			String filenameB = UUID.randomUUID()+"-"+fileB.getOriginalFilename();
+			member.setM_bg(filenameB);
+			FileOutputStream fos = new FileOutputStream(
+			new File(real+"/"+filenameB));
+			fos.write(fileB.getBytes());
+			fos.close();
 		}
-		String m_id = (String)session.getAttribute("m_id");
-		member.setM_id(m_id);
+		if (!member.getFile_p().isEmpty()) {
+			MultipartFile fileP = member.getFile_p();
+			String filenameP = UUID.randomUUID()+"-"+fileP.getOriginalFilename();
+			member.setM_profile(filenameP);
+			FileOutputStream fos = new FileOutputStream(
+			new File(real+"/"+filenameP));
+			fos.write(fileP.getBytes());
+			fos.close();
+		} 
 		int	result = ms.update(member);
+		model.addAttribute("m_id", member.getM_id());
 		model.addAttribute("result", result);
-		System.out.println("result");
 		return "home/updateProfile";
 		
 	}

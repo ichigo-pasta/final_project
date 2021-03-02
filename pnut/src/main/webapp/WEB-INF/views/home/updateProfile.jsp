@@ -16,7 +16,7 @@
 </c:if>
 <c:if test="${result > 0 }">
 	<script type="text/javascript">
-		location.href = "${path}/home/profileForm.do";
+		location.href = "${path}/home/profileForm.do?m_id=${m_id}";
 	</script>
 </c:if>
 </body>

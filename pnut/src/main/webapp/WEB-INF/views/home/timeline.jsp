@@ -10,6 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
 </head>
 <body>
+<input type="hidden"> 
 	<div class="container">
 		<h2 class="text-primary">타임라인</h2>
 		<table class="table table-border">
@@ -18,11 +19,21 @@
 			<tr>
 				<td colspan="2"><i class="bi bi-arrow-repeat"></i>${pn.writer}님이 리넛하셨습니다.</td>
 			<tr>
-		</c:if>
 			<tr>
-				<td rowspan="4">프로필사진</td>
-				<td>, ${pn.writer}, ${pn.regdate}</td>
+				<td rowspan="4">
+					<img alt="" src="${path}/resources/images/${pn.member.re_pf}"
+						width="100" height="100" onclick="profile('${pn.re_writer}')"></td>
+				<td>${pn.member.re_nick}, ${pn.re_writer}, ${pn.regdate}</td>
 			</tr>
+		</c:if>
+		<c:if test="${pn.renut == null}">
+			<tr>
+				<td rowspan="4">
+					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
+						width="100" height="100" onclick="profile('${pn.writer}')"> </td>
+				<td>${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}</td>
+			</tr>
+		</c:if>
 			<tr>
 				<td><pre>${pn.content}</pre></td>
 			</tr>
