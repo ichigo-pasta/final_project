@@ -117,15 +117,14 @@ public class MemberController {
 	public String followerList(String m_id) { 
 		return "home/followerList"; 
 	}
-	@RequestMapping(value = "home/follow", produces = "text/html;charset=utf-8")  // jsp로 보냄
+	@RequestMapping(value = "follow", produces = "text/html;charset=utf-8")
 	@ResponseBody
-	public String follow(String m_id, HttpSession session) {
+	public void follow(String m_id, HttpSession session) {
 		String active = (String) session.getAttribute("m_id");
 		String passive = m_id;
-		ms.insert(active , passive);
-		return "";
+		ms.insert(active , passive);		
 	}
-	@RequestMapping(value = "home/unfollow", produces = "text/html;charset=utf-8")  // jsp로 보냄
+	@RequestMapping(value = "unfollow", produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public void unfollow(String m_id, HttpSession session) {
 		String active = (String) session.getAttribute("m_id");
