@@ -19,8 +19,7 @@ public class Peanuts {
 	private String picture4;	// 사진 4 파일명
 	private Date regdate;		// 작성일
 	private String del;			// 삭제여부
-	// join용
-	private Member member;
+	
 	// 파일 업로드
 	private MultipartFile file1;	// 사진 1
 	private MultipartFile file2;	// 사진 2

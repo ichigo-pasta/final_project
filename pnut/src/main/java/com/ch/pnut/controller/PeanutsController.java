@@ -3,7 +3,6 @@ package com.ch.pnut.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ch.pnut.model.Member;
 import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.service.MemberService;
 import com.ch.pnut.service.PeanutsService;

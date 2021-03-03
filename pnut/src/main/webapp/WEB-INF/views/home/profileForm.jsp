@@ -63,11 +63,13 @@
 	function follow(m_id) {
 		buttonChange();
 		var xhr = new XMLHttpRequest();
-		xhr.open("get","${path}/home/follow.do?m_id="+m_id,true);
+		xhr.open("get","${path}/follow.do?m_id="+m_id,true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
 				console.log('success');
-			} else {alert('요청오류: '+xhr.status);}
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
 		}
 		xhr.send(null);
 	}
@@ -79,7 +81,7 @@
 	function unfollow(m_id) {
 		buttonChange2();
 		var xhr = new XMLHttpRequest();
-		xhr.open("get","${path}/home/unfollow.do?m_id="+m_id,true);
+		xhr.open("get","${path}/unfollow.do?m_id="+m_id,true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
 				console.log('success');
