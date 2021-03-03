@@ -12,4 +12,10 @@ public interface MemberDao {
 
 	int update(Member member);
 
+	void insert(String active, String passive);
+
+	void delete(String active, String passive);
+
+	List<String> followList(String m_id);
+
 }

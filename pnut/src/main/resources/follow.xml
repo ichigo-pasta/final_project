@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="followns">
+	<resultMap type="member" id="memberResult">
+		<result property="active" column="active"/>
+		<result property="passive" column="passive"/>
+	</resultMap>
+	<insert id="insert" parameterType="hashmap">
+		insert into pn_follow values (#{active}, #{passive})
+	</insert>
+	<delete id="delete" parameterType="hashmap">
+		delete pn_follow where active=#{active} and passive=#{passive}
+	</delete>
+	<select id="followList" parameterType="string" resultType="string">
+		select passive from pn_follow where active=#{m_id}
+	</select>
+</mapper>
