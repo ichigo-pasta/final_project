@@ -81,7 +81,8 @@ public class PeanutsController {
 	@RequestMapping("home/timeline")
 	public String timeline(int amt, Model model, HttpSession session ) {
 		String m_id = (String)session.getAttribute("m_id");
-		List<Peanuts> list = ps.selectList(m_id, amt);
+		List<String> followList = ms.followList(m_id);
+		List<Peanuts> list = ps.selectList(m_id, amt, followList);
 		int listLen = list.size();
 		if (listLen > 0) {
 			for(int i=0; i<listLen; i++) {

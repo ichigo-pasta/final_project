@@ -8,6 +8,6 @@ public interface PeanutsDao {
 
 	int insert(Peanuts peanut);
 
-	List<Peanuts> selectList(String m_id, int amt);
+	List<Peanuts> selectList(String m_id, int amt, List<String> followList);
 
 }

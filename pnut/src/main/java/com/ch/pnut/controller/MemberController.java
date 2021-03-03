@@ -89,7 +89,7 @@ public class MemberController {
 			String filenameB = UUID.randomUUID()+"-"+fileB.getOriginalFilename();
 			member.setM_bg(filenameB);
 			FileOutputStream fos = new FileOutputStream(
-			new File(real+"/"+filenameB));
+					new File(real+"/"+filenameB));
 			fos.write(fileB.getBytes());
 			fos.close();
 		}
@@ -98,7 +98,7 @@ public class MemberController {
 			String filenameP = UUID.randomUUID()+"-"+fileP.getOriginalFilename();
 			member.setM_profile(filenameP);
 			FileOutputStream fos = new FileOutputStream(
-			new File(real+"/"+filenameP));
+					new File(real+"/"+filenameP));
 			fos.write(fileP.getBytes());
 			fos.close();
 		} 
@@ -106,6 +106,30 @@ public class MemberController {
 		model.addAttribute("m_id", member.getM_id());
 		model.addAttribute("result", result);
 		return "home/updateProfile";
-		
+	}
+
+	@RequestMapping("home/followingList") 
+	public String followingList(String m_id) {
+		return "home/followingList"; 
+	}
+
+	@RequestMapping("home/followerList") 
+	public String followerList(String m_id) { 
+		return "home/followerList"; 
+	}
+	@RequestMapping(value = "home/follow", produces = "text/html;charset=utf-8")  // jsp로 보냄
+	@ResponseBody
+	public String follow(String m_id, HttpSession session) {
+		String active = (String) session.getAttribute("m_id");
+		String passive = m_id;
+		ms.insert(active , passive);
+		return "";
+	}
+	@RequestMapping(value = "home/unfollow", produces = "text/html;charset=utf-8")  // jsp로 보냄
+	@ResponseBody
+	public void unfollow(String m_id, HttpSession session) {
+		String active = (String) session.getAttribute("m_id");
+		String passive = m_id;
+		ms.delete(active , passive);
 	}
 }
