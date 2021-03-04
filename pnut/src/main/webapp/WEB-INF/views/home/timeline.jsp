@@ -10,8 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
 </head>
 <body>
-<input type="hidden"> 
-	<div class="container">
+	<div class="container">	
 		<table class="table table-border">
 	<c:forEach items="${list }" var="pn">			
 		<c:if test="${pn.renut != null}">
@@ -34,7 +33,7 @@
 			</tr>
 		</c:if>
 			<tr>
-				<td><pre>${pn.content}</pre></td>
+				<td class="contentRow"><pre>${pn.content}</pre></td>
 			</tr>
 		<c:if test="${pn.picture1 != null}">
 			<tr class="gallery">

@@ -11,9 +11,9 @@
 <body>
 <div class="container">
 <table class="table table-bordered">
-	<tr height="50">
+	<tr height="70">
 		<td><img alt="" src="${path }/resources/images/P-Nut.png" height="50" onclick="">
-		<td style="display: flex; justify-content: space-between; align-items: center;"><tiles:insertAttribute name="headline"/></td>
+		<td height="70" class="d-flex align-items-center"><tiles:insertAttribute name="headline"/></td>
 	</tr>
 	<tr>
 		<td width="20%"><tiles:insertAttribute name="menu"/></td>

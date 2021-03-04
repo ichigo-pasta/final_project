@@ -24,4 +24,10 @@
 		word-break: break-word;
 		white-space: pre-wrap;
 	}
+	.contentRow button {
+		border: none;
+		background-color: transparent;
+		font-style: italic;
+		color: #8b00ff;
+	}
 </style>

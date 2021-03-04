@@ -30,5 +30,5 @@ public class MemberServiceImpl implements MemberService {
 	}
 	public List<String> followList(String m_id) {
 		return md.followList(m_id);
-	}
+	}	
 }
