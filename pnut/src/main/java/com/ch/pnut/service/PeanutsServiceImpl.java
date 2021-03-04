@@ -19,4 +19,7 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public List<Peanuts> selectList(String m_id, int amt, List<String> followList) {
 		return pd.selectList(m_id, amt, followList);
 	}
+	public List<Peanuts> search(String[] arrayKw, int amt) {
+		return pd.search(arrayKw, amt);
+	}
 }
