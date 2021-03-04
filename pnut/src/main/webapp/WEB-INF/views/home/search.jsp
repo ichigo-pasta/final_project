@@ -8,8 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 <c:forEach items="${list}" var="pn">
-	${pn.content}, ${pn.member.m_profile}
+	<p class="contentRow">${pn.content}, ${pn.member.m_profile}</p>
 </c:forEach>
+</div>
 </body>
 </html>

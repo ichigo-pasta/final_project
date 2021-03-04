@@ -1,5 +1,7 @@
 package com.ch.pnut.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +23,31 @@ public class PeanutsServiceImpl implements PeanutsService {
 	}
 	public List<Peanuts> search(String[] arrayKw, int amt) {
 		return pd.search(arrayKw, amt);
+	}
+	public String setHashtag(String content) {
+		content = content.replace("<", "&lt;").replace(">", "&gt;");
+		content = content.replace("\r\n", "<br>");
+		String[] splitContent = content.split(" ");
+		int len = splitContent.length;
+		
+		List<String> temp = new ArrayList<>();
+		int tempSize;
+		for (int i = 0; i < len; i++) {
+			if (splitContent[i].startsWith("#") || splitContent[i].contains("<br>#")) {
+				temp = Arrays.asList(splitContent[i].split("<br>"));
+				tempSize = temp.size();
+				for(int j=0; j<tempSize; j++) {
+					if(temp.get(j).startsWith("#")) {
+						temp.set(j, makeSearchBtn(temp.get(j)));
+					}
+				}							
+				splitContent[i] = String.join("<br>", temp.toArray(new String[temp.size()]));
+			}			
+		}
+		String hashtagedContent = String.join(" ", splitContent);
+		return hashtagedContent;
+	}
+	public String makeSearchBtn(String str) {
+		return "<button onclick=\"search('hashtag', '" + str + "')\">" + str + "</button>";
 	}
 }

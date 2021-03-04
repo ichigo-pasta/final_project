@@ -86,33 +86,13 @@ public class PeanutsController {
 		int listLen = list.size();
 		if (listLen > 0) {
 			for(Peanuts p:list) {
-				p.setContent(setHashtag(p.getContent()));
+				p.setContent(ps.setHashtag(p.getContent()));
 			}
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("m_id", m_id);
 		return "home/timeline";
-	}
-
-	private String setHashtag(String content) {
-		content = content.replace("<", "&lt;").replace(">", "&gt;");		
-		String[] splitContent = content.split(" |\n");
-		int len = splitContent.length;
-		String hashtagedContent = "";
-		for (int i = 0; i < len; i++) {
-			if (splitContent[i].startsWith("#")) {
-				splitContent[i] = "<a href='#'>" + splitContent[i] + "</a>";
-			}
-			if (splitContent[i].contains("\r")) {
-				hashtagedContent += splitContent[i];
-			} else if (i != len - 1) {
-				hashtagedContent += splitContent[i] + " ";
-			} else {
-				hashtagedContent += splitContent[i];
-			}
-		}
-		return hashtagedContent;
-	}
+	}	
 
 	@RequestMapping("/nolay/peanutList")
 	public String peanutList() {

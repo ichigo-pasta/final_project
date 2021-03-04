@@ -12,4 +12,6 @@ public interface PeanutsService {
 
 	List<Peanuts> search(String[] arrayKw, int amt);
 
+	String setHashtag(String content);
+
 }
