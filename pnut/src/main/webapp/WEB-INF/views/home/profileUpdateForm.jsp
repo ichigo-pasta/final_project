@@ -18,7 +18,7 @@
 <div id="container">
 <form action="${path}/home/updateProfile.do" 
 	method="post" enctype="multipart/form-data">
-<input type="text" name="m_id" value="${member.m_id }"> 
+<input type="hidden" name="m_id" value="${member.m_id }"> 
 
 <div class="pic_container d-flex align-items-end">
 	<img alt="" src="${path}/resources/images/${member.m_profile}"
@@ -37,7 +37,7 @@
 		<td><input type="submit" value="저장"></td>
 	</tr>
 	<tr>
-		<td>${member.m_id }</td>
+		<td><c:out value="${member.m_id }"/> </td>
 		<td colspan="3"></td>
 	</tr>
 	<tr>

@@ -21,10 +21,10 @@
 		</c:if>
 			<tr>
 				<td rowspan="4"><img alt="" src="${path}/resources/images/${member.m_profile}"></td>
-				<td>, ${pn.writer}, ${pn.regdate}</td>
+				<td><c:out value=" , ${pn.writer}, ${pn.regdate}"/></td>
 			</tr>
 			<tr>
-				<td>${pn.content }</td>
+				<td><c:out value="${pn.content }"/></td>
 			</tr>
 		<c:if test="${pn.picture1 != null}">
 			<tr class="gallery">

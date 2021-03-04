@@ -25,5 +25,11 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("followList", followList);
 		return sst.selectList("peanutsns.selectList", map);
 	}
+	public List<Peanuts> search(String[] arrayKw, int amt) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("arrayKw", arrayKw);
+		map.put("amt", amt);
+		return sst.selectList("peanutsns.search", map);
+	}
 	
 }

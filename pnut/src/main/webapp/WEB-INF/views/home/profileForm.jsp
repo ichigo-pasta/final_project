@@ -28,7 +28,7 @@
 </div> 
 <table class="table table-border">
 	<tr>
-		<td>${member.m_nickname }</td>
+		<td><c:out value="${member.m_nickname }"></c:out></td>
 		<td colspan="2"></td>
 	<c:if test="${member.m_id == my_id}">
 		<td><a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a></td>
@@ -43,13 +43,13 @@
 	</c:if>
 	</tr>
 	<tr>
-		<td>${member.m_id }</td>
+		<td><c:out value="${member.m_id }"/></td>
 		<td colspan="3"></td>
 	</tr>
 	<tr>
-		<td colspan="4">${member.m_intro }</td>
+		<td colspan="4"><c:out value="${member.m_intro }"/></td>
 	<tr>
-		<td>${member.m_regdate }</td>
+		<td><c:out value="${member.m_regdate }"/></td>
 		<td colspan="3"></td>
 	</tr>
 	<tr>

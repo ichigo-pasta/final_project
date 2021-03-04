@@ -5,10 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-	@RequestMapping("home/search")
-	public String search() {
-		return "home/search";
-	}
 	@RequestMapping("home/notice")
 	public String notice() {
 		return "home/notice";

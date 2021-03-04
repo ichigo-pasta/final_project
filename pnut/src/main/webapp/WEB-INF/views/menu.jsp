@@ -14,10 +14,6 @@
 				<i class="bi-house-door-fill">홈</i></a></td>
 	</tr>
 	<tr>
-		<td><a href="${path}/home/search.do" class="btn btn-warning">
-				<i class="bi-search">검색</i></a></td>
-	</tr>
-	<tr>
 		<td><a href="${path}/home/notice.do" class="btn btn-warning">
 				<i class="bi-bell-fill">알림</i></a></td>
 	</tr>
