@@ -20,4 +20,8 @@
 
 <style>
 	.err {color:red; font-weight: bold;}
+	pre {
+		word-break: break-word;
+		white-space: pre-wrap;
+	}
 </style>
