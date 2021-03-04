@@ -13,7 +13,7 @@
 <table class="table table-bordered">
 	<tr height="50">
 		<td><img alt="" src="${path }/resources/images/P-Nut.png" height="50" onclick="">
-		<td></td>
+		<td><tiles:insertAttribute name="headline"/></td>
 	</tr>
 	<tr>
 		<td width="20%"><tiles:insertAttribute name="menu"/></td>

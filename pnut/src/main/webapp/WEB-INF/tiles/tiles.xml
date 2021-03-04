@@ -5,6 +5,7 @@
 	<definition name="tilesbase"
 		template="/WEB-INF/views/layout.jsp">
 		<!-- 레이아웃 적용 -->
+		<put-attribute name="headline" 		value="" />
 		<put-attribute name="menu" 		value="/WEB-INF/views/menu.jsp" />
 		<put-attribute name="body" 		value="" />
 	</definition>
@@ -21,5 +22,7 @@
 	<definition name="*/*" extends="tilesbase">
 		<put-attribute name="body"
 			value="/WEB-INF/views/{1}/{2}.jsp" />
+		<put-attribute name="headline"
+			value="/WEB-INF/views/headline/{2}.jsp" />
 	</definition>
 </tiles-definitions>
