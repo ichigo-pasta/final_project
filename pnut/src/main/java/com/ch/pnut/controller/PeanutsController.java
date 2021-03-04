@@ -85,11 +85,8 @@ public class PeanutsController {
 		List<Peanuts> list = ps.selectList(m_id, amt, followList);
 		int listLen = list.size();
 		if (listLen > 0) {
-			for(int i=0; i<listLen; i++) {
-				Peanuts p = list.get(i);
-				String content = p.getContent();				
-				p.setContent(setHashtag(content));				
-				list.set(i, p);
+			for(Peanuts p:list) {
+				p.setContent(setHashtag(p.getContent()));
 			}
 		}
 		model.addAttribute("list", list);
@@ -98,6 +95,7 @@ public class PeanutsController {
 	}
 
 	private String setHashtag(String content) {
+		content = content.replace("<", "&lt;").replace(">", "&gt;");		
 		String[] splitContent = content.split(" |\n");
 		int len = splitContent.length;
 		String hashtagedContent = "";
@@ -118,7 +116,6 @@ public class PeanutsController {
 
 	@RequestMapping("/nolay/peanutList")
 	public String peanutList() {
-
 		return "nolay/peanutList";
 	}
 }
