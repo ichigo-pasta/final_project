@@ -34,7 +34,12 @@
 		<td><a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a></td>
 	</c:if>
 	<c:if test="${member.m_id != my_id}">
-		<td><button id="followbt" onclick="follow('${member.m_id}')">팔로우</button></td>
+		<c:if test="${isFollow == true }">
+		<td><button id="followbt" onclick="unfollow('${member.m_id}')" onmouseover="this.innerText='언팔로우'" onmouseout="this.innerText='팔로우 중'">팔로우 중</button></td>
+		</c:if>
+		<c:if test="${isFollow == false }">
+		<td><button id="followbt" onclick="follow('${member.m_id}')">팔로우</button></td>		
+		</c:if>
 	</c:if>
 	</tr>
 	<tr>
@@ -74,9 +79,10 @@
 		xhr.send(null);
 	}
 	function buttonChange() {
-		var btn = document.getElementById('followbt');
-		btn.innerText = '언팔로우';
+		var btn = document.getElementById('followbt');		
 		btn.setAttribute("onclick","unfollow('${member.m_id}')");
+		btn.setAttribute("onmouseover","this.innerText='언팔로우'");
+		btn.setAttribute("onmouseout","this.innerText='팔로우 중'");
 	}
 	function unfollow(m_id) {
 		buttonChange2();
@@ -93,6 +99,8 @@
 		var btn = document.getElementById('followbt');
 		btn.innerText = '팔로우';
 		btn.setAttribute("onclick","follow('${member.m_id}')");
+		btn.removeAttribute("onmouseover");
+		btn.removeAttribute("onmouseout");
 	}
 </script>
 </body>

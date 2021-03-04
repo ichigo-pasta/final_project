@@ -68,9 +68,12 @@ public class MemberController {
 		return "logout";
 	}
 	@RequestMapping("home/profileForm")
-	public String profile(String m_id, Model model) {
+	public String profile(String m_id, Model model, HttpSession session) {
 		Member member = ms.select(m_id);
+		String my_id = (String) session.getAttribute("m_id");
+		boolean isFollow = ms.followList(my_id).contains(m_id);
 		model.addAttribute("member", member);
+		model.addAttribute("isFollow", isFollow);
 		return "home/profileForm";
 	}
 	@RequestMapping("home/profileUpdateForm")
