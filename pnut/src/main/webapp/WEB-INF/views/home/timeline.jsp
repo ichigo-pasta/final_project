@@ -63,7 +63,9 @@
 			<tr></tr>
 		</c:if>
 			<tr>
-				<td>댓글, 리넛, 좋아요</td>
+				<td><a href="${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}"><i class="bi-chat"></i></a>
+					<a href="#"><i class="bi-arrow-clockwise"></i></a>
+					<a href="#"><i class="bi-hand-thumbs-up"></i></a></td>
 			</tr>		
 	</c:forEach>
 		</table>

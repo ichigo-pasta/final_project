@@ -21,7 +21,6 @@ public class SearchController {
 	private PeanutsService ps;	
 	@RequestMapping("home/search")
 	public String search(String type, String keyword, int amt, Model model) {
-		System.out.println("검색키워드: "+keyword);
 		keyword = keyword.replaceAll(" +", " ");
 		String[] arrayKw = keyword.split(" ");
 		int arrayLen = arrayKw.length;
@@ -33,7 +32,6 @@ public class SearchController {
 		case "peanut":
 			List<Peanuts> list = new ArrayList<>();
 			list = ps.search(arrayKw, amt);
-			System.out.println(arrayKw[0]);
 			for(Peanuts pn:list) {
 				pn.setContent(ps.setHashtag(pn.getContent()));
 			}

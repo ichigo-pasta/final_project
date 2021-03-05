@@ -12,4 +12,8 @@ public interface PeanutsDao {
 
 	List<Peanuts> search(String[] arrayKw, int amt);
 
+	Peanuts selectDetail(int peanut_no);
+
+	Integer isRenut(int peanut_no);
+
 }

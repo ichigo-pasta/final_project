@@ -14,4 +14,8 @@ public interface PeanutsService {
 
 	String setHashtag(String content);
 
+	Peanuts selectDetail(int peanut_no);
+
+	Integer isRenut(int peanut_no);
+
 }

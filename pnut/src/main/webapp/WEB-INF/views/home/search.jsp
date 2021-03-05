@@ -21,7 +21,7 @@
 </ul>
 <div class="container">
 <table class="table table-border">
-	<c:if test="${type != user}" >
+	<c:if test="${type != 'user'}" >
 	<c:if test="${empty list }">
 		<tr>
 			<td colspan="2">데이터가 없습니다</td>
@@ -71,7 +71,7 @@
 	</c:forEach>
 	</c:if>
 	</c:if>
-	<c:if test="${type == user}" >
+	<c:if test="${type == 'user'}" >
 	<c:if test="${empty list2 }">
 		<tr>	
 			<td>데이터가 없습니다.</td>

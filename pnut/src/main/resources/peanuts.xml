@@ -76,4 +76,7 @@
 		</foreach>order by p.peanut_no desc) a)
 		where rn between 1 and #{amt}
 	</select>
+	<select id="isRenut" parameterType="int" resultType="integer">
+		select renut from pn_peanuts where peanut_no = #{peanut_no}
+	</select>
 </mapper>
