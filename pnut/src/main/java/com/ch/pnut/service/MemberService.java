@@ -18,4 +18,6 @@ public interface MemberService {
 
 	List<String> followList(String m_id);
 
+	List<Member> search(String[] arrayKw, int amt);
+
 }

@@ -10,7 +10,7 @@
 <body>
 <div class="container">
 <h2 class="text-primary">로그인</h2>
-<form action="login.do">
+<form action="login.do" method="post">
 	<table class="table table-bordered table-hover">
 		<tr>
 			<td>아이디<i class="bi-person-fill"></i></td>

@@ -31,4 +31,12 @@
 		<if test="m_intro!=null">, m_intro=#{m_intro}</if>
 		where m_id=#{m_id} 
 	</update>
+	<select id="search" parameterType="hashmap" resultMap="memberResult">
+		select * from (select a.*, rownum rn from 
+		(select * from pn_member where m_del='n'
+		<foreach collection="arrayKw" item="item" index="i">
+			and	(m_id like '%'||#{item[i]}||'%' or m_nickname like '%'||#{item[i]}||'%' or m_intro like '%'||#{item[i]}||'%') 
+		</foreach>) a)
+		where rn between 1 and #{amt}
+	</select>
 </mapper>
