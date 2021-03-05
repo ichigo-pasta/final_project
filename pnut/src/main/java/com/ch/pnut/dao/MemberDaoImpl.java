@@ -46,4 +46,11 @@ public class MemberDaoImpl implements MemberDao {
 		
 	}
 
+	public List<Member> search(String[] arrayKw, int amt) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("arrayKw", arrayKw);
+		map.put("amt", amt);
+		return sst.selectList("memberns.search", map);
+	}
+
 }

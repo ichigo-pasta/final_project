@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ch.pnut.model.Member;
 import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.service.MemberService;
 import com.ch.pnut.service.PeanutsService;
@@ -23,22 +24,26 @@ public class SearchController {
 		System.out.println("검색키워드: "+keyword);
 		keyword = keyword.replaceAll(" +", " ");
 		String[] arrayKw = keyword.split(" ");
-		List<Peanuts> list = new ArrayList<>();
+		int arrayLen = arrayKw.length;
 		switch(type) {
 		case "hashtag":
-			for (String kw : arrayKw) {
-				if(!kw.startsWith("#")) kw = "#"+kw;
+			for (int i = 0; i < arrayLen; i++) {
+				if(!arrayKw[i].startsWith("#")) arrayKw[i] = "#"+arrayKw[i];
 			}
 		case "peanut":
+			List<Peanuts> list = new ArrayList<>();
 			list = ps.search(arrayKw, amt);
+			System.out.println(arrayKw[0]);
 			for(Peanuts pn:list) {
 				pn.setContent(ps.setHashtag(pn.getContent()));
 			}
+			model.addAttribute("list", list);
 			break;
 		case "user":
-			
+			List<Member> list2 = new ArrayList<>();
+			list2 = ms.search(arrayKw, amt);
+			model.addAttribute("list2", list2);
 		}
-		model.addAttribute("list", list);
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);
 		return "home/search";
