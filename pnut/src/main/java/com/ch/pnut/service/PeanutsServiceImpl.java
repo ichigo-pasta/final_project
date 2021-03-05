@@ -50,4 +50,10 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public String makeSearchBtn(String str) {
 		return "<button onclick=\"search('hashtag', '" + str + "')\">" + str + "</button>";
 	}
+	public Peanuts selectDetail(int peanut_no) {
+		return pd.selectDetail(peanut_no);
+	}
+	public Integer isRenut(int peanut_no) {
+		return pd.isRenut(peanut_no);
+	}
 }

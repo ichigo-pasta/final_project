@@ -93,6 +93,13 @@ public class PeanutsController {
 		model.addAttribute("m_id", m_id);
 		return "home/timeline";
 	}	
+	@RequestMapping("home/peanutDetail")
+	public String peanutDetail(int peanut_no) {
+		Integer renut = ps.isRenut(peanut_no);
+		System.out.println(renut);
+		/* Peanuts peanut = ps.selectDetail(peanut_no); */
+		return "home/peanutDetail";
+	}
 
 	@RequestMapping("/nolay/peanutList")
 	public String peanutList() {

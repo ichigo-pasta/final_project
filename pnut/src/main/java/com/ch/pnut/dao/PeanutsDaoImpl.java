@@ -31,5 +31,11 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("amt", amt);
 		return sst.selectList("peanutsns.search", map);
 	}
+	public Peanuts selectDetail(int peanut_no) {
+		return sst.selectOne("peanutsns.selectDetail", peanut_no);
+	}
+	public Integer isRenut(int peanut_no) {
+		return sst.selectOne("peanutsns.isRenut", peanut_no);
+	}
 	
 }
