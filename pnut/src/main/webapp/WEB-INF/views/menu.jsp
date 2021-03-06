@@ -10,31 +10,38 @@
 <body>
 <table>
 	<tr>
-		<td><a href="${path}/home/timeline.do?amt=20" class="btn btn-warning">
-				<i class="bi-house-door-fill">홈</i></a></td>
+		<td><a href="${path}/home/timeline.do?amt=20" 
+				class="list-group-item list-group-item-action list-group-item-warning">
+			<i class="bi-house-door-fill"></i>&nbsp;&nbsp;홈</a></td>
 	</tr>
 	<tr>
-		<td><a href="${path}/home/notice.do" class="btn btn-warning">
-				<i class="bi-bell-fill">알림</i></a></td>
+		<td><a href="${path}/home/notice.do"
+		 		class="list-group-item list-group-item-action list-group-item-warning">
+			<i class="bi-bell-fill"></i>&nbsp;&nbsp;알림</a></td>
 	</tr>
 	<tr>
-		<td><a href="${path}/home/message.do" class="btn btn-warning">
-				<i class="bi-envelope-fill">메시지</i></a></td>
+		<td><a href="${path}/home/message.do" 
+				class="list-group-item list-group-item-action list-group-item-warning">
+			<i class="bi-envelope-fill"></i>&nbsp;&nbsp;메시지</a></td>
 	</tr>
 	<tr>
-		<td><a href="${path}/home/bookmark.do" class="btn btn-warning">
-				<i class="bi-bookmark-fill">북마크</i></a></td>
+		<td><a href="${path}/home/bookmark.do" 
+				class="list-group-item list-group-item-action list-group-item-warning">
+			<i class="bi-bookmark-fill"></i>&nbsp;&nbsp;북마크</a></td>
 	</tr>
 	<tr>
-		<td><a class="btn btn-warning" onclick="profile('${m_id}')">
-				<i class="bi-person-fill">프로필</i></a></td>
+		<td><a class="list-group-item list-group-item-action list-group-item-warning" 
+				onclick="profile('${m_id}')">
+			<i class="bi-person-fill"></i>&nbsp;&nbsp;프로필</a></td>
 	</tr>
 	<tr>
-		<td><a href="${path}/home/writeForm.do" class="btn btn-warning">
-				<i class="bi-pencil-fill">글쓰기</i></a></td>
+		<td><a href="${path}/home/writeForm.do" 
+				class="list-group-item list-group-item-action list-group-item-warning">
+			<i class="bi-pencil-fill"></i>&nbsp;&nbsp;글쓰기</a></td>
 	</tr>
 	<tr>
-		<td><a href="${path}/logout.do">로그아웃</a></td>
+		<td><a href="${path}/logout.do"
+				class="list-group-item list-group-item-action list-group-item-warning">&nbsp;로그아웃</a></td>
 	</tr>
 </table>
 <script type="text/javascript">

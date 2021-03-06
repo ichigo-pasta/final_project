@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	
-</style>
-</head>
-<body>
-<div class="container">
 <div class="row">
 	<div class="col col-7">
 		<h4 class="text-primary">타임라인</h4>
@@ -23,7 +12,6 @@
 		<button class="btn btn-outline-secondary" onclick="search('peanut')">검색</button>
 	</span>
 	</div>
-</div>
 </div>
 <script type="text/javascript">	
 	function search() {
@@ -64,5 +52,3 @@
 		}
 	}
 </script>
-</body>
-</html>

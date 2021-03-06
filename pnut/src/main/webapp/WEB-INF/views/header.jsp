@@ -17,7 +17,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <!-- JQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
 <style>
 	.err {color:red; font-weight: bold;}
 	pre {
@@ -29,5 +30,13 @@
 		background-color: transparent;
 		font-style: italic;
 		color: #8b00ff;
+	}
+	/* div {
+		border: 1px solid black;
+	} */
+	#headline {
+		display: flex;
+		align-items: center;
+		height: 60px;
 	}
 </style>

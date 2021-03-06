@@ -22,48 +22,64 @@
 </head>
 <body>
 <div id="container">
-<div class="pic_container d-flex align-items-end">
-	<img alt="" src="${path}/resources/images/${member.m_profile}"
-		width="100" height="100">
-</div> 
-<table class="table table-border">
-	<tr>
-		<td><c:out value="${member.m_nickname }"></c:out></td>
-		<td colspan="2"></td>
-	<c:if test="${member.m_id == my_id}">
-		<td><a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a></td>
-	</c:if>
-	<c:if test="${member.m_id != my_id}">
-		<c:if test="${isFollow == true }">
-		<td><button id="followbt" onclick="unfollow('${member.m_id}')" onmouseover="this.innerText='언팔로우'" onmouseout="this.innerText='팔로우 중'">팔로우 중</button></td>
-		</c:if>
-		<c:if test="${isFollow == false }">
-		<td><button id="followbt" onclick="follow('${member.m_id}')">팔로우</button></td>		
-		</c:if>
-	</c:if>
-	</tr>
-	<tr>
-		<td><c:out value="${member.m_id }"/></td>
-		<td colspan="3"></td>
-	</tr>
-	<tr>
-		<td colspan="4"><c:out value="${member.m_intro }"/></td>
-	<tr>
-		<td><c:out value="${member.m_regdate }"/></td>
-		<td colspan="3"></td>
-	</tr>
-	<tr>
-		<td><a href="${path}/home/followingList.do?m_id=${member.m_id}">팔로우 중</a></td>
-		<td><a href="${path}/home/followerList.do?m_id=${member.m_id}">팔로워</a></td>
-		<td colspan="2"></td>
-	</tr>
-	<tr>
-		<td colspan="2">피넛</td>
-		<td colspan="2">사진 피넛</td>
-	</tr>
-</table>
-<div id="peanut"></div>
+	<div class="pic_container d-flex align-items-end">
+		<img alt="" src="${path}/resources/images/${member.m_profile}"
+			width="100" height="100">
+	</div> 
+	<div class="row">
+		<div class="col col-10">
+			<c:out value="${member.m_nickname }"></c:out>
+		</div>
+		<div class="col col-2">
+			<c:if test="${member.m_id == my_id}">
+				<a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a>
+			</c:if>
+			<c:if test="${member.m_id != my_id}">
+				<c:if test="${isFollow == true }">
+					<button id="followbt" onclick="unfollow('${member.m_id}')" 
+						onmouseover="this.innerText='언팔로우'" 
+						onmouseout="this.innerText='팔로우 중'">팔로우 중</button>
+				</c:if>
+				<c:if test="${isFollow == false }">
+					<button id="followbt" onclick="follow('${member.m_id}')">팔로우</button>	
+				</c:if>
+			</c:if>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col"> 
+			<c:out value="${member.m_id }"/>
+		</div>
+	</div>
+	<div class="row" style="height: 200px">
+		<div class="col"> 
+			자기소개 :<c:out value="${member.m_intro }"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col"> 
+			<c:out value="${member.m_regdate }"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col col-2"> 
+			<a href="${path}/home/followingList.do?m_id=${member.m_id}">팔로우 중</a>
+		</div>
+		<div class="col col-2"> 
+			<a href="${path}/home/followerList.do?m_id=${member.m_id}">팔로워</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col col-6"> 
+			피넛
+		</div>
+		<div class="col col-6"> 
+			사진 피넛
+		</div>
+	</div>
 </div>
+<div id="peanut"></div>
+
 <script type="text/javascript">
 	function follow(m_id) {
 		buttonChange();

@@ -10,13 +10,13 @@
 <body>
 <ul class="nav nav-tabs nav-fill">
   <li class="nav-item">
-    <a class="nav-link" id="peanut"><button onclick="search('peanut')" class="btn col-12">피넛</button></a>
+    <a class="nav-link" id="peanut" href="javascript:search('peanut');">피넛</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="hashtag"><button onclick="search('hashtag')" class="btn col-12">해시태그</button></a>
+    <a class="nav-link" id="hashtag" href="javascript:search('hashtag');">해시태그</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="user"><button onclick="search('user')" class="btn col-12">사용자</button></a>
+    <a class="nav-link" id="user" href="javascript:search('user');">사용자</a>
   </li>
 </ul>
 <div class="container">

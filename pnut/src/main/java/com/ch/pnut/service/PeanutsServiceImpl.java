@@ -48,7 +48,7 @@ public class PeanutsServiceImpl implements PeanutsService {
 		return hashtagedContent;
 	}
 	public String makeSearchBtn(String str) {
-		return "<button onclick=\"search('hashtag', '" + str + "')\">" + str + "</button>";
+		return "<a href=\"javascript:search('hashtag', '" + str + "');\">" + str + "</a>";
 	}
 	public Peanuts selectDetail(int peanut_no) {
 		return pd.selectDetail(peanut_no);
