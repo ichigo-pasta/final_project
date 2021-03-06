@@ -10,17 +10,16 @@
 </head>
 <body>
 <div class="container">
-<table class="table table-bordered">
-	<tr height="70">
-		<td width="15%"><img alt="" src="${path }/resources/images/P-Nut.png" height="50" onclick="">
-		<td height="70" class="d-flex align-items-center">
-			<tiles:insertAttribute name="headline"/></td>
-	</tr>
-	<tr>
-		<td width="15%"><tiles:insertAttribute name="menu"/></td>
-		<td><tiles:insertAttribute name="body"/></td>
-	</tr>
-</table>
-</div>
+    <div class="row" id="headline">
+    	<div class="col col-lg-2 col-md-3 col-sm-4" align="center">
+    		<img alt="" src="${path }/resources/images/P-Nut.png" height="50" onclick=""></div>
+    	<div class="col col-lg-10 col-md-9 col-sm-8" >
+    		<tiles:insertAttribute name="headline"/></div>
+    </div>
+    <div class="row">
+    	<div class="col col-lg-2 col-md-3 col-sm-4" align="right"><tiles:insertAttribute name="menu"/></div>
+    	<div class="col col-lg-10 col-md-9 col-sm-8"><tiles:insertAttribute name="body"/></div>
+  	</div>  	
+  </div>
 </body>
 </html>

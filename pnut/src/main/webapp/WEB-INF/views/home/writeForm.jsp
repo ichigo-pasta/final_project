@@ -1,50 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <div class="container">
 <form action="${path}/home/write.do" method="post" enctype="multipart/form-data">
-	<table class="table table-border">
-		<tr>
-			<td rowspan="2">
-				<img alt="" src="${path}/resources/images/${member.m_profile}"
-					width="100" height="100"></td>
-			<td>
-				<textarea cols="55" rows="9" required="required" 
-					name="content" id="content" style="resize: none;" onchange="checkByte(e);"></textarea>
-				<br>
-				<div align="right">
-					<span id="count">0</span>/<span id="max_count">0</span>					
+	<div class="row">
+		<div class="col col-2">
+			<img alt="" src="${path}/resources/images/${member.m_profile}"
+					width="100" height="100">
+		</div>
+		<div class="col col-10">
+			<div class="row">
+				<textarea rows="9" required="required" 
+					name="content" id="content" style="resize: none;" 
+					onchange="checkByte(e);"></textarea>
+			</div>
+			<div class="row" align="right">
+				<span id="count">0/0</span>
+			</div>
+			<div class="row" align="right">
+				<div class="col">
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-outline-warning" onclick="img_upload();" >
+							<i class="bi bi-card-image" style="font-size: 30px; color: skyblue"></i>
+							<font style="color: black;">사진추가</font>
+						</button>
+						<button type="button" class="btn btn-outline-warning" onclick="img_delete();" >
+							<i class="bi bi-card-image" style="font-size: 30px; color: red"></i>
+							<font style="color: black;">사진삭제</font>
+						</button>
+					</div>
 				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<button type="button" class="btn btn-outline-warning" onclick="img_upload();" >
-					<i class="bi bi-card-image" style="font-size: 30px; color: skyblue"></i>
-					<font style="color: black;">사진추가</font>
-				</button>
-				<button type="button" class="btn btn-outline-warning" onclick="img_delete();" >
-					<i class="bi bi-card-image" style="font-size: 30px; color: red"></i>
-					<font style="color: black;">사진삭제</font>
-				</button><br>				
-   				<input type="file" accept="image/*" id="file1" name="file1" hidden="hidden" onchange="setThumbnail(event);">
-   				<input type="file" accept="image/*" id="file2" name="file2" hidden="hidden" onchange="setThumbnail(event);">
-   				<input type="file" accept="image/*" id="file3" name="file3" hidden="hidden" onchange="setThumbnail(event);">
-   				<input type="file" accept="image/*" id="file4" name="file4" hidden="hidden" onchange="setThumbnail(event);">
-				<span id="img_container1"></span>
-				<span id="img_container2"></span><br>
-				<span id="img_container3"></span>
-				<span id="img_container4"></span><br>
-				<input type="submit" value="피넛" class="btn btn-warning"></td>
-		</tr>
-	</table>	
+			</div>
+			<div class="row" align="right">
+				<div class="col">
+					<button class="btn btn-warning">피넛</button>
+				</div>
+			</div>		
+			<div class="row">
+				<div class="col-6" id="img_container1"></div>
+				<div class="col-6" id="img_container2"></div>
+				<div class="col-6" id="img_container3"></div>
+				<div class="col-6" id="img_container4"></div>
+			</div> 
+		</div>
+	</div>
+<input type="file" accept="image/*" id="file1" name="file1" hidden="hidden" onchange="setThumbnail(event);">
+<input type="file" accept="image/*" id="file2" name="file2" hidden="hidden" onchange="setThumbnail(event);">
+<input type="file" accept="image/*" id="file3" name="file3" hidden="hidden" onchange="setThumbnail(event);">
+<input type="file" accept="image/*" id="file4" name="file4" hidden="hidden" onchange="setThumbnail(event);">
 </form>
 </div>
 <script type="text/javascript">
@@ -52,7 +55,6 @@
 	var countSpan = document.getElementById('count');
 	var msg = '';
 	var MAX_MESSAGE_BYTE = 400;
-	document.getElementById('max_count').innerHTML = MAX_MESSAGE_BYTE;
 	
 	function count(msg) {
 		var totalByte = 0;
@@ -66,11 +68,11 @@
 	function checkByte(e) {
 		const totalByte = count(e.target.value);
 		if (totalByte <= MAX_MESSAGE_BYTE) {
-			countSpan.innerText = totalByte.toString();
+			countSpan.innerText = totalByte.toString()+"/"+MAX_MESSAGE_BYTE;
 			msg = e.target.value;
 		} else {
 			alert(MAX_MESSAGE_BYTE + '까지만 입력가능합니다');
-			countSpan.innerText = count(msg).toString();
+			countSpan.innerText = count(msg).toString()+"/"+MAX_MESSAGE_BYTE;
 			e.target.value = msg;
 		}
 	}
@@ -115,7 +117,8 @@
 		reader.onload = function(event) {			
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
-			img.setAttribute("width", "45%");
+			img.setAttribute("width", "100%");
+			img.setAttribute("class", "img-thumbnail");
 			document.getElementById('img_container' + evt).appendChild(img);						
 		}
 		reader.readAsDataURL(image[0]);
@@ -147,5 +150,3 @@
 	}
 	
 </script>
-</body>
-</html>
