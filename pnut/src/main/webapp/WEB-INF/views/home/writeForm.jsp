@@ -12,7 +12,9 @@
 <form action="${path}/home/write.do" method="post" enctype="multipart/form-data">
 	<table class="table table-border">
 		<tr>
-			<td rowspan="2">프로필 사진</td>
+			<td rowspan="2">
+				<img alt="" src="${path}/resources/images/${member.m_profile}"
+					width="100" height="100"></td>
 			<td>
 				<textarea cols="55" rows="9" required="required" 
 					name="content" id="content" style="resize: none;" onchange="checkByte(e);"></textarea>
@@ -24,11 +26,13 @@
 		</tr>
 		<tr>
 			<td>
-				<button type="button" class="btn btn-info" onclick="img_upload();" >
-					<i class="bi bi-card-image" style="font-size: 30px"></i>사진추가
+				<button type="button" class="btn btn-outline-warning" onclick="img_upload();" >
+					<i class="bi bi-card-image" style="font-size: 30px; color: skyblue"></i>
+					<font style="color: black;">사진추가</font>
 				</button>
-				<button type="button" class="btn btn-info" onclick="img_delete();" >
-					<i class="bi bi-card-image" style="font-size: 30px; color: red"></i>사진삭제
+				<button type="button" class="btn btn-outline-warning" onclick="img_delete();" >
+					<i class="bi bi-card-image" style="font-size: 30px; color: red"></i>
+					<font style="color: black;">사진삭제</font>
 				</button><br>				
    				<input type="file" accept="image/*" id="file1" name="file1" hidden="hidden" onchange="setThumbnail(event);">
    				<input type="file" accept="image/*" id="file2" name="file2" hidden="hidden" onchange="setThumbnail(event);">
@@ -38,7 +42,7 @@
 				<span id="img_container2"></span><br>
 				<span id="img_container3"></span>
 				<span id="img_container4"></span><br>
-				<input type="submit" value="피넛" class="btn btn-success"></td>
+				<input type="submit" value="피넛" class="btn btn-warning"></td>
 		</tr>
 	</table>	
 </form>

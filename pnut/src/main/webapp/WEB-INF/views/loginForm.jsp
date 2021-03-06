@@ -26,6 +26,7 @@
 			<td colspan="2"><input type="submit" value="확인"></td>
 		</tr>	
 	</table>
+
 </form>
 <div align="center">
 	<a href="joinForm.do" class="btn btn-success">
