@@ -21,7 +21,12 @@
 				<div class="col col-10">
 					<div class="row">
 						<div class="col">
-							<c:out value=" ${pn.member.re_nick}, ${pn.re_writer}, ${pn.regdate}"/>
+							<c:out value=" ${pn.member.re_nick}, ${pn.re_writer}, ${pn.regdate}"/><br>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							${pn.content}
 						</div>
 					</div>
 				</div>
@@ -36,105 +41,83 @@
 				<div class="col col-10">
 					<div class="row">
 						<div class="col">
-							<c:out value="${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}"/>
+							<c:out value="${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}"/><br>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							${pn.content}
 						</div>
 					</div>
 				</div>
 			</div>
 		</c:if>
-			<
-	</c:forEach>
-</c:if>
-
-<br>
-<br>
-
-
-	<div class="row">
-		<div class="col">
-						
-				<c:if test="${pn.renut != null}">
-					<i class="bi bi-arrow-repeat"></i><c:out value="${pn.writer}"/> 님이 리넛하셨습니다.
-			
-					<img alt="" src="${path}/resources/images/${pn.member.re_pf}"
-						width="100" height="100" onclick="profile('${pn.re_writer}')">
-				<td><c:out value=" ${pn.member.re_nick}, ${pn.re_writer}, ${pn.regdate}"/>
-			</tr>
-		</c:if>
-		<c:if test="${pn.renut == null}">
-			<tr>
-				<td rowspan="4">
-					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
-						width="100" height="100" onclick="profile('${pn.writer}')"> </td>
-				<td><c:out value="${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}"/></td>
-			</tr>
-		</c:if>
-		</div>
-	</div>
-</div>	
-		<table class="table table-border">
-	<c:forEach items="${list }" var="pn">			
-		<c:if test="${pn.renut != null}">
-			<tr>
-				<td colspan="2"><i class="bi bi-arrow-repeat"></i><c:out value="${pn.writer}"/> 님이 리넛하셨습니다.</td>
-			<tr>
-			<tr>
-				<td rowspan="4">
-					<img alt="" src="${path}/resources/images/${pn.member.re_pf}"
-						width="100" height="100" onclick="profile('${pn.re_writer}')"></td>
-				<td><c:out value=" ${pn.member.re_nick}, ${pn.re_writer}, ${pn.regdate}"/></td>
-			</tr>
-		</c:if>
-		<c:if test="${pn.renut == null}">
-			<tr>
-				<td rowspan="4">
-					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
-						width="100" height="100" onclick="profile('${pn.writer}')"> </td>
-				<td><c:out value="${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}"/></td>
-			</tr>
-		</c:if>
-			<tr>
-				<td class="contentRow"><pre>${pn.content}</pre></td>
-			</tr>
+			<%-- <div class="row">
+				<div class="col col-2"></div>
+				<div class="col col-10">
+					<div class="row">
+						<div class="col">
+							${pn.content}
+						</div>
+					</div>
+				</div>
+			</div> --%>
 		<c:if test="${pn.picture1 != null}">
-			<tr class="gallery">
-				<td>
+			<div class="row">
+				<div class="col col-2"></div>
+				<div class="col col-10 gallery">
 					<a href="${path}/resources/images/${pn.picture1}">
-						<img src="${path}/resources/images/${pn.picture1}" width="45%" onclick="baguetteBox.run('.gallery')">
+						<img src="${path}/resources/images/${pn.picture1}" 
+							width="45%" onclick="baguetteBox.run('.gallery')">
 					</a>
 			<c:if test="${pn.picture2 != null}">
 					<a href="${path}/resources/images/${pn.picture2}">
-						<img src="${path}/resources/images/${pn.picture2}" width="45%" onclick="baguetteBox.run('.gallery')">
-					</a>			
+						<img src="${path}/resources/images/${pn.picture2}" 
+							width="45%" onclick="baguetteBox.run('.gallery')">
+					</a>
 				<c:if test="${pn.picture3 != null}">
-					<a href="${path}/resources/images/${pn.picture3}">
-						<img src="${path}/resources/images/${pn.picture3}" width="45%" onclick="baguetteBox.run('.gallery')">
-					</a>			
+					<a href="${path}/resources/images/${pn.picture2}">
+						<img src="${path}/resources/images/${pn.picture2}" 
+							width="45%" onclick="baguetteBox.run('.gallery')">
+					</a>
 					<c:if test="${pn.picture4 != null}">
 					<a href="${path}/resources/images/${pn.picture4}">
-						<img src="${path}/resources/images/${pn.picture4}" width="45%" onclick="baguetteBox.run('.gallery')">
+						<img src="${path}/resources/images/${pn.picture4}" 
+							width="45%" onclick="baguetteBox.run('.gallery')">
 					</a>
-					</c:if>	
-				</c:if>		
+					</c:if>
+				</c:if>
 			</c:if>
-				</td>
-			</tr>
+				</div>
+			</div>
 		</c:if>
 		<c:if test="${pn.picture1 == null}">
-			<tr></tr>
-		</c:if>
-			<tr>
-				<td><a href="${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}"><i class="bi-chat"></i></a>
-					<a href="#"><i class="bi-arrow-clockwise"></i></a>
-					<a href="#"><i class="bi-hand-thumbs-up"></i></a></td>
-			</tr>		
+			<div class="row">
+				<div class="col col-2"></div>
+				<div class="col col-10">&nbsp;</div>
+			</div>
+		</c:if>	
+			<div class="row">
+				<div class="col col-2"></div>
+				<div class="col col-10">
+					<div class="row">
+						<div class="col col-4">
+							<a href="${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}"><i class="bi-chat"></i></a>
+						</div>
+						<div class="col col-4">
+							<a href="#"><i class="bi-arrow-clockwise"></i></a>
+						</div>
+						<div class="col col-4">
+							<a href="#"><i class="bi-hand-thumbs-up"></i></a>
+			 			</div>
+					</div>
+				</div>
+			</div>
 	</c:forEach>
-		</table>
-	</div>	
+</c:if>			
+</div>			
 <script type="text/javascript">
 	function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
 	}
 </script>
-</body>
-</html>
