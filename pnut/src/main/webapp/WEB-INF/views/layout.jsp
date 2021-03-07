@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ include file="header.jsp" %>
 <!DOCTYPE html> 
 <html>
 <head>
 <meta charset="UTF-8">
-<title>P-Nut</title>
+<title>P-Nut</title><%@ include file="header.jsp" %><%@ include file="header2.jsp" %>
 </head>
 <body>
 <div class="container">

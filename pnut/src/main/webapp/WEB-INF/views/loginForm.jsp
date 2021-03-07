@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="UTF-8"><%@ include file="header.jsp" %><%@ include file="header2.jsp" %>
+<title>P-Nut</title>
 </head>
 <body>
 <div class="container">

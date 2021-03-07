@@ -5,7 +5,7 @@
 <form action="${path}/home/write.do" method="post" enctype="multipart/form-data">
 	<div class="row">
 		<div class="col col-2">
-			<img alt="" src="${path}/resources/images/${member.m_profile}"
+			<img alt="" src="${path}/resources/images/${m_profile}"
 					width="100" height="100">
 		</div>
 		<div class="col col-10">
@@ -20,12 +20,12 @@
 			<div class="row" align="right">
 				<div class="col">
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-outline-warning" onclick="img_upload();" >
-							<i class="bi bi-card-image" style="font-size: 30px; color: skyblue"></i>
+						<button type="button" class="btn btn-outline-warning" onclick="img_upload();" style="display: flex; align-items:center; padding: 0 12px">
+							<i class="bi bi-card-image" style="font-size: 2rem; color: skyblue; line-height: 36px"></i> 
 							<font style="color: black;">사진추가</font>
 						</button>
-						<button type="button" class="btn btn-outline-warning" onclick="img_delete();" >
-							<i class="bi bi-card-image" style="font-size: 30px; color: red"></i>
+						<button type="button" class="btn btn-outline-warning" onclick="img_delete();" style="display: flex; align-items: center; padding: 0 12px">
+							<i class="bi bi-card-image" style="font-size: 2rem; color: red; line-height: 36px"></i>
 							<font style="color: black;">사진삭제</font>
 						</button>
 					</div>
@@ -147,6 +147,5 @@
 				i_con.removeChild(i_con.lastChild);
 			}
 		}
-	}
-	
+	}	
 </script>
