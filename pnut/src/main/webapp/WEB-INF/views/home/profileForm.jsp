@@ -2,25 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <%@ include file="../sessionChk.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- <script type="text/javascript">
-	$(function () {
-		$('#peanut').load('${path}/nolay/peanutList.do?amt=20');
-	});
-</script> -->
-<style type="text/css">
-.pic_container {
-	height: 200px;
-	background-image: url('${path}/resources/images/${member.m_bg}');
-	background-size: 100% 100%;
-}
-</style>
-</head>
-<body>
 <div id="container">
 	<div class="pic_container d-flex align-items-end">
 		<img alt="" src="${path}/resources/images/${member.m_profile}"
@@ -117,7 +98,8 @@
 		btn.setAttribute("onclick","follow('${member.m_id}')");
 		btn.removeAttribute("onmouseover");
 		btn.removeAttribute("onmouseout");
-	}
+	}	
+	//	$(function () {
+	//		$('#peanut').load('${path}/nolay/peanutList.do?amt=20');
+	//	});	
 </script>
-</body>
-</html>

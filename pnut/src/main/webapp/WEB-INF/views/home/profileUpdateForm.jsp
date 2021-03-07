@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-<style type="text/css">
-.pic_container {
-	height: 200px;
-	background-image: url('${path}/resources/images/${member.m_bg}');
-	background-size: 100% 100%;
-}
-</style>
-</head>
-<body>
 <div id="container">
 <form action="${path}/home/updateProfile.do" 
 	method="post" enctype="multipart/form-data">
@@ -54,11 +45,8 @@
 </form>
 <div id="peanut"></div>
 </div>
-
 <script type="text/javascript">
 	function thumbnail() {
 		
 	}
 </script>
-</body>
-</html>
