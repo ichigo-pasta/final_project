@@ -51,14 +51,6 @@
 			<a href="${path}/home/followerList.do?m_id=${member.m_id}">팔로워</a>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col col-6"> 
-			피넛
-		</div>
-		<div class="col col-6"> 
-			사진 피넛
-		</div>
-	</div>
 	<ul class="nav nav-tabs nav-fill">
   		<li class="nav-item">
   			<a class="nav-link" id="peanut" href="javascript:search('peanut');">피넛</a>
@@ -70,6 +62,7 @@
 </div>
 <div id="peanut"></div>
 
+<input type="hidden" value="${type}" id="type">
 <script type="text/javascript">
 	function follow(m_id) {
 		buttonChange();
@@ -108,6 +101,7 @@
 		btn.removeAttribute("onmouseover");
 		btn.removeAttribute("onmouseout");
 	}	
+	
 	//	$(function () {
 	//		$('#peanut').load('${path}/nolay/peanutList.do?amt=20');
 	//	});	
