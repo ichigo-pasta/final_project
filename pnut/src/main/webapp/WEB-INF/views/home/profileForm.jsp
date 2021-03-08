@@ -58,6 +58,14 @@
 			사진 피넛
 		</div>
 	</div>
+	<ul class="nav nav-tabs nav-fill">
+  		<li class="nav-item">
+  			<a class="nav-link" id="peanut" href="javascript:search('peanut');">피넛</a>
+ 		</li>
+ 		<li class="nav-item">
+  			<a class="nav-link" id="picpeanut" href="javascript:search('picpeanut');">사진 피넛</a>
+  		</li>
+	</ul>
 </div>
 <div id="peanut"></div>
 
