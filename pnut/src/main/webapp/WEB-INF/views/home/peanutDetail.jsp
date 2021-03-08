@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
+<%@ include file="../getMyId.jsp" %>
 <div class="container">	
 <c:if test="${empty peanut }">
 	<script type="text/javascript">
@@ -80,7 +81,39 @@
 				</div> <%-- peanut 오른쪽 column --%>
 			</div>	<%-- peanut row --%>
 		</div> <%-- peanut_container --%>
-	
+		<div class="reply_container">
+			<div class="row">
+				<div class="col col-2">
+					프로필 사진
+				</div>
+				<div class="col col-9">
+					닉네임, @아이디<br>
+					등록일<br>
+					내용
+				</div>
+			</div>
+			<form action="${path}/home/reply.do" method="post">
+				<div class="row">
+					<div class="col"><b><c:out value="${m_nickname}"/></b></div>
+				</div>
+				<div class="row">
+					<div class="col col-10">
+						<div class="row">
+							<textarea rows="5" style="resize: none" 
+								name="content" required="required" 
+								placeholder="댓글을 입력해주세요"></textarea>
+						</div>
+					</div>
+					<div class="col col-2">
+						<div class="row">
+							<button class="btn btn-info">등록</button>
+						</div>
+					</div>
+				</div>
+		<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
+		<input type="hidden" value="${my_id }" name="writer">
+			</form>
+		</div>
 </c:if>	<%-- test="${not empty peanut }" --%>			
 </div>	<%-- container --%>
 <script type="text/javascript">

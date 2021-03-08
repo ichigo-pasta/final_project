@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : xml을 구별하기 위한 이름 -->
+<mapper namespace="repliesns">
+	<resultMap type="replies" id="repliesResult">
+		<result property="reply_no" column="reply_no" />
+		<result property="peanut_no" column="peanut_no" />
+		<result property="writer" column="writer" />
+		<result property="content" column="content" />
+		<result property="regdate" column="regdate" />
+		<result property="ip" column="ip" />
+		<result property="ref" column="ref" />
+		<result property="ref_level" column="ref_level" />
+		<result property="del" column="del" />
+	<collection property="member" resultMap="memberResult" />
+	</resultMap>
+	<resultMap type="member" id="memberResult">
+		<result property="m_id" column="m_id" />
+		<result property="m_pw" column="m_pw" />
+		<result property="m_name" column="m_name" />
+		<result property="m_nickname" column="m_nickname" />
+		<result property="m_email" column="m_email" />
+		<result property="m_tel" column="m_tel" />
+		<result property="m_intro" column="m_intro" />
+		<result property="m_regdate" column="m_regdate" />
+		<result property="m_del" column="m_del" />
+		<result property="m_profile" column="m_profile" />
+		<result property="m_bg" column="m_bg" />
+		<result property="re_nick" column="re_nick" />
+		<result property="re_pf" column="re_pf" />
+	</resultMap>
+	<insert id="insertReply" parameterType="replies">
+		insert into pn_replies values (reply_no_seq.nextval, #{peanut_no}, #{writer}, #{content},
+			sysdate, #{ip}, reply_no_seq.nextval, #{ref_level}, 'n')
+	</insert>
+	<select id="replyList" parameterType="hashmap" resultMap="repliesResult">
+		select * from
+			(select a.*, rownum rn from
+				(select rep.*, m_profile, m_nickname 
+				from pn_replies rep, pn_member mem
+				where mem.m_id = rep.writer and peanut_no = #{peanut_no}  
+				order by ref desc, reply_no) a)
+			where rn between 1 and #{amt}; 
+	</select>
+</mapper>
