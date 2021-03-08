@@ -84,13 +84,21 @@
 		</c:if>
 					<div class="row">
 						<div class="col col-4">
-							<a href="${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}"><i class="bi-chat"></i></a>
+							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
+							<i class="bi-chat" style="color: gray"></i></button>
 						</div>
 						<div class="col col-4">
-							<a href="#"><i class="bi-arrow-clockwise"></i></a>
+							<button><i class="bi-arrow-clockwise" style="color: gray"></i></button>
 						</div>
 						<div class="col col-4">
-							<a href="#"><i class="bi-hand-thumbs-up"></i></a>
+							<c:if test="${pn.bookmarked == true}">
+								<button onclick="bookmark('${pn.peanut_no}')">
+								<i class="bi-bookmark" style="color: blue"></i></button>
+							</c:if>
+							<c:if test="${pn.bookmarked == false}">
+								<button onclick="bookmark('${pn.peanut_no}')">
+								<i class="bi-bookmark" style="color: gray"></i></button>
+							</c:if>
 						</div>
 					</div>
 				</div> <%-- peanut 오른쪽 column --%>
@@ -102,5 +110,17 @@
 <script type="text/javascript">
 	function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
+	}
+	function bookmark(peanut_no) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/setBm.do?peanut_no="+peanut_no,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);
 	}
 </script>

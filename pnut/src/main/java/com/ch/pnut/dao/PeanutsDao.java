@@ -21,4 +21,8 @@ public interface PeanutsDao {
 
 	List<Replies> replyList(Integer peanut_no, Integer amt);
 
+	List<Integer> selectBm(String m_id);
+
+	void insertBm(int peanut_no, String m_id);
+
 }

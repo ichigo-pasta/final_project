@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ch.pnut.model.Member;
 import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.model.Replies;
 import com.ch.pnut.service.MemberService;
@@ -80,21 +82,50 @@ public class PeanutsController {
 	}
 
 	@RequestMapping("home/timeline")
-	public String timeline(Integer amt, Model model, HttpSession session ) {
-		if(amt == null) amt = 20;
-		String m_id = (String)session.getAttribute("m_id");
+	public String timeline(Integer amt, Model model, HttpSession session) {
+		if (amt == null)
+			amt = 20;
+		String m_id = (String) session.getAttribute("m_id");
 		List<String> followList = ms.followList(m_id);
 		List<Peanuts> list = ps.selectList(m_id, amt, followList);
 		int listLen = list.size();
 		if (listLen > 0) {
-			for(Peanuts p:list) {
+			for (Peanuts p : list) {
 				p.setContent(ps.setHashtag(p.getContent()));
+			}
+		}
+		List<Integer> bmList = ps.selectBm(m_id);
+		for (Peanuts peanut : list) {
+			peanut.setBookmarked(false);
+			for (int bm : bmList) {
+				if (peanut.getRenut() == null) {
+					if (peanut.getPeanut_no() == bm) {
+						peanut.setBookmarked(true);
+						break;
+					} else {
+						if (peanut.getRenut() == bm) {
+							peanut.setBookmarked(true);
+							break;
+						}
+					}
+				}
 			}
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("m_id", m_id);
 		return "home/timeline";
-	}	
+	}
+	@RequestMapping(value = "setBm", produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public void setBm(int peanut_no, HttpSession session) {
+		String m_id = (String)session.getAttribute("m_id");
+		int num;
+		if (ps.selectDetail(peanut_no).getRenut() == null) {
+			num = peanut_no;
+		} else  num = ps.selectDetail(peanut_no).getRenut();
+		ps.insertBm(num, m_id);
+	}
+	
 	@RequestMapping("home/peanutDetail")
 	public String peanutDetail(Integer peanut_no, Model model,
 			HttpSession session, Integer amt) {
@@ -121,6 +152,7 @@ public class PeanutsController {
 		reply.setRef_level(0);
 		reply.setIp(request.getRemoteAddr());
 		ps.insertReply(reply);
+		model.addAttribute("peanut_no", reply.getPeanut_no());
 		return "home/reply";
 	}
 	

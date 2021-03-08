@@ -8,11 +8,13 @@
 		<typeAlias alias="peanuts" type="com.ch.pnut.model.Peanuts" />
 		<typeAlias alias="follow" type="com.ch.pnut.model.Follow" />
 		<typeAlias alias="replies" type="com.ch.pnut.model.Replies" />
+		<typeAlias alias="bookmark" type="com.ch.pnut.model.Bookmark" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="member.xml" />
 		<mapper resource="peanuts.xml" />
 		<mapper resource="follow.xml" />
 		<mapper resource="replies.xml" />
+		<mapper resource="bookmark.xml" />		
 	</mappers>
 </configuration>

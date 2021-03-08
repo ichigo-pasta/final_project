@@ -47,5 +47,14 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("amt", amt);
 		return sst.selectList("repliesns.replyList", map);
 	}
+	public List<Integer> selectBm(String m_id) {
+		return sst.selectList("bookmarkns.selectBm", m_id);
+	}
+	public void insertBm(int peanut_no, String m_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("peanut_no", peanut_no);
+		map.put("m_id", m_id);
+		sst.insert("bookmarkns.insertBm", map);
+	}
 	
 }

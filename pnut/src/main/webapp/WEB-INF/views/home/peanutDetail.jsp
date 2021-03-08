@@ -82,16 +82,19 @@
 			</div>	<%-- peanut row --%>
 		</div> <%-- peanut_container --%>
 		<div class="reply_container">
+			<c:forEach items="${list}" var="rep">
 			<div class="row">
 				<div class="col col-2">
-					프로필 사진
+					<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
+						width="80" height="80" onclick="profile('${rep.writer}')">
 				</div>
 				<div class="col col-9">
-					닉네임, @아이디<br>
-					등록일<br>
-					내용
+					${rep.member.m_nickname}, ${rep.member.m_id}<br>
+					${rep.regdate }<br>
+					<pre>${rep.content}</pre>
 				</div>
-			</div>
+			</div>	
+			</c:forEach>
 			<form action="${path}/home/reply.do" method="post">
 				<div class="row">
 					<div class="col"><b><c:out value="${m_nickname}"/></b></div>

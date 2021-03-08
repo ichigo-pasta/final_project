@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : xml을 구별하기 위한 이름 -->
+<mapper namespace="bookmarkns">
+	<resultMap type="bookmark" id="bookmarkResult">
+		<result property="peanut_no" column="peanut_no" />
+		<result property="bm_user" column="bm_user" />
+	</resultMap>
+	<select id="selectBm" parameterType="string" resultType="integer">
+		select peanut_no from pn_bookmark
+		where bm_user = #{m_id}
+	</select>
+	<insert id="insertBm" parameterType="hashmap">
+		insert into pn_bookmark values (#{peanut_no}, #{m_id})
+	</insert>
+</mapper>
