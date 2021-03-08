@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-<%@ include file="../sessionChk.jsp" %>
+<%@ include file="../getMyId.jsp" %>
 <div id="container">
 	<div class="pic_container d-flex align-items-end">
 		<img alt="" src="${path}/resources/images/${member.m_profile}"
