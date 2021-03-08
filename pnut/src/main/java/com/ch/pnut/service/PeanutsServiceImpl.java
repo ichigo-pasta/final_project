@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ch.pnut.dao.PeanutsDao;
 import com.ch.pnut.model.Peanuts;
+import com.ch.pnut.model.Replies;
 
 @Service
 public class PeanutsServiceImpl implements PeanutsService {
@@ -55,5 +56,11 @@ public class PeanutsServiceImpl implements PeanutsService {
 	}
 	public Integer isRenut(int peanut_no) {
 		return pd.isRenut(peanut_no);
+	}
+	public void insertReply(Replies reply) {
+		pd.insertReply(reply);
+	}
+	public List<Replies> replyList(Integer peanut_no, Integer amt) {
+		return pd.replyList(peanut_no, amt);
 	}
 }

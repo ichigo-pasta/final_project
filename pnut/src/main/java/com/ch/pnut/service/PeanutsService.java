@@ -3,6 +3,7 @@ package com.ch.pnut.service;
 import java.util.List;
 
 import com.ch.pnut.model.Peanuts;
+import com.ch.pnut.model.Replies;
 
 public interface PeanutsService {
 
@@ -17,5 +18,9 @@ public interface PeanutsService {
 	Peanuts selectDetail(int peanut_no);
 
 	Integer isRenut(int peanut_no);
+
+	void insertReply(Replies reply);
+
+	List<Replies> replyList(Integer peanut_no, Integer amt);
 
 }

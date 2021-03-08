@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ch.pnut.model.Peanuts;
+import com.ch.pnut.model.Replies;
 
 @Repository
 public class PeanutsDaoImpl implements PeanutsDao {
@@ -36,6 +37,15 @@ public class PeanutsDaoImpl implements PeanutsDao {
 	}
 	public Integer isRenut(int peanut_no) {
 		return sst.selectOne("peanutsns.isRenut", peanut_no);
+	}
+	public void insertReply(Replies reply) {
+		sst.insert("repliesns.insertReply", reply);
+	}
+	public List<Replies> replyList(Integer peanut_no, Integer amt) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("peanut_no", peanut_no);
+		map.put("amt", amt);
+		return sst.selectList("repliesns.replyList", map);
 	}
 	
 }

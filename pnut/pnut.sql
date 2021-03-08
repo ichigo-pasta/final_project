@@ -116,6 +116,8 @@ create table pn_message (
 drop SEQUENCE peanut_no_seq;
 create SEQUENCE peanut_no_seq;
 
+drop SEQUENCE reply_no_seq;
+create SEQUENCE reply_no_seq;
 
 
 select * from pn_member;
@@ -132,4 +134,4 @@ select * from pn_message;
 delete PN_FOLLOW; 
 insert into pn_follow values ('k1', 'k2');
 insert into pn_follow values ('k1', 'k3');
-insert into pn_member values ('k1', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n',null,null); 
+insert into pn_member values ('k1', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n',null,null);

@@ -7,10 +7,12 @@
 		<typeAlias alias="member" type="com.ch.pnut.model.Member" />
 		<typeAlias alias="peanuts" type="com.ch.pnut.model.Peanuts" />
 		<typeAlias alias="follow" type="com.ch.pnut.model.Follow" />
+		<typeAlias alias="replies" type="com.ch.pnut.model.Replies" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="member.xml" />
 		<mapper resource="peanuts.xml" />
 		<mapper resource="follow.xml" />
+		<mapper resource="replies.xml" />
 	</mappers>
 </configuration>

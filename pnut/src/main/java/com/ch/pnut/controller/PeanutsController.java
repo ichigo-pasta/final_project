@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ch.pnut.model.Peanuts;
+import com.ch.pnut.model.Replies;
 import com.ch.pnut.service.MemberService;
 import com.ch.pnut.service.PeanutsService;
 
@@ -95,15 +96,34 @@ public class PeanutsController {
 		return "home/timeline";
 	}	
 	@RequestMapping("home/peanutDetail")
-	public String peanutDetail(int peanut_no, Model model) {
+	public String peanutDetail(Integer peanut_no, Model model,
+			HttpSession session, Integer amt) {
+		if (peanut_no == null) {
+			peanut_no = 0;
+		}
+		if (amt == null) {
+			amt = 20;
+		}
+		String m_id = (String)session.getAttribute("m_id");
+		String m_nickname = ms.select(m_id).getM_nickname();
 		Integer renut = ps.isRenut(peanut_no);
 		Peanuts peanut;
 		if(renut == null) peanut = ps.selectDetail(peanut_no);			
 		else peanut = ps.selectDetail(renut);
 		model.addAttribute("peanut", peanut);
+		model.addAttribute("m_nickname", m_nickname);
+		List<Replies> list = ps.replyList(peanut_no, amt);
+		model.addAttribute("list", list);
 		return "home/peanutDetail";
 	}
-
+	@RequestMapping("home/reply")
+	public String reply(Replies reply, Model model, HttpServletRequest request) {
+		reply.setRef_level(0);
+		reply.setIp(request.getRemoteAddr());
+		ps.insertReply(reply);
+		return "home/reply";
+	}
+	
 	@RequestMapping("/nolay/peanutList")
 	public String peanutList() {
 		return "nolay/peanutList";

@@ -3,6 +3,7 @@ package com.ch.pnut.dao;
 import java.util.List;
 
 import com.ch.pnut.model.Peanuts;
+import com.ch.pnut.model.Replies;
 
 public interface PeanutsDao {
 
@@ -15,5 +16,9 @@ public interface PeanutsDao {
 	Peanuts selectDetail(int peanut_no);
 
 	Integer isRenut(int peanut_no);
+
+	void insertReply(Replies reply);
+
+	List<Replies> replyList(Integer peanut_no, Integer amt);
 
 }
