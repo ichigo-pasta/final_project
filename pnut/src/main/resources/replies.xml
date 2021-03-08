@@ -42,6 +42,6 @@
 				from pn_replies rep, pn_member mem
 				where mem.m_id = rep.writer and peanut_no = #{peanut_no}  
 				order by ref desc, reply_no) a)
-			where rn between 1 and #{amt}; 
+			where rn between 1 and #{amt} 
 	</select>
 </mapper>

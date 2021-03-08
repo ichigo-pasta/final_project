@@ -63,4 +63,10 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public List<Replies> replyList(Integer peanut_no, Integer amt) {
 		return pd.replyList(peanut_no, amt);
 	}
+	public List<Integer> selectBm(String m_id) {
+		return pd.selectBm(m_id);
+	}
+	public void insertBm(int peanut_no, String m_id) {
+		pd.insertBm(peanut_no, m_id);
+	}
 }

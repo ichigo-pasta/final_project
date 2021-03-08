@@ -30,4 +30,6 @@ public class Peanuts {
 	private Member member;			// 회원 정보
 	private String re_writer;		// 리넛 작성자
 	
+	private boolean bookmarked;		// 내가 북마크한 피넛인가?
+	
 }
