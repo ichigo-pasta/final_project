@@ -59,8 +59,8 @@
 						</div>
 				<c:if test="${pn.picture3 != null}">
 						<div class="col col-6 tl_image">
-							<a href="${path}/resources/images/${pn.picture2}">
-								<img src="${path}/resources/images/${pn.picture2}" 
+							<a href="${path}/resources/images/${pn.picture3}">
+								<img src="${path}/resources/images/${pn.picture3}" 
 									width="100%" onclick="baguetteBox.run('.gallery')">
 							</a>
 						</div>

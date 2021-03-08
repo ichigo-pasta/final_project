@@ -79,7 +79,8 @@ public class PeanutsController {
 	}
 
 	@RequestMapping("home/timeline")
-	public String timeline(int amt, Model model, HttpSession session ) {
+	public String timeline(Integer amt, Model model, HttpSession session ) {
+		if(amt == null) amt = 20;
 		String m_id = (String)session.getAttribute("m_id");
 		List<String> followList = ms.followList(m_id);
 		List<Peanuts> list = ps.selectList(m_id, amt, followList);
@@ -94,10 +95,12 @@ public class PeanutsController {
 		return "home/timeline";
 	}	
 	@RequestMapping("home/peanutDetail")
-	public String peanutDetail(int peanut_no) {
+	public String peanutDetail(int peanut_no, Model model) {
 		Integer renut = ps.isRenut(peanut_no);
-		System.out.println(renut);
-		/* Peanuts peanut = ps.selectDetail(peanut_no); */
+		Peanuts peanut;
+		if(renut == null) peanut = ps.selectDetail(peanut_no);			
+		else peanut = ps.selectDetail(renut);
+		model.addAttribute("peanut", peanut);
 		return "home/peanutDetail";
 	}
 

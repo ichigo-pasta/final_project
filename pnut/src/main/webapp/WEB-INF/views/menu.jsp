@@ -3,7 +3,7 @@
 <%@ include file="header.jsp" %><%@ include file="header2.jsp" %>
 <table>
 	<tr>
-		<td><a href="${path}/home/timeline.do?amt=20" 
+		<td><a href="${path}/home/timeline.do" 
 				class="list-group-item list-group-item-action list-group-item-warning">
 			<i class="bi-house-door-fill"></i>&nbsp;&nbsp;홈</a></td>
 	</tr>

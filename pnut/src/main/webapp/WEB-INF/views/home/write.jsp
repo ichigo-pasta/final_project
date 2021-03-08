@@ -9,6 +9,6 @@
 </c:if>
 <c:if test="${result > 0 }">
 	<script type="text/javascript">
-		location.href = "${path}/home/timeline.do?amt=20";
+		location.href = "${path}/home/timeline.do";
 	</script>
 </c:if>
