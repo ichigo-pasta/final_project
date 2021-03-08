@@ -39,6 +39,12 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
+	<beans:bean id="sc" class="com.ch.pnut.service.SessionChk"></beans:bean>
+	<interceptors>
+		<interceptor>			
+			<mapping path="/home/*.do"/>
+			<beans:ref bean="sc"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

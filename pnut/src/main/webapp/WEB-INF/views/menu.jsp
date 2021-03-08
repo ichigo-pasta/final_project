@@ -24,7 +24,7 @@
 	</tr>
 	<tr>
 		<td><a class="list-group-item list-group-item-action list-group-item-warning" 
-				onclick="profile('${m_id}')">
+				href="javascript:profile('${m_id}');">
 			<i class="bi-person-fill"></i>&nbsp;&nbsp;프로필</a></td>
 	</tr>
 	<tr>
