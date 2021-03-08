@@ -44,10 +44,10 @@
 	</div>
 	<div class="row">
 		<div class="col col-2"> 
-			<a href="${path}/home/followingList.do?m_id=${member.m_id}">팔로우 중</a>
+			<a href="${path}/home/followingList.do?m_id=${member.m_id}">${followLtSize } 팔로우 중</a>
 		</div>
 		<div class="col col-2"> 
-			<a href="${path}/home/followerList.do?m_id=${member.m_id}">팔로워</a>
+			<a href="${path}/home/followerList.do?m_id=${member.m_id}">${followerLtSize } 팔로워</a>
 		</div>
 	</div>
 	<div class="row">

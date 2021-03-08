@@ -53,4 +53,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectList("memberns.search", map);
 	}
 
+	@Override
+	public List<String> followerList(String m_id) {
+		return sst.selectList("followns.followerList", m_id);
+	}
+
 }
