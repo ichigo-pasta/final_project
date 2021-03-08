@@ -5,32 +5,56 @@
 <head>
 <meta charset="UTF-8"><%@ include file="header.jsp" %><%@ include file="header2.jsp" %>
 <title>P-Nut</title>
+<style type="text/css">
+	
+	.in {
+		display: flex;
+		height: 100vh;
+		justify-content: center;
+		align-items: center;
+	}
+</style>
 </head>
 <body>
 <div class="container">
-<h2 class="text-primary">로그인</h2>
 <form action="login.do" method="post">
-	<table class="table table-bordered table-hover">
-		<tr>
-			<td>아이디<i class="bi-person-fill"></i></td>
-			<td><input type="text" name="m_id" 
-				required="required" autofocus="autofocus"></td>
-		</tr>
-		<tr>
-			<td>비밀번호<i class="bi-lock-fill"></i></td>
-			<td><input type="password" name="m_pw" 
-				required="required"></td>
-		</tr>
-		<tr>
-			<td colspan="2"><input type="submit" value="확인"></td>
-		</tr>	
-	</table>
-
+	<div class="in">
+	<div class="row" align="center">
+		<div class="col" align="center">
+			<div class="row">
+				<div class="col">
+					<h2 class="text-primary">로그인</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col col-6">
+					<i class="bi-person-fill">&nbsp;</i>아이디
+				</div>
+				<div class="col col-6">
+					<input type="text" name="m_id" 
+						required="required" autofocus="autofocus">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col col-6">
+					<i class="bi-lock-fill">&nbsp;</i>비밀번호
+				</div>
+				<div class="col col-6">
+					<input type="password" name="m_pw" 
+						required="required">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" align="center">
+					<input type="submit" value="로그인" class="btn btn-warning">
+					<a href="joinForm.do" class="btn btn-success">
+					<i class="bi-person-fill">회원가입</i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 </form>
-<div align="center">
-	<a href="joinForm.do" class="btn btn-success">
-		<i class="bi-person-fill">회원가입</i></a>
-</div>
 </div>
 </body>
 </html>
