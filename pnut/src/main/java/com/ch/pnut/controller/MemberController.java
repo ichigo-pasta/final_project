@@ -3,6 +3,7 @@ package com.ch.pnut.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -71,9 +72,15 @@ public class MemberController {
 	public String profile(String m_id, Model model, HttpSession session) {
 		Member member = ms.select(m_id);
 		String my_id = (String) session.getAttribute("m_id");
-		boolean isFollow = ms.followList(my_id).contains(m_id);
+		List<String> myFollowLt = ms.followList(my_id);
+		boolean isFollow = myFollowLt.contains(m_id);
+		List<String> followLt = ms.followList(m_id);
+		int followLtSize = followLt.size();
+		int followerLtSize = ms.followerList(m_id).size();
 		model.addAttribute("member", member);
 		model.addAttribute("isFollow", isFollow);
+		model.addAttribute("followLtSize", followLtSize);
+		model.addAttribute("followerLtSize", followerLtSize);
 		return "home/profileForm";
 	}
 	@RequestMapping("home/profileUpdateForm")

@@ -20,4 +20,6 @@ public interface MemberDao {
 
 	List<Member> search(String[] arrayKw, int amt);
 
+	List<String> followerList(String m_id);
+
 }
