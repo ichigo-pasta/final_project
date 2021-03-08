@@ -95,22 +95,20 @@ public class PeanutsController {
 			}
 		}
 		List<Integer> bmList = ps.selectBm(m_id);
-		for (Peanuts peanut : list) {
-			peanut.setBookmarked(false);
-			for (int bm : bmList) {
+		if(bmList.size() > 0) {
+			for (Peanuts peanut : list) {
+				peanut.setBookmarked(false);			
 				if (peanut.getRenut() == null) {
-					if (peanut.getPeanut_no() == bm) {
-						peanut.setBookmarked(true);
-						break;
-					} else {
-						if (peanut.getRenut() == bm) {
-							peanut.setBookmarked(true);
-							break;
-						}
+					if (bmList.contains(peanut.getPeanut_no())) {
+						peanut.setBookmarked(true);					
+					}
+				} else {
+					if (bmList.contains(peanut.getRenut())) {
+						peanut.setBookmarked(true);					
 					}
 				}
 			}
-		}
+		}		
 		model.addAttribute("list", list);
 		model.addAttribute("m_id", m_id);
 		return "home/timeline";
