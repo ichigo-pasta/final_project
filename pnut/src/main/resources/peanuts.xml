@@ -79,4 +79,7 @@
 	<select id="isRenut" parameterType="int" resultType="integer">
 		select renut from pn_peanuts where peanut_no = #{peanut_no}
 	</select>
+	<select id="selectDetail" parameterType="int" resultMap="peanutsResult">
+		select * from pn_peanuts p, pn_member m where p.writer = m.m_id and p.peanut_no = #{peanut_no} and p.del = 'n'
+	</select>
 </mapper>

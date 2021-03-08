@@ -20,7 +20,8 @@ public class SearchController {
 	@Autowired
 	private PeanutsService ps;	
 	@RequestMapping("home/search")
-	public String search(String type, String keyword, int amt, Model model) {
+	public String search(String type, String keyword, Integer amt, Model model) {
+		if(amt == null) amt = 20;
 		keyword = keyword.replaceAll(" +", " ");
 		String[] arrayKw = keyword.split(" ");
 		int arrayLen = arrayKw.length;
