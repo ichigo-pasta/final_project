@@ -81,28 +81,39 @@ public class PeanutsController {
 	}
 
 	@RequestMapping("home/timeline")
-	public String timeline(Integer amt, Model model) {
+	public String timeline(Integer amt, Integer timeout, Model model) {
 		if (amt == null) amt = 20;
+		if (timeout == null) timeout = 0;
 		model.addAttribute("amt", amt);
+		model.addAttribute("timeout", timeout);
 		return "home/timeline";
 	}
 	@RequestMapping("tlContents")	
-	public String tlContents(Integer amt, Model model, HttpSession session) {
-		if (amt == null) amt = 20;		
+	public String tlContents(Integer amt, Integer timeout, Model model, HttpSession session) {
+		if (amt == null) amt = 20;
+		if (timeout == null) timeout = 0;
 		String m_id = (String) session.getAttribute("m_id");
-		List<String> followList = ms.followList(m_id);
-		List<Peanuts> list = ps.selectList(m_id, amt, followList);
+		List<String> followList = ms.followList(m_id);	// 로그인 유저가 팔로우한 아이디 리스트
+		List<Peanuts> list = ps.selectList(m_id, amt, followList);	// 로그인 유저, 팔로우유저 피넛 리스트 amt개 조회한 리스트
 		int listLen = list.size();
+		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트		
+		
+//		if (listLen > 0) {
+//			for (Peanuts peanut : list) {
+//				peanut.setContent(ps.setHashtag(peanut.getContent()));	// list 피넛 해시태그 처리
+//				if (peanut.getRenut() == null) {	// 리넛이 아닐 때
+//					
+//				}
+//			}
+//		}
 		
 		if (listLen > 0) {
 			for (Peanuts p : list) {
 				p.setContent(ps.setHashtag(p.getContent()));
 			}
 		}		
-		List<Integer> bmList = ps.selectBm(m_id);		
 		if(bmList.size() > 0 && listLen > 0) {
-			for (Peanuts peanut : list) {
-				peanut.setBookmarked(false);
+			for (Peanuts peanut : list) {				
 				if (peanut.getRenut() == null) {
 					peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
 					peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
@@ -122,6 +133,7 @@ public class PeanutsController {
 		}		
 		model.addAttribute("list", list);
 		model.addAttribute("m_id", m_id);
+		model.addAttribute("timeout", timeout);
 		return "tlContents";
 	}
 	
