@@ -8,6 +8,7 @@ import lombok.Data;
 public class Replies {
 	private int reply_no;
 	private int peanut_no;
+	private String rep_target;
 	private String writer;
 	private String content; 
 	private Date regdate;

@@ -106,7 +106,9 @@
 					<div class="row">
 						<div class="col col-10">
 							<div class="row">
-								<textarea rows="5" style="resize: none" 
+								${rep.member.target_nn}
+								<textarea id="cont${rep.reply_no}"
+									rows="5" style="resize: none" 
 									name="content" required="required" 
 									placeholder="답글을 입력해주세요"></textarea>
 							</div>
@@ -117,6 +119,7 @@
 							</div>
 						</div>
 					</div>
+					<input type="hidden" value="${peanut.writer}" name="rep_target">
 					<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
 					<input type="hidden" value="${rep.ref}" name="ref">
 					<input type="hidden" value="${my_id }" name="writer">
@@ -137,7 +140,7 @@
 				</div>
 				<div class="col col-9">
 					${rep.member.m_nickname}, @${rep.writer}<br>
-					<pre>${rep.content}</pre>
+					<pre><b>${rep.member.target_nn}</b>&nbsp;${rep.content}</pre>
 					${rep.regdate }&nbsp;&nbsp;
 					<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
 				</div>
@@ -153,7 +156,9 @@
 					<div class="row">
 						<div class="col col-10">
 							<div class="row">
-								<textarea rows="5" style="resize: none" 
+								${rep.member.target_nn}
+								<textarea id="cont${rep.reply_no}"
+									rows="5" style="resize: none" 
 									name="content" required="required" 
 									placeholder="답글을 입력해주세요"></textarea>
 							</div>
@@ -164,6 +169,7 @@
 							</div>
 						</div>
 					</div>
+					<input type="hidden" value="${rep.writer}" name="rep_target">
 					<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
 					<input type="hidden" value="${rep.ref}" name="ref">
 					<input type="hidden" value="${my_id }" name="writer">
@@ -190,6 +196,7 @@
 						</div>
 					</div>
 				</div>
+		<input type="hidden" value="${rep.writer}" name="rep_target">
 		<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
 		<input type="hidden" value="${my_id }" name="writer">
 			</form>
@@ -204,5 +211,7 @@
 	function comIns(reply_no) {
 		$(".recome").hide();
 		$("#comIns"+reply_no).show();
+		$("#cont"+reply_no).focus();
+		
 	}
 </script>
