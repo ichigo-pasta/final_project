@@ -83,6 +83,7 @@
 		</div> <%-- peanut_container --%>
 		<div class="reply_container"> <!-- 댓글 -->
 			<c:forEach items="${list}" var="rep">
+		<c:if test="${rep.ref_level == 0}">
 			<div class="row">
 				<div class="col col-2">
 					<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
@@ -91,10 +92,11 @@
 				<div class="col col-9">
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
-					${rep.regdate }&nbsp;&nbsp;<button id="commentbt" onclick="comment('${my_id}')">답글 쓰기</button>
+					${rep.regdate }&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${my_id}')">답글 쓰기</button>
 				</div>
 			</div>
-			<div class="row">
+		</c:if>
+			<div class="row" id="comIns${rep.reply_no}" style="display: none">
 				<div class="col col-1"></div>
 				<div class="col col-10">
 					<div class="row">
@@ -120,7 +122,26 @@
 					<input type="hidden" value="${my_id }" name="writer">
 				</form>
 				</div>
-			</div>		
+			</div>
+		<c:if test="${rep.ref_level == 1}">
+			<div class="row" id="com${rep.reply_no}">
+				<div class="col col-1"></div>
+				<div class="col col-2">
+					<div class="row">
+						<div class="col">
+							<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
+								width="80" height="80" onclick="profile('${rep.writer}')">
+						</div>
+					</div>
+				</div>
+				<div class="col col-9">
+					${rep.member.m_nickname}, @${rep.writer}<br>
+					<pre>${rep.content}</pre>
+					${rep.regdate }&nbsp;&nbsp;
+					<button id="commentbt" onclick="comIns('${my_id}')">답글 쓰기</button>
+				</div>
+			</div>
+		</c:if>		
 			</c:forEach>
 			<form action="${path}/home/reply.do" method="post">
 				<div class="row">
@@ -151,7 +172,7 @@
 	function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
 	}
-	function comment(my_id) {
-		
+	function comIns(reply_no) {
+		$("#comIns"+reply_no).show();
 	}
 </script>
