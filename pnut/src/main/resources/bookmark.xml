@@ -15,4 +15,7 @@
 	<insert id="insertBm" parameterType="hashmap">
 		insert into pn_bookmark values (#{peanut_no}, #{m_id})
 	</insert>
+	<delete id="deleteBm" parameterType="hashmap">
+		delete pn_bookmark where peanut_no = #{num} and bm_user = #{m_id}
+	</delete>
 </mapper>

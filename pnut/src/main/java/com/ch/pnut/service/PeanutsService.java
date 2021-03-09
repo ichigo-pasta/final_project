@@ -27,4 +27,6 @@ public interface PeanutsService {
 
 	void insertBm(int peanut_no, String m_id);
 
+	void deleteBm(int num, String m_id);
+
 }

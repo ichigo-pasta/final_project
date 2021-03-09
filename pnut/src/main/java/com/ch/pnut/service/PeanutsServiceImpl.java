@@ -69,4 +69,8 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public void insertBm(int peanut_no, String m_id) {
 		pd.insertBm(peanut_no, m_id);
 	}
+	@Override
+	public void deleteBm(int num, String m_id) {
+		pd.deleteBm(num, m_id);
+	}
 }
