@@ -59,8 +59,8 @@ public class PeanutsDaoImpl implements PeanutsDao {
 
 	public void insertComment(Replies reply) {
 		sst.insert("repliesns.insertComment", reply);
-
-
+		
+	}
 	public void deleteBm(int num, String m_id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("num", num);

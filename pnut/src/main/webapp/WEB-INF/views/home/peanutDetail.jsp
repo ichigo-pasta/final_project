@@ -92,11 +92,11 @@
 				<div class="col col-9">
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
-					${rep.regdate }&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${my_id}')">답글 쓰기</button>
+					${rep.regdate }&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
 				</div>
 			</div>
-		</c:if>
-			<div class="row" id="comIns${rep.reply_no}" style="display: none">
+		
+			<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
 				<div class="col col-1"></div>
 				<div class="col col-10">
 					<div class="row">
@@ -118,14 +118,15 @@
 						</div>
 					</div>
 					<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
-					<input type="hidden" value="${rep.reply_no}" name="ref">
+					<input type="hidden" value="${rep.ref}" name="ref">
 					<input type="hidden" value="${my_id }" name="writer">
 				</form>
 				</div>
 			</div>
+		</c:if>	
 		<c:if test="${rep.ref_level == 1}">
-			<div class="row" id="com${rep.reply_no}">
-				<div class="col col-1"></div>
+			<div class="row">
+				<div class="col col-1"></div>				
 				<div class="col col-2">
 					<div class="row">
 						<div class="col">
@@ -138,7 +139,35 @@
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
 					${rep.regdate }&nbsp;&nbsp;
-					<button id="commentbt" onclick="comIns('${my_id}')">답글 쓰기</button>
+					<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
+				</div>
+			</div>
+			
+			<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
+				<div class="col col-1"></div>
+				<div class="col col-10">
+					<div class="row">
+						<div class="col"><b><c:out value="${m_nickname}"/></b></div>
+					</div>
+				<form action="${path}/home/comment.do" method="post">	
+					<div class="row">
+						<div class="col col-10">
+							<div class="row">
+								<textarea rows="5" style="resize: none" 
+									name="content" required="required" 
+									placeholder="답글을 입력해주세요"></textarea>
+							</div>
+						</div>
+						<div class="col col-2">
+							<div class="row">
+								<button class="btn btn-info">등록</button>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
+					<input type="hidden" value="${rep.ref}" name="ref">
+					<input type="hidden" value="${my_id }" name="writer">
+				</form>
 				</div>
 			</div>
 		</c:if>		
@@ -173,6 +202,7 @@
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
 	}
 	function comIns(reply_no) {
+		$(".recome").hide();
 		$("#comIns"+reply_no).show();
 	}
 </script>
