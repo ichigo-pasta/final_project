@@ -81,9 +81,14 @@ public class PeanutsController {
 	}
 
 	@RequestMapping("home/timeline")
-	public String timeline(Integer amt, Model model, HttpSession session) {
-		if (amt == null)
-			amt = 20;
+	public String timeline(Integer amt, Model model) {
+		if (amt == null) amt = 20;
+		model.addAttribute("amt", amt);
+		return "home/timeline";
+	}
+	@RequestMapping("tlContents")	
+	public String tlContents(Integer amt, Model model, HttpSession session) {
+		if (amt == null) amt = 20;		
 		String m_id = (String) session.getAttribute("m_id");
 		List<String> followList = ms.followList(m_id);
 		List<Peanuts> list = ps.selectList(m_id, amt, followList);
@@ -94,7 +99,7 @@ public class PeanutsController {
 			}
 		}
 		List<Integer> bmList = ps.selectBm(m_id);
-		if(bmList.size() > 0) {
+		if(bmList.size() > 0 && listLen > 0) {
 			for (Peanuts peanut : list) {
 				peanut.setBookmarked(false);			
 				if (peanut.getRenut() == null) {
@@ -110,8 +115,9 @@ public class PeanutsController {
 		}		
 		model.addAttribute("list", list);
 		model.addAttribute("m_id", m_id);
-		return "home/timeline";
+		return "tlContents";
 	}
+	
 	@RequestMapping(value = "setBm", produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public void setBm(int peanut_no, HttpSession session) {
