@@ -56,5 +56,12 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("m_id", m_id);
 		sst.insert("bookmarkns.insertBm", map);
 	}
+	@Override
+	public void deleteBm(int num, String m_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("num", num);
+		map.put("m_id", m_id);
+		sst.delete("bookmarkns.deleteBm", map);
+	}
 	
 }

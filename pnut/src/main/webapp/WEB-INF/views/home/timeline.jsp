@@ -92,12 +92,12 @@
 						</div>
 						<div class="col col-4">
 							<c:if test="${pn.bookmarked == true}">
-								<button onclick="bookmark('${pn.peanut_no}')">
-								<i class="bi-bookmark" style="color: blue"></i></button>
+								<button onclick="deleteBm('${pn.peanut_no}')" id="bnBtn${pn.peanut_no}">
+								<i class="bi-bookmark" style="color: blue;" id="bnBtnI${pn.peanut_no}"></i></button>
 							</c:if>
 							<c:if test="${pn.bookmarked == false}">
-								<button onclick="bookmark('${pn.peanut_no}')">
-								<i class="bi-bookmark" style="color: gray"></i></button>
+								<button onclick="setBm('${pn.peanut_no}')" id="bnBtn${pn.peanut_no}">
+								<i class="bi-bookmark" style="color: gray" id="bnBtnI${pn.peanut_no}"></i></button>
 							</c:if>
 						</div>
 					</div>
@@ -111,7 +111,8 @@
 	function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
 	}
-	function bookmark(peanut_no) {
+	function setBm(peanut_no) {
+		changeBmBtn1(peanut_no);
 		var xhr = new XMLHttpRequest();
 		xhr.open("get","${path}/setBm.do?peanut_no="+peanut_no,true);
 		xhr.onload = function() {
@@ -122,5 +123,26 @@
 			}
 		}
 		xhr.send(null);
+	}
+	function changeBmBtn1(peanut_no) {
+		document.getElementById('bnBtn'+peanut_no).setAttribute("onclick", "deleteBm('"+peanut_no+"')");
+		document.getElementById('bnBtnI'+peanut_no).setAttribute("style", "color: blue");
+	}
+	function deleteBm(peanut_no) {
+		changeBmBtn2(peanut_no);
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/deleteBm.do?peanut_no="+peanut_no,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);
+	}
+	function changeBmBtn2(peanut_no) {
+		document.getElementById('bnBtn'+peanut_no).setAttribute("onclick", "setBm('"+peanut_no+"')");
+		document.getElementById('bnBtnI'+peanut_no).setAttribute("style", "color: gray");
 	}
 </script>
