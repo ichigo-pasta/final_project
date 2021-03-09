@@ -72,7 +72,7 @@ public class PeanutsServiceImpl implements PeanutsService {
 
 	public void insertComment(Replies reply) {
 		pd.insertComment(reply);
-
+	}
 	@Override
 	public void deleteBm(int num, String m_id) {
 		pd.deleteBm(num, m_id);
