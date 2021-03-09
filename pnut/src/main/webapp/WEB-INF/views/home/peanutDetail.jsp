@@ -116,6 +116,7 @@
 						</div>
 					</div>
 					<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
+					<input type="hidden" value="${rep.reply_no}" name="ref">
 					<input type="hidden" value="${my_id }" name="writer">
 				</form>
 				</div>

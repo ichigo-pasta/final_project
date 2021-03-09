@@ -155,6 +155,10 @@ public class PeanutsController {
 	}
 	@RequestMapping("home/comment")
 	public String comment(Replies reply, Model model, HttpServletRequest request) {
+		reply.setRef_level(1);
+		reply.setIp(request.getRemoteAddr());
+		ps.insertComment(reply);
+		model.addAttribute("reply_no", reply.getReply_no());
 		model.addAttribute("peanut_no", reply.getPeanut_no());
 		return "home/comment";
 	}

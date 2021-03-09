@@ -56,5 +56,8 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("m_id", m_id);
 		sst.insert("bookmarkns.insertBm", map);
 	}
+	public void insertComment(Replies reply) {
+		sst.insert("repliesns.insertComment", reply);
+	}
 	
 }
