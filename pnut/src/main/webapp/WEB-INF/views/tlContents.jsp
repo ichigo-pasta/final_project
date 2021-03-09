@@ -84,19 +84,28 @@
 					<div class="row">
 						<div class="col col-4">
 							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
-							<i class="bi-chat" style="color: gray"></i></button>
+								<i class="bi-chat" style="color: gray"></i>
+								<c:if test="${pn.repCnt != 0}">${pn.repCnt }</c:if>
+							</button>
 						</div>
 						<div class="col col-4">
-							<button><i class="bi-arrow-clockwise" style="color: gray"></i></button>
+							<button>
+								<i class="bi-arrow-clockwise" style="color: gray"></i>
+								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
+							</button>
 						</div>
 						<div class="col col-4">
 							<c:if test="${pn.bookmarked == true}">
-								<button onclick="deleteBm('${pn.peanut_no}')" id="bnBtn${pn.peanut_no}">
-								<i class="bi-bookmark" style="color: blue;" id="bnBtnI${pn.peanut_no}"></i></button>
+								<button onclick="deleteBm('${pn.peanut_no}')" id="bmBtn${pn.peanut_no}">
+									<i class="bi-bookmark" style="color: blue;" id="bmBtnI${pn.peanut_no}"></i>
+									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
+								</button>
 							</c:if>
 							<c:if test="${pn.bookmarked == false}">
-								<button onclick="setBm('${pn.peanut_no}')" id="bnBtn${pn.peanut_no}">
-								<i class="bi-bookmark" style="color: gray" id="bnBtnI${pn.peanut_no}"></i></button>
+								<button onclick="setBm('${pn.peanut_no}')" id="bmBtn${pn.peanut_no}">
+									<i class="bi-bookmark" style="color: gray" id="bmBtnI${pn.peanut_no}"></i>
+									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
+								</button>
 							</c:if>
 						</div>
 					</div>
