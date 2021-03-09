@@ -31,4 +31,10 @@ public interface PeanutsDao {
 	void deleteBm(int num, String m_id);
 
 
+	Integer repCnt(int peanut_no);
+
+	Integer renutCnt(int peanut_no);
+
+	Integer bmCnt(int peanut_no);
+
 }

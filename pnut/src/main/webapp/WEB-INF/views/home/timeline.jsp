@@ -4,8 +4,8 @@
 <div class="container" id="tl">
 </div>
 <script type="text/javascript">
+	var a = ${amt };		
 	window.onpageshow = function() {
-		var a = ${amt};		
 		refreshTl(a);
 		setInterval(function() {
 			refreshTl(a);
@@ -39,10 +39,11 @@
 			}
 		}
 		xhr.send(null);
+		refreshTl(a);
 	}
 	function changeBmBtn1(peanut_no) {
-		document.getElementById('bnBtn'+peanut_no).setAttribute("onclick", "deleteBm('"+peanut_no+"')");
-		document.getElementById('bnBtnI'+peanut_no).setAttribute("style", "color: blue");
+		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "deleteBm('"+peanut_no+"')");
+		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: blue");
 	}
 	function deleteBm(peanut_no) {
 		changeBmBtn2(peanut_no);
@@ -56,9 +57,10 @@
 			}
 		}
 		xhr.send(null);
+		refreshTl(a);
 	}
 	function changeBmBtn2(peanut_no) {
-		document.getElementById('bnBtn'+peanut_no).setAttribute("onclick", "setBm('"+peanut_no+"')");
-		document.getElementById('bnBtnI'+peanut_no).setAttribute("style", "color: gray");
+		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "setBm('"+peanut_no+"')");
+		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: gray");
 	}
 </script>

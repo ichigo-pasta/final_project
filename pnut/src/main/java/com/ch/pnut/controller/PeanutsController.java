@@ -93,20 +93,27 @@ public class PeanutsController {
 		List<String> followList = ms.followList(m_id);
 		List<Peanuts> list = ps.selectList(m_id, amt, followList);
 		int listLen = list.size();
+		
 		if (listLen > 0) {
 			for (Peanuts p : list) {
 				p.setContent(ps.setHashtag(p.getContent()));
 			}
-		}
-		List<Integer> bmList = ps.selectBm(m_id);
+		}		
+		List<Integer> bmList = ps.selectBm(m_id);		
 		if(bmList.size() > 0 && listLen > 0) {
 			for (Peanuts peanut : list) {
-				peanut.setBookmarked(false);			
+				peanut.setBookmarked(false);
 				if (peanut.getRenut() == null) {
+					peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
+					peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
+					peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
 					if (bmList.contains(peanut.getPeanut_no())) {
 						peanut.setBookmarked(true);					
 					}
 				} else {
+					peanut.setRepCnt(ps.repCnt(peanut.getRenut()));
+					peanut.setRenutCnt(ps.renutCnt(peanut.getRenut()));
+					peanut.setBmCnt(ps.bmCnt(peanut.getRenut()));
 					if (bmList.contains(peanut.getRenut())) {
 						peanut.setBookmarked(true);					
 					}

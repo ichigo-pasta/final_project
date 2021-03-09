@@ -68,5 +68,17 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		sst.delete("bookmarkns.deleteBm", map);
 
 	}
+	@Override
+	public Integer repCnt(int peanut_no) {
+		return sst.selectOne("repliesns.repCnt", peanut_no);
+	}
+	@Override
+	public Integer renutCnt(int peanut_no) {
+		return sst.selectOne("peanutsns.renutCnt", peanut_no);
+	}
+	@Override
+	public Integer bmCnt(int peanut_no) {
+		return sst.selectOne("bookmarkns.bmCnt", peanut_no);
+	}
 	
 }

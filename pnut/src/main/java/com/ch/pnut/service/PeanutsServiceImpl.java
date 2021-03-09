@@ -78,4 +78,16 @@ public class PeanutsServiceImpl implements PeanutsService {
 		pd.deleteBm(num, m_id);
 
 	}
+	@Override
+	public Integer repCnt(int peanut_no) {
+		return pd.repCnt(peanut_no);
+	}
+	@Override
+	public Integer renutCnt(int peanut_no) {
+		return pd.renutCnt(peanut_no);
+	}
+	@Override
+	public Integer bmCnt(int peanut_no) {
+		return pd.bmCnt(peanut_no);
+	}
 }

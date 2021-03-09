@@ -82,4 +82,7 @@
 	<select id="selectDetail" parameterType="int" resultMap="peanutsResult">
 		select * from pn_peanuts p, pn_member m where p.writer = m.m_id and p.peanut_no = #{peanut_no} and p.del = 'n'
 	</select>
+	<select id="renutCnt" parameterType="int" resultType="integer">
+		select count(peanut_no) from pn_peanuts where renut = #{peanut_no} and del = 'n'
+	</select>
 </mapper>
