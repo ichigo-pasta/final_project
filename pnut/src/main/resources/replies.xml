@@ -35,6 +35,10 @@
 		insert into pn_replies values (reply_no_seq.nextval, #{peanut_no}, #{writer}, #{content},
 			sysdate, #{ip}, reply_no_seq.nextval, #{ref_level}, 'n')
 	</insert>
+	<insert id="insertComment" parameterType="replies">
+		insert into pn_replies values (reply_no_seq.nextval, #{peanut_no}, #{writer}, #{content},
+			sysdate, #{ip}, #{ref}, #{ref_level}, 'n')
+	</insert>
 	<select id="replyList" parameterType="hashmap" resultMap="repliesResult">
 		select * from
 			(select a.*, rownum rn from
