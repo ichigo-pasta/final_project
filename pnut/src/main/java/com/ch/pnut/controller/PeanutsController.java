@@ -153,6 +153,11 @@ public class PeanutsController {
 		model.addAttribute("peanut_no", reply.getPeanut_no());
 		return "home/reply";
 	}
+	@RequestMapping("home/comment")
+	public String comment(Replies reply, Model model, HttpServletRequest request) {
+		model.addAttribute("peanut_no", reply.getPeanut_no());
+		return "home/comment";
+	}
 	
 	@RequestMapping("/nolay/peanutList")
 	public String peanutList() {
