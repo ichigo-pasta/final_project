@@ -24,4 +24,6 @@ public class Member {
 	
 	private MultipartFile file_p;	// 프로필 화면
 	private MultipartFile file_b;	// 배경화면
+	// 조인용
+	private String target_nn;
 }

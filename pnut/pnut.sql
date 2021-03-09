@@ -50,6 +50,7 @@ create table pn_peanuts (
 create table pn_replies (
 	reply_no	number			primary key,	-- 댓글 번호(pk)
 	peanut_no 	number 			not null,		-- 게시글 번호(fk)
+	rep_target	varchar2(20)	,				-- 댓글의 대상 id(fk) 
 	writer		varchar2(20)	not null,		-- 댓글 작성자
 	content		varchar2(600)	not null,		-- 댓글 내용
 	regdate		date			not null,		-- 작성일
@@ -57,7 +58,8 @@ create table pn_replies (
 	ref			number			not null,		-- 참조번호
 	ref_level	number			not null,		-- 참조레벨
 	del			char(1)			not null,		-- 삭제여부
-	foreign key (peanut_no) references pn_peanuts(peanut_no)
+	foreign key (peanut_no) references pn_peanuts(peanut_no),
+	foreign key (rep_target) references pn_member(m_id)
 );
 
 -- 팔로우 테이블 생성

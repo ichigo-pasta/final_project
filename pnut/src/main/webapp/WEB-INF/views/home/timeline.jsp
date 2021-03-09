@@ -9,7 +9,7 @@
 		refreshTl(a);
 		setInterval(function() {
 			refreshTl(a);
-		}, 5000);
+		}, 20000);
 	}
 	function refreshTl(amt) {
 		var xhr = new XMLHttpRequest();

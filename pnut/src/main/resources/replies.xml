@@ -7,6 +7,7 @@
 	<resultMap type="replies" id="repliesResult">
 		<result property="reply_no" column="reply_no" />
 		<result property="peanut_no" column="peanut_no" />
+		<result property="rep_target" column="rep_target" />
 		<result property="writer" column="writer" />
 		<result property="content" column="content" />
 		<result property="regdate" column="regdate" />
@@ -30,21 +31,22 @@
 		<result property="m_bg" column="m_bg" />
 		<result property="re_nick" column="re_nick" />
 		<result property="re_pf" column="re_pf" />
+		<result property="target_nn" column="target_nn" />
 	</resultMap>
 	<insert id="insertReply" parameterType="replies">
-		insert into pn_replies values (reply_no_seq.nextval, #{peanut_no}, #{writer}, #{content},
+		insert into pn_replies values (reply_no_seq.nextval, #{peanut_no}, #{rep_target}, #{writer}, #{content},
 			sysdate, #{ip}, reply_no_seq.nextval, #{ref_level}, 'n')
 	</insert>
 	<insert id="insertComment" parameterType="replies">
-		insert into pn_replies values (reply_no_seq.nextval, #{peanut_no}, #{writer}, #{content},
+		insert into pn_replies values (reply_no_seq.nextval, #{peanut_no}, #{rep_target}, #{writer}, #{content},
 			sysdate, #{ip}, #{ref}, #{ref_level}, 'n')
 	</insert>
 	<select id="replyList" parameterType="hashmap" resultMap="repliesResult">
 		select * from
 			(select a.*, rownum rn from
-				(select rep.*, m_profile, m_nickname 
-				from pn_replies rep, pn_member mem
-				where mem.m_id = rep.writer and peanut_no = #{peanut_no}  
+				(select rep.*, mem.m_profile, mem.m_nickname, mem2.m_nickname target_nn 
+				from pn_replies rep, pn_member mem, pn_member mem2
+				where mem.m_id = rep.writer and rep.rep_target = mem2.m_id(+) and peanut_no = #{peanut_no}  
 				order by ref desc, ref_level, reply_no) a)
 			where rn between 1 and #{amt} 
 	</select>
