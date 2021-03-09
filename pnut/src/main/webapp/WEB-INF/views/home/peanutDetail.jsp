@@ -94,7 +94,7 @@
 					${rep.regdate }&nbsp;&nbsp;<button id="commentbt" onclick="comment('${my_id}')">답글 쓰기</button>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="commentInsert" style="display: none">
 				<div class="col col-1"></div>
 				<div class="col col-10">
 					<div class="row">
@@ -119,6 +119,23 @@
 					<input type="hidden" value="${rep.reply_no}" name="ref">
 					<input type="hidden" value="${my_id }" name="writer">
 				</form>
+				</div>
+			</div>
+			<div class="row" id="comment">
+				<div class="col col-1"></div>
+				<div class="col col-2">
+					<div class="row">
+						<div class="col">
+							<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
+								width="80" height="80" onclick="profile('${rep.writer}')">
+						</div>
+					</div>
+				</div>
+				<div class="col col-9">
+					${rep.member.m_nickname}, @${rep.writer}<br>
+					<pre>${rep.content}</pre>
+					${rep.regdate }&nbsp;&nbsp;
+					<button id="commentbt" onclick="comment('${my_id}')">답글 쓰기</button>
 				</div>
 			</div>		
 			</c:forEach>
@@ -152,6 +169,6 @@
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
 	}
 	function comment(my_id) {
-		
+		$("#commentInsert").show();
 	}
 </script>
