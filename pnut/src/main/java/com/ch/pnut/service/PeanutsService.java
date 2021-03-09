@@ -27,6 +27,10 @@ public interface PeanutsService {
 
 	void insertBm(int peanut_no, String m_id);
 
+
 	void insertComment(Replies reply);
+
+	void deleteBm(int num, String m_id);
+
 
 }

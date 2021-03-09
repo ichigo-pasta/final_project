@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ch.pnut.model.Member;
 import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.model.Replies;
 import com.ch.pnut.service.MemberService;
@@ -122,6 +121,16 @@ public class PeanutsController {
 			num = peanut_no;
 		} else  num = ps.selectDetail(peanut_no).getRenut();
 		ps.insertBm(num, m_id);
+	}
+	@RequestMapping("deleteBm")
+	@ResponseBody
+	public void deleteBm(int peanut_no, HttpSession session) {
+		String m_id = (String)session.getAttribute("m_id");
+		int num;
+		if (ps.selectDetail(peanut_no).getRenut() == null) {
+			num = peanut_no;
+		} else  num = ps.selectDetail(peanut_no).getRenut();
+		ps.deleteBm(num, m_id);
 	}
 	
 	@RequestMapping("home/peanutDetail")
