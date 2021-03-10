@@ -37,6 +37,8 @@ public interface PeanutsService {
 	Integer renutCnt(int peanut_no);
 
 	Integer bmCnt(int peanut_no);
+	
+	List<Peanuts> distinctList(List<Peanuts> list);
 
 	List<Peanuts> selectBmList(String m_id, int amt);
 

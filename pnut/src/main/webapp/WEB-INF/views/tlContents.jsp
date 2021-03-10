@@ -91,7 +91,7 @@
 							</button>
 						</div>
 						<div class="col col-4">
-							<button>
+							<button data-bs-toggle="modal" data-bs-target="#modal${pn.peanut_no}" onclick="stopRefresh()">
 								<i class="bi-arrow-clockwise" style="color: gray"></i>
 								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
 							</button>
@@ -125,6 +125,28 @@
 								</button>
 								</c:if>
 							</c:if>
+						</div>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="modal${pn.peanut_no}" aria-labelledby="modal${pn.peanut_no}Label" data-bs-backdrop="static" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="modal${pn.peanut_no}Label">Renut</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="startRefresh()"></button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col" style="min-height: 5vw">
+											${pn.content}
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">									
+	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="startRefresh()">취소</a>
+	        						<a type="button" class="btn btn-primary" onclick="doRenut('${pn.peanut_no}')">리넛</a>
+      							</div>
+							</div>
 						</div>
 					</div>
 				</div> <%-- peanut 오른쪽 column --%>
