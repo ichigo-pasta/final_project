@@ -94,7 +94,7 @@ public class PeanutsServiceImpl implements PeanutsService {
 
 	public List<Peanuts> selectBmList(String m_id, int amt) {
 		return pd.selectBmList(m_id, amt);
-
+	}
 	public List<Peanuts> distinctList(List<Peanuts> list) {
 		Peanuts temp;
 		List<Integer> chk = new ArrayList<>();
