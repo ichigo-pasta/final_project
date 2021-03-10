@@ -68,17 +68,19 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		sst.delete("bookmarkns.deleteBm", map);
 
 	}
-	@Override
 	public Integer repCnt(int peanut_no) {
 		return sst.selectOne("repliesns.repCnt", peanut_no);
 	}
-	@Override
 	public Integer renutCnt(int peanut_no) {
 		return sst.selectOne("peanutsns.renutCnt", peanut_no);
 	}
-	@Override
 	public Integer bmCnt(int peanut_no) {
 		return sst.selectOne("bookmarkns.bmCnt", peanut_no);
 	}
-	
+	public List<Peanuts> selectBmList(String m_id, int amt) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("m_id", m_id);
+		map.put("amt", amt);
+		return sst.selectList("peanutsns.selectBmList", map);
+	}
 }

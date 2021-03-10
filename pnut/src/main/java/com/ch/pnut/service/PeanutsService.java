@@ -40,4 +40,6 @@ public interface PeanutsService {
 	
 	List<Peanuts> distinctList(List<Peanuts> list);
 
+	List<Peanuts> selectBmList(String m_id, int amt);
+
 }

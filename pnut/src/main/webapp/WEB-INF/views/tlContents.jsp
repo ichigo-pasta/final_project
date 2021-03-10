@@ -18,11 +18,13 @@
 				<div class="col col-2">
 		<c:if test="${pn.renut != null}">
 					<img alt="" src="${path}/resources/images/${pn.member.re_pf}"
-						width="100" height="100" onclick="profile('${pn.re_writer}')">
+						width="100" height="100" onclick="profile('${pn.re_writer}')"
+						class="profile_pic">
 		</c:if>
 		<c:if test="${pn.renut == null}">
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
-						width="100" height="100" onclick="profile('${pn.writer}')">
+						width="100" height="100" onclick="profile('${pn.writer}')"
+						class="profile_pic">
 		</c:if>
 				</div>
 				<div class="col col-10">

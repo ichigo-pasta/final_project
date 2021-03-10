@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col col-2">
 			<img alt="" src="${path}/resources/images/${m_profile}"
-					width="100" height="100">
+					width="100" height="100" class="profile_pic">
 		</div>
 		<div class="col col-10">
 			<div class="row">

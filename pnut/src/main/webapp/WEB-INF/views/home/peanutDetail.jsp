@@ -15,7 +15,8 @@
 			<div class="row">
 				<div class="col col-2">		
 					<img alt="" src="${path}/resources/images/${peanut.member.m_profile}"
-						width="100" height="100" onclick="profile('${peanut.writer}')">		
+						width="100" height="100" onclick="profile('${peanut.writer}')"
+						class="profile_pic">		
 				</div>
 				<div class="col col-10">
 					<div class="row">
@@ -84,12 +85,13 @@
 		<div class="reply_container"> <!-- 댓글 -->
 			<c:forEach items="${list}" var="rep">
 		<c:if test="${rep.ref_level == 0}">
-			<div class="row">
+			<div class="row rep_row">
 				<div class="col col-2">
 					<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
-						width="80" height="80" onclick="profile('${rep.writer}')">
+						width="80" height="80" onclick="profile('${rep.writer}')"
+						align="right" class="profile_pic">
 				</div>
-				<div class="col col-9">
+				<div class="col col-9" style="background: #eee; border-radius: 10px" >
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
 					${rep.regdate }&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
@@ -128,17 +130,18 @@
 			</div>
 		</c:if>	
 		<c:if test="${rep.ref_level == 1}">
-			<div class="row">
+			<div class="row rep_row">
 				<div class="col col-1"></div>				
 				<div class="col col-2">
 					<div class="row">
 						<div class="col">
 							<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
-								width="80" height="80" onclick="profile('${rep.writer}')">
+								width="80" height="80" onclick="profile('${rep.writer}')"
+								align="right" class="profile_pic">
 						</div>
 					</div>
 				</div>
-				<div class="col col-9">
+				<div class="col col-9" style="background: #eee; border-radius: 10px" >
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre><b>${rep.member.target_nn}</b>&nbsp;${rep.content}</pre>
 					${rep.regdate }&nbsp;&nbsp;

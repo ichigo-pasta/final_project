@@ -18,7 +18,7 @@
 			<i class="bi-envelope-fill"></i>&nbsp;&nbsp;메시지</a></td>
 	</tr>
 	<tr>
-		<td><a href="${path}/home/bookmark.do" 
+		<td><a href="javascript:bookmark('${m_id}');" 
 				class="list-group-item list-group-item-action list-group-item-warning">
 			<i class="bi-bookmark-fill"></i>&nbsp;&nbsp;북마크</a></td>
 	</tr>
@@ -40,5 +40,8 @@
 <script type="text/javascript">
 	function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
+	}
+	function bookmark(m_id) {
+		location.href = "${path}/home/bookmarkForm.do?m_id="+m_id;
 	}
 </script>

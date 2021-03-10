@@ -21,4 +21,5 @@
 	<select id="bmCnt" parameterType="int" resultType="integer">
 		select count(bm_user) from pn_bookmark where peanut_no = #{peanut_no}
 	</select>
+	
 </mapper>
