@@ -156,11 +156,19 @@ public class PeanutsController {
 		Peanuts peanut;
 		if(renut == null) peanut = ps.selectDetail(peanut_no);			
 		else peanut = ps.selectDetail(renut);
+		List<String> myFollowLt = ms.followList(m_id);
+		boolean isFollow = myFollowLt.contains(peanut.getWriter());
 		model.addAttribute("peanut", peanut);
 		model.addAttribute("m_nickname", m_nickname);
 		List<Replies> list = ps.replyList(peanut_no, amt);
 		model.addAttribute("list", list);
+		model.addAttribute("isFollow", isFollow);
 		return "home/peanutDetail";
+	}
+	@RequestMapping(value = "deletePd", produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public void deletePd(int peanut_no) {
+		ps.deletePd(peanut_no);		
 	}
 	@RequestMapping("home/reply")
 	public String reply(Replies reply, Model model, HttpServletRequest request) {
