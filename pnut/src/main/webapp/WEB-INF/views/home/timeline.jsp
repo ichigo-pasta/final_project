@@ -10,7 +10,7 @@
 		autoRefresh(a);
 		setInterval(function() {
 			autoRefresh(a);
-		}, 20000);
+		}, 10000);
 	}
 	function autoRefresh(amt) {
 		timeout = 0;
