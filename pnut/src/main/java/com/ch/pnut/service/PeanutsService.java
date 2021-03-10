@@ -37,5 +37,7 @@ public interface PeanutsService {
 	Integer renutCnt(int peanut_no);
 
 	Integer bmCnt(int peanut_no);
+	
+	List<Peanuts> distinctList(List<Peanuts> list);
 
 }
