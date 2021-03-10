@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ch.pnut.model.Bookmark;
 import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.model.Replies;
 import com.ch.pnut.service.MemberService;
@@ -158,10 +157,13 @@ public class PeanutsController {
 		Peanuts peanut;
 		if(renut == null) peanut = ps.selectDetail(peanut_no);			
 		else peanut = ps.selectDetail(renut);
+		List<String> myFollowLt = ms.followList(m_id);
+		boolean isFollow = myFollowLt.contains(peanut.getWriter());
 		model.addAttribute("peanut", peanut);
 		model.addAttribute("m_nickname", m_nickname);
 		List<Replies> list = ps.replyList(peanut_no, amt);
 		model.addAttribute("list", list);
+		model.addAttribute("isFollow", isFollow);
 		return "home/peanutDetail";
 	}
 	@RequestMapping("home/reply")

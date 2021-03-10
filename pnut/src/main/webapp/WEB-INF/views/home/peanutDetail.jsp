@@ -28,12 +28,30 @@
 								<a class="btn btn-light dropdown" type="button"
 									id="dropdownMenuButton" data-bs-toggle="dropdown"
 									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<c:if test="${peanut.writer == my_id }">
+									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 										<li><a class="dropdown-item" href="#">
 											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
-										<li><a class="dropdown-item" href="#">Menu item</a></li>
-										<li><a class="dropdown-item" href="#">Menu item</a></li>
 									</ul>
+								</c:if>
+								<c:if test="${peanut.writer != my_id }">
+									<c:if test="${isFollow == true }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<i class="bi bi-person-x"></i>&nbsp;언팔로우</a></li>
+											<li><a class="dropdown-item" href="#">
+												<i class="bi bi-x-circle"></i>&nbsp;차단</a></li>	
+										</ul>
+									</c:if>	
+									<c:if test="${isFollow == false }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<i class="bi bi-person-plus"></i>&nbsp;팔로우</a></li>
+											<li><a class="dropdown-item" href="#">
+												<i class="bi bi-x-circle"></i>&nbsp;차단</a></li>
+										</ul>
+									</c:if>
+								</c:if>		
 							</div>
 						</div>
 					</div>
