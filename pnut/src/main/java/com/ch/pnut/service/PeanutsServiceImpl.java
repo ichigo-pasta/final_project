@@ -2,6 +2,7 @@ package com.ch.pnut.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,5 +90,23 @@ public class PeanutsServiceImpl implements PeanutsService {
 	@Override
 	public Integer bmCnt(int peanut_no) {
 		return pd.bmCnt(peanut_no);
+	}
+	public List<Peanuts> distinctList(List<Peanuts> list) {
+		Peanuts temp;
+		List<Integer> chk = new ArrayList<>();
+		int num;
+		Iterator<Peanuts> itr = list.iterator();
+		while(itr.hasNext()) {
+			temp = itr.next();
+			if(temp.getRenut() == null) {
+				num = temp.getPeanut_no();
+			} else num = temp.getRenut();
+			if(!chk.contains(num)) {
+				chk.add(num);
+			} else {
+				itr.remove();
+			}
+		}
+		return list;
 	}
 }

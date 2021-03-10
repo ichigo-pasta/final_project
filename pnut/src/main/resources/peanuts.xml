@@ -36,17 +36,18 @@
 	</resultMap>
 	<insert id="insert" parameterType="peanuts">
 		insert into pn_peanuts values (peanut_no_seq.nextval, #{writer},
-		#{content},
-		#{ip},null
-		<if test="picture1 == null">,null</if>
-		<if test="picture1 != null">,#{picture1}</if>
-		<if test="picture2 == null">,null</if>
-		<if test="picture2 != null">,#{picture2}</if>
-		<if test="picture3 == null">,null</if>
-		<if test="picture3 != null">,#{picture3}</if>
-		<if test="picture4 == null">,null</if>
-		<if test="picture4 != null">,#{picture4}</if>
-		,sysdate,'n')
+		#{content}, #{ip}
+		<if test="renut == null">, null</if>
+		<if test="renut != null">, #{renut}</if>
+		<if test="picture1 == null">, null</if>
+		<if test="picture1 != null">, #{picture1}</if>
+		<if test="picture2 == null">, null</if>
+		<if test="picture2 != null">, #{picture2}</if>
+		<if test="picture3 == null">, null</if>
+		<if test="picture3 != null">, #{picture3}</if>
+		<if test="picture4 == null">, null</if>
+		<if test="picture4 != null">, #{picture4}</if>
+		, sysdate, 'n')
 	</insert>
 	<select id="selectList" parameterType="hashmap"
 		resultMap="peanutsResult">

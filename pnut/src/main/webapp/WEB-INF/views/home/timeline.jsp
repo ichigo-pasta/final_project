@@ -6,11 +6,11 @@
 <script type="text/javascript">
 	var a = ${amt };
 	var timeout;
-	window.onpageshow = function() {
+	var refresh;
+	
+	window.onpageshow = function() {		
 		autoRefresh(a);
-		setInterval(function() {
-			autoRefresh(a);
-		}, 10000);
+		startRefresh();			
 	}
 	function autoRefresh(amt) {
 		timeout = 0;
@@ -86,5 +86,14 @@
 		for (var b of bmBtn) {
 			b.disabled = false;
 		}
+	}
+	function stopRefresh() {
+		clearInterval(refresh);
+	}
+	function startRefresh() {
+		refresh = setInterval(autoRefresh, 10000, a);
+	}
+	function doRenut(peanut_no){
+		location.href="${path}/renut.do?peanut_no="+peanut_no;
 	}
 </script>
