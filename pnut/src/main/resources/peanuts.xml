@@ -95,4 +95,10 @@
 			order by peanut_no desc) a
 		) where rn between 1 and #{amt}
 	</select>
+	<select id="selectRenut" parameterType="string" resultType="integer">
+		select renut from pn_peanuts where writer = #{m_id} and renut is not null and del = 'n'
+	</select>
+	<update id="cancelRenut" parameterType="hashmap">
+		update pn_peanuts set del = 'y' where renut = #{renut} and writer = #{m_id}
+	</update>
 </mapper>

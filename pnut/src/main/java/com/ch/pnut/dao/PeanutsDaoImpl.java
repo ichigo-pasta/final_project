@@ -83,4 +83,15 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("amt", amt);
 		return sst.selectList("peanutsns.selectBmList", map);
 	}
+	@Override
+	public List<Integer> selectRenut(String m_id) {
+		return sst.selectList("peanutsns.selectRenut", m_id);
+	}
+	@Override
+	public void cancelRenut(int renut, String m_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("renut", renut);
+		map.put("m_id", m_id);
+		sst.update("peanutsns.cancelRenut", map);
+	}
 }

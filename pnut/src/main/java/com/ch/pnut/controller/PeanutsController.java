@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ch.pnut.model.Bookmark;
 import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.model.Replies;
 import com.ch.pnut.service.MemberService;
@@ -82,22 +81,20 @@ public class PeanutsController {
 	}
 
 	@RequestMapping("home/timeline")
-	public String timeline(Integer amt, Integer timeout, Model model) {
-		if (amt == null) amt = 20;
-		if (timeout == null) timeout = 0;
-		model.addAttribute("amt", amt);
-		model.addAttribute("timeout", timeout);
+	public String timeline(Integer amt, Model model) {
+		if (amt == null) amt = 20;		
+		model.addAttribute("amt", amt);		
 		return "home/timeline";
 	}
 	@RequestMapping("tlContents")	
-	public String tlContents(Integer amt, Integer timeout, Model model, HttpSession session) {
-		if (amt == null) amt = 20;
-		if (timeout == null) timeout = 0;
+	public String tlContents(Integer amt, Model model, HttpSession session) {
+		if (amt == null) amt = 20;		
 		String m_id = (String) session.getAttribute("m_id");
 		List<String> followList = ms.followList(m_id);	// 로그인 유저가 팔로우한 아이디 리스트
 		List<Peanuts> list = ps.distinctList(ps.selectList(m_id, amt, followList));	// 로그인 유저, 팔로우유저 피넛 리스트 amt개 조회한 후 리넛 중복 제거
 		int listSize = list.size();
-		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트		
+		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트
+		List<Integer> renutList = ps.selectRenut(m_id);
 		
 		if (listSize > 0) {
 			for (Peanuts peanut : list) {
@@ -107,18 +104,19 @@ public class PeanutsController {
 					peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
 					peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
 					if (bmList.contains(peanut.getPeanut_no())) peanut.setBookmarked(true);
+					if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);
 				} else {							// 리넛일 때
 					peanut.setRepCnt(ps.repCnt(peanut.getRenut()));
 					peanut.setRenutCnt(ps.renutCnt(peanut.getRenut()));
 					peanut.setBmCnt(ps.bmCnt(peanut.getRenut()));
 					if (bmList.contains(peanut.getRenut())) peanut.setBookmarked(true);
+					if (renutList.contains(peanut.getRenut())) peanut.setRenuted(true);
 				}
 			}
 		}		
 
 		model.addAttribute("list", list);
-		model.addAttribute("m_id", m_id);
-		model.addAttribute("timeout", timeout);
+		model.addAttribute("m_id", m_id);		
 		return "tlContents";
 	}
 	
@@ -224,6 +222,14 @@ public class PeanutsController {
 			peanut.setIp(request.getRemoteAddr());
 			ps.insert(peanut);
 		}		
+		return "redirect:home/timeline.do";
+	}
+	
+	@RequestMapping("cancelRenut")
+	public String cancelRenut(Integer peanut_no, HttpSession session, HttpServletRequest request) {
+		String m_id = (String)session.getAttribute("m_id");
+		int renut = ps.isRenut(peanut_no);	// 리넛 취소 대상 원본피넛번호
+		ps.cancelRenut(renut, m_id);
 		return "redirect:home/timeline.do";
 	}
 }
