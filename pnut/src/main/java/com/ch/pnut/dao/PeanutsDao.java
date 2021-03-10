@@ -37,4 +37,6 @@ public interface PeanutsDao {
 
 	Integer bmCnt(int peanut_no);
 
+	List<Peanuts> selectBmList(String m_id, int amt);
+
 }

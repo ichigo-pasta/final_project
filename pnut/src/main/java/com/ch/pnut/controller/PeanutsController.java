@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ch.pnut.model.Bookmark;
 import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.model.Replies;
 import com.ch.pnut.service.MemberService;
@@ -196,7 +197,26 @@ public class PeanutsController {
 		model.addAttribute("peanut_no", reply.getPeanut_no());
 		return "home/comment";
 	}
-	
+	@RequestMapping("home/bookmarkForm")
+	public String bookmarkForm(Integer amt, Model model, 
+			HttpSession session) {
+		if (amt == null) amt = 20;
+		String m_id = (String)session.getAttribute("m_id");
+		List<Peanuts> bmList = ps.selectBmList(m_id, amt);	// 로그인 유저가 북마크한 피넛번호 리스트		
+		int listLen = bmList.size(); 
+		if (listLen > 0) {
+			for (Peanuts peanut : bmList) {				
+				peanut.setContent(ps.setHashtag(peanut.getContent()));
+				peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
+				peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
+				peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
+			}
+		}
+		model.addAttribute("amt", amt);
+		model.addAttribute("m_id", m_id);
+		model.addAttribute("bmList", bmList);
+		return "home/bookmarkForm";
+	}
 	@RequestMapping("/nolay/peanutList")
 	public String peanutList() {
 		return "nolay/peanutList";

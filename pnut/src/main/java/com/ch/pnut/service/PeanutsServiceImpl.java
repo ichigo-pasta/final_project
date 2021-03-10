@@ -90,4 +90,7 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public Integer bmCnt(int peanut_no) {
 		return pd.bmCnt(peanut_no);
 	}
+	public List<Peanuts> selectBmList(String m_id, int amt) {
+		return pd.selectBmList(m_id, amt);
+	}
 }

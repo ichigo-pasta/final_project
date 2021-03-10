@@ -85,4 +85,13 @@
 	<select id="renutCnt" parameterType="int" resultType="integer">
 		select count(peanut_no) from pn_peanuts where renut = #{peanut_no} and del = 'n'
 	</select>
+	<select id="selectBmList" parameterType="hashmap" resultMap="peanutsResult">
+		select * from
+			(select a.*, rownum rn from
+				(select * from pn_peanuts p, pn_member m where peanut_no in
+					(select peanut_no from pn_bookmark where bm_user = #{m_id})
+				and p.writer = m.m_id and del = 'n'
+			order by peanut_no desc) a
+		) where rn between 1 and #{amt}
+	</select>
 </mapper>

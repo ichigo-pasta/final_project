@@ -58,4 +58,13 @@
 	.bi::before {
 		vertical-align: -.125em;
 	}
+	.rep_row {
+		padding: 5px 0;
+	}
+	.rep_row:first-child {
+		padding: 10px 0 5px 0;
+	} 
+	.profile_pic {
+		border-radius: 10px;
+	}
 </style>
