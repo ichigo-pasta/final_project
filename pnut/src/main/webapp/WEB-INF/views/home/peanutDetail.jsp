@@ -20,8 +20,21 @@
 				</div>
 				<div class="col col-10">
 					<div class="row">
-						<div class="col">
+						<div class="col col-11">
 							<c:out value="${peanut.member.m_nickname}, ${peanut.writer}, ${peanut.regdate}"/>
+						</div>
+						<div class="col col-1">
+							<div class="btn-group">
+								<a class="btn btn-light dropdown" type="button"
+									id="dropdownMenuButton" data-bs-toggle="dropdown"
+									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<li><a class="dropdown-item" href="#">
+											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
+										<li><a class="dropdown-item" href="#">Menu item</a></li>
+										<li><a class="dropdown-item" href="#">Menu item</a></li>
+									</ul>
+							</div>
 						</div>
 					</div>
 					<div class="row">
