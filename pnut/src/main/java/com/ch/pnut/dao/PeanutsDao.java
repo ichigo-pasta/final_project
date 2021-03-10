@@ -41,4 +41,9 @@ public interface PeanutsDao {
 
 	void deletePd(int peanut_no);
 
+	List<Integer> selectRenut(String m_id);
+
+	void cancelRenut(int renut, String m_id);
+
+
 }
