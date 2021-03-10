@@ -31,10 +31,12 @@ public class Peanuts {
 	private String re_writer;		// 리넛 작성자
 	
 	private boolean bookmarked;		// 내가 북마크한 피넛인가?
+	private boolean renuted;		// 내가 리넛한 피넛인가?
 	
 	// 피넛 하단 아이콘 카운터
 	private Integer repCnt;			// 리플 개수
 	private Integer renutCnt;		// 리넛 개수
 	private Integer bmCnt;			// 북마크 개수
+	
 	
 }

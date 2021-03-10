@@ -125,7 +125,7 @@ create SEQUENCE reply_no_seq;
 select * from pn_member;
 select * from pn_member where m_id='k2';
 select * from pn_master;
-select * from pn_peanuts;
+select * from pn_peanuts order by peanut_no desc;
 select * from pn_replies;
 select * from pn_follow;
 select * from pn_block;
