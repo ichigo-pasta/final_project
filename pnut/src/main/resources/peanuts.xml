@@ -95,4 +95,7 @@
 			order by peanut_no desc) a
 		) where rn between 1 and #{amt}
 	</select>
+	<update id="deletePd" parameterType="int">
+		update pn_peanuts set del = 'y' where peanut_no = #{peanut_no}
+	</update>
 </mapper>

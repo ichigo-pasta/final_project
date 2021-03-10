@@ -83,4 +83,7 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("amt", amt);
 		return sst.selectList("peanutsns.selectBmList", map);
 	}
+	public void deletePd(int peanut_no) {
+		sst.update("peanutsns.deletePd", peanut_no);
+	}
 }

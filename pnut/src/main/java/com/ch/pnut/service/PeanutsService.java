@@ -42,4 +42,6 @@ public interface PeanutsService {
 
 	List<Peanuts> selectBmList(String m_id, int amt);
 
+	void deletePd(int peanut_no);
+
 }

@@ -39,4 +39,6 @@ public interface PeanutsDao {
 
 	List<Peanuts> selectBmList(String m_id, int amt);
 
+	void deletePd(int peanut_no);
+
 }

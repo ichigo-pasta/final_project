@@ -166,6 +166,11 @@ public class PeanutsController {
 		model.addAttribute("isFollow", isFollow);
 		return "home/peanutDetail";
 	}
+	@RequestMapping(value = "deletePd", produces = "text/html;charset=utf-8")
+	@ResponseBody
+	public void deletePd(int peanut_no) {
+		ps.deletePd(peanut_no);		
+	}
 	@RequestMapping("home/reply")
 	public String reply(Replies reply, Model model, HttpServletRequest request) {
 		reply.setRef_level(0);
