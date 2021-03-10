@@ -95,49 +95,33 @@ public class PeanutsController {
 		String m_id = (String) session.getAttribute("m_id");
 		List<String> followList = ms.followList(m_id);	// 로그인 유저가 팔로우한 아이디 리스트
 		List<Peanuts> list = ps.selectList(m_id, amt, followList);	// 로그인 유저, 팔로우유저 피넛 리스트 amt개 조회한 리스트
-		int listLen = list.size();
+		int listSize = list.size();
 		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트		
 		
-//		if (listLen > 0) {
-//			for (Peanuts peanut : list) {
-//				peanut.setContent(ps.setHashtag(peanut.getContent()));	// list 피넛 해시태그 처리
-//				if (peanut.getRenut() == null) {	// 리넛이 아닐 때
-//					
-//				}
-//			}
-//		}
-		
-		if (listLen > 0) {
-			for (Peanuts p : list) {
-				p.setContent(ps.setHashtag(p.getContent()));
-			}
-		}		
-		if(bmList.size() > 0 && listLen > 0) {
-			for (Peanuts peanut : list) {				
-				if (peanut.getRenut() == null) {
+		if (listSize > 0) {
+			for (Peanuts peanut : list) {
+				peanut.setContent(ps.setHashtag(peanut.getContent()));	// list 피넛 해시태그 처리
+				if (peanut.getRenut() == null) {	// 리넛이 아닐 때
 					peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
 					peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
 					peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
-					if (bmList.contains(peanut.getPeanut_no())) {
-						peanut.setBookmarked(true);					
-					}
-				} else {
+					if (bmList.contains(peanut.getPeanut_no())) peanut.setBookmarked(true);
+				} else {							// 리넛일 때
 					peanut.setRepCnt(ps.repCnt(peanut.getRenut()));
 					peanut.setRenutCnt(ps.renutCnt(peanut.getRenut()));
 					peanut.setBmCnt(ps.bmCnt(peanut.getRenut()));
-					if (bmList.contains(peanut.getRenut())) {
-						peanut.setBookmarked(true);					
-					}
+					if (bmList.contains(peanut.getRenut())) peanut.setBookmarked(true);
 				}
 			}
 		}		
+
 		model.addAttribute("list", list);
 		model.addAttribute("m_id", m_id);
 		model.addAttribute("timeout", timeout);
 		return "tlContents";
 	}
 	
-	@RequestMapping(value = "setBm", produces = "text/html;charset=utf-8")
+	@RequestMapping("setBm")
 	@ResponseBody
 	public void setBm(int peanut_no, HttpSession session) {
 		String m_id = (String)session.getAttribute("m_id");
