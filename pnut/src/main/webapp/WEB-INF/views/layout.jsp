@@ -10,14 +10,14 @@
 <body>
 <div class="container">
     <div class="row" id="headline">
-    	<div class="col col-lg-2 col-md-3 col-sm-4" style="padding: 0 36px">
+    	<div class="col col-lg-2 col-md-3 col-sm-4 col-4" style="padding: 0 36px">
     		<img alt="" src="${path }/resources/images/P-Nut.png" height="50" onclick=""></div>
-    	<div class="col col-lg-10 col-md-9 col-sm-8" >
+    	<div class="col col-lg-10 col-md-9 col-sm-8 col-8" >
     		<tiles:insertAttribute name="headline"/></div>
     </div>
     <div class="row">
-    	<div class="col col-lg-2 col-md-3 col-sm-4"><tiles:insertAttribute name="menu"/></div>
-    	<div class="col col-lg-10 col-md-9 col-sm-8"><tiles:insertAttribute name="body"/></div>
+    	<div class="col col-lg-2 col-md-3 col-sm-4 col-4"><tiles:insertAttribute name="menu"/></div>
+    	<div class="col col-lg-10 col-md-9 col-sm-8 col-8"><tiles:insertAttribute name="body"/></div>
   	</div>  	
   </div>
 </body>
