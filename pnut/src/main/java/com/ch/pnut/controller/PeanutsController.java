@@ -165,10 +165,11 @@ public class PeanutsController {
 		model.addAttribute("isFollow", isFollow);
 		return "home/peanutDetail";
 	}
-	@RequestMapping(value = "deletePd", produces = "text/html;charset=utf-8")
-	@ResponseBody
-	public void deletePd(int peanut_no) {
-		ps.deletePd(peanut_no);		
+	@RequestMapping("deletePd")
+	public String deletePd(Model model, Integer peanut_no) {
+		int result = ps.deletePd(peanut_no);
+		model.addAttribute("result", result);
+		return "deletePd";
 	}
 	@RequestMapping("home/reply")
 	public String reply(Replies reply, Model model, HttpServletRequest request) {

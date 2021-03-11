@@ -30,8 +30,8 @@
 									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
 								<c:if test="${peanut.writer == my_id }">
 									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
-										<li onclick="">
-											<a class="dropdown-item" href="#">
+										<li>
+											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${peanut.peanut_no}">
 											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
 									</ul>
 								</c:if>
@@ -52,7 +52,7 @@
 												<i class="bi bi-x-circle"></i>&nbsp;차단</a></li>
 										</ul>
 									</c:if>
-								</c:if>		
+								</c:if>				
 							</div>
 						</div>
 					</div>
@@ -247,8 +247,5 @@
 		$(".recome").hide();
 		$("#comIns"+reply_no).show();
 		$("#cont"+reply_no).focus();
-	}
-	function deletePd(peanut_no) {
-		
 	}
 </script>
