@@ -84,9 +84,6 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		return sst.selectList("peanutsns.selectBmList", map);
 	}
 
-	public void deletePd(int peanut_no) {
-		sst.update("peanutsns.deletePd", peanut_no);
-	}
 	public List<Integer> selectRenut(String m_id) {
 		return sst.selectList("peanutsns.selectRenut", m_id);
 	}
@@ -97,5 +94,8 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("m_id", m_id);
 		sst.update("peanutsns.cancelRenut", map);
 
+	}
+	public int deletePd(Integer peanut_no) {
+		return sst.update("peanutsns.deletePd", peanut_no);
 	}
 }
