@@ -22,4 +22,6 @@ public interface MemberService {
 
 	List<String> followerList(String m_id);
 
+	List<Member> followingList(List<String> followlist, Integer amt);
+
 }

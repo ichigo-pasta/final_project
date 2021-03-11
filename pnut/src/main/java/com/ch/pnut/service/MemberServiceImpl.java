@@ -34,8 +34,10 @@ public class MemberServiceImpl implements MemberService {
 	public List<Member> search(String[] arrayKw, int amt) {
 		return md.search(arrayKw, amt);
 	}
-	@Override
 	public List<String> followerList(String m_id) {
 		return md.followerList(m_id);
+	}
+	public List<Member> followingList(List<String> followlist, Integer amt) {
+		return md.followingList(followlist, amt);
 	}	
 }

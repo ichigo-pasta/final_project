@@ -15,7 +15,7 @@
 			</div>
 		</c:if>
 			<div class="row">
-				<span style="width: 100px">
+				<div style="width: 120px">
 		<c:if test="${pn.renut != null}">
 					<img alt="" src="${path}/resources/images/${pn.member.re_pf}"
 						width="100" height="100" onclick="profile('${pn.re_writer}')"
@@ -26,7 +26,7 @@
 						width="100" height="100" onclick="profile('${pn.writer}')"
 						class="profile_pic">
 		</c:if>
-				</span>
+				</div>
 				<div class="col">
 					<div class="row">
 						<div class="col">
