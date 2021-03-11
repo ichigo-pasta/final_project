@@ -39,14 +39,14 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col" style="min-height: 5vw">
+						<div class="col content_col" id="content${pn.peanut_no }" style="min-height: 5vw; cursor: pointer">
 							${pn.content}
 						</div>
 					</div>
 		<c:if test="${pn.picture1 != null}">					
 					<div class="row gallery">
 						<div class="col col-6 tl_image">
-							<a href="${path}/resources/images/${pn.picture1}">									
+							<a href="${path}/resources/images/${pn.picture1}">							
 								<img src="${path}/resources/images/${pn.picture1}" 
 									width="100%" onclick="baguetteBox.run('.gallery')">
 							</a>

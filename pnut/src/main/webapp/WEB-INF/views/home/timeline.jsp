@@ -6,6 +6,7 @@
 <script type="text/javascript">
 	var a = ${amt };	
 	var refresh;
+	var drag;
 	
 	window.onpageshow = function() {		
 		refreshTl(a);
@@ -18,6 +19,7 @@
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
 				document.getElementById('tl').innerHTML = xhr.responseText;
+				setEvent();
 			} else {
 				alert('요청오류: '+xhr.status);
 			}
@@ -75,5 +77,21 @@
 	}
 	function cancelRenut(peanut_no) {
 		location.href="${path}/cancelRenut.do?peanut_no="+peanut_no;
+	}
+	function setEvent() {
+		drag = false;
+		var cont_rows = document.getElementsByClassName('content_col');
+		for(var cont_row of cont_rows) {
+			cont_row.addEventListener('mousedown', function() {
+				drag = false;
+			});
+			cont_row.addEventListener('mousemove', function() {
+				drag = true;
+			});
+			cont_row.addEventListener('mouseup', function(event) {				
+				var cr_id = event.target.id.substring(7);
+				if(!drag) location.href="${path}/home/peanutDetail.do?peanut_no="+cr_id;
+			});
+		}
 	}
 </script>
