@@ -35,13 +35,24 @@
 		<div>
 			<img alt="" src="${path}/resources/images/${m_profile}" width="50"
 				height="50">
+			<div class="btn-group dropup" align="right">
+				<a class="btn btn-light dropdown" type="button"
+					id="dropdownMenuButton" data-bs-toggle="dropdown"
+					aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+				<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+					<li>
+						<a class="dropdown-item" 
+							href="${path}/logout.do">로그아웃</a></li>
+					<li>
+						<a class="dropdown-item" 
+							href="#">차단 목록</a></li>
+				</ul>
+			</div>
 		</div>
 		<div>
 			<div>
 				<div class="col"><b>${m_nickname}</b></div>
 				<div class="col">@${m_id}</div>
-				<a href="${path}/logout.do"
-				class="list-group-item list-group-item-action list-group-item-warning">&nbsp;로그아웃</a>
 			</div>
 		</div>
 	</div>
