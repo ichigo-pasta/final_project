@@ -140,7 +140,7 @@
 					<div class="row">
 						<div class="col col-10">
 							<div class="row">
-								${rep.member.target_nn}
+								${rep.member.m_nickname}
 								<textarea id="cont${rep.reply_no}"
 									rows="5" style="resize: none" 
 									name="content" required="required" 
@@ -153,7 +153,7 @@
 							</div>
 						</div>
 					</div>
-					<input type="hidden" value="${peanut.writer}" name="rep_target">
+					<input type="hidden" value="${rep.writer}" name="rep_target">
 					<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
 					<input type="hidden" value="${rep.ref}" name="ref">
 					<input type="hidden" value="${my_id }" name="writer">
@@ -191,7 +191,7 @@
 					<div class="row">
 						<div class="col col-10">
 							<div class="row">
-								${rep.member.target_nn}
+								${rep.member.m_nickname}
 								<textarea id="cont${rep.reply_no}"
 									rows="5" style="resize: none" 
 									name="content" required="required" 
@@ -231,7 +231,7 @@
 						</div>
 					</div>
 				</div>
-		<input type="hidden" value="${rep.writer}" name="rep_target">
+		<input type="hidden" value="${peanut.writer}" name="rep_target">
 		<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
 		<input type="hidden" value="${my_id }" name="writer">
 			</form>
