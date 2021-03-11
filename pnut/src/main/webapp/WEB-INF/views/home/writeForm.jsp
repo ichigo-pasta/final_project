@@ -4,11 +4,11 @@
 <div class="container">
 <form action="${path}/home/write.do" method="post" enctype="multipart/form-data">
 	<div class="row">
-		<div class="col col-2">
+		<div style="width: 120px">
 			<img alt="" src="${path}/resources/images/${m_profile}"
 					width="100" height="100" class="profile_pic">
 		</div>
-		<div class="col col-10">
+		<div class="col">
 			<div class="row">
 				<textarea rows="9" required="required" 
 					name="content" id="content" style="resize: none;" 

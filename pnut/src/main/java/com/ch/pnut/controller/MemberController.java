@@ -77,16 +77,26 @@ public class MemberController {
 		List<String> followLt = ms.followList(m_id);
 		int followLtSize = followLt.size();
 		int followerLtSize = ms.followerList(m_id).size();
+		Member member2 = ms.select(my_id);
+		String m_profile = member2.getM_profile();
+		String m_nickname = member2.getM_nickname();
+		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("member", member);
 		model.addAttribute("isFollow", isFollow);
 		model.addAttribute("followLtSize", followLtSize);
 		model.addAttribute("followerLtSize", followerLtSize);
+		model.addAttribute("m_profile", m_profile);
 		return "home/profileForm";
 	}
 	@RequestMapping("home/profileUpdateForm")
-	public String profileUpdateForm(String m_id, Model model) {
+	public String profileUpdateForm(String m_id, Model model, HttpSession session) {
 		Member member = ms.select(m_id);
+		String m_profile = member.getM_profile();
+		String m_nickname = member.getM_nickname();
+		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("member", member);
+		model.addAttribute("m_profile", m_profile);
 		return "home/profileUpdateForm";
 	}
 	@RequestMapping("home/updateProfile")
@@ -119,12 +129,30 @@ public class MemberController {
 	}
 
 	@RequestMapping("home/followingList") 
-	public String followingList(String m_id) {
+	public String followingList(String m_id, Model model, 
+			HttpSession session, Integer amt) {
+		if(amt == null) {
+			amt = 20;
+		}
+		Member member = ms.select((String) session.getAttribute("m_id"));
+		String m_profile = member.getM_profile();
+		String m_nickname = member.getM_nickname();
+		List<String> followlist = ms.followList(m_id);
+		List<Member> list = ms.followingList(followlist, amt);
+		System.err.println(list.get(0).getM_id());
+		model.addAttribute("list", list);
+		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("m_nickname", m_nickname);
 		return "home/followingList"; 
 	}
 
 	@RequestMapping("home/followerList") 
-	public String followerList(String m_id) { 
+	public String followerList(String m_id, Model model, HttpSession session) { 
+		Member member = ms.select((String) session.getAttribute("m_id"));
+		String m_profile = member.getM_profile();
+		String m_nickname = member.getM_nickname();
+		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("m_nickname", m_nickname);
 		return "home/followerList"; 
 	}
 	@RequestMapping(value = "follow", produces = "text/html;charset=utf-8")
