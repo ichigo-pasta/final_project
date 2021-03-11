@@ -96,7 +96,7 @@
 		) where rn between 1 and #{amt}
 	</select>
 	<update id="deletePd" parameterType="int">
-		update pn_peanuts set del = 'y' where peanut_no = #{peanut_no}
+		update pn_peanuts set del = 'y' where peanut_no = #{peanut_no} or renut = #{peanut_no}
 	</update>
 	<select id="selectRenut" parameterType="string" resultType="integer">
 		select renut from pn_peanuts where writer = #{m_id} and renut is not null and del = 'n'

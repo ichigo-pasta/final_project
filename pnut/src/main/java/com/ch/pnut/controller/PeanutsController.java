@@ -160,7 +160,7 @@ public class PeanutsController {
 		boolean isFollow = myFollowLt.contains(peanut.getWriter());
 		model.addAttribute("peanut", peanut);
 		model.addAttribute("m_nickname", m_nickname);
-		List<Replies> list = ps.replyList(peanut_no, amt);
+		List<Replies> list = ps.replyList(peanut.getPeanut_no(), amt);
 		model.addAttribute("list", list);
 		model.addAttribute("isFollow", isFollow);
 		return "home/peanutDetail";
