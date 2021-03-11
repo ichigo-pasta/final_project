@@ -86,7 +86,7 @@ public class PeanutsDaoImpl implements PeanutsDao {
 
 	public void deletePd(int peanut_no) {
 		sst.update("peanutsns.deletePd", peanut_no);
-
+	}
 	public List<Integer> selectRenut(String m_id) {
 		return sst.selectList("peanutsns.selectRenut", m_id);
 	}
