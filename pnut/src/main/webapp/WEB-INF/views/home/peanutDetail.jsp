@@ -9,8 +9,7 @@
 		location.href="${path}/home/timeline.do";
 	</script>
 </c:if>
-<c:if test="${not empty peanut }">
-	
+<c:if test="${not empty peanut }">	
 		<div class="peanut_container">		
 			<div class="row">
 				<div class="col col-2">		

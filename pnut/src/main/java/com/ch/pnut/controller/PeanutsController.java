@@ -164,9 +164,10 @@ public class PeanutsController {
 		Peanuts peanut;
 		if(renut == null) peanut = ps.selectDetail(peanut_no);			
 		else peanut = ps.selectDetail(renut);
+		model.addAttribute("peanut", peanut);
+		if(peanut == null) return "home/peanutDetail";
 		List<String> myFollowLt = ms.followList(m_id);
 		boolean isFollow = myFollowLt.contains(peanut.getWriter());
-		model.addAttribute("peanut", peanut);
 		model.addAttribute("m_nickname", m_nickname);
 		List<Replies> list = ps.replyList(peanut.getPeanut_no(), amt);
 		model.addAttribute("list", list);
@@ -230,7 +231,7 @@ public class PeanutsController {
 		return "nolay/peanutList";
 	}
 	
-	@RequestMapping("renut")
+	@RequestMapping("renut")	// 타임라인에서 리넛 실행
 	public String renut(Integer peanut_no, HttpSession session, HttpServletRequest request) {
 		String m_id = (String)session.getAttribute("m_id");
 		Integer isRenut = ps.isRenut(peanut_no);	// 리넛 대상 글이 리넛이면 원본 피넛번호, 리넛이 아니면 null
@@ -251,11 +252,32 @@ public class PeanutsController {
 		return "redirect:home/timeline.do";
 	}
 	
-	@RequestMapping("cancelRenut")
+	@RequestMapping("renut2")	// 북마크 페이지에서 리넛 실행. 북마크페이지의 글들은 리넛이 아님
+	public String renut2(Integer peanut_no, HttpSession session, HttpServletRequest request) {
+		String m_id = (String)session.getAttribute("m_id");
+		Peanuts peanut = ps.selectDetail(peanut_no);
+		peanut.setWriter(m_id);
+		peanut.setRenut(peanut_no);
+		peanut.setIp(request.getRemoteAddr());
+		ps.insert(peanut);				
+		return "redirect:home/bookmarkForm.do?m_id="+m_id;
+	}
+	
+	@RequestMapping("cancelRenut") // 타임라인에서 리넛 취소
 	public String cancelRenut(Integer peanut_no, HttpSession session, HttpServletRequest request) {
 		String m_id = (String)session.getAttribute("m_id");
-		int renut = ps.isRenut(peanut_no);	// 리넛 취소 대상 원본피넛번호
+		Integer renut = ps.isRenut(peanut_no);
+		if(renut == null) renut = peanut_no;
 		ps.cancelRenut(renut, m_id);
 		return "redirect:home/timeline.do";
+	}
+	
+	@RequestMapping("cancelRenut2")	// 북마크 페이지에서 리넛 취소
+	public String cancelRenut2(Integer peanut_no, HttpSession session, HttpServletRequest request) {
+		String m_id = (String)session.getAttribute("m_id");
+		Integer renut = ps.isRenut(peanut_no);
+		if(renut == null) renut = peanut_no;
+		ps.cancelRenut(renut, m_id);
+		return "redirect:home/bookmarkForm.do?m_id="+m_id;
 	}
 }
