@@ -117,7 +117,7 @@ public class PeanutsServiceImpl implements PeanutsService {
 
 	public void deletePd(int peanut_no) {
 		pd.deletePd(peanut_no);
-
+	}
 	public List<Integer> selectRenut(String m_id) {
 		return pd.selectRenut(m_id);
 	}
