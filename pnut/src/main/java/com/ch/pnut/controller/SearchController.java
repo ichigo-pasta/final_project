@@ -3,6 +3,8 @@ package com.ch.pnut.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,8 @@ public class SearchController {
 	@Autowired
 	private PeanutsService ps;	
 	@RequestMapping("home/search")
-	public String search(String type, String keyword, Integer amt, Model model) {
+	public String search(String type, String keyword, Integer amt
+			, Model model, HttpSession session) {
 		if(amt == null) amt = 20;
 		keyword = keyword.replaceAll(" +", " ");
 		String[] arrayKw = keyword.split(" ");
@@ -43,9 +46,14 @@ public class SearchController {
 			list2 = ms.search(arrayKw, amt);
 			model.addAttribute("list2", list2);
 		}
+		
+		Member member = ms.select((String) session.getAttribute("m_id"));
+		String m_profile = member.getM_profile();
+		String m_nickname = member.getM_nickname();
+		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);
 		return "home/search";
 	}
-	
 }

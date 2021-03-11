@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ch.pnut.model.Member;
 import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.model.Replies;
 import com.ch.pnut.service.MemberService;
@@ -81,8 +82,13 @@ public class PeanutsController {
 	}
 
 	@RequestMapping("home/timeline")
-	public String timeline(Integer amt, Model model) {
+	public String timeline(Integer amt, Model model, HttpSession session) {
 		if (amt == null) amt = 20;		
+		Member member = ms.select((String) session.getAttribute("m_id"));
+		String m_profile = member.getM_profile();
+		String m_nickname = member.getM_nickname();
+		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("amt", amt);		
 		return "home/timeline";
 	}
@@ -114,7 +120,7 @@ public class PeanutsController {
 				}
 			}
 		}		
-
+		
 		model.addAttribute("list", list);
 		model.addAttribute("m_id", m_id);		
 		return "tlContents";
@@ -150,8 +156,10 @@ public class PeanutsController {
 		if (amt == null) {
 			amt = 20;
 		}
+		Member member = ms.select((String) session.getAttribute("m_id"));
+		String m_profile = member.getM_profile();
+		String m_nickname = member.getM_nickname();
 		String m_id = (String)session.getAttribute("m_id");
-		String m_nickname = ms.select(m_id).getM_nickname();
 		Integer renut = ps.isRenut(peanut_no);
 		Peanuts peanut;
 		if(renut == null) peanut = ps.selectDetail(peanut_no);			
@@ -163,6 +171,7 @@ public class PeanutsController {
 		List<Replies> list = ps.replyList(peanut.getPeanut_no(), amt);
 		model.addAttribute("list", list);
 		model.addAttribute("isFollow", isFollow);
+		model.addAttribute("m_profile", m_profile);
 		return "home/peanutDetail";
 	}
 	@RequestMapping("deletePd")
@@ -203,9 +212,14 @@ public class PeanutsController {
 				peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
 			}
 		}
+		Member member = ms.select((String) session.getAttribute("m_id"));
+		String m_profile = member.getM_profile();
+		String m_nickname = member.getM_nickname();
+		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("amt", amt);
 		model.addAttribute("m_id", m_id);
 		model.addAttribute("bmList", bmList);
+		model.addAttribute("m_profile", m_profile);
 		return "home/bookmarkForm";
 	}
 	@RequestMapping("/nolay/peanutList")
