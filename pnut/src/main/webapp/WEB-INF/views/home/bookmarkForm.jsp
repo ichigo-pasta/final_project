@@ -9,11 +9,11 @@
 	<c:forEach items="${bmList }" var="pn">
 		<div class="peanut_container">
 			<div class="row">
-				<div class="col col-2">
-					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
+				<div style="width: 120px">
+					<img class="profile_pic" alt="" src="${path}/resources/images/${pn.member.m_profile}"
 						width="100" height="100" onclick="profile('${pn.writer}')">
 				</div>
-				<div class="col col-10">
+				<div class="col">
 					<div class="row">
 						<div class="col">
 							<c:out value="${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}"/>

@@ -21,6 +21,9 @@
 		word-break: break-word;
 		white-space: pre-wrap;
 	}
+	.container {
+		min-width: 576px;
+	}
 	.peanut_container button {
 		border: none;
 		background-color: transparent;

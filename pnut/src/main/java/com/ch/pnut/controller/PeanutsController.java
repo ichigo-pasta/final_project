@@ -203,15 +203,18 @@ public class PeanutsController {
 		if (amt == null) amt = 20;
 		String m_id = (String)session.getAttribute("m_id");
 		List<Peanuts> bmList = ps.selectBmList(m_id, amt);	// 로그인 유저가 북마크한 피넛번호 리스트		
-		int listLen = bmList.size(); 
+		List<Integer> renutList = ps.selectRenut(m_id);
+		int listLen = bmList.size();		
 		if (listLen > 0) {
 			for (Peanuts peanut : bmList) {				
 				peanut.setContent(ps.setHashtag(peanut.getContent()));
 				peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
 				peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
 				peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
+				if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);
 			}
-		}
+		}		
+		
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
