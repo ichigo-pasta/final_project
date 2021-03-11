@@ -20,7 +20,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col" style="min-height: 5vw">
+						<div class="col content_col" id="content${pn.peanut_no }" style="min-height: 5vw; cursor: pointer">
 							${pn.content}
 						</div>
 					</div>
@@ -66,25 +66,125 @@
 					<div class="row">
 						<div class="col col-4">
 							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
-								<i class="bi-chat" style="color: gray"></i>
-								<c:if test="${pn.repCnt != 0}">${pn.repCnt }</c:if>
+							<c:if test="${pn.repCnt != 0}">
+								<i class="bi-chat" style="color: blue"></i>
+								${pn.repCnt }
+							</c:if>
+							<c:if test="${pn.repCnt == 0}">
+								<i class="bi-chat" style="color: gray"></i>								
+							</c:if>
 							</button>
 						</div>
 						<div class="col col-4">
-							<button>
+							<c:if test="${pn.renuted == false }">
+							<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}">
 								<i class="bi-arrow-clockwise" style="color: gray"></i>
 								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
 							</button>
+							</c:if>
+							<c:if test="${pn.renuted == true }">
+							<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}">
+								<i class="bi-arrow-clockwise" style="color: blue"></i>
+								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
+							</button>
+							</c:if>
 						</div>
 						<div class="col col-4">
-								<button onclick="deleteBm('${pn.peanut_no}')" id="bmBtn${pn.peanut_no}" class="bmBtn">
+							<button onclick="confirmDelBm('${pn.peanut_no}')" id="bmBtn${pn.peanut_no}">
 									<i class="bi-bookmark" style="color: blue;" id="bmBtnI${pn.peanut_no}"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
-								</button>
+							</button>
+						</div>
+					</div>
+				<!-- 리넛 설정 Modal -->
+					<div class="modal fade" id="set${pn.peanut_no}" aria-labelledby="set${pn.peanut_no}Label" data-bs-backdrop="static" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="set${pn.peanut_no}Label">리넛하기</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col" style="min-height: 5vw">
+											${pn.content}
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">									
+	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</a>
+	        						<a type="button" class="btn btn-primary" onclick="doRenut2('${pn.peanut_no}')">리넛</a>
+      							</div>
+							</div>
+						</div>
+					</div>
+					<!-- 리넛 취소 Modal -->
+					<div class="modal fade" id="cancel${pn.peanut_no}" aria-labelledby="cancel${pn.peanut_no}Label" data-bs-backdrop="static" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="cancel${pn.peanut_no}Label">리넛 취소하기</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col" style="min-height: 5vw">
+											${pn.content}
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">									
+	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</a>
+	        						<a type="button" class="btn btn-primary" onclick="cancelRenut2('${pn.peanut_no}')">리넛 취소</a>
+      							</div>
+							</div>
 						</div>
 					</div>
 				</div> <%-- peanut 오른쪽 column --%>
 			</div>	<%-- peanut row --%>
 		</div> <%-- peanut_container --%>
 	</c:forEach>
-</c:if>	<%-- test="${not empty list }" --%>			
+</c:if>	<%-- test="${not empty list }" --%>
+<script type="text/javascript">
+	var startX;
+	var startY;
+	const judge = 5;
+	var cont_rows = document.getElementsByClassName('content_col');
+	for(var cont_row of cont_rows) {
+		cont_row.addEventListener('mousedown', function(event) {				
+			startX = event.pageX;
+			startY = event.pageY;
+		});			
+		cont_row.addEventListener('mouseup', function(event) {
+			var diffX = Math.abs(startX - event.pageX);
+			var diffY = Math.abs(startY - event.pageY);
+			if(diffX < judge || diffY < judge) {
+				var cr_id = event.target.id.substring(7);
+				location.href="${path}/home/peanutDetail.do?peanut_no="+cr_id;
+			}				
+		});
+	}
+	function doRenut2(peanut_no) {
+		location.href="${path}/renut2.do?peanut_no="+peanut_no;
+	}
+	function cancelRenut2(peanut_no) {
+		location.href="${path}/cancelRenut2.do?peanut_no="+peanut_no;
+	}
+	function confirmDelBm(peanut_no) {
+		var conf = confirm('북마크를 제거하시겠습니까?');
+		if(conf) deleteBm2(peanut_no);
+		else return false;
+	}
+	function deleteBm2(peanut_no) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/deleteBm.do?peanut_no="+peanut_no,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				location.reload();
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);				
+	}	
+</script>

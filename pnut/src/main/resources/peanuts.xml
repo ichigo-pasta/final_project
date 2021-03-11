@@ -77,13 +77,13 @@
 		</foreach>order by p.peanut_no desc) a)
 		where rn between 1 and #{amt}
 	</select>
-	<select id="isRenut" parameterType="int" resultType="integer">
+	<select id="isRenut" parameterType="integer" resultType="integer">
 		select renut from pn_peanuts where peanut_no = #{peanut_no}
 	</select>
-	<select id="selectDetail" parameterType="int" resultMap="peanutsResult">
+	<select id="selectDetail" parameterType="integer" resultMap="peanutsResult">
 		select * from pn_peanuts p, pn_member m where p.writer = m.m_id and p.peanut_no = #{peanut_no} and p.del = 'n'
 	</select>
-	<select id="renutCnt" parameterType="int" resultType="integer">
+	<select id="renutCnt" parameterType="integer" resultType="integer">
 		select count(peanut_no) from pn_peanuts where renut = #{peanut_no} and del = 'n'
 	</select>
 	<select id="selectBmList" parameterType="hashmap" resultMap="peanutsResult">
@@ -95,7 +95,7 @@
 			order by peanut_no desc) a
 		) where rn between 1 and #{amt}
 	</select>
-	<update id="deletePd" parameterType="int">
+	<update id="deletePd" parameterType="integer">
 		update pn_peanuts set del = 'y' where peanut_no = #{peanut_no} or renut = #{peanut_no}
 	</update>
 	<select id="selectRenut" parameterType="string" resultType="integer">

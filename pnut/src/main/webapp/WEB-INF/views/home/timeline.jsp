@@ -6,7 +6,9 @@
 <script type="text/javascript">
 	var a = ${amt };	
 	var refresh;
-	var drag;
+	var startX;
+	var startY;
+	const judge = 5;
 	
 	window.onpageshow = function() {		
 		refreshTl(a);
@@ -41,8 +43,7 @@
 				alert('요청오류: '+xhr.status);
 			}
 		}
-		xhr.send(null);
-		refreshTl(a);		
+		xhr.send(null);		
 	}
 	function changeBmBtn1(peanut_no) {		
 		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "deleteBm('"+peanut_no+"')");
@@ -59,8 +60,7 @@
 				alert('요청오류: '+xhr.status);
 			}
 		}
-		xhr.send(null);
-		refreshTl(a);		
+		xhr.send(null);				
 	}
 	function changeBmBtn2(peanut_no) {		
 		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "setBm('"+peanut_no+"')");
@@ -82,15 +82,17 @@
 		drag = false;
 		var cont_rows = document.getElementsByClassName('content_col');
 		for(var cont_row of cont_rows) {
-			cont_row.addEventListener('mousedown', function() {
-				drag = false;
-			});
-			cont_row.addEventListener('mousemove', function() {
-				drag = true;
-			});
-			cont_row.addEventListener('mouseup', function(event) {				
-				var cr_id = event.target.id.substring(7);
-				if(!drag) location.href="${path}/home/peanutDetail.do?peanut_no="+cr_id;
+			cont_row.addEventListener('mousedown', function(event) {				
+				startX = event.pageX;
+				startY = event.pageY;
+			});			
+			cont_row.addEventListener('mouseup', function(event) {
+				var diffX = Math.abs(startX - event.pageX);
+				var diffY = Math.abs(startY - event.pageY);
+				if(diffX < judge || diffY < judge) {
+					var cr_id = event.target.id.substring(7);
+					location.href="${path}/home/peanutDetail.do?peanut_no="+cr_id;
+				}				
 			});
 		}
 	}

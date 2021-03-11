@@ -50,7 +50,7 @@
 				order by ref desc, ref_level, reply_no) a)
 			where rn between 1 and #{amt} 
 	</select>
-	<select id="repCnt" parameterType="int" resultType="integer">
+	<select id="repCnt" parameterType="integer" resultType="integer">
 		select count(reply_no) from pn_replies where peanut_no = #{peanut_no}
 	</select>
 </mapper>

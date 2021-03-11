@@ -18,7 +18,7 @@
 	<delete id="deleteBm" parameterType="hashmap">
 		delete pn_bookmark where peanut_no = #{num} and bm_user = #{m_id}
 	</delete>
-	<select id="bmCnt" parameterType="int" resultType="integer">
+	<select id="bmCnt" parameterType="integer" resultType="integer">
 		select count(bm_user) from pn_bookmark where peanut_no = #{peanut_no}
 	</select>
 	
