@@ -147,10 +147,18 @@ public class MemberController {
 	}
 
 	@RequestMapping("home/followerList") 
-	public String followerList(String m_id, Model model, HttpSession session) { 
+	public String followerList(String m_id, Model model, 
+			HttpSession session, Integer amt) { 
+		if(amt == null) {
+			amt = 20;
+		}
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
+		List<String> followerList = ms.followerList(m_id);
+		List<Member> list = ms.followedList(followerList, amt);
+		System.err.println(list.get(0).getM_id());
+		model.addAttribute("list", list);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);
 		return "home/followerList"; 

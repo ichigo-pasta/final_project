@@ -17,6 +17,6 @@
 		select passive from pn_follow where active=#{m_id}
 	</select>
 	<select id="followerList" parameterType="string" resultType="string">
-		select active from pn_follow where passive = #{m_id}
+		select active from pn_follow where passive=#{m_id}
 	</select>
 </mapper>

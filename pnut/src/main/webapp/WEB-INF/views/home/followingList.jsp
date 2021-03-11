@@ -5,7 +5,7 @@
 	<c:forEach items="${list }" var="pn">
 		<div class="row">
 			<div style="width: 80px">
-				<img alt="" src="${path}/resources/images/${pn.m_profile}" width="80px" height="80px"">
+				<img alt="" src="${path}/resources/images/${pn.m_profile}" width="80px" height="80px">
 			</div>
 			<div class="col">
 				<b>${pn.m_nickname}</b><br>
