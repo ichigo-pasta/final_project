@@ -39,5 +39,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	public List<Member> followingList(List<String> followlist, Integer amt) {
 		return md.followingList(followlist, amt);
+	}
+	public List<Member> followedList(List<String> followerList, Integer amt) {
+		return md.followedList(followerList, amt);
 	}	
 }
