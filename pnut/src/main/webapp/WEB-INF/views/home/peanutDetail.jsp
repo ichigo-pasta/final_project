@@ -14,12 +14,12 @@
 <c:if test="${not empty peanut }">	
 		<div class="peanut_container">
 			<div class="row">
-				<div class="col col-2">		
+				<div style="width: 110px">		
 					<img alt="" src="${path}/resources/images/${peanut.member.m_profile}"
 						width="100" height="100" onclick="profile('${peanut.writer}')"
 						class="profile_pic">		
 				</div>
-				<div class="col col-10">
+				<div class="col">
 					<div class="row">
 						<div class="col col-11">							
 							<c:out value="${peanut.member.m_nickname} @${peanut.writer}"/>
@@ -60,17 +60,19 @@
 									<c:if test="${isFollow == true }">
 										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 											<li><a class="dropdown-item" href="#">
-												<i class="bi bi-person-x"></i>&nbsp;언팔로우</a></li>
-											<li><a class="dropdown-item" href="#">
-												<i class="bi bi-x-circle"></i>&nbsp;차단</a></li>	
+												<button class="bi bi-person-x" id="followbt" 
+													>팔로우 중</button></a></li>
+											<li><a class="drxopdown-item" href="#">
+												<button class="bi bi-x-circle"></button>&nbsp;차단</a></li>	
 										</ul>
 									</c:if>	
 									<c:if test="${isFollow == false }">
 										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 											<li><a class="dropdown-item" href="#">
-												<i class="bi bi-person-plus"></i>&nbsp;팔로우</a></li>
+												<button class="bi bi-person-plus" id="followbt"
+													>팔로우</button></a></li>
 											<li><a class="dropdown-item" href="#">
-												<i class="bi bi-x-circle"></i>&nbsp;차단</a></li>
+												<button class="bi bi-x-circle"></button>&nbsp;차단</a></li>
 										</ul>
 									</c:if>
 								</c:if>				
@@ -414,4 +416,41 @@
 	function cancelRenut2(peanut_no, redirect) {
 		location.href="${path}/cancelRenut2.do?peanut_no="+peanut_no+"&redirect="+redirect;
 	}
+	function follow(my_id) {
+		buttonChange();
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/follow.do?m_id="+my_id,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);
+	}
+	function buttonChange() {
+		var btn = document.getElementById('followbt');		
+		btn.setAttribute("onclick","unfollow('${peanut.member.m_id}')");
+		btn.setAttribute("onmouseover","this.innerText='언팔로우'");
+		btn.setAttribute("onmouseout","this.innerText='팔로우 중'");
+	}
+	function unfollow(my_id) {
+		buttonChange2();
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/unfollow.do?m_id="+m_id,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('success');
+			} else {alert('요청오류: '+xhr.status);}
+		}
+		xhr.send(null);
+	}
+	function buttonChange2() {
+		var btn = document.getElementById('followbt');
+		btn.innerText = '팔로우';
+		btn.setAttribute("onclick","follow('${peanut.member.m_id}')");
+		btn.removeAttribute("onmouseover");
+		btn.removeAttribute("onmouseout");
+	}	
 </script>
