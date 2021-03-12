@@ -32,10 +32,10 @@
 		</button>
 	</div>
 	<div>
-		<div>
+		<div style="display: flex; justify-content: space-between;">
 			<img alt="" src="${path}/resources/images/${m_profile}" width="50"
 				height="50">
-			<div class="btn-group dropup" align="right">
+			<div class="btn-group dropup">
 				<a class="btn btn-light dropdown" type="button"
 					id="dropdownMenuButton" data-bs-toggle="dropdown"
 					aria-expanded="false"><i class="bi bi-three-dots"></i></a>

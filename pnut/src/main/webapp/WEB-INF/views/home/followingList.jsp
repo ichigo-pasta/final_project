@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <div class="container">
+<c:if test="${empty list}">
+	팔로잉하는 유저가 없습니다.
+</c:if>
+<c:if test="${not empty list}">
 	<c:forEach items="${list }" var="pn">
 		<div class="row">
 			<div style="width: 80px">
@@ -14,4 +18,5 @@
 			</div>
 		</div>
 	</c:forEach>
+</c:if>
 </div>

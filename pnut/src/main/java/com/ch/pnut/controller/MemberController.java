@@ -139,7 +139,6 @@ public class MemberController {
 		String m_nickname = member.getM_nickname();
 		List<String> followlist = ms.followList(m_id);
 		List<Member> list = ms.followingList(followlist, amt);
-		System.err.println(list.get(0).getM_id());
 		model.addAttribute("list", list);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);
@@ -157,7 +156,6 @@ public class MemberController {
 		String m_nickname = member.getM_nickname();
 		List<String> followerList = ms.followerList(m_id);
 		List<Member> list = ms.followedList(followerList, amt);
-		System.err.println(list.get(0).getM_id());
 		model.addAttribute("list", list);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);
