@@ -72,7 +72,7 @@ public class PeanutsController {
 				fos.write(files[i].getBytes());
 				fos.close();
 			};
-		} 
+		}
 		String m_id = (String)session.getAttribute("m_id");
 		peanut.setWriter(m_id);
 		peanut.setIp(request.getRemoteAddr());
@@ -93,15 +93,21 @@ public class PeanutsController {
 		return "home/timeline";
 	}
 	@RequestMapping("tlContents")	
-	public String tlContents(Integer amt, Model model, HttpSession session) {
-		if (amt == null) amt = 20;		
+	public String tlContents(Integer amt, Integer more, Model model, HttpSession session) {
+		if (amt == null) amt = 20;
+		if (more == null) more = 0;
 		String m_id = (String) session.getAttribute("m_id");
-		List<String> followList = ms.followList(m_id);	// 로그인 유저가 팔로우한 아이디 리스트
-		List<Peanuts> list = ps.distinctList(ps.selectList(m_id, amt, followList));	// 로그인 유저, 팔로우유저 피넛 리스트 amt개 조회한 후 리넛 중복 제거
+		List<String> followList = ms.followList(m_id);	// 로그인 유저가 팔로우한 아이디 리스트		
+		List<Peanuts> list = ps.selectList(m_id, amt+1, followList);	// 로그인 유저, 팔로우유저 피넛 리스트 amt+1개 조회
+		if (list.size() > amt) {
+			more = 1;	// amt 값보다 데이터가 더 많으면 more = 1
+			list.remove(amt.intValue());	// amt 범위 초과 피넛 리스트에서 제거
+		}
+		list = ps.distinctList(list);	// 리넛 중복제거
 		int listSize = list.size();
 		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트
 		List<Integer> renutList = ps.selectRenut(m_id);
-		
+
 		if (listSize > 0) {
 			for (Peanuts peanut : list) {
 				peanut.setContent(ps.setHashtag(peanut.getContent()));	// list 피넛 해시태그 처리
@@ -119,13 +125,15 @@ public class PeanutsController {
 					if (renutList.contains(peanut.getRenut())) peanut.setRenuted(true);
 				}
 			}
-		}		
+		}
 		
 		model.addAttribute("list", list);
-		model.addAttribute("m_id", m_id);		
+		model.addAttribute("m_id", m_id);
+		model.addAttribute("amt", amt);
+		model.addAttribute("more", more);
 		return "tlContents";
 	}
-	
+
 	@RequestMapping("setBm")
 	@ResponseBody
 	public void setBm(int peanut_no, HttpSession session) {
@@ -146,7 +154,7 @@ public class PeanutsController {
 		} else  num = ps.selectDetail(peanut_no).getRenut();
 		ps.deleteBm(num, m_id);
 	}
-	
+
 	@RequestMapping("home/peanutDetail")
 	public String peanutDetail(Integer peanut_no, Model model,
 			HttpSession session, Integer amt) {
@@ -156,7 +164,7 @@ public class PeanutsController {
 		if (amt == null) {
 			amt = 20;
 		}
-		
+
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
@@ -174,7 +182,7 @@ public class PeanutsController {
 		List<Integer> renutList = ps.selectRenut(m_id);
 		if (bmList.contains(peanut.getPeanut_no())) peanut.setBookmarked(true);
 		if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);
-		
+
 		List<String> myFollowLt = ms.followList(m_id);
 		boolean isFollow = myFollowLt.contains(peanut.getWriter());
 		List<Replies> list = ps.replyList(peanut.getPeanut_no(), amt);
@@ -215,7 +223,7 @@ public class PeanutsController {
 		String m_id = (String)session.getAttribute("m_id");
 		List<Peanuts> bmList = ps.selectBmList(m_id, amt);	// 로그인 유저가 북마크한 피넛번호 리스트		
 		List<Integer> renutList = ps.selectRenut(m_id);
-		int listLen = bmList.size();		
+		int listLen = bmList.size();
 		if (listLen > 0) {
 			for (Peanuts peanut : bmList) {				
 				peanut.setContent(ps.setHashtag(peanut.getContent()));
@@ -224,8 +232,8 @@ public class PeanutsController {
 				peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
 				if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);
 			}
-		}		
-		
+		}
+
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
@@ -240,7 +248,7 @@ public class PeanutsController {
 	public String peanutList() {
 		return "nolay/peanutList";
 	}
-	
+
 	@RequestMapping("renut")	// 타임라인에서 리넛 실행
 	public String renut(Integer peanut_no, String redirect, 
 			HttpSession session, HttpServletRequest request) {
@@ -266,13 +274,12 @@ public class PeanutsController {
 			peanut.setRenut(isRenut);
 			peanut.setIp(request.getRemoteAddr());
 			ps.insert(peanut);
-		}		
+		}
 		if (redirect == null) return "redirect:home/timeline.do"; 
 		String rd = "";
 		switch (redirect) {
 		case "a":
 			break;
-
 		default:
 			rd = "redirect:home/timeline.do";
 			break;
@@ -290,21 +297,20 @@ public class PeanutsController {
 		peanut.setWriter(m_id);
 		peanut.setRenut(peanut_no);
 		peanut.setIp(request.getRemoteAddr());
-		ps.insert(peanut);				
+		ps.insert(peanut);
 		if (redirect == null) return "redirect:home/bookmarkForm.do?m_id="+m_id; 
 		String rd = "";
 		switch (redirect) {
 		case "detail":
 			rd = "redirect:home/peanutDetail.do?peanut_no="+peanut_no;
 			break;
-
 		default:
 			rd = "redirect:home/bookmarkForm.do?m_id="+m_id;
 			break;
 		}
 		return rd;
 	}
-	
+
 	@RequestMapping("cancelRenut") // 타임라인에서 리넛 취소
 	public String cancelRenut(Integer peanut_no, HttpSession session,
 			HttpServletRequest request, String redirect) {
@@ -319,14 +325,13 @@ public class PeanutsController {
 		switch (redirect) {
 		case "a":
 			break;
-
 		default:
 			rd = "redirect:home/timeline.do";
 			break;
 		}
 		return rd;
 	}
-	
+
 	@RequestMapping("cancelRenut2")	// 북마크 페이지에서 리넛 취소
 	public String cancelRenut2(Integer peanut_no, HttpSession session,
 			HttpServletRequest request, String redirect) {
@@ -342,7 +347,6 @@ public class PeanutsController {
 		case "detail":
 			rd = "redirect:home/peanutDetail.do?peanut_no="+peanut_no;
 			break;
-
 		default:
 			rd = "redirect:home/bookmarkForm.do?m_id="+m_id;
 			break;

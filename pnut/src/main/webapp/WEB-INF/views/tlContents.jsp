@@ -125,7 +125,7 @@
 						<div class="col col-10">&nbsp;</div>
 					</div>
 		</c:if>
-					<div class="row"> <!-- 댓글, 리넛, 북마크 박스 -->
+					<div class="row btBox"> <!-- 댓글, 리넛, 북마크 박스 -->
 						<div class="col col-4">
 							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
 							<c:if test="${pn.repCnt != 0}">
@@ -214,4 +214,10 @@
 			</div>	<%-- peanut row --%>
 		</div> <%-- peanut_container --%>
 	</c:forEach>
+	<c:if test="${more == 1 }">
+		<div class="d-grid gap-2">
+			<br>		
+  			<button class="btn btn-outline-info btn-lg" type="button" onclick="more_read('${amt+20}')">more...</button>
+		</div>
+	</c:if>	
 </c:if>	<%-- test="${not empty list }" --%>		

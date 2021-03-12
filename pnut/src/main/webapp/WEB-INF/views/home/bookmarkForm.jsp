@@ -85,7 +85,7 @@
 						<div class="col col-10">&nbsp;</div>
 					</div>
 		</c:if>
-					<div class="row">
+					<div class="row btBox">
 						<div class="col col-4">
 							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
 							<c:if test="${pn.repCnt != 0}">

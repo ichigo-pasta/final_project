@@ -24,7 +24,7 @@
 	.container {
 		min-width: 576px;
 	}
-	.peanut_container button {
+	.btBox button {
 		border: none;
 		background-color: transparent;
 	}
