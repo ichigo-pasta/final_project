@@ -3,5 +3,5 @@
 <%@ include file="header.jsp" %>
 <script type="text/javascript">
 	alert("삭제되었거나 유효하지 않은 피넛입니다.");
-	location.href = "${path}/home/timeline.do";
+	history.go(-1);
 </script>

@@ -165,12 +165,21 @@ public class PeanutsController {
 		Peanuts peanut;
 		if(renut == null) peanut = ps.selectDetail(peanut_no);			
 		else peanut = ps.selectDetail(renut);
-		model.addAttribute("peanut", peanut);
-		if(peanut == null) return "home/peanutDetail";
+		if(peanut == null) return "peanutError";
+		peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
+		peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
+		peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
+		peanut.setContent(ps.setHashtag(peanut.getContent()));
+		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트
+		List<Integer> renutList = ps.selectRenut(m_id);
+		if (bmList.contains(peanut.getPeanut_no())) peanut.setBookmarked(true);
+		if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);
+		
 		List<String> myFollowLt = ms.followList(m_id);
 		boolean isFollow = myFollowLt.contains(peanut.getWriter());
-		model.addAttribute("m_nickname", m_nickname);
 		List<Replies> list = ps.replyList(peanut.getPeanut_no(), amt);
+		model.addAttribute("peanut", peanut);
+		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("list", list);
 		model.addAttribute("isFollow", isFollow);
 		model.addAttribute("m_profile", m_profile);
@@ -242,7 +251,7 @@ public class PeanutsController {
 		if(isRenut == null) {
 			peanut = ps.selectDetail(peanut_no);
 			if (peanut == null) {
-				return "renutError";
+				return "peanutError";
 			}
 			peanut.setWriter(m_id);
 			peanut.setRenut(peanut_no);
@@ -251,7 +260,7 @@ public class PeanutsController {
 		} else {
 			peanut = ps.selectDetail(isRenut);
 			if (peanut == null) {
-				return "renutError";
+				return "peanutError";
 			}
 			peanut.setWriter(m_id);
 			peanut.setRenut(isRenut);
@@ -277,7 +286,7 @@ public class PeanutsController {
 		if (peanut_no == null) peanut_no = 0;
 		String m_id = (String)session.getAttribute("m_id");
 		Peanuts peanut = ps.selectDetail(peanut_no);
-		if (peanut == null) return "renutError";
+		if (peanut == null) return "peanutError";
 		peanut.setWriter(m_id);
 		peanut.setRenut(peanut_no);
 		peanut.setIp(request.getRemoteAddr());
@@ -285,7 +294,8 @@ public class PeanutsController {
 		if (redirect == null) return "redirect:home/bookmarkForm.do?m_id="+m_id; 
 		String rd = "";
 		switch (redirect) {
-		case "a":
+		case "detail":
+			rd = "redirect:home/peanutDetail.do?peanut_no="+peanut_no;
 			break;
 
 		default:
@@ -303,7 +313,7 @@ public class PeanutsController {
 		Integer renut = ps.isRenut(peanut_no);
 		if(renut == null) renut = peanut_no;
 		int result = ps.cancelRenut(renut, m_id);
-		if (result == 0) return "renutError";
+		if (result == 0) return "peanutError";
 		if (redirect == null) return "redirect:home/timeline.do"; 
 		String rd = "";
 		switch (redirect) {
@@ -325,11 +335,12 @@ public class PeanutsController {
 		Integer renut = ps.isRenut(peanut_no);
 		if(renut == null) renut = peanut_no;
 		int result = ps.cancelRenut(renut, m_id);
-		if (result == 0) return "renutError";
+		if (result == 0) return "peanutError";
 		if (redirect == null) return "redirect:home/bookmarkForm.do?m_id="+m_id; 
 		String rd = "";
 		switch (redirect) {
-		case "a":
+		case "detail":
+			rd = "redirect:home/peanutDetail.do?peanut_no="+peanut_no;
 			break;
 
 		default:
