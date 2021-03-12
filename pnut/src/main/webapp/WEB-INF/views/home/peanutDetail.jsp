@@ -99,15 +99,45 @@
 						<div class="col col-10">&nbsp;</div>
 					</div>
 		</c:if>
-					<div class="row">
+					<div class="row"> <!-- 댓글, 리넛, 북마크 박스 -->
 						<div class="col col-4">
-							<a href="${path}/home/peanutDetail.do?peanut_no=${peanut.peanut_no}"><i class="bi-chat"></i></a>
+							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
+							<c:if test="${pn.repCnt != 0}">
+								<i class="bi-chat" style="color: blue"></i>
+								${pn.repCnt }
+							</c:if>
+							<c:if test="${pn.repCnt == 0}">
+								<i class="bi-chat" style="color: gray"></i>								
+							</c:if>
+							</button>
 						</div>
 						<div class="col col-4">
-							<a href="#"><i class="bi-arrow-clockwise"></i></a>
+							<c:if test="${pn.renuted == false }">
+							<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}" onclick="stopRefresh()">
+								<i class="bi-arrow-clockwise" style="color: gray"></i>
+								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
+							</button>
+							</c:if>
+							<c:if test="${pn.renuted == true }">
+							<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}" onclick="stopRefresh()">
+								<i class="bi-arrow-clockwise" style="color: blue"></i>
+								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
+							</button>
+							</c:if>
 						</div>
 						<div class="col col-4">
-							<a href="#"><i class="bi-hand-thumbs-up"></i></a>
+							<c:if test="${pn.bookmarked == true}">
+								<button onclick="deleteBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}">
+									<i class="bi-bookmark" style="color: blue;" id="bmBtnI${pn.peanut_no}"></i>
+									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
+								</button>
+							</c:if>							
+							<c:if test="${pn.bookmarked == false}">								
+								<button onclick="setBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}">
+									<i class="bi-bookmark" style="color: gray" id="bmBtnI${pn.peanut_no}"></i>
+									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
+								</button>
+							</c:if>
 						</div>
 					</div>
 				</div> <%-- peanut 오른쪽 column --%>
@@ -246,5 +276,45 @@
 		$(".recome").hide();
 		$("#comIns"+reply_no).show();
 		$("#cont"+reply_no).focus();
+	}
+	// 댓글, 리넛, 북마크 자바스크립트
+	function profile(m_id) {
+		location.href = "${path}/home/profileForm.do?m_id="+m_id;
+	}
+	function setBm(peanut_no) {		
+		changeBmBtn1(peanut_no);		
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/setBm.do?peanut_no="+peanut_no,false);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('set bm success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);		
+	}
+	function changeBmBtn1(peanut_no) {		
+		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "deleteBm('"+peanut_no+"')");
+		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: blue");
+	}
+	function deleteBm(peanut_no) {		
+		changeBmBtn2(peanut_no);
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/deleteBm.do?peanut_no="+peanut_no,false);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('remove bm success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);				
+	}
+	function doRenut(peanut_no) {
+		location.href="${path}/renut.do?peanut_no="+peanut_no;
+	}
+	function cancelRenut(peanut_no) {
+		location.href="${path}/cancelRenut.do?peanut_no="+peanut_no;
 	}
 </script>

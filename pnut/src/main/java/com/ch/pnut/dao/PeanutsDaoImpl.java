@@ -88,11 +88,11 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		return sst.selectList("peanutsns.selectRenut", m_id);
 	}
 	
-	public void cancelRenut(int renut, String m_id) {
+	public int cancelRenut(int renut, String m_id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("renut", renut);
 		map.put("m_id", m_id);
-		sst.update("peanutsns.cancelRenut", map);
+		return sst.update("peanutsns.cancelRenut", map);
 
 	}
 	public int deletePd(Integer peanut_no) {

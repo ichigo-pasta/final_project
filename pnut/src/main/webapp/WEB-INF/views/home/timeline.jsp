@@ -72,11 +72,11 @@
 	function startRefresh() {
 		refresh = setInterval(refreshTl, 10000, a);
 	}
-	function doRenut(peanut_no) {
-		location.href="${path}/renut.do?peanut_no="+peanut_no;
+	function doRenut(peanut_no, redirect) {
+		location.href="${path}/renut.do?peanut_no="+peanut_no+"&redirect="+redirect;
 	}
-	function cancelRenut(peanut_no) {
-		location.href="${path}/cancelRenut.do?peanut_no="+peanut_no;
+	function cancelRenut(peanut_no, redirect) {
+		location.href="${path}/cancelRenut.do?peanut_no="+peanut_no+"&redirect="+redirect;
 	}
 	function setEvent() {
 		drag = false;

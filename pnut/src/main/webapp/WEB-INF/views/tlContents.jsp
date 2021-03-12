@@ -83,7 +83,7 @@
 						<div class="col col-10">&nbsp;</div>
 					</div>
 		</c:if>
-					<div class="row">
+					<div class="row"> <!-- 댓글, 리넛, 북마크 박스 -->
 						<div class="col col-4">
 							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
 							<c:if test="${pn.repCnt != 0}">
@@ -141,7 +141,7 @@
 								</div>
 								<div class="modal-footer">									
 	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="startRefresh()">닫기</a>
-	        						<a type="button" class="btn btn-primary" onclick="doRenut('${pn.peanut_no}')">리넛</a>
+	        						<a type="button" class="btn btn-primary" onclick="doRenut('${pn.peanut_no}','timeline')">리넛</a>
       							</div>
 							</div>
 						</div>
@@ -163,7 +163,7 @@
 								</div>
 								<div class="modal-footer">									
 	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="startRefresh()">닫기</a>
-	        						<a type="button" class="btn btn-primary" onclick="cancelRenut('${pn.peanut_no}')">리넛 취소</a>
+	        						<a type="button" class="btn btn-primary" onclick="cancelRenut('${pn.peanut_no}','timeline')">리넛 취소</a>
       							</div>
 							</div>
 						</div>

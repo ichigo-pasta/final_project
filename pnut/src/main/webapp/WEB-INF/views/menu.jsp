@@ -5,29 +5,29 @@
 	<div class="btn-group-vertical" role="group" style="width: 110px">
 		<button type="button"
 			onclick="location.href='${path}/home/timeline.do'"
-			class="btn btn-outline-secondary">
+			class="btn btn-outline-secondary menuBt" id="timelineBt">
 			<i class="bi-house-door-fill"></i>&nbsp;&nbsp;홈
 		</button>
 		<button type="button" onclick="location.href='${path}/home/notice.do'"
-			class="btn btn-dark">
+			class="btn btn-outline-secondary menuBt" id="noticeBt">
 			<i class="bi-bell-fill"></i>&nbsp;&nbsp;알림
 		</button>
 		<button type="button"
 			onclick="location.href='${path}/home/message.do'"
-			class="btn btn-dark">
+			class="btn btn-outline-secondary menuBt" id="messageBt">
 			<i class="bi-envelope-fill"></i>&nbsp;&nbsp;메시지
 		</button>
 		<button type="button" onclick="bookmark('${m_id}');"
-			class="btn btn-dark">
+			class="btn btn-outline-secondary menuBt" id="bookmarkBt">
 			<i class="bi-bookmark-fill"></i>&nbsp;&nbsp;북마크
 		</button>
-		<button type="button" class="btn btn-dark"
-			onclick="profile('${m_id}');">
+		<button type="button" class="btn btn-outline-secondary menuBt"
+			onclick="profile('${m_id}');" id="profileBt">
 			<i class="bi-person-fill"></i>&nbsp;&nbsp;프로필
 		</button>
 		<button type="button"
 			onclick="location.href='${path}/home/writeForm.do'"
-			class="btn btn-dark">
+			class="btn btn-outline-secondary menuBt" id="writeFormBt">
 			<i class="bi-pencil-fill"></i>&nbsp;&nbsp;글쓰기
 		</button>
 	</div>
@@ -63,5 +63,37 @@
 	}
 	function bookmark(m_id) {
 		location.href = "${path}/home/bookmarkForm.do?m_id=" + m_id;
+	}
+	window.onload = function () {
+		var currentPage = location.href.split("/")[location.href.split("/").length-1];
+		if (currentPage.startsWith('timeline.do')) {
+			btnReset();
+			document.getElementById('timelineBt').setAttribute('class','btn btn-dark menuBt');
+		} else if (currentPage.startsWith('notice.do')) {
+			btnReset();
+			document.getElementById('noticeBt').setAttribute('class','btn btn-dark menuBt');
+		}
+		else if (currentPage.startsWith('message.do')) {
+			btnReset();
+			document.getElementById('messageBt').setAttribute('class','btn btn-dark menuBt');
+		}
+		else if (currentPage.startsWith('bookmarkForm.do')) {
+			btnReset();
+			document.getElementById('bookmarkBt').setAttribute('class','btn btn-dark menuBt');
+		}
+		else if (currentPage.startsWith('profileForm.do')) {
+			btnReset();
+			document.getElementById('profileBt').setAttribute('class','btn btn-dark menuBt');
+		}
+		else if (currentPage.startsWith('writeForm.do')) {
+			btnReset();
+			document.getElementById('writeFormBt').setAttribute('class','btn btn-dark menuBt');
+		}
+	}
+	function btnReset() {
+		var buttons = document.getElementsByClassName('menuBt');
+		for (var bt of buttons) {
+			bt.setAttribute('class','btn btn-outline-secondary menuBt');
+		}
 	}
 </script>
