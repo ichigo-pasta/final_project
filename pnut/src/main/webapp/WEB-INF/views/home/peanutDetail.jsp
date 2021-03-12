@@ -123,7 +123,7 @@
 						<div class="col col-10">&nbsp;</div>
 					</div>
 		</c:if>
-					<div class="row"> <!-- 댓글, 리넛, 북마크 박스 -->
+					<div class="row btBox"> <!-- 댓글, 리넛, 북마크 박스 -->
 						<div class="col col-4">
 							<c:if test="${peanut.repCnt != 0}">
 								<i class="bi-chat" style="color: blue"></i>

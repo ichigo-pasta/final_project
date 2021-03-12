@@ -8,16 +8,16 @@
 	var refresh;
 	var startX;
 	var startY;
-	const judge = 5;
+	const judge = 5;	
 	
-	window.onpageshow = function() {		
+	window.onpageshow = function() {
 		refreshTl(a);
-		startRefresh();			
+		startRefresh();
 	}
 	
-	function refreshTl(amt) {		
+	function refreshTl(amt) {
+		a = amt;
 		var xhr = new XMLHttpRequest();
-		xhr.open("post","${path}/tlContents.do", true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
 				document.getElementById('tl').innerHTML = xhr.responseText;
@@ -26,8 +26,9 @@
 				alert('요청오류: '+xhr.status);
 			}
 		}
+		xhr.open("post","${path}/tlContents.do", true);
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		xhr.send("amt="+amt);		
+		xhr.send("amt="+a);		
 	}
 	function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
@@ -35,7 +36,6 @@
 	function setBm(peanut_no) {		
 		changeBmBtn1(peanut_no);		
 		var xhr = new XMLHttpRequest();
-		xhr.open("get","${path}/setBm.do?peanut_no="+peanut_no,false);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
 				console.log('set bm success');
@@ -43,6 +43,7 @@
 				alert('요청오류: '+xhr.status);
 			}
 		}
+		xhr.open("get","${path}/setBm.do?peanut_no="+peanut_no,false);
 		xhr.send(null);		
 	}
 	function changeBmBtn1(peanut_no) {		
@@ -52,7 +53,6 @@
 	function deleteBm(peanut_no) {		
 		changeBmBtn2(peanut_no);
 		var xhr = new XMLHttpRequest();
-		xhr.open("get","${path}/deleteBm.do?peanut_no="+peanut_no,false);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
 				console.log('remove bm success');
@@ -60,6 +60,7 @@
 				alert('요청오류: '+xhr.status);
 			}
 		}
+		xhr.open("get","${path}/deleteBm.do?peanut_no="+peanut_no,false);
 		xhr.send(null);				
 	}
 	function changeBmBtn2(peanut_no) {		
@@ -78,8 +79,7 @@
 	function cancelRenut(peanut_no, redirect) {
 		location.href="${path}/cancelRenut.do?peanut_no="+peanut_no+"&redirect="+redirect;
 	}
-	function setEvent() {
-		drag = false;
+	function setEvent() {		
 		var cont_rows = document.getElementsByClassName('content_col');
 		for(var cont_row of cont_rows) {
 			cont_row.addEventListener('mousedown', function(event) {				
@@ -95,5 +95,10 @@
 				}				
 			});
 		}
+	}
+	function more_read(amt) {
+		refreshTl(amt);
+		stopRefresh();
+		startRefresh();
 	}
 </script>
