@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <%@ include file="../getMyId.jsp" %>
+<jsp:useBean id="today" class="java.util.Date" />
+<fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <div class="container">	
 <c:if test="${empty peanut }">
 	<script type="text/javascript">
@@ -10,7 +12,7 @@
 	</script>
 </c:if>
 <c:if test="${not empty peanut }">	
-		<div class="peanut_container">		
+		<div class="peanut_container">
 			<div class="row">
 				<div style="width: 110px">		
 					<img alt="" src="${path}/resources/images/${peanut.member.m_profile}"
@@ -19,9 +21,28 @@
 				</div>
 				<div class="col">
 					<div class="row">
-						<div class="col col-11">
-							<c:out value="${peanut.member.m_nickname} @${peanut.writer}"/> 
-							<fmt:formatDate pattern="yyyy년 MM월 dd일" value="${peanut.regdate}"/> 
+						<div class="col col-11">							
+							<c:out value="${peanut.member.m_nickname} @${peanut.writer}"/>
+							<c:choose>
+								<c:when test="${(now - peanut.regdate.time) > (1000*60*60*24*7*4)}">
+									<fmt:formatDate value="${peanut.regdate }" pattern="yyyy년 MM월 dd일"/>
+								</c:when>
+								<c:when test="${(now - peanut.regdate.time) <= (1000*60*60*24*7*4) and (now - peanut.regdate.time) > (1000*60*60*24*7)}">
+									<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60*24*7) }" integerOnly="true"/>주 전
+								</c:when>
+								<c:when test="${(now - peanut.regdate.time) <= (1000*60*60*24*7) and (now - peanut.regdate.time) > (1000*60*60*24)}">
+									<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60*24) }" integerOnly="true"/>일 전
+								</c:when>
+								<c:when test="${(now - peanut.regdate.time) <= (1000*60*60*24) and (now - peanut.regdate.time) > (1000*60*60)}">
+									<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60) }" integerOnly="true"/>시간 전
+								</c:when>
+								<c:when test="${(now - peanut.regdate.time) <= (1000*60*60) and (now - peanut.regdate.time) > (1000*60)}">
+									<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60) }" integerOnly="true"/>분 전
+								</c:when>
+								<c:otherwise>
+									1분 이내
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div class="col col-1">
 							<div class="btn-group">
@@ -200,7 +221,27 @@
 				<div class="col col-9" style="background: #eee; border-radius: 10px" >
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
-					${rep.regdate }&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
+					<c:choose>
+						<c:when test="${(now - rep.regdate.time) > (1000*60*60*24*7*4)}">
+							<fmt:formatDate value="${rep.regdate }" pattern="yyyy년 MM월 dd일"/>
+						</c:when>
+						<c:when test="${(now - rep.regdate.time) <= (1000*60*60*24*7*4) and (now - rep.regdate.time) > (1000*60*60*24*7)}">
+							<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60*24*7) }" integerOnly="true"/>주 전
+						</c:when>
+						<c:when test="${(now - rep.regdate.time) <= (1000*60*60*24*7) and (now - rep.regdate.time) > (1000*60*60*24)}">
+							<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60*24) }" integerOnly="true"/>일 전
+						</c:when>
+						<c:when test="${(now - rep.regdate.time) <= (1000*60*60*24) and (now - rep.regdate.time) > (1000*60*60)}">
+							<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60) }" integerOnly="true"/>시간 전
+						</c:when>
+						<c:when test="${(now - rep.regdate.time) <= (1000*60*60) and (now - rep.regdate.time) > (1000*60)}">
+							<fmt:parseNumber value="${(now - rep.regdate.time) / (1000*60) }" integerOnly="true"/>분 전
+						</c:when>
+						<c:otherwise>
+							1분 이내
+						</c:otherwise>
+					</c:choose>
+					&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
 				</div>
 			</div>
 		
@@ -250,8 +291,27 @@
 				<div class="col col-9" style="background: #eee; border-radius: 10px" >
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre><b>${rep.member.target_nn}</b>&nbsp;${rep.content}</pre>
-					${rep.regdate }&nbsp;&nbsp;
-					<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
+					<c:choose>
+						<c:when test="${(now - rep.regdate.time) > (1000*60*60*24*7*4)}">
+							<fmt:formatDate value="${rep.regdate }" pattern="yyyy년 MM월 dd일"/>
+						</c:when>
+						<c:when test="${(now - rep.regdate.time) <= (1000*60*60*24*7*4) and (now - rep.regdate.time) > (1000*60*60*24*7)}">
+							<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60*24*7) }" integerOnly="true"/>주 전
+						</c:when>
+						<c:when test="${(now - rep.regdate.time) <= (1000*60*60*24*7) and (now - rep.regdate.time) > (1000*60*60*24)}">
+							<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60*24) }" integerOnly="true"/>일 전
+						</c:when>
+						<c:when test="${(now - rep.regdate.time) <= (1000*60*60*24) and (now - rep.regdate.time) > (1000*60*60)}">
+							<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60) }" integerOnly="true"/>시간 전
+						</c:when>
+						<c:when test="${(now - rep.regdate.time) <= (1000*60*60) and (now - rep.regdate.time) > (1000*60)}">
+							<fmt:parseNumber value="${(now - rep.regdate.time) / (1000*60) }" integerOnly="true"/>분 전
+						</c:when>
+						<c:otherwise>
+							1분 이내
+						</c:otherwise>
+					</c:choose>
+					&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
 				</div>
 			</div>
 			

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<jsp:useBean id="today" class="java.util.Date" />
+<fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <c:if test="${empty list }">
 	일상에서 일어나는 작은 일들을 간단하게 기록해보세요
 </c:if>
@@ -31,10 +33,50 @@
 					<div class="row">
 						<div class="col">
 		<c:if test="${pn.renut != null}">
-							<c:out value=" ${pn.member.re_nick}, ${pn.re_writer}, ${pn.regdate}"/>
+							<c:out value=" ${pn.member.re_nick} @${pn.re_writer}"/>							
+							<c:choose>
+								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
+									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일"/>
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24*7*4) and (now - pn.regdate.time) > (1000*60*60*24*7)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60*24*7) }" integerOnly="true"/>주 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24*7) and (now - pn.regdate.time) > (1000*60*60*24)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60*24) }" integerOnly="true"/>일 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24) and (now - pn.regdate.time) > (1000*60*60)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60) }" integerOnly="true"/>시간 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60) and (now - pn.regdate.time) > (1000*60)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60) }" integerOnly="true"/>분 전
+								</c:when>
+								<c:otherwise>
+									1분 이내
+								</c:otherwise>
+							</c:choose>
 		</c:if>
 		<c:if test="${pn.renut == null}">
-							<c:out value="${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}"/>
+							<c:out value="${pn.member.m_nickname} @${pn.writer}"/>							
+							<c:choose>
+								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
+									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일"/>
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24*7*4) and (now - pn.regdate.time) > (1000*60*60*24*7)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60*24*7) }" integerOnly="true"/>주 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24*7) and (now - pn.regdate.time) > (1000*60*60*24)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60*24) }" integerOnly="true"/>일 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24) and (now - pn.regdate.time) > (1000*60*60)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60) }" integerOnly="true"/>시간 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60) and (now - pn.regdate.time) > (1000*60)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60) }" integerOnly="true"/>분 전
+								</c:when>
+								<c:otherwise>
+									1분 이내
+								</c:otherwise>
+							</c:choose>
 		</c:if>
 						</div>
 					</div>
