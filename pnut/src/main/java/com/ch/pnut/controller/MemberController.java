@@ -139,7 +139,8 @@ public class MemberController {
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
 		List<String> followlist = ms.followList(m_id);
-		List<Member> list = ms.followingList(followlist, amt);
+		List<Member> list = new ArrayList<>(); 
+		if (followlist.size() > 0) list = ms.followingList(followlist, amt);
 		model.addAttribute("list", list);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);

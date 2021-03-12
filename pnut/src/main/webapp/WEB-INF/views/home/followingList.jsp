@@ -9,7 +9,8 @@
 	<c:forEach items="${list }" var="pn">
 		<div class="row">
 			<div style="width: 80px">
-				<img alt="" src="${path}/resources/images/${pn.m_profile}" width="80px" height="80px">
+				<img alt="" src="${path}/resources/images/${pn.m_profile}" width="80px" height="80px"
+					onclick="profile('${pn.m_id}')" class="profile_pic">
 			</div>
 			<div class="col">
 				<b>${pn.m_nickname}</b><br>
@@ -20,3 +21,9 @@
 	</c:forEach>
 </c:if>
 </div>
+
+<script type="text/javascript">
+function profile(m_id) {
+		location.href = "${path}/home/profileForm.do?m_id="+m_id;
+	}
+</script>
