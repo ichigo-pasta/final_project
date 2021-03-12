@@ -156,6 +156,7 @@ public class PeanutsController {
 		if (amt == null) {
 			amt = 20;
 		}
+		
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
@@ -232,52 +233,109 @@ public class PeanutsController {
 	}
 	
 	@RequestMapping("renut")	// 타임라인에서 리넛 실행
-	public String renut(Integer peanut_no, HttpSession session, HttpServletRequest request) {
+	public String renut(Integer peanut_no, String redirect, 
+			HttpSession session, HttpServletRequest request) {
+		if (peanut_no == null) peanut_no = 0;
 		String m_id = (String)session.getAttribute("m_id");
 		Integer isRenut = ps.isRenut(peanut_no);	// 리넛 대상 글이 리넛이면 원본 피넛번호, 리넛이 아니면 null
 		Peanuts peanut;
 		if(isRenut == null) {
 			peanut = ps.selectDetail(peanut_no);
+			if (peanut == null) {
+				return "renutError";
+			}
 			peanut.setWriter(m_id);
 			peanut.setRenut(peanut_no);
 			peanut.setIp(request.getRemoteAddr());
 			ps.insert(peanut);
 		} else {
 			peanut = ps.selectDetail(isRenut);
+			if (peanut == null) {
+				return "renutError";
+			}
 			peanut.setWriter(m_id);
 			peanut.setRenut(isRenut);
 			peanut.setIp(request.getRemoteAddr());
 			ps.insert(peanut);
 		}		
-		return "redirect:home/timeline.do";
+		if (redirect == null) return "redirect:home/timeline.do"; 
+		String rd = "";
+		switch (redirect) {
+		case "a":
+			break;
+
+		default:
+			rd = "redirect:home/timeline.do";
+			break;
+		}
+		return rd;
 	}
 	
 	@RequestMapping("renut2")	// 북마크 페이지에서 리넛 실행. 북마크페이지의 글들은 리넛이 아님
-	public String renut2(Integer peanut_no, HttpSession session, HttpServletRequest request) {
+	public String renut2(Integer peanut_no, HttpSession session,
+			HttpServletRequest request, String redirect) {
+		if (peanut_no == null) peanut_no = 0;
 		String m_id = (String)session.getAttribute("m_id");
 		Peanuts peanut = ps.selectDetail(peanut_no);
+		if (peanut == null) return "renutError";
 		peanut.setWriter(m_id);
 		peanut.setRenut(peanut_no);
 		peanut.setIp(request.getRemoteAddr());
 		ps.insert(peanut);				
-		return "redirect:home/bookmarkForm.do?m_id="+m_id;
+		if (redirect == null) return "redirect:home/bookmarkForm.do?m_id="+m_id; 
+		String rd = "";
+		switch (redirect) {
+		case "a":
+			break;
+
+		default:
+			rd = "redirect:home/bookmarkForm.do?m_id="+m_id;
+			break;
+		}
+		return rd;
 	}
 	
 	@RequestMapping("cancelRenut") // 타임라인에서 리넛 취소
-	public String cancelRenut(Integer peanut_no, HttpSession session, HttpServletRequest request) {
+	public String cancelRenut(Integer peanut_no, HttpSession session,
+			HttpServletRequest request, String redirect) {
+		if (peanut_no == null) peanut_no = 0;
 		String m_id = (String)session.getAttribute("m_id");
 		Integer renut = ps.isRenut(peanut_no);
 		if(renut == null) renut = peanut_no;
-		ps.cancelRenut(renut, m_id);
-		return "redirect:home/timeline.do";
+		int result = ps.cancelRenut(renut, m_id);
+		if (result == 0) return "renutError";
+		if (redirect == null) return "redirect:home/timeline.do"; 
+		String rd = "";
+		switch (redirect) {
+		case "a":
+			break;
+
+		default:
+			rd = "redirect:home/timeline.do";
+			break;
+		}
+		return rd;
 	}
 	
 	@RequestMapping("cancelRenut2")	// 북마크 페이지에서 리넛 취소
-	public String cancelRenut2(Integer peanut_no, HttpSession session, HttpServletRequest request) {
+	public String cancelRenut2(Integer peanut_no, HttpSession session,
+			HttpServletRequest request, String redirect) {
+		if (peanut_no == null) peanut_no = 0;
 		String m_id = (String)session.getAttribute("m_id");
 		Integer renut = ps.isRenut(peanut_no);
 		if(renut == null) renut = peanut_no;
-		ps.cancelRenut(renut, m_id);
-		return "redirect:home/bookmarkForm.do?m_id="+m_id;
+		int result = ps.cancelRenut(renut, m_id);
+		if (result == 0) return "renutError";
+		if (redirect == null) return "redirect:home/bookmarkForm.do?m_id="+m_id; 
+		String rd = "";
+		switch (redirect) {
+		case "a":
+			break;
+
+		default:
+			rd = "redirect:home/bookmarkForm.do?m_id="+m_id;
+			break;
+		}
+		return rd;
 	}
 }

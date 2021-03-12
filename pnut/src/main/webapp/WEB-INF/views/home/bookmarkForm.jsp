@@ -113,7 +113,7 @@
 								</div>
 								<div class="modal-footer">									
 	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</a>
-	        						<a type="button" class="btn btn-primary" onclick="doRenut2('${pn.peanut_no}')">리넛</a>
+	        						<a type="button" class="btn btn-primary" onclick="doRenut2('${pn.peanut_no}','bookmark')">리넛</a>
       							</div>
 							</div>
 						</div>
@@ -135,7 +135,7 @@
 								</div>
 								<div class="modal-footer">									
 	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</a>
-	        						<a type="button" class="btn btn-primary" onclick="cancelRenut2('${pn.peanut_no}')">리넛 취소</a>
+	        						<a type="button" class="btn btn-primary" onclick="cancelRenut2('${pn.peanut_no}','bookmark')">리넛 취소</a>
       							</div>
 							</div>
 						</div>
@@ -164,11 +164,11 @@
 			}				
 		});
 	}
-	function doRenut2(peanut_no) {
-		location.href="${path}/renut2.do?peanut_no="+peanut_no;
+	function doRenut2(peanut_no, redirect) {
+		location.href="${path}/renut2.do?peanut_no="+peanut_no+"&redirect="+redirect;
 	}
-	function cancelRenut2(peanut_no) {
-		location.href="${path}/cancelRenut2.do?peanut_no="+peanut_no;
+	function cancelRenut2(peanut_no, redirect) {
+		location.href="${path}/cancelRenut2.do?peanut_no="+peanut_no+"&redirect="+redirect;
 	}
 	function confirmDelBm(peanut_no) {
 		var conf = confirm('북마크를 제거하시겠습니까?');
