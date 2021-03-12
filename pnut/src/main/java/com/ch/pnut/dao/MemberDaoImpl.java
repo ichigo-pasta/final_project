@@ -60,8 +60,7 @@ public class MemberDaoImpl implements MemberDao {
 	public List<Member> followingList(List<String> followlist, Integer amt) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("followlist", followlist);
-		map.put("amt", amt);
-		System.out.println("followlist="+followlist);
+		map.put("amt", amt);		
 		return sst.selectList("memberns.followingList", map);
 	}
 

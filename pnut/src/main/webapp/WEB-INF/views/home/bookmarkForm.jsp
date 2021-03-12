@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
 <%@ include file="../getMyId.jsp" %>
+<jsp:useBean id="today" class="java.util.Date" />
+<fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <c:if test="${empty bmList }">
 	간직하고 싶은 피넛들을 북마크해보세요
 </c:if>
@@ -16,7 +18,27 @@
 				<div class="col">
 					<div class="row">
 						<div class="col">
-							<c:out value="${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}"/>
+							<c:out value="${pn.member.m_nickname} @${pn.writer}"/>
+							<c:choose>
+								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
+									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일"/>
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24*7*4) and (now - pn.regdate.time) > (1000*60*60*24*7)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60*24*7) }" integerOnly="true"/>주 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24*7) and (now - pn.regdate.time) > (1000*60*60*24)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60*24) }" integerOnly="true"/>일 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24) and (now - pn.regdate.time) > (1000*60*60)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60) }" integerOnly="true"/>시간 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60) and (now - pn.regdate.time) > (1000*60)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60) }" integerOnly="true"/>분 전
+								</c:when>
+								<c:otherwise>
+									1분 이내
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<div class="row">

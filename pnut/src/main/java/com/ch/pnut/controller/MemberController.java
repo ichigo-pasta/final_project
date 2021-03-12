@@ -3,6 +3,7 @@ package com.ch.pnut.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -155,7 +156,8 @@ public class MemberController {
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
 		List<String> followerList = ms.followerList(m_id);
-		List<Member> list = ms.followedList(followerList, amt);
+		List<Member> list = new ArrayList<>();
+		if (followerList.size() > 0) list = ms.followedList(followerList, amt);
 		model.addAttribute("list", list);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);
