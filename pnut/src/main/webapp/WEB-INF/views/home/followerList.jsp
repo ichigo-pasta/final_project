@@ -15,7 +15,7 @@
 			<div class="col">
 				<b>${pn.m_nickname}</b><br>
 				@${pn.m_id }<br>
-				${pn.m_intro } 
+				${pn.m_intro }
 			</div>
 		</div>
 	</c:forEach>

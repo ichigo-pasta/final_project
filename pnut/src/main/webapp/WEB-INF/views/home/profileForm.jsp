@@ -59,10 +59,22 @@
   		</li>
 	</ul>
 </div>
-<div id="peanut"></div>
+
+<div>
+	<c:if test="${empty list}">
+		데이터가 없습니다.
+	</c:if>
+</div>
 
 <input type="hidden" value="${type}" id="type">
 <script type="text/javascript">
+	window.onpageshow = function() {
+		if (document.getElementById("peanut").value == "peanut") {
+			document.getElementById("peanut").setAttribute("class","nav-link active");
+		} else {
+			document.getElementById("picpeanut").setAttribute("class","nav-link active");
+		}
+	}
 	function follow(m_id) {
 		buttonChange();
 		var xhr = new XMLHttpRequest();
@@ -100,6 +112,10 @@
 		btn.removeAttribute("onmouseover");
 		btn.removeAttribute("onmouseout");
 	}	
+	
+	function profile(m_id) {
+		location.href = "${path}/home/profileForm.do?m_id="+m_id;
+	}
 	
 	//	$(function () {
 	//		$('#peanut').load('${path}/nolay/peanutList.do?amt=20');

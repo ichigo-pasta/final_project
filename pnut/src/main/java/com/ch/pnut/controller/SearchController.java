@@ -37,7 +37,7 @@ public class SearchController {
 			List<Peanuts> list = new ArrayList<>();
 			if (arrayLen > 0) list = ps.search(arrayKw, amt); 
 			for(Peanuts pn:list) {
-				pn.setContent(ps.setHashtag(pn.getContent()));
+				pn.setContent(ps.setHashtag(pn.getContent(),"hashtag"));
 			}
 			model.addAttribute("list", list);
 			break;

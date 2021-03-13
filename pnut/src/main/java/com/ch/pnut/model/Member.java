@@ -26,4 +26,6 @@ public class Member {
 	private MultipartFile file_b;	// 배경화면
 	// 조인용
 	private String target_nn;
+	
+	private boolean followMe;		// 나를 팔로우한 유저인지 판단(기본값 : false)
 }

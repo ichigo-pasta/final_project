@@ -13,7 +13,7 @@ public interface PeanutsService {
 
 	List<Peanuts> search(String[] arrayKw, int amt);
 
-	String setHashtag(String content);
+	String setHashtag(String content, String type);
 
 	Peanuts selectDetail(int peanut_no);
 
