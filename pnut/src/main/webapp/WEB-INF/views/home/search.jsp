@@ -21,10 +21,10 @@
 		</c:if>
 		<c:if test="${not empty list}">
 		<c:forEach items="${list }" var="pn">
-			<div class="row">
+			<div class="row peanut_container">
 				<div style="width: 110px">
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
-						width="100" height="100" onclick="profile('${pn.writer}')">
+						width="100" height="100" onclick="profile('${pn.writer}')" class="profile_pic">
 				</div>
 				<div class="col">
 					<div class="row">
@@ -181,7 +181,7 @@
 						</div>
 					</div> <!-- 취소 Modal 종료 -->
 				</div>
-			</div>
+			</div>	<!-- peanut_container 종료 -->
 		</c:forEach>
 		</c:if>
 	</c:if>
