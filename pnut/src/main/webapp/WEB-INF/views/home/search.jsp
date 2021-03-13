@@ -110,26 +110,27 @@
 					</div> <!-- 댓글 아이콘 종료 -->
 					<div class="col col-4"> <!-- 리넛 아이콘 -->
 						<c:if test="${pn.renuted == false }">
-						<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}" onclick="stopRefresh()">
+						<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}">
 							<i class="bi-arrow-clockwise" style="color: gray"></i>
 							<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
 						</button>
 						</c:if>
 						<c:if test="${pn.renuted == true }">
-						<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}" onclick="stopRefresh()">								<i class="bi-arrow-clockwise" style="color: blue"></i>
+						<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}">
+							<i class="bi-arrow-clockwise" style="color: blue"></i>
 							<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
 						</button>
 						</c:if>
 					</div> <!-- 리넛 아이콘 종료 -->
 					<div class="col col-4"> <!-- 북마크 아이콘 -->
 						<c:if test="${pn.bookmarked == true}">
-							<button onclick="deleteBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}">
+							<button onclick="deleteBm('${pn.peanut_no}')" id="bmBtn${pn.peanut_no}">
 								<i class="bi-bookmark" style="color: blue;" id="bmBtnI${pn.peanut_no}"></i>
 								<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 							</button>
-						</c:if>							
+						</c:if>
 						<c:if test="${pn.bookmarked == false}">								
-							<button onclick="setBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}">
+							<button onclick="setBm('${pn.peanut_no}')" id="bmBtn${pn.peanut_no}">
 								<i class="bi-bookmark" style="color: gray" id="bmBtnI${pn.peanut_no}"></i>
 								<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 							</button>
@@ -142,7 +143,7 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="set${pn.peanut_no}Label">리넛하기</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="startRefresh()"></button>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
 									<div class="row">
@@ -152,8 +153,8 @@
 									</div>
 								</div>
 								<div class="modal-footer">									
-	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="startRefresh()">닫기</a>
-	        						<a type="button" class="btn btn-primary" onclick="doRenut('${pn.peanut_no}','timeline')">리넛</a>
+	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</a>
+	        						<a type="button" class="btn btn-primary" onclick="rn_from_search('${pn.peanut_no}')">리넛</a>
       							</div>
 							</div>
 						</div>
@@ -164,7 +165,7 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="cancel${pn.peanut_no}Label">리넛 취소하기</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="startRefresh()"></button>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
 									<div class="row">
@@ -174,14 +175,14 @@
 									</div>
 								</div>
 								<div class="modal-footer">									
-	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="startRefresh()">닫기</a>
+	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</a>
 	        						<a type="button" class="btn btn-primary" onclick="cancelRenut('${pn.peanut_no}','timeline')">리넛 취소</a>
       							</div>
 							</div>
 						</div>
 					</div> <!-- 취소 Modal 종료 -->
 				</div>
-			</div>	<!-- peanut_container 종료 -->
+			</div>	<!-- peanut_container 종료 -->			
 		</c:forEach>
 		</c:if>
 	</c:if>
@@ -202,6 +203,12 @@
 				</div>
 			</c:forEach>
 		</c:if>
+	</c:if>
+	<c:if test="${more == 1 }">
+			<div class="d-grid gap-2">
+				<br>		
+	  			<button class="btn btn-outline-info btn-lg" type="button" onclick="search('${type }', '${keyword }', '${amt+20}')">more...</button>
+			</div>
 	</c:if>
 </div>
 

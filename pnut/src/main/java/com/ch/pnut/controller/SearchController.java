@@ -23,13 +23,17 @@ public class SearchController {
 	private PeanutsService ps;	
 	@RequestMapping("home/search")
 	public String search(String type, String keyword, Integer amt
-			, Model model, HttpSession session) {
+			, Integer more, Model model, HttpSession session) {
 		if(amt == null) amt = 20;
+		if(more == null) more = 0;
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
-		List<String> myBlock = ms.myBlockList(member.getM_id()); 
-		List<String> block = ms.blockList(member.getM_id());		
+		String m_id = member.getM_id();
+		List<String> myBlock = ms.myBlockList(m_id); 
+		List<String> block = ms.blockList(m_id);
+		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트
+		List<Integer> renutList = ps.selectRenut(m_id);	// 로그인 유저가 리넛한 피넛번호 리스트
 		keyword = keyword.replaceAll(" +", " ");
 		String[] arrayKw = keyword.split(" ");
 		int arrayLen = arrayKw.length;
@@ -40,11 +44,20 @@ public class SearchController {
 			}
 		case "peanut": 
 			List<Peanuts> list = new ArrayList<>();
-			if (arrayLen > 0) list = ps.search(arrayKw, amt, myBlock, block); 
+			if (arrayLen > 0) list = ps.search(arrayKw, amt+1, myBlock, block);
+			if (list.size() > amt) {
+				more = 1;
+				list.remove(amt.intValue());
+			}
 			for(Peanuts pn:list) {
 				pn.setContent(ps.setHashtag(pn.getContent(),"hashtag"));
-			}
-			model.addAttribute("list", list);
+				pn.setRepCnt(ps.repCnt(pn.getPeanut_no()));
+				pn.setRenutCnt(ps.renutCnt(pn.getPeanut_no()));
+				pn.setBmCnt(ps.bmCnt(pn.getPeanut_no()));
+				if (bmList.contains(pn.getPeanut_no())) pn.setBookmarked(true);
+				if (renutList.contains(pn.getPeanut_no())) pn.setRenuted(true);
+			}			
+			model.addAttribute("list", list);			
 			break;
 		case "user":
 			List<Member> list2 = new ArrayList<>();
@@ -55,6 +68,8 @@ public class SearchController {
 		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("amt", amt);
+		model.addAttribute("more", more);
 		return "home/search";
 	}
 }
