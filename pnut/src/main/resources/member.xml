@@ -42,16 +42,10 @@
 	<select id="followingList" parameterType="hashmap" resultType="member">
 		select * from	
 			(select a.*, rownum rn from 	
-				(select * from pn_member where m_del = 'n' 
-				<if test="!followlist.isEmpty()">
-				and m_id in 
+				(select * from pn_member where m_del = 'n' and m_id in 
 					<foreach collection="followlist" item="item" open="(" separator="," close=")">
 						#{item}
 					</foreach>
-				</if>
-				<if test="followlist.isEmpty()">
-				and 1 = 0
-				</if>
 				) a)
 				where rn between 1 and #{amt}
 	</select>

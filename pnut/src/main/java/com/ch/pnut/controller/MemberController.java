@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,11 +19,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ch.pnut.model.Member;
 import com.ch.pnut.service.MemberService;
+import com.ch.pnut.service.PeanutsService;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService ms;
+	@Autowired
+	private PeanutsService ps;
 	@RequestMapping("loginForm")
 	public String loginForm() {
 		return "loginForm";
@@ -130,7 +134,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("home/followingList") 
-	public String followingList(String m_id, Model model, 
+	public String followingList(Model model, 
 			HttpSession session, Integer amt) {
 		if(amt == null) {
 			amt = 20;
@@ -138,8 +142,22 @@ public class MemberController {
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
-		List<String> followlist = ms.followList(m_id);
-		List<Member> list = ms.followingList(followlist, amt);
+		//
+		String my_id = (String)session.getAttribute("m_id");  // 접속 ID
+		List<String> myFollowList = ms.followList(my_id); // 내가 팔로우한 아이디 리스트
+		List<String> followList = ms.followerList(my_id); // 나를 팔로우한 아이디 리스트 
+		
+		List<Member> list = new ArrayList<>(); 
+		// 내가 팔로우한 멤버 리스트
+		if (myFollowList.size() > 0) list = ms.followingList(myFollowList, amt); 
+		for (Member mem : list) {
+			mem.setM_intro(ps.setHashtag(mem.getM_intro(),"user")); // 자기소개 해시태그 
+			if (followList.size() > 0) {
+				if (followList.contains(mem.getM_id())) {
+					mem.setFollowMe(true);
+				}
+			}
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);

@@ -110,7 +110,7 @@ public class PeanutsController {
 
 		if (listSize > 0) {
 			for (Peanuts peanut : list) {
-				peanut.setContent(ps.setHashtag(peanut.getContent()));	// list 피넛 해시태그 처리
+				peanut.setContent(ps.setHashtag(peanut.getContent(),"hashtag"));	// list 피넛 해시태그 처리
 				if (peanut.getRenut() == null) {	// 리넛이 아닐 때
 					peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
 					peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
@@ -177,7 +177,7 @@ public class PeanutsController {
 		peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
 		peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
 		peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
-		peanut.setContent(ps.setHashtag(peanut.getContent()));
+		peanut.setContent(ps.setHashtag(peanut.getContent(),"hashtag"));
 		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트
 		List<Integer> renutList = ps.selectRenut(m_id);
 		if (bmList.contains(peanut.getPeanut_no())) peanut.setBookmarked(true);
@@ -226,7 +226,7 @@ public class PeanutsController {
 		int listLen = bmList.size();
 		if (listLen > 0) {
 			for (Peanuts peanut : bmList) {				
-				peanut.setContent(ps.setHashtag(peanut.getContent()));
+				peanut.setContent(ps.setHashtag(peanut.getContent(),"hashtag"));
 				peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
 				peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
 				peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
