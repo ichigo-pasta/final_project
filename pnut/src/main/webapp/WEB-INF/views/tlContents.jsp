@@ -117,14 +117,13 @@
 					</c:if>
 				</c:if>
 			</c:if>
-					</div>
-											
-		</c:if>
+					</div> <!-- 갤러리 종료 부분 -->
+		</c:if> 
 		<c:if test="${pn.picture1 == null}">
 					<div class="row">
 						<div class="col col-10">&nbsp;</div>
 					</div>
-		</c:if>
+		</c:if> <!-- 사진 없을 때 -->
 					<div class="row btBox"> <!-- 댓글, 리넛, 북마크 박스 -->
 						<div class="col col-4">
 							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">

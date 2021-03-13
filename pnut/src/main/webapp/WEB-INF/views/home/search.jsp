@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
+<jsp:useBean id="today" class="java.util.Date" />
+<fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <ul class="nav nav-tabs nav-fill">
   <li class="nav-item">
     <a class="nav-link" id="peanut" href="javascript:search('peanut');">피넛</a>
@@ -20,14 +22,34 @@
 		<c:if test="${not empty list}">
 		<c:forEach items="${list }" var="pn">
 			<div class="row">
-				<div class="col col-2">
+				<div style="width: 110px">
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
 						width="100" height="100" onclick="profile('${pn.writer}')">
 				</div>
-				<div class="col col-10">
+				<div class="col">
 					<div class="row">
 						<div class="col">
-							<c:out value="${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}"/>
+							<c:out value="${pn.member.m_nickname}, ${pn.writer}"/>
+							<c:choose>
+								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
+									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일"/>
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24*7*4) and (now - pn.regdate.time) > (1000*60*60*24*7)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60*24*7) }" integerOnly="true"/>주 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24*7) and (now - pn.regdate.time) > (1000*60*60*24)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60*24) }" integerOnly="true"/>일 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60*24) and (now - pn.regdate.time) > (1000*60*60)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60*60) }" integerOnly="true"/>시간 전
+								</c:when>
+								<c:when test="${(now - pn.regdate.time) <= (1000*60*60) and (now - pn.regdate.time) > (1000*60)}">
+									<fmt:parseNumber value="${(now - pn.regdate.time) / (1000*60) }" integerOnly="true"/>분 전
+								</c:when>
+								<c:otherwise>
+									1분 이내
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<div class="row">
@@ -35,41 +57,46 @@
 							${pn.content}
 						</div>
 					</div>
-			<c:if test="${pn.picture1 != null}">
-					<div class="row">
-						<div class="col gallery">
-							<a href="${path}/resources/images/${pn.picture1}">
-							<img src="${path}/resources/images/${pn.picture1}" 
-								width="45%" onclick="baguetteBox.run('.gallery')">
+			<c:if test="${pn.picture1 != null}">					
+					<div class="row gallery">
+						<div class="col col-6 tl_image">
+							<a href="${path}/resources/images/${pn.picture1}">							
+								<img src="${path}/resources/images/${pn.picture1}" 
+									width="100%" onclick="baguetteBox.run('.gallery')">
 							</a>
-				<c:if test="${pn.picture2 != null}">
+						</div>								
+			<c:if test="${pn.picture2 != null}">
+						<div class="col col-6 tl_image">
 							<a href="${path}/resources/images/${pn.picture2}">
-							<img src="${path}/resources/images/${pn.picture2}" 
-								width="45%" onclick="baguetteBox.run('.gallery')">
-							</a>			
-					<c:if test="${pn.picture3 != null}">
-							<a href="${path}/resources/images/${pn.picture3}">
-							<img src="${path}/resources/images/${pn.picture3}" 
-								width="45%" onclick="baguetteBox.run('.gallery')">
-							</a>			
-						<c:if test="${pn.picture4 != null}">
-							<a href="${path}/resources/images/${pn.picture4}">
-							<img src="${path}/resources/images/${pn.picture4}" 
-								width="45%" onclick="baguetteBox.run('.gallery')">
+								<img src="${path}/resources/images/${pn.picture2}" 
+									width="100%" onclick="baguetteBox.run('.gallery')">
 							</a>
-						</c:if>
+						</div>
+				<c:if test="${pn.picture3 != null}">
+						<div class="col col-6 tl_image">
+							<a href="${path}/resources/images/${pn.picture3}">
+								<img src="${path}/resources/images/${pn.picture3}" 
+									width="100%" onclick="baguetteBox.run('.gallery')">
+							</a>
+						</div>
+					<c:if test="${pn.picture4 != null}">
+						<div class="col col-6 tl_image">
+							<a href="${path}/resources/images/${pn.picture4}">
+								<img src="${path}/resources/images/${pn.picture4}" 
+									width="100%" onclick="baguetteBox.run('.gallery')">
+							</a>
+						</div>
 					</c:if>
 				</c:if>
-						</div>
-					</div>
-			</c:if>	
-			<c:if test="${pn.picture1 == null}">
-				<div class="row">
-					<div class="col col-2"></div>
-					<div class="col col-10">&nbsp;</div>
-				</div>
 			</c:if>
-				<div class="row"> <!-- 댓글, 리넛, 북마크 박스 -->
+					</div> <!-- 갤러리 종료 부분 -->
+		</c:if> 
+		<c:if test="${pn.picture1 == null}">
+					<div class="row">
+						<div class="col col-10">&nbsp;</div>
+					</div>
+		</c:if> <!-- 사진 없을 때 -->
+				<div class="row btBox"> <!-- 댓글, 리넛, 북마크 박스 -->
 					<div class="col col-4"> <!-- 댓글 아이콘 -->
 						<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
 						<c:if test="${pn.repCnt != 0}">

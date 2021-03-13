@@ -14,4 +14,10 @@
 	<insert id="insertBlock" parameterType="hashmap">
 		insert into pn_block values(#{my_id}, #{m_id})
 	</insert>
+	<select id="myBlockList" parameterType="string" resultType="string">
+		select passive from pn_block where active = #{m_id}
+	</select>
+	<select id="blockList" parameterType="string" resultType="string">
+		select active from pn_block where passive = #{m_id}
+	</select>
 </mapper>
