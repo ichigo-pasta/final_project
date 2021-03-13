@@ -62,8 +62,8 @@
 											<li><a class="dropdown-item" href="#">
 												<button class="bi bi-person-x" id="followbt" 
 													>팔로우 중</button></a></li>
-											<li><a class="drxopdown-item" href="#">
-												<button class="bi bi-x-circle"></button>&nbsp;차단</a></li>	
+											<li><a class="drxopdown-item" href="${path}/block.do?m_id=${peanut.writer}">
+												<button class="bi bi-x-circle" onclick="location.href='${path}/block.do?m_id=${peanut.writer}'"></button>&nbsp;차단</a></li>	
 										</ul>
 									</c:if>	
 									<c:if test="${isFollow == false }">
@@ -71,8 +71,8 @@
 											<li><a class="dropdown-item" href="#">
 												<button class="bi bi-person-plus" id="followbt"
 													>팔로우</button></a></li>
-											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-x-circle"></button>&nbsp;차단</a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${peanut.writer}">
+												<button class="bi bi-x-circle" onclick="location.href='${path}/block.do?m_id=${peanut.writer}'"></button>&nbsp;차단</a></li>
 										</ul>
 									</c:if>
 								</c:if>				
