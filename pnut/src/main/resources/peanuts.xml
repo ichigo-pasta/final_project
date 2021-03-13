@@ -69,12 +69,33 @@
 		where rn between 1 and #{amt}
 	</select>
 	<select id="search" parameterType="hashmap" resultMap="peanutsResult">
-		select * from (select a.*, rownum rn from 
-		(select p.*, m_nickname, m_profile from pn_peanuts p, pn_member m where p.del='n' and p.writer=m.m_id 
-		and renut is null
+		select * from 
+			(select a.*, rownum rn from 
+				(select p.*, m_nickname, m_profile 
+				from pn_peanuts p, pn_member m 
+				where p.del='n' and p.writer=m.m_id 
+			and renut is null 
 		<foreach collection="arrayKw" item="item">
 			and content like '%'||#{item}||'%'
-		</foreach>order by p.peanut_no desc) a)
+		</foreach>
+		<if test="myBlock.size != 0 or block.size != 0">
+			and writer not in (
+			<if test="myBlock.size != 0">
+				<foreach collection="myBlock" item="item1" separator=",">
+					#{item1}
+				</foreach>
+				<foreach collection="block" item="item2" open="," separator=",">
+					#{item2}
+				</foreach>
+			</if>
+			<if test="myBlock.size == 0">
+				<foreach collection="block" item="item3" separator=",">
+					#{item3}
+				</foreach>
+			</if>
+			)
+		</if>
+		order by p.peanut_no desc) a)
 		where rn between 1 and #{amt}
 	</select>
 	<select id="isRenut" parameterType="integer" resultType="integer">

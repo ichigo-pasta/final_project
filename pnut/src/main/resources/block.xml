@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : xml을 구별하기 위한 이름 -->
+<mapper namespace="blockns">
+	<resultMap type="block" id="blockResult">
+		<result property="active" column="active" />
+		<result property="passive" column="passive" />
+	</resultMap>
+	<select id="checkBlock" parameterType="hashmap" resultType="int">
+		select count(*) from pn_block where active = #{my_id} and passive = #{m_id}
+	</select>
+	<insert id="insertBlock" parameterType="hashmap">
+		insert into pn_block values(#{my_id}, #{m_id})
+	</insert>
+	<select id="myBlockList" parameterType="string" resultType="string">
+		select passive from pn_block where active = #{m_id}
+	</select>
+	<select id="blockList" parameterType="string" resultType="string">
+		select active from pn_block where passive = #{m_id}
+	</select>
+</mapper>

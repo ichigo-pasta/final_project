@@ -23,10 +23,13 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public List<Peanuts> selectList(String m_id, int amt, List<String> followList) {
 		return pd.selectList(m_id, amt, followList);
 	}
-	public List<Peanuts> search(String[] arrayKw, int amt) {
-		return pd.search(arrayKw, amt);
+	public List<Peanuts> search(String[] arrayKw, int amt, List<String> myBlock, List<String> block) {
+		return pd.search(arrayKw, amt, myBlock, block);
 	}
-	public String setHashtag(String content) {
+	public String setHashtag(String content, String type) {
+		if (content == null) {
+			return null;
+		}
 		content = content.replace("<", "&lt;").replace(">", "&gt;");
 		content = content.replace("\r\n", "<br>");
 		String[] splitContent = content.split(" ");
@@ -40,7 +43,7 @@ public class PeanutsServiceImpl implements PeanutsService {
 				tempSize = temp.size();
 				for(int j=0; j<tempSize; j++) {
 					if(temp.get(j).startsWith("#")) {
-						temp.set(j, makeSearchBtn(temp.get(j)));
+						temp.set(j, makeSearchBtn(temp.get(j),type));
 					}
 				}							
 				splitContent[i] = String.join("<br>", temp.toArray(new String[temp.size()]));
@@ -49,8 +52,8 @@ public class PeanutsServiceImpl implements PeanutsService {
 		String hashtagedContent = String.join(" ", splitContent);
 		return hashtagedContent;
 	}
-	public String makeSearchBtn(String str) {
-		return "<a href=\"javascript:search('hashtag', '" + str + "');\">" + str + "</a>";
+	public String makeSearchBtn(String str, String type) {
+		return "<a href=\"javascript:search('"+type+"', '" + str + "');\">" + str + "</a>";
 	}
 	public Peanuts selectDetail(int peanut_no) {
 		return pd.selectDetail(peanut_no);

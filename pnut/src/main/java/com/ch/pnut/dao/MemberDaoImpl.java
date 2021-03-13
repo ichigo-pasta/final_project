@@ -71,4 +71,27 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectList("memberns.followedList", map);
 	}
 
+	@Override
+	public int checkBlock(String my_id, String m_id) {
+		Map<String, String> map = new HashMap<>();
+		map.put("my_id", my_id);
+		map.put("m_id", m_id);
+		return sst.selectOne("blockns.checkBlock", map);
+	}
+
+	public int insertBlock(String my_id, String m_id) {
+		Map<String, String> map = new HashMap<>();
+		map.put("my_id", my_id);
+		map.put("m_id", m_id);
+		return sst.insert("blockns.insertBlock", map);
+	}
+
+	public List<String> myBlockList(String m_id) {
+		return sst.selectList("blockns.myBlockList", m_id);
+	}
+
+	public List<String> blockList(String m_id) {
+		return sst.selectList("blockns.blockList", m_id);
+	}
+
 }

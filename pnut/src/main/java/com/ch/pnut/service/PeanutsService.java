@@ -11,9 +11,9 @@ public interface PeanutsService {
 
 	List<Peanuts> selectList(String m_id, int amt, List<String> followList);
 
-	List<Peanuts> search(String[] arrayKw, int amt);
+	List<Peanuts> search(String[] arrayKw, int amt, List<String> myBlock, List<String> block);
 
-	String setHashtag(String content);
+	String setHashtag(String content, String type);
 
 	Peanuts selectDetail(int peanut_no);
 

@@ -42,5 +42,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 	public List<Member> followedList(List<String> followerList, Integer amt) {
 		return md.followedList(followerList, amt);
+	}
+	public int checkBlock(String my_id, String m_id) {
+		return md.checkBlock(my_id, m_id);
+	}
+	public int insertBlock(String my_id, String m_id) {
+		return md.insertBlock(my_id, m_id);
+	}
+	public List<String> myBlockList(String m_id) {
+		return md.myBlockList(m_id);
+	}
+	public List<String> blockList(String m_id) {
+		return md.blockList(m_id);
 	}	
 }
