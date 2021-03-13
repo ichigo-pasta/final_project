@@ -26,4 +26,8 @@ public interface MemberService {
 
 	List<Member> followedList(List<String> followerList, Integer amt);
 
+	int checkBlock(String my_id, String m_id);
+
+	int insertBlock(String my_id, String m_id);
+
 }
