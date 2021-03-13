@@ -20,8 +20,8 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public int insert(Peanuts peanut) {
 		return pd.insert(peanut);
 	}
-	public List<Peanuts> selectList(String m_id, int amt, List<String> followList) {
-		return pd.selectList(m_id, amt, followList);
+	public List<Peanuts> selectList(String m_id, int amt, List<String> followList, List<String> myBlock, List<String> block) {
+		return pd.selectList(m_id, amt, followList, myBlock, block);
 	}
 	public List<Peanuts> search(String[] arrayKw, int amt, List<String> myBlock, List<String> block) {
 		return pd.search(arrayKw, amt, myBlock, block);

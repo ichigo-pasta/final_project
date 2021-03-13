@@ -49,8 +49,7 @@
 		<if test="picture4 != null">, #{picture4}</if>
 		, sysdate, 'n')
 	</insert>
-	<select id="selectList" parameterType="hashmap"
-		resultMap="peanutsResult">
+	<select id="selectList" parameterType="hashmap" resultMap="peanutsResult">
 		select * from (select a.*, rownum rn from (
 			select p1.*,m1.m_profile, m1.m_nickname, m2.m_profile re_pf, p2.writer re_writer,
 			m2.m_nickname re_nick
@@ -64,7 +63,41 @@
 				#{item}
 			</foreach>
 		</if>
-			)		
+			)			
+		<if test="myBlock.size != 0 or block.size != 0">
+			and p1.writer not in (
+			<if test="myBlock.size != 0">
+				<foreach collection="myBlock" item="item" separator=",">
+					#{item}
+				</foreach>
+				<foreach collection="block" item="item">
+					, #{item}
+				</foreach>
+			</if>
+			<if test="myBlock.size == 0">
+				<foreach collection="block" item="item" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			)
+		</if>
+		<if test="myBlock.size != 0 or block.size != 0">
+			and p2.writer not in (
+			<if test="myBlock.size != 0">
+				<foreach collection="myBlock" item="item" separator=",">
+					#{item}
+				</foreach>
+				<foreach collection="block" item="item">
+					, #{item}
+				</foreach>
+			</if>
+			<if test="myBlock.size == 0">
+				<foreach collection="block" item="item" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			)
+		</if>					
 			order by p1.peanut_no desc) a)
 		where rn between 1 and #{amt}
 	</select>
@@ -81,16 +114,16 @@
 		<if test="myBlock.size != 0 or block.size != 0">
 			and writer not in (
 			<if test="myBlock.size != 0">
-				<foreach collection="myBlock" item="item1" separator=",">
-					#{item1}
+				<foreach collection="myBlock" item="item" separator=",">
+					#{item}
 				</foreach>
-				<foreach collection="block" item="item2" open="," separator=",">
-					#{item2}
+				<foreach collection="block" item="item">
+					, #{item}
 				</foreach>
 			</if>
 			<if test="myBlock.size == 0">
-				<foreach collection="block" item="item3" separator=",">
-					#{item3}
+				<foreach collection="block" item="item" separator=",">
+					#{item}
 				</foreach>
 			</if>
 			)

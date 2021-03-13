@@ -29,9 +29,7 @@ public class SearchController {
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
 		List<String> myBlock = ms.myBlockList(member.getM_id()); 
-		List<String> block = ms.blockList(member.getM_id());
-		System.out.println(block.get(0));
-		System.out.println(myBlock.size());
+		List<String> block = ms.blockList(member.getM_id());		
 		keyword = keyword.replaceAll(" +", " ");
 		String[] arrayKw = keyword.split(" ");
 		int arrayLen = arrayKw.length;
