@@ -9,7 +9,7 @@ public interface PeanutsService {
 
 	int insert(Peanuts peanut);
 
-	List<Peanuts> selectList(String m_id, int amt, List<String> followList);
+	List<Peanuts> selectList(String m_id, int amt, List<String> followList, List<String> myBlock, List<String> block);
 
 	List<Peanuts> search(String[] arrayKw, int amt, List<String> myBlock, List<String> block);
 

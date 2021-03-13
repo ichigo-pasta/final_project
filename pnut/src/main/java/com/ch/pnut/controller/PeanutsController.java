@@ -97,8 +97,11 @@ public class PeanutsController {
 		if (amt == null) amt = 20;
 		if (more == null) more = 0;
 		String m_id = (String) session.getAttribute("m_id");
+		List<String> myBlock = ms.myBlockList(m_id);	// 로그인 유저가 차단한 아이디 리스트
+		List<String> block = ms.blockList(m_id);		// 로그인 유저를 차단한 아이디 리스트
 		List<String> followList = ms.followList(m_id);	// 로그인 유저가 팔로우한 아이디 리스트		
-		List<Peanuts> list = ps.selectList(m_id, amt+1, followList);	// 로그인 유저, 팔로우유저 피넛 리스트 amt+1개 조회
+		// 차단유저간 피넛 제외하고 로그인 유저, 팔로우유저 피넛 리스트 amt+1개 조회
+		List<Peanuts> list = ps.selectList(m_id, amt+1, followList, myBlock, block);
 		if (list.size() > amt) {
 			more = 1;	// amt 값보다 데이터가 더 많으면 more = 1
 			list.remove(amt.intValue());	// amt 범위 초과 피넛 리스트에서 제거
