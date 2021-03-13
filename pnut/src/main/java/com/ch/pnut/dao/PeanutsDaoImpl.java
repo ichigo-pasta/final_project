@@ -26,10 +26,18 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("followList", followList);
 		return sst.selectList("peanutsns.selectList", map);
 	}
-	public List<Peanuts> search(String[] arrayKw, int amt) {
+	public List<Peanuts> search(String[] arrayKw, int amt, List<String> myBlock, List<String> block) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("arrayKw", arrayKw);
 		map.put("amt", amt);
+		if (myBlock == null) {
+			System.out.println("myBlock = null");
+		} else System.out.println("myBlock != null");
+		map.put("myBlock", myBlock);
+		if (block == null) {
+			System.out.println("block = null");
+		} else System.out.println("block != null");
+		map.put("block", block);
 		return sst.selectList("peanutsns.search", map);
 	}
 	public Peanuts selectDetail(int peanut_no) {

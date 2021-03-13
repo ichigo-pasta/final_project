@@ -25,6 +25,13 @@ public class SearchController {
 	public String search(String type, String keyword, Integer amt
 			, Model model, HttpSession session) {
 		if(amt == null) amt = 20;
+		Member member = ms.select((String) session.getAttribute("m_id"));
+		String m_profile = member.getM_profile();
+		String m_nickname = member.getM_nickname();
+		List<String> myBlock = ms.myBlockList(member.getM_id()); 
+		List<String> block = ms.blockList(member.getM_id());
+		System.out.println(block.get(0));
+		System.out.println(myBlock.size());
 		keyword = keyword.replaceAll(" +", " ");
 		String[] arrayKw = keyword.split(" ");
 		int arrayLen = arrayKw.length;
@@ -35,7 +42,7 @@ public class SearchController {
 			}
 		case "peanut": 
 			List<Peanuts> list = new ArrayList<>();
-			if (arrayLen > 0) list = ps.search(arrayKw, amt); 
+			if (arrayLen > 0) list = ps.search(arrayKw, amt, myBlock, block); 
 			for(Peanuts pn:list) {
 				pn.setContent(ps.setHashtag(pn.getContent(),"hashtag"));
 			}
@@ -46,9 +53,6 @@ public class SearchController {
 			if (arrayLen > 0) list2 = ms.search(arrayKw, amt);
 			model.addAttribute("list2", list2);
 		}
-		Member member = ms.select((String) session.getAttribute("m_id"));
-		String m_profile = member.getM_profile();
-		String m_nickname = member.getM_nickname();
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("type", type);

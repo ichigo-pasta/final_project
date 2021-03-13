@@ -30,4 +30,8 @@ public interface MemberService {
 
 	int insertBlock(String my_id, String m_id);
 
+	List<String> myBlockList(String m_id);
+
+	List<String> blockList(String m_id);
+
 }

@@ -11,7 +11,7 @@ public interface PeanutsDao {
 
 	List<Peanuts> selectList(String m_id, int amt, List<String> followList);
 
-	List<Peanuts> search(String[] arrayKw, int amt);
+	List<Peanuts> search(String[] arrayKw, int amt, List<String> myBlock, List<String> block);
 
 	Peanuts selectDetail(int peanut_no);
 
