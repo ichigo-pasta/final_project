@@ -39,7 +39,8 @@
 		var amt = document.createElement('input');
 		amt.setAttribute('type', 'hidden');
 		amt.setAttribute('name', 'amt');
-		amt.setAttribute('value', '20');
+		if(arguments.length < 3) amt.setAttribute('value', '20');
+		else amt.setAttribute('value', arguments[2]);
 		
 		form.appendChild(type);
 		form.appendChild(keyword);
