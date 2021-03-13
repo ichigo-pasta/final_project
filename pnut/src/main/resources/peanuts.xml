@@ -82,7 +82,7 @@
 			)
 		</if>
 		<if test="myBlock.size != 0 or block.size != 0">
-			and p2.writer not in (
+			and (p2.writer not in (
 			<if test="myBlock.size != 0">
 				<foreach collection="myBlock" item="item" separator=",">
 					#{item}
@@ -96,7 +96,7 @@
 					#{item}
 				</foreach>
 			</if>
-			)
+			) or p2.writer is null)
 		</if>					
 			order by p1.peanut_no desc) a)
 		where rn between 1 and #{amt}
