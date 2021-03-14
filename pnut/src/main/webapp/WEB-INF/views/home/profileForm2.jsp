@@ -52,10 +52,10 @@
 	</div>
 	<ul class="nav nav-tabs nav-fill">
   		<li class="nav-item">
-  			<a class="nav-link active" id="peanut" href="javascript:search('peanut');">피넛</a>
+  			<a class="nav-link" id="peanut" href="${path}/home/profileForm.do?m_id=${my_id}">피넛</a>
  		</li>
  		<li class="nav-item">
-  			<a class="nav-link" id="picpeanut" href="${path}/home/profileForm2.do?m_id=${my_id}">사진 피넛</a>
+  			<a class="nav-link active" id="picpeanut" href="javascript:search('picPeanut');">사진 피넛</a>
   		</li>
 	</ul>
 </div>
@@ -65,7 +65,7 @@
 	</c:if>
 	<c:if test="${not empty list}">
 		<c:forEach items="${list }" var="pn">
-		<c:if test="${my_id == pn.writer}">
+		<c:if test="${my_id == pn.writer && pn.picture1 != null}">
 			<div class="row peanut_container">
 			<div style="width: 110px">
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
