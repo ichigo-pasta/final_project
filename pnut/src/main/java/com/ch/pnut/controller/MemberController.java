@@ -85,6 +85,7 @@ public class MemberController {
 		List<String> followLt = ms.followList(m_id);
 		int followLtSize = followLt.size();
 		int followerLtSize = ms.followerList(m_id).size();
+		List<Peanuts> list = ps.selectProfilePn(m_id, amt);  // 프로필 리넛 표시 리스트
 		Member member2 = ms.select(my_id);
 		String m_profile = member2.getM_profile();
 		String m_nickname = member2.getM_nickname();
@@ -94,6 +95,7 @@ public class MemberController {
 		model.addAttribute("followLtSize", followLtSize);
 		model.addAttribute("followerLtSize", followerLtSize);
 		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("list", list);
 		return "home/profileForm";
 	}
 	@RequestMapping("home/profileUpdateForm")

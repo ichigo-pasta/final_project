@@ -158,4 +158,13 @@
 	<update id="cancelRenut" parameterType="hashmap">
 		update pn_peanuts set del = 'y' where renut = #{renut} and writer = #{m_id}
 	</update>
+	<select id="selectProfilePn" parameterType="hashmap" resultMap="peanutsResult">
+		select * from 
+			(select a.*, rownum rn from 
+				(select p.*, m_nickname, m_profile 
+				from pn_peanuts p, pn_member m 
+				where p.del='n' and p.writer=m.m_id
+				order by p.peanut_no desc) a)
+		where rn between 1 and #{amt}
+	</select>
 </mapper>
