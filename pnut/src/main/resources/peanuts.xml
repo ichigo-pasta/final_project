@@ -97,7 +97,7 @@
 				</foreach>
 			</if>
 			) or p2.writer is null)
-		</if>					
+		</if>				
 			order by p1.peanut_no desc) a)
 		where rn between 1 and #{amt}
 	</select>

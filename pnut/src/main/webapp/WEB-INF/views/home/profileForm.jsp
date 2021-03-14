@@ -55,24 +55,45 @@
   			<a class="nav-link" id="peanut" href="javascript:search('peanut');">피넛</a>
  		</li>
  		<li class="nav-item">
-  			<a class="nav-link" id="picpeanut" href="javascript:search('picpeanut');">사진 피넛</a>
+  			<a class="nav-link" id="picpeanut" href="javascript:search('picPeanut');">사진 피넛</a>
   		</li>
 	</ul>
 </div>
-
-<div>
-	<c:if test="${empty list}">
-		데이터가 없습니다.
-	</c:if>
+<div class="container">
+		<c:if test="${empty list}">
+			데이터가 없습니다.
+		</c:if>
+		<c:if test="${not empty list}">
+		<c:forEach items="${list }" var="pn">
+			<div class="row">
+				<div class="col col-2">
+					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
+						width="100" height="100" onclick="profile('${pn.writer}')">
+				</div>
+				<div class="col col-10">
+					<div class="row">
+						<div class="col">
+							<c:out value="${pn.member.m_nickname}, ${pn.writer}, ${pn.regdate}"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							${pn.content}
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+		</c:if>	
 </div>
 
 <input type="hidden" value="${type}" id="type">
 <script type="text/javascript">
 	window.onpageshow = function() {
-		if (document.getElementById("peanut").value == "peanut") {
+		if (document.getElementById("type").value == "peanut") {
 			document.getElementById("peanut").setAttribute("class","nav-link active");
 		} else {
-			document.getElementById("picpeanut").setAttribute("class","nav-link active");
+			document.getElementById("picPeanut").setAttribute("class","nav-link active");
 		}
 	}
 	function follow(m_id) {
