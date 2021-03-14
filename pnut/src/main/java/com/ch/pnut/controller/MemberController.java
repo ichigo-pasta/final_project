@@ -95,7 +95,35 @@ public class MemberController {
 		model.addAttribute("followerLtSize", followerLtSize);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("list", list);
+		model.addAttribute("my_id", my_id);
+		model.addAttribute("type", type);
 		return "home/profileForm";
+	}
+	@RequestMapping("home/profileForm2")
+	public String profile2(String m_id, Model model, HttpSession session,
+			Integer amt, String type) {
+		if(amt == null) amt = 20;
+		Member member = ms.select(m_id);
+		String my_id = (String) session.getAttribute("m_id");
+		List<String> myFollowLt = ms.followList(my_id);
+		boolean isFollow = myFollowLt.contains(m_id);
+		List<String> followLt = ms.followList(m_id);
+		int followLtSize = followLt.size();
+		int followerLtSize = ms.followerList(m_id).size();
+		List<Peanuts> list = ps.selectProfilePn(m_id, amt);  // 프로필 리넛 표시 리스트
+		Member member2 = ms.select(my_id);
+		String m_profile = member2.getM_profile();
+		String m_nickname = member2.getM_nickname();
+		model.addAttribute("m_nickname", m_nickname);
+		model.addAttribute("member", member);
+		model.addAttribute("isFollow", isFollow);
+		model.addAttribute("followLtSize", followLtSize);
+		model.addAttribute("followerLtSize", followerLtSize);
+		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("list", list);
+		model.addAttribute("my_id", my_id);
+		model.addAttribute("type", type);
+		return "home/profileForm2";
 	}
 	@RequestMapping("home/profileUpdateForm")
 	public String profileUpdateForm(String m_id, Model model, HttpSession session) {
