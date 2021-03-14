@@ -176,7 +176,7 @@
 								</div>
 								<div class="modal-footer">									
 	        						<a type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</a>
-	        						<a type="button" class="btn btn-primary" onclick="cancelRenut('${pn.peanut_no}','timeline')">리넛 취소</a>
+	        						<a type="button" class="btn btn-primary" onclick="rncancel_from_renut('${pn.peanut_no}')">리넛 취소</a>
       							</div>
 							</div>
 						</div>
@@ -227,5 +227,43 @@
 	}
 	function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
+	}
+	function rn_from_search(peanut_no) {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				if(xhr.responseText.includes("success")) {
+					alert('리넛 성공');
+					search(document.getElementById("type").value, document.getElementById("keyword").value);					
+				} else {
+					alert('리넛 실패');
+					search(document.getElementById("type").value, document.getElementById("keyword").value);
+				}
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.open("post","${path}/rn_from_search.do", true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.send("peanut_no="+peanut_no);
+	}
+	function rncancel_from_renut(peanut_no) {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				if(xhr.responseText.includes("success")) {
+					alert('리넛을 취소했습니다');
+					search(document.getElementById("type").value, document.getElementById("keyword").value);					
+				} else {
+					alert('리넛 취소 과정에서 오류가 발생했습니다');
+					search(document.getElementById("type").value, document.getElementById("keyword").value);
+				}
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.open("post","${path}/rncancel_from_renut.do", true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.send("peanut_no="+peanut_no);
 	}
 </script>
