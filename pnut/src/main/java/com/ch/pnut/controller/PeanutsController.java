@@ -176,7 +176,14 @@ public class PeanutsController {
 		Peanuts peanut;
 		if(renut == null) peanut = ps.selectDetail(peanut_no);			
 		else peanut = ps.selectDetail(renut);
+		
 		if(peanut == null) return "peanutError";
+		
+		List<String> block = ms.blockList(m_id);		// 로그인 유저를 차단한 아이디 리스트
+		List<String> myBlock = ms.myBlockList(m_id);	// 로그인 유저가 차단한 아이디 리스트
+		if(block.contains(peanut.getWriter())) return "peanutError";
+		if(myBlock.contains(peanut.getWriter())) return "peanutError";
+		
 		peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
 		peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
 		peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
@@ -237,7 +244,7 @@ public class PeanutsController {
 			}
 		}
 
-		Member member = ms.select((String) session.getAttribute("m_id"));
+		Member member = ms.select(m_id);
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
 		model.addAttribute("m_nickname", m_nickname);
