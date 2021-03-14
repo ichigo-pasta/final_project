@@ -2,32 +2,32 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <div style="display: flex; flex-direction: column; justify-content: space-between; height: 90vh; top: 60px" class="sticky-top">
-	<div class="btn-group-vertical" role="group" style="width: 110px">
+	<div class="btn-group-vertical" role="group" style="width: 110px;">
 		<button type="button"
 			onclick="location.href='${path}/home/timeline.do'"
-			class="btn btn-outline-secondary menuBt" id="timelineBt">
+			class="btn btn-outline-secondary menuBt" id="timelineBt" style="text-align: left">
 			<i class="bi-house-door-fill"></i>&nbsp;&nbsp;홈
 		</button>
 		<button type="button" onclick="location.href='${path}/home/notice.do'"
-			class="btn btn-outline-secondary menuBt" id="noticeBt">
+			class="btn btn-outline-secondary menuBt" id="noticeBt" style="text-align: left">
 			<i class="bi-bell-fill"></i>&nbsp;&nbsp;알림
 		</button>
 		<button type="button"
 			onclick="location.href='${path}/home/message.do'"
-			class="btn btn-outline-secondary menuBt" id="messageBt">
+			class="btn btn-outline-secondary menuBt" id="messageBt" style="text-align: left">
 			<i class="bi-envelope-fill"></i>&nbsp;&nbsp;메시지
 		</button>
 		<button type="button" onclick="bookmark('${m_id}');"
-			class="btn btn-outline-secondary menuBt" id="bookmarkBt">
+			class="btn btn-outline-secondary menuBt" id="bookmarkBt" style="text-align: left">
 			<i class="bi-bookmark-fill"></i>&nbsp;&nbsp;북마크
 		</button>
 		<button type="button" class="btn btn-outline-secondary menuBt"
-			onclick="profile('${m_id}');" id="profileBt">
+			onclick="profile('${m_id}');" id="profileBt" style="text-align: left">
 			<i class="bi-person-fill"></i>&nbsp;&nbsp;프로필
 		</button>
 		<button type="button"
 			onclick="location.href='${path}/home/writeForm.do'"
-			class="btn btn-outline-secondary menuBt" id="writeFormBt">
+			class="btn btn-outline-secondary menuBt" id="writeFormBt" style="text-align: left">
 			<i class="bi-pencil-fill"></i>&nbsp;&nbsp;글쓰기
 		</button>
 	</div>

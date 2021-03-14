@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ch.pnut.model.Member;
+import com.ch.pnut.model.Peanuts;
 import com.ch.pnut.service.MemberService;
 import com.ch.pnut.service.PeanutsService;
 
@@ -73,7 +74,9 @@ public class MemberController {
 		return "logout";
 	}
 	@RequestMapping("home/profileForm")
-	public String profile(String m_id, Model model, HttpSession session) {
+	public String profile(String m_id, Model model, HttpSession session,
+			Integer amt, String type) {
+		if(amt == null) amt = 20;
 		Member member = ms.select(m_id);
 		String my_id = (String) session.getAttribute("m_id");
 		List<String> myFollowLt = ms.followList(my_id);
@@ -81,16 +84,17 @@ public class MemberController {
 		List<String> followLt = ms.followList(m_id);
 		int followLtSize = followLt.size();
 		int followerLtSize = ms.followerList(m_id).size();
+		List<Peanuts> list = ps.selectProfilePn(m_id, amt);  // 프로필 리넛 표시 리스트
 		Member member2 = ms.select(my_id);
 		String m_profile = member2.getM_profile();
 		String m_nickname = member2.getM_nickname();
-		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("member", member);
 		model.addAttribute("isFollow", isFollow);
 		model.addAttribute("followLtSize", followLtSize);
 		model.addAttribute("followerLtSize", followerLtSize);
 		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("list", list);
 		return "home/profileForm";
 	}
 	@RequestMapping("home/profileUpdateForm")
@@ -198,7 +202,8 @@ public class MemberController {
 	@RequestMapping("block")
 	public String block(String m_id, HttpSession session, Model model) {
 		int result;
-		String my_id = (String) session.getAttribute("m_id");		
+		String my_id = (String) session.getAttribute("m_id");
+		System.out.println(my_id + ", "+ m_id);
 		int isBlocked = ms.checkBlock(my_id, m_id);	// 내가 상대를 이미 차단중인지 체크
 		if (isBlocked == 1) result = -1;	// result -1 : 이미 차단중 
 		else {

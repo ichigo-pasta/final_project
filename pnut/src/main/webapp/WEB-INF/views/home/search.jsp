@@ -129,7 +129,7 @@
 								<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 							</button>
 						</c:if>
-						<c:if test="${pn.bookmarked == false}">								
+							<c:if test="${pn.bookmarked == false}">								
 							<button onclick="setBm('${pn.peanut_no}')" id="bmBtn${pn.peanut_no}">
 								<i class="bi-bookmark" style="color: gray" id="bmBtnI${pn.peanut_no}"></i>
 								<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
