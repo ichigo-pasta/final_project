@@ -313,6 +313,24 @@ public class PeanutsController {
 		}
 		return rd;
 	}
+	
+	@RequestMapping("rn_from_search")
+	@ResponseBody
+	public String rn_from_search(Integer peanut_no, HttpSession session, HttpServletRequest request) {
+		if (peanut_no == null) peanut_no = 0;
+		String result;
+		String m_id = (String)session.getAttribute("m_id");
+		Peanuts peanut = ps.selectDetail(peanut_no);
+		if (peanut == null) result = "fail";
+		else {
+			peanut.setWriter(m_id);
+			peanut.setRenut(peanut_no);
+			peanut.setIp(request.getRemoteAddr());
+			ps.insert(peanut);
+			result = "success";
+		}
+		return result;
+	}
 
 	@RequestMapping("cancelRenut") // 타임라인에서 리넛 취소
 	public String cancelRenut(Integer peanut_no, HttpSession session,
@@ -339,10 +357,8 @@ public class PeanutsController {
 	public String cancelRenut2(Integer peanut_no, HttpSession session,
 			HttpServletRequest request, String redirect) {
 		if (peanut_no == null) peanut_no = 0;
-		String m_id = (String)session.getAttribute("m_id");
-		Integer renut = ps.isRenut(peanut_no);
-		if(renut == null) renut = peanut_no;
-		int result = ps.cancelRenut(renut, m_id);
+		String m_id = (String)session.getAttribute("m_id");		
+		int result = ps.cancelRenut(peanut_no, m_id);
 		if (result == 0) return "peanutError";
 		if (redirect == null) return "redirect:home/bookmarkForm.do?m_id="+m_id; 
 		String rd = "";
@@ -356,4 +372,18 @@ public class PeanutsController {
 		}
 		return rd;
 	}
+	
+	@RequestMapping("rncancel_from_renut")
+	@ResponseBody
+	public String rncancel_from_renut(Integer peanut_no, HttpSession session,
+			HttpServletRequest request) {
+		if (peanut_no == null) peanut_no = 0;		
+		String m_id = (String)session.getAttribute("m_id");		
+		int cancelCnt = ps.cancelRenut(peanut_no, m_id);
+		String result;
+		if (cancelCnt > 0) result = "success";
+		else result = "fail";
+		return result;
+	}
+	
 }
