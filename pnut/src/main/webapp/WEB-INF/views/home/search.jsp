@@ -266,4 +266,38 @@
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		xhr.send("peanut_no="+peanut_no);
 	}
+	function setBm(peanut_no) {		
+		changeBmBtn1(peanut_no);		
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('set bm success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.open("get","${path}/setBm.do?peanut_no="+peanut_no,false);
+		xhr.send(null);		
+	}
+	function changeBmBtn1(peanut_no) {		
+		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "deleteBm('"+peanut_no+"')");
+		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: blue");
+	}
+	function deleteBm(peanut_no) {		
+		changeBmBtn2(peanut_no);
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('remove bm success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.open("get","${path}/deleteBm.do?peanut_no="+peanut_no,false);
+		xhr.send(null);				
+	}
+	function changeBmBtn2(peanut_no) {		
+		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "setBm('"+peanut_no+"')");
+		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: gray");		
+	}
 </script>
