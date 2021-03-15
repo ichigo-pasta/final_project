@@ -215,4 +215,32 @@ public class MemberController {
 		model.addAttribute("result", result);
 		return "block";
 	}
+	@RequestMapping("home/blockList")
+	public String blockList(String m_id, Model model, 
+			HttpSession session, Integer amt) {
+		if(amt == null) {
+			amt = 20;
+		}
+		Member member = ms.select((String) session.getAttribute("m_id"));
+		String m_profile = member.getM_profile();
+		String m_nickname = member.getM_nickname();
+		String my_id = (String)session.getAttribute("m_id");	// 접속 ID
+		List<String> blockList = ms.myBlockList(my_id);			// 내가 차단한 아이디 리스트
+		List<String> blockedList = ms.blockList(my_id);			// 나를 차단한 아이디 리스트 
+		List<Member> list = new ArrayList<>(); 
+		// 내가 차단한 멤버 리스트
+//		if (myBlockList.size() > 0) list = ms.followingList(myBlockList, amt); 
+//		for (Member mem : list) {
+//			mem.setM_intro(ps.setHashtag(mem.getM_intro(),"user")); // 자기소개 해시태그 
+//			if (followList.size() > 0) {
+//				if (followList.contains(mem.getM_id())) {
+//					mem.setFollowMe(true);
+//				}
+//			}
+//		}
+		model.addAttribute("list", list);
+		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("m_nickname", m_nickname);
+		return "home/blockList";
+	}
 }

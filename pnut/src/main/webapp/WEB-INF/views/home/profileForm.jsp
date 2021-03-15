@@ -11,7 +11,7 @@
 		<div class="col col-10">
 			<c:out value="${member.m_nickname }"></c:out>
 		</div>
-		<div class="col col-2">
+		<div class="col">
 			<c:if test="${member.m_id == my_id}">
 				<a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a>
 			</c:if>
@@ -32,9 +32,9 @@
 			<c:out value="${member.m_id }"/>
 		</div>
 	</div>
-	<div class="row" style="height: 200px">
+	<div class="row">
 		<div class="col"> 
-			자기소개 :<c:out value="${member.m_intro }"/>
+			<c:out value="${member.m_intro }"/>
 		</div>
 	</div>
 	<div class="row">
