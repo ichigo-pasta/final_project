@@ -94,4 +94,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectList("blockns.blockList", m_id);
 	}
 
+	@Override
+	public int noticeCount(String attribute) {
+		return sst.selectOne("noticens.noticeCount", attribute);
+	}
+
 }

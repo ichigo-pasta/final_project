@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : xml을 구별하기 위한 이름 -->
+<mapper namespace="noticens">
+	<resultMap type="notice" id="noticeResult">
+		<result property="notice_no" column="notice_no" />
+		<result property="active" column="active" />
+		<result property="passive" column="passive" />
+		<result property="n_type" column="n_type" />
+		<result property="peanut_no" column="peanut_no" />
+		<result property="reply_no" column="reply_no" />
+		<result property="regdate" column="regdate" />
+		<result property="read" column="read" />
+	</resultMap>	
+	<select id="noticeCount" parameterType="string" resultType="int">
+		select count(notice_no) from pn_notice where passive = #{attribute} and read = 'n'
+	</select>
+</mapper>

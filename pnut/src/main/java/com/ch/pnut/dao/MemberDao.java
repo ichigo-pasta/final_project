@@ -34,4 +34,6 @@ public interface MemberDao {
 
 	List<String> blockList(String m_id);
 
+	int noticeCount(String attribute);
+
 }
