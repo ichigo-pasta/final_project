@@ -54,5 +54,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 	public List<String> blockList(String m_id) {
 		return md.blockList(m_id);
+	}
+	@Override
+	public int noticeCount(String attribute) {
+		return md.noticeCount(attribute);
 	}	
 }

@@ -243,4 +243,11 @@ public class MemberController {
 		model.addAttribute("m_nickname", m_nickname);
 		return "home/blockList";
 	}
+	
+	@RequestMapping("noticeLoad")
+	@ResponseBody
+	public int noticeLoad(HttpSession session) {
+		int result = ms.noticeCount((String) session.getAttribute("m_id"));		
+		return result;
+	}
 }
