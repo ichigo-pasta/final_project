@@ -132,7 +132,7 @@ create SEQUENCE notice_no_seq;
 
 -- 트리거 생성
 create or replace trigger block_trig
-    after insert on pn_block
+    before insert on pn_block
     for each row
 begin
     delete pn_follow where (active = :new.active and passive = :new.passive) or (active = :new.passive and passive = :new.active);    
@@ -145,14 +145,16 @@ end;
 /
 
 create or replace trigger renut_trig
-    after insert on pn_peanuts
+    before insert on pn_peanuts
     for each row
 declare
     rn_writer varchar2(20);
 begin
-    if :new.renut != null then
-        select p2.writer into rn_writer from pn_peanuts p1, pn_peanuts p2 where p1.renut = p2.peanut_no and p1.peanut_no = :new.peanut_no;
-        insert into pn_notice values(notice_no_seq.nextval, :new.writer, rn_writer, 'renut', :new.renut, null, sysdate, 'n');
+    if :new.renut is not null then
+        select writer into rn_writer from pn_peanuts where peanut_no = :new.renut;
+        if :new.writer != rn_writer then
+            insert into pn_notice values(notice_no_seq.nextval, :new.writer, rn_writer, 'renut', :new.renut, null, sysdate, 'n');
+        end if;
     end if;
 end;
 /
@@ -160,12 +162,9 @@ end;
 create or replace trigger cancel_rn_trig
     after update on pn_peanuts
     for each row
-declare
-    rn_writer varchar2(20);
 begin
-    if :new.renut != null then
-        select p2.writer into rn_writer from pn_peanuts p1, pn_peanuts p2 where p1.renut = p2.peanut_no and p1.peanut_no = :new.peanut_no;
-        delete pn_notice where read = 'n' and active = :new.writer and passive = rn_writer and peanut_no = :new.renut;
+    if :new.renut is not null then        
+        delete pn_notice where read = 'n' and active = :new.writer and peanut_no = :new.renut;
     end if;
 end;
 /
@@ -220,6 +219,7 @@ delete PN_FOLLOW;
 delete pn_bookmark;
 delete pn_block;
 delete pn_notice;
+
 insert into pn_follow values ('k1', 'k2');
 insert into pn_follow values ('k1', 'k3');
 insert into pn_member values ('k1', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n',null,null);
