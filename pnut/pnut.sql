@@ -190,7 +190,9 @@ create or replace trigger reply_trig
     after insert on pn_replies
     for each row
 begin
-    insert into pn_notice values(notice_no_seq.nextval, :new.writer, :new.rep_target, 'reply', null, :new.reply_no, sysdate, 'n');
+    if :new.writer != :new.rep_target then
+        insert into pn_notice values(notice_no_seq.nextval, :new.writer, :new.rep_target, 'reply', null, :new.reply_no, sysdate, 'n');
+    end if;
 end;
 /
 
