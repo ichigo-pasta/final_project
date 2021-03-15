@@ -126,9 +126,10 @@
 		</c:if> <!-- 사진 없을 때 -->
 					<div class="row btBox"> <!-- 댓글, 리넛, 북마크 박스 -->
 						<div class="col col-4">
-							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
+							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'"
+								class="btnBox">
 							<c:if test="${pn.repCnt != 0}">
-								<i class="bi-chat" style="color: blue"></i>
+								<i class="bi-chat" style="color: #D27D32"></i>
 								${pn.repCnt }
 							</c:if>
 							<c:if test="${pn.repCnt == 0}">
@@ -138,27 +139,31 @@
 						</div>
 						<div class="col col-4">
 							<c:if test="${pn.renuted == false }">
-							<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}" onclick="stopRefresh()">
+							<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}" onclick="stopRefresh()"
+								class="btnBox">
 								<i class="bi-arrow-clockwise" style="color: gray"></i>
 								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
 							</button>
 							</c:if>
 							<c:if test="${pn.renuted == true }">
-							<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}" onclick="stopRefresh()">
-								<i class="bi-arrow-clockwise" style="color: blue"></i>
+							<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}" onclick="stopRefresh()"
+								class="btnBox">
+								<i class="bi-arrow-clockwise" style="color: #D27D32"></i>
 								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
 							</button>
 							</c:if>
 						</div>
 						<div class="col col-4">
 							<c:if test="${pn.bookmarked == true}">
-								<button onclick="deleteBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}">
-									<i class="bi-bookmark" style="color: blue;" id="bmBtnI${pn.peanut_no}"></i>
+								<button onclick="deleteBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}"
+									class="btnBox">
+									<i class="bi-bookmark" style="color: #D27D32;" id="bmBtnI${pn.peanut_no}"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 								</button>
 							</c:if>							
 							<c:if test="${pn.bookmarked == false}">								
-								<button onclick="setBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}">
+								<button onclick="setBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}"
+									class="btnBox">
 									<i class="bi-bookmark" style="color: gray" id="bmBtnI${pn.peanut_no}"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 								</button>
