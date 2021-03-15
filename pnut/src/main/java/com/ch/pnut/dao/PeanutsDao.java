@@ -45,7 +45,7 @@ public interface PeanutsDao {
 
 	int deletePd(Integer peanut_no);
 
-	List<Peanuts> selectProfilePn(String m_id, Integer amt);
+	List<Peanuts> selectProfilePn(String m_id, Integer amt, String type);
 
 
 }

@@ -52,10 +52,12 @@
 	</div>
 	<ul class="nav nav-tabs nav-fill">
   		<li class="nav-item">
-  			<a class="nav-link active" id="peanut" href="javascript:search('peanut');">피넛</a>
+  			<a class="nav-link" id="pean" 
+  				href="${path}/home/profileForm.do?m_id=${member.m_id}&type=peanut">피넛</a>
  		</li>
  		<li class="nav-item">
-  			<a class="nav-link" id="picpeanut" href="${path}/home/profileForm2.do?m_id=${my_id}">사진 피넛</a>
+  			<a class="nav-link" id="peanPic" 
+  				href="${path}/home/profileForm.do?m_id=${member.m_id}&type=peanutPic">사진 피넛</a>
   		</li>
 	</ul>
 </div>
@@ -65,7 +67,6 @@
 	</c:if>
 	<c:if test="${not empty list}">
 		<c:forEach items="${list }" var="pn">
-		<c:if test="${my_id == pn.writer}">
 			<div class="row peanut_container">
 			<div style="width: 110px">
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
@@ -265,18 +266,17 @@
 					</div>	<!-- 취소 Modal 종료 -->
 				</div>
 			</div>	<!-- peanut_container 종료 -->
-			</c:if>
 		</c:forEach>
 	</c:if>
 </div>
 
-<input type="hidden" value="${type}" id="type">
+<input type="hidden" value="${type}" id="types">
 <script type="text/javascript">
-	window.onpageshow = function() {
-		if (document.getElementById("type").value == "peanut") {
-			document.getElementById("peanut").setAttribute("class","nav-link active");
+	window.onload = function() {
+		if (document.getElementById("types").value == "peanut") {
+			document.getElementById("pean").setAttribute("class","nav-link active");
 		} else {
-			document.getElementById("picPeanut").setAttribute("class","nav-link active");
+			document.getElementById("peanPic").setAttribute("class","nav-link active");
 		}
 	}
 	function follow(m_id) {

@@ -129,7 +129,7 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public int deletePd(Integer peanut_no) {
 		return pd.deletePd(peanut_no);
 	}
-	public List<Peanuts> selectProfilePn(String m_id, Integer amt) {
-		return pd.selectProfilePn(m_id, amt);
+	public List<Peanuts> selectProfilePn(String m_id, Integer amt, String type) {
+		return pd.selectProfilePn(m_id, amt, type);
 	}
 }
