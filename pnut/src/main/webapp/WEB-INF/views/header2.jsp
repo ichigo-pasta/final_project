@@ -21,6 +21,12 @@
 		word-break: break-word;
 		white-space: pre-wrap;
 	}
+	body {
+		display: flex;
+		align-items: center;
+		background: #282828;
+		color: gray;
+	}
 	.container {
 		min-width: 576px;
 	}
@@ -38,7 +44,7 @@
 	}
 	.peanut_container {		
 		padding: 10px 0;
-		border-bottom: 1px solid black;
+		border-bottom: 1px solid gray;
 	}
 	.peanut_container:nth-last-child(1) {
 		border-bottom: none
@@ -69,5 +75,8 @@
 	} 
 	.profile_pic {
 		border-radius: 10px;
+	}
+	.btnBox {
+		color: gray;
 	}
 </style>
