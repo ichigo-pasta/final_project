@@ -29,7 +29,7 @@
 				</div>
 				<div class="col">
 					<div class="row">
-						<div class="col">
+						<div class="col col-10">
 							<c:out value="${pn.member.m_nickname}, ${pn.writer}"/>
 							<c:choose>
 								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
@@ -52,7 +52,22 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-					</div>
+							<div class="col">
+								<c:if test="${mem.m_id == my_id}">
+									<a href="${path}/home/profileUpdateForm.do?m_id=${mem.m_id }">프로필 수정</a>
+								</c:if>
+								<c:if test="${mem.m_id != my_id}">
+									<c:if test="${isFollow == true }">
+										<button id="followbt" onclick="unfollow('${mem.m_id}')"
+											onmouseover="this.innerText='언팔로우'"
+											onmouseout="this.innerText='팔로우 중'">팔로우 중</button>
+									</c:if>
+									<c:if test="${isFollow == false }">
+										<button id="followbt" onclick="follow('${mem.m_id}')">팔로우</button>
+									</c:if>
+								</c:if>
+							</div>
+						</div>
 					<div class="row">
 						<div class="col">
 							${pn.content}
