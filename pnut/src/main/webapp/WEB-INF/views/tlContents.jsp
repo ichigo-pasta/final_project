@@ -116,7 +116,7 @@
 					</div>
 					<div class="row">
 						<div class="col content_col" id="content${pn.peanut_no }" style="min-height: 5vw; cursor: pointer">
-							${pn.content}
+							<pre id="contpre${pn.peanut_no }">${pn.content}</pre>
 						</div>
 					</div>
 		<c:if test="${pn.picture1 != null}">					

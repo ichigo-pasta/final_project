@@ -91,14 +91,20 @@ create table pn_bookmark (
 
 -- 알림 테이블 생성
 create table pn_notice (
-	peanut_no 		number,						-- 게시글 번호
-	reply_no 		number,						-- 댓글 번호
-	notice_user 	varchar2(20),				-- 알림대상
-	primary key (peanut_no, reply_no, notice_user),
+	notice_no	number			primary key,	-- 알림번호(pk)
+	active		varchar2(20),					-- 알림 생성자(fk)
+	passive 	varchar2(20),					-- 알림 수신자(fk)
+	n_type		varchar2(10)	not null,		-- 알림 타입
+	peanut_no	number,							-- 리넛알림일 경우 피넛번호(fk)
+	reply_no	number,							-- 댓글알림일 경우 댓글번호(fk)
+	regdate		date			not null,		-- 알림 생성일
+	read		char(1)			not null,		-- 알림 수신여부
+	foreign key (active) references pn_member(m_id),
+	foreign key (passive) references pn_member(m_id),
 	foreign key (peanut_no) references pn_peanuts(peanut_no),
-	foreign key (reply_no) references pn_replies(reply_no),
-	foreign key (notice_user) references pn_member(m_id)
+	foreign key (reply_no) references pn_replies(reply_no)
 );
+	
 
 -- 쪽지 테이블 생성
 create table pn_message (
@@ -121,16 +127,79 @@ create SEQUENCE peanut_no_seq;
 drop SEQUENCE reply_no_seq;
 create SEQUENCE reply_no_seq;
 
+drop SEQUENCE notice_no_seq;
+create SEQUENCE notice_no_seq;
+
 -- 트리거 생성
 create or replace trigger block_trig
-    after insert on pn_block
+    before insert on pn_block
     for each row
 begin
-    delete pn_follow where (active = :new.active and passive = :new.passive) or (active = :new.passive and passive = :new.active);
+    delete pn_follow where (active = :new.active and passive = :new.passive) or (active = :new.passive and passive = :new.active);    
     update pn_peanuts set del = 'y' where (writer = :new.active and renut in (select peanut_no from pn_peanuts where writer = :new.passive))
         or (writer = :new.passive and renut in (select peanut_no from pn_peanuts where writer = :new.active));
     delete pn_bookmark where (peanut_no in (select peanut_no from pn_peanuts where writer = :new.passive) and bm_user = :new.active)
         or (peanut_no in (select peanut_no from pn_peanuts where writer = :new.active) and bm_user = :new.passive);
+    delete pn_notice where (active = :new.active and passive = :new.passive) or (active = :new.passive and passive = :new.active);
+end;
+/
+
+create or replace trigger renut_trig
+    before insert on pn_peanuts
+    for each row
+declare
+    rn_writer varchar2(20);
+begin
+    if :new.renut is not null then
+        select writer into rn_writer from pn_peanuts where peanut_no = :new.renut;
+        if :new.writer != rn_writer then
+            insert into pn_notice values(notice_no_seq.nextval, :new.writer, rn_writer, 'renut', :new.renut, null, sysdate, 'n');
+        end if;
+    end if;
+end;
+/
+
+create or replace trigger cancel_rn_trig
+    after update on pn_peanuts
+    for each row
+begin
+    if :new.renut is not null then        
+        delete pn_notice where read = 'n' and active = :new.writer and peanut_no = :new.renut;
+    end if;
+end;
+/
+
+create or replace trigger follow_trig
+    after insert on pn_follow
+    for each row
+begin
+    insert into pn_notice values(notice_no_seq.nextval, :new.active, :new.passive, 'follow', null, null, sysdate, 'n');
+end;
+/
+
+create or replace trigger unfollow_trig
+    after delete on pn_follow
+    for each row
+begin
+    delete pn_notice where read = 'n' and active = :old.active and passive = :old.passive;
+end;
+/
+
+create or replace trigger reply_trig
+    after insert on pn_replies
+    for each row
+begin
+    if :new.writer != :new.rep_target then
+        insert into pn_notice values(notice_no_seq.nextval, :new.writer, :new.rep_target, 'reply', null, :new.reply_no, sysdate, 'n');
+    end if;
+end;
+/
+
+create or replace trigger del_reply_trig
+    after update on pn_replies
+    for each row
+begin
+    delete pn_notice where read = 'n' and reply_no = :old.reply_no;
 end;
 /
 
@@ -149,6 +218,8 @@ select * from pn_message;
 delete PN_FOLLOW; 
 delete pn_bookmark;
 delete pn_block;
+delete pn_notice;
+
 insert into pn_follow values ('k1', 'k2');
 insert into pn_follow values ('k1', 'k3');
 insert into pn_member values ('k1', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n',null,null);

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <div style="display: flex; flex-direction: column; justify-content: space-between; height: 90vh; top: 60px" class="sticky-top">
-	<div class="btn-group-vertical" role="group" style="width: 110px;">
+	<div class="btn-group-vertical" role="group" style="width: 123px;">
 		<button type="button"
 			onclick="location.href='${path}/home/timeline.do'"
 			class="btn btn-outline-secondary menuBt" id="timelineBt" style="text-align: left">
@@ -11,6 +11,7 @@
 		<button type="button" onclick="location.href='${path}/home/notice.do'"
 			class="btn btn-outline-secondary menuBt" id="noticeBt" style="text-align: left">
 			<i class="bi-bell-fill"></i>&nbsp;&nbsp;알림
+			<span class="badge rounded-pill bg-info text-dark invisible" id="notice_cnt"></span>
 		</button>
 		<button type="button"
 			onclick="location.href='${path}/home/message.do'"
@@ -58,13 +59,16 @@
 	</div>
 </div>
 <script type="text/javascript">
+	var notice_refresh;
 	function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id=" + m_id;
 	}
 	function bookmark(m_id) {
 		location.href = "${path}/home/bookmarkForm.do?m_id=" + m_id;
 	}
-	window.onload = function () {
+	window.addEventListener('load', function() {
+		notice_load();
+		notice_refresh = setInterval(notice_load, 10000);
 		var currentPage = location.href.split("/")[location.href.split("/").length-1];
 		if (currentPage.startsWith('timeline.do')) {
 			btnReset();
@@ -89,11 +93,33 @@
 			btnReset();
 			document.getElementById('writeFormBt').setAttribute('class','btn btn-dark menuBt');
 		}
-	}
+	});	
 	function btnReset() {
 		var buttons = document.getElementsByClassName('menuBt');
 		for (var bt of buttons) {
 			bt.setAttribute('class','btn btn-outline-secondary menuBt');
 		}
+	}
+	function notice_load() {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				var notice_count = xhr.responseText;
+				if(notice_count <= 0) {
+					document.getElementById('notice_cnt').setAttribute('class','badge rounded-pill bg-info text-dark invisible');
+				} else if (notice_count < 10) {
+					document.getElementById('notice_cnt').setAttribute('class','badge rounded-pill bg-info text-dark');
+					document.getElementById('notice_cnt').innerHTML = notice_count;
+				} else {
+					document.getElementById('notice_cnt').setAttribute('class','badge rounded-pill bg-info text-dark');
+					document.getElementById('notice_cnt').innerHTML = '9+';
+				}
+				
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.open("get","${path}/noticeLoad.do",true);
+		xhr.send(null);
 	}
 </script>

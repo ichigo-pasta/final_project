@@ -34,6 +34,9 @@ public interface MemberService {
 
 	List<String> blockList(String m_id);
 
+
 	List<Member> myBlockingList(List<String> myBlockList, Integer amt);
+
+	int noticeCount(String attribute);
 
 }

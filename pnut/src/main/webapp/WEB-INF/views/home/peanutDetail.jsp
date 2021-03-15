@@ -81,7 +81,7 @@
 					</div>
 					<div class="row">
 						<div class="col" style="min-height: 5vw">
-							${peanut.content}
+							<pre>${peanut.content}</pre>
 						</div>
 					</div>
 		<c:if test="${peanut.picture1 != null}">					
@@ -215,12 +215,12 @@
 			<c:forEach items="${list}" var="rep">
 		<c:if test="${rep.ref_level == 0}">
 			<div class="row rep_row">
-				<div class="col col-2">
+				<div style="width: 90px">
 					<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
 						width="80" height="80" onclick="profile('${rep.writer}')"
 						align="right" class="profile_pic">
 				</div>
-				<div class="col col-9" style="background: #eee; border-radius: 10px" >
+				<div class="col" style="background: #eee; border-radius: 10px" >
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
 					<c:choose>
@@ -245,52 +245,49 @@
 					</c:choose>
 					&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
 				</div>
-			</div>
-		
-			<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
-				<div class="col col-1"></div>
-				<div class="col col-10">
-					<div class="row">
-						<div class="col"><b><c:out value="${m_nickname}"/></b></div>
-					</div>
-				<form action="${path}/home/comment.do" method="post">	
-					<div class="row">
-						<div class="col col-10">
-							<div class="row">
-								${rep.member.m_nickname}
-								<textarea id="cont${rep.reply_no}"
-									rows="5" style="resize: none" 
-									name="content" required="required" 
-									placeholder="답글을 입력해주세요"></textarea>
+				
+				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
+					<div style="width: 90px"></div>
+					<div class="col">
+						<div class="row">
+							<div class="col"><b><c:out value="${m_nickname}"/></b></div>
+						</div>
+					<form action="${path}/home/comment.do" method="post">	
+						<div class="row">
+							<div class="col col-10">
+								<div class="row">
+									to : ${rep.member.m_nickname}
+									<textarea id="cont${rep.reply_no}"
+										rows="5" style="resize: none" 
+										name="content" required="required" 
+										placeholder="답글을 입력해주세요"></textarea>
+								</div>
+							</div>
+							<div class="col col-2">
+								<div class="row">
+									<button class="btn btn-info">등록</button>
+								</div>
 							</div>
 						</div>
-						<div class="col col-2">
-							<div class="row">
-								<button class="btn btn-info">등록</button>
-							</div>
-						</div>
+						<input type="hidden" value="${rep.writer}" name="rep_target">
+						<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
+						<input type="hidden" value="${rep.ref}" name="ref">
+						<input type="hidden" value="${my_id }" name="writer">
+					</form>
 					</div>
-					<input type="hidden" value="${rep.writer}" name="rep_target">
-					<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
-					<input type="hidden" value="${rep.ref}" name="ref">
-					<input type="hidden" value="${my_id }" name="writer">
-				</form>
 				</div>
 			</div>
 		</c:if>	
 		<c:if test="${rep.ref_level == 1}">
-			<div class="row rep_row">
-				<div class="col col-1"></div>				
-				<div class="col col-2">
-					<div class="row">
-						<div class="col">
-							<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
-								width="80" height="80" onclick="profile('${rep.writer}')"
-								align="right" class="profile_pic">
-						</div>
-					</div>
+			<div class="row rep_row">						
+				<div style="width: 150px">					
+					<div class="col">
+						<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
+							width="80" height="80" onclick="profile('${rep.writer}')"
+							align="right" class="profile_pic">
+					</div>					
 				</div>
-				<div class="col col-9" style="background: #eee; border-radius: 10px" >
+				<div class="col" style="background: #eee; border-radius: 10px" >
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre><b>${rep.member.target_nn}</b>&nbsp;${rep.content}</pre>
 					<c:choose>
@@ -314,37 +311,37 @@
 						</c:otherwise>
 					</c:choose>
 					&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
-				</div>
-			</div>
-			
-			<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
-				<div class="col col-1"></div>
-				<div class="col col-10">
-					<div class="row">
-						<div class="col"><b><c:out value="${m_nickname}"/></b></div>
-					</div>
-				<form action="${path}/home/comment.do" method="post">	
-					<div class="row">
-						<div class="col col-10">
-							<div class="row">
-								${rep.member.m_nickname}
-								<textarea id="cont${rep.reply_no}"
-									rows="5" style="resize: none" 
-									name="content" required="required" 
-									placeholder="답글을 입력해주세요"></textarea>
+				</div>			
+						
+				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
+					<div style="width: 150px"></div>
+					<div class="col">
+						<div class="row">
+							<div class="col"><b><c:out value="${m_nickname}"/></b></div>
+						</div>
+					<form action="${path}/home/comment.do" method="post">	
+						<div class="row">
+							<div class="col col-10">
+								<div class="row">
+									to : ${rep.member.m_nickname}
+									<textarea id="cont${rep.reply_no}"
+										rows="5" style="resize: none" 
+										name="content" required="required" 
+										placeholder="답글을 입력해주세요"></textarea>
+								</div>
+							</div>
+							<div class="col col-2">
+								<div class="row">
+									<button class="btn btn-info">등록</button>
+								</div>
 							</div>
 						</div>
-						<div class="col col-2">
-							<div class="row">
-								<button class="btn btn-info">등록</button>
-							</div>
-						</div>
+						<input type="hidden" value="${rep.writer}" name="rep_target">
+						<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
+						<input type="hidden" value="${rep.ref}" name="ref">
+						<input type="hidden" value="${my_id }" name="writer">
+					</form>
 					</div>
-					<input type="hidden" value="${rep.writer}" name="rep_target">
-					<input type="hidden" value="${peanut.peanut_no}" name="peanut_no">
-					<input type="hidden" value="${rep.ref}" name="ref">
-					<input type="hidden" value="${my_id }" name="writer">
-				</form>
 				</div>
 			</div>
 		</c:if>		

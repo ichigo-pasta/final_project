@@ -10,6 +10,7 @@
 		<typeAlias alias="replies" type="com.ch.pnut.model.Replies" />
 		<typeAlias alias="bookmark" type="com.ch.pnut.model.Bookmark" />
 		<typeAlias alias="block" type="com.ch.pnut.model.Block" />
+		<typeAlias alias="notice" type="com.ch.pnut.model.Notice" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="member.xml" />
@@ -18,5 +19,6 @@
 		<mapper resource="replies.xml" />
 		<mapper resource="bookmark.xml" />
 		<mapper resource="block.xml" />
+		<mapper resource="notice.xml" />
 	</mappers>
 </configuration>
