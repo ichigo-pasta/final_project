@@ -94,4 +94,11 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectList("blockns.blockList", m_id);
 	}
 
+	public List<Member> myBlockingList(List<String> myBlockList, Integer amt) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("myBlockList", myBlockList);
+		map.put("amt", amt);
+		return sst.selectList("blockns.myBlockingList", map);
+	}
+
 }

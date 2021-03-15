@@ -87,6 +87,9 @@
 	#followbt {
 		border: 0;
 		outline: 0;
-		background: skyblue;
+	}
+	#blockbt {
+		border: 0;
+		outline: 0;
 	}
 </style>

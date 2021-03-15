@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
+<%@ include file="../getMyId.jsp" %>
 <jsp:useBean id="today" class="java.util.Date" />
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <ul class="nav nav-tabs nav-fill">
@@ -197,8 +198,23 @@
 						<img alt="" src="${path}/resources/images/${mem.m_profile}"
 							width="100" height="100" onclick="profile('${mem.m_id}')">
 					</div>
-					<div class="col col-10">
-						<c:out value="${mem.m_nickname}, ${mem.m_id}, ${mem.m_regdate}"/>	
+					<div class="col col-8">
+						<c:out value="${mem.m_nickname}, ${mem.m_id}, ${mem.m_regdate}" />
+					</div>
+					<div class="col">
+						<c:if test="${mem.m_id == my_id}">
+							<a href="${path}/home/profileUpdateForm.do?m_id=${mem.m_id }">프로필 수정</a>
+						</c:if>
+						<c:if test="${mem.m_id != my_id}">
+							<c:if test="${isFollow == true }">
+								<button id="followbt" onclick="unfollow('${mem.m_id}')"
+									onmouseover="this.innerText='언팔로우'"
+									onmouseout="this.innerText='팔로우 중'">팔로우 중</button>
+							</c:if>
+							<c:if test="${isFollow == false }">
+								<button id="followbt" onclick="follow('${mem.m_id}')">팔로우</button>
+							</c:if>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>
@@ -300,4 +316,41 @@
 		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "setBm('"+peanut_no+"')");
 		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: gray");		
 	}
+	function follow(m_id) {
+		buttonChange();
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/follow.do?m_id="+m_id,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);
+	}
+	function buttonChange() {
+		var btn = document.getElementById('followbt');		
+		btn.setAttribute("onclick","unfollow('${member.m_id}')");
+		btn.setAttribute("onmouseover","this.innerText='언팔로우'");
+		btn.setAttribute("onmouseout","this.innerText='팔로우 중'");
+	}
+	function unfollow(m_id) {
+		buttonChange2();
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/unfollow.do?m_id="+m_id,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('success');
+			} else {alert('요청오류: '+xhr.status);}
+		}
+		xhr.send(null);
+	}
+	function buttonChange2() {
+		var btn = document.getElementById('followbt');
+		btn.innerText = '팔로우';
+		btn.setAttribute("onclick","follow('${member.m_id}')");
+		btn.removeAttribute("onmouseover");
+		btn.removeAttribute("onmouseout");
+	}	
 </script>

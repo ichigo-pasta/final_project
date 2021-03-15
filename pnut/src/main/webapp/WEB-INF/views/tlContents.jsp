@@ -9,29 +9,29 @@
 <c:if test="${not empty list }">
 	<c:forEach items="${list }" var="pn">
 		<div class="peanut_container">
-		<c:if test="${pn.renut != null}">
+		<c:if test="${pn.renut != null}"> <!-- 리넛 여부 표시 -->
 			<div class="row">
-				<div class="col">
+				<div class="col col-10">
 					<i class="bi bi-arrow-repeat"></i><c:out value="${pn.writer}"/> 님이 리넛하셨습니다.
 				</div>
 			</div>
 		</c:if>
-			<div class="row">
+			<div class="row">	<!-- 리넛 여부 표시줄 -->
 				<div style="width: 120px">
-		<c:if test="${pn.renut != null}">
+		<c:if test="${pn.renut != null}"> 
 					<img alt="" src="${path}/resources/images/${pn.member.re_pf}"
 						width="100" height="100" onclick="profile('${pn.re_writer}')"
 						class="profile_pic">
 		</c:if>
-		<c:if test="${pn.renut == null}">
+		<c:if test="${pn.renut == null}"> 
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
 						width="100" height="100" onclick="profile('${pn.writer}')"
 						class="profile_pic">
 		</c:if>
-				</div>
-				<div class="col">
+				</div>			<!-- 리넛 여부 표시줄  끝 -->
+				<div class="col">	
 					<div class="row">
-						<div class="col">
+						<div class="col-11">	<!-- 리넛 여부에 따른 닉네임, 아이디, 작성일 표시줄 -->
 		<c:if test="${pn.renut != null}">
 							<c:out value=" ${pn.member.re_nick} @${pn.re_writer}"/>							
 							<c:choose>
@@ -78,7 +78,41 @@
 								</c:otherwise>
 							</c:choose>
 		</c:if>
-						</div>
+						</div>			<!-- 리넛 여부에 따른 닉네임, 아이디, 작성일 표시줄  끝 -->
+						<div class="col col-1">		<!-- 삭제/팔로우,차단 드롭다운 메뉴 -->
+							<div class="btn-group">
+								<a class="btn btn-light dropdown" type="button"
+									id="dropdownMenuButton" data-bs-toggle="dropdown"
+									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+								<c:if test="${pn.writer == m_id }">
+									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+										<li>
+											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${peanut.peanut_no}">
+											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
+									</ul>
+								</c:if>
+								<c:if test="${pn.writer != m_id }">
+									<c:if test="${isFollow == true }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<button class="bi bi-person-x" id="followbt">&nbsp;팔로우 중</button></a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${peanut.writer}">
+												<button class="bi bi-x-circle" id="blockbt"
+													onclick="location.href='${path}/block.do?m_id=${peanut.writer}'"></button>&nbsp;차단</a></li>	
+										</ul>
+									</c:if>	
+									<c:if test="${isFollow == false }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<button class="bi bi-person-plus" id="followbt"
+													>팔로우</button></a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${peanut.writer}">
+												<button class="bi bi-x-circle" onclick="location.href='${path}/block.do?m_id=${peanut.writer}'"></button>&nbsp;차단</a></li>
+										</ul>
+									</c:if>
+								</c:if>				
+							</div>
+						</div>		<!-- 삭제/팔로우,차단 드롭다운 메뉴 끝 -->
 					</div>
 					<div class="row">
 						<div class="col content_col" id="content${pn.peanut_no }" style="min-height: 5vw; cursor: pointer">
