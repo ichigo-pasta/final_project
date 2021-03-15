@@ -135,7 +135,7 @@ create or replace trigger block_trig
     after insert on pn_block
     for each row
 begin
-    delete pn_follow where (active = :new.active and passive = :new.passive) or (active = :new.passive and passive = :new.active);
+    delete pn_follow where (active = :new.active and passive = :new.passive) or (active = :new.passive and passive = :new.active);    
     update pn_peanuts set del = 'y' where (writer = :new.active and renut in (select peanut_no from pn_peanuts where writer = :new.passive))
         or (writer = :new.passive and renut in (select peanut_no from pn_peanuts where writer = :new.active));
     delete pn_bookmark where (peanut_no in (select peanut_no from pn_peanuts where writer = :new.passive) and bm_user = :new.active)
@@ -219,6 +219,7 @@ select * from pn_message;
 delete PN_FOLLOW; 
 delete pn_bookmark;
 delete pn_block;
+delete pn_notice;
 insert into pn_follow values ('k1', 'k2');
 insert into pn_follow values ('k1', 'k3');
 insert into pn_member values ('k1', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n',null,null);
