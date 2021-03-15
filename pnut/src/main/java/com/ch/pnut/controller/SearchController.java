@@ -57,7 +57,10 @@ public class SearchController {
 				pn.setBmCnt(ps.bmCnt(pn.getPeanut_no()));
 				if (bmList.contains(pn.getPeanut_no())) pn.setBookmarked(true);
 				if (renutList.contains(pn.getPeanut_no())) pn.setRenuted(true);
-			}			
+				List<String> myFollowLt = ms.followList(my_id);
+				boolean isFollow = myFollowLt.contains(m_id);
+				model.addAttribute("isFollow", isFollow);
+			}
 			model.addAttribute("list", list);			
 			break;
 		case "user":
