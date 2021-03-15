@@ -114,13 +114,13 @@ public class PeanutsController {
 		if (listSize > 0) {
 			for (Peanuts peanut : list) {
 				peanut.setContent(ps.setHashtag(peanut.getContent(),"hashtag"));	// list 피넛 해시태그 처리
-				if (peanut.getRenut() == null) {	// 리넛이 아닐 때
+				if (peanut.getRenut() == null) {									// 리넛이 아닐 때
 					peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
 					peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
 					peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
 					if (bmList.contains(peanut.getPeanut_no())) peanut.setBookmarked(true);
 					if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);
-				} else {							// 리넛일 때
+				} else {															// 리넛일 때
 					peanut.setRepCnt(ps.repCnt(peanut.getRenut()));
 					peanut.setRenutCnt(ps.renutCnt(peanut.getRenut()));
 					peanut.setBmCnt(ps.bmCnt(peanut.getRenut()));

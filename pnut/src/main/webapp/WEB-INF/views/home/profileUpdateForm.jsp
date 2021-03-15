@@ -8,37 +8,38 @@
 
 <div class="pic_container d-flex align-items-end">
 	<img alt="" src="${path}/resources/images/${member.m_profile}"
-		width="100" height="100">
+		width="100" height="100" id="profileArea">
 </div> 
 <div class="row">
 	<div class="col">
-		<div class="row">
-			<div class="col-6">
-				${member.m_profile}<input type="file" name="file_p">
+		<div class="row" id="profileUpdateBorder">
+			<div class="col">
+				프로필&nbsp;<input type="file" name="file_p">
 			</div>
-			<div class="col-6">
-				${member.m_bg }<input type="file" name="file_b">
-			</div>				
+			<div class="col">
+				배경사진&nbsp;<input type="file" name="file_b">
+			</div>
+			<div class="col-1">
+				<input type="submit" value="저장">
+			</div>					
 		</div>
-		<div class="row">
-			<div class="col-10">
+		<div class="row" id="profileUpdateBorder">
+			<div class="col">
+				닉네임<br>
 				<input type="text" name="m_nickname" 
 					value="${member.m_nickname }"
 					required="required">
 			</div>
-			<div class="col-2">
-				<input type="submit" value="저장">
-			</div>				
 		</div>
-		<div class="row">
+		<div class="row" id="profileUpdateBorder">
 			<div class="col">
+				아이디<br>
 				<c:out value="${member.m_id }"/>					
 			</div>
 		</div>
-		<div class="row">
-			<div class="col col-12">
-				<textarea rows="5" name="m_intro"></textarea>
-			</div>
+		<div class="row" id="profileUpdateBorder" style="padding: 0 12px 5px 12px">
+			자기소개<br>
+			<textarea rows="5" name="m_intro" style="resize: none;"></textarea>
 		</div>
 	</div>
 </div>
@@ -46,7 +47,4 @@
 <div id="peanut"></div>
 </div>
 <script type="text/javascript">
-	function thumbnail() {
-		
-	}
 </script>

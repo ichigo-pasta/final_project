@@ -79,4 +79,14 @@
 	.btnBox {
 		color: gray;
 	}
+	#profileUpdateBorder {
+		border: 1px solid gray;
+		border-radius: 10px;
+		margin: 5px 0px;
+	}
+	#followbt {
+		border: 0;
+		outline: 0;
+		background: skyblue;
+	}
 </style>
