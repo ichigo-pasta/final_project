@@ -18,8 +18,9 @@
 <style>
 	.err {color:red; font-weight: bold;}
 	pre {
-		word-break: break-word;
+		word-break: break-all;
 		white-space: pre-wrap;
+		font-size: 18px;
 	}
 	.container {
 		min-width: 576px;
