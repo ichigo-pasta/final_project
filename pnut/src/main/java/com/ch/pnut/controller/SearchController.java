@@ -30,6 +30,7 @@ public class SearchController {
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
 		String m_id = member.getM_id();
+		String my_id = (String) session.getAttribute("m_id");
 		List<String> myBlock = ms.myBlockList(m_id); 
 		List<String> block = ms.blockList(m_id);
 		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트
@@ -62,6 +63,9 @@ public class SearchController {
 		case "user":
 			List<Member> list2 = new ArrayList<>();
 			if (arrayLen > 0) list2 = ms.search(arrayKw, amt);
+			List<String> myFollowLt = ms.followList(my_id);
+			boolean isFollow = myFollowLt.contains(m_id);
+			model.addAttribute("isFollow", isFollow);
 			model.addAttribute("list2", list2);
 		}
 		model.addAttribute("m_profile", m_profile);

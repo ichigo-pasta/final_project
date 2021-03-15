@@ -110,6 +110,20 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
+						<div class="col col-1">		<!-- 삭제/팔로우,차단 드롭다운 메뉴 -->
+							<div class="btn-group">
+								<a class="btn btn-light dropdown" type="button"
+									id="dropdownMenuButton" data-bs-toggle="dropdown"
+									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+								<c:if test="${pn.writer == m_id }">
+									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+										<li>
+											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${peanut.peanut_no}">
+											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
+									</ul>
+								</c:if>
+							</div>
+						</div>
 					</div>
 					<div class="row">
 						<div class="col">${pn.content}</div>

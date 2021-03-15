@@ -102,22 +102,25 @@ public class PeanutsController {
 		List<String> followList = ms.followList(m_id);	// 로그인 유저가 팔로우한 아이디 리스트		
 		// 차단 피넛 제외하고 로그인 유저, 팔로우유저 피넛 리스트 amt+1개 조회
 		List<Peanuts> list = ps.selectList(m_id, amt+1, followList, myBlock, block);
+		
 		if (list.size() > amt) {
 			more = 1;	// amt 값보다 데이터가 더 많으면 more = 1
 			list.remove(amt.intValue());	// amt 범위 초과 피넛 리스트에서 제거
 		}
 		list = ps.distinctList(list);	// 리넛 중복제거
 		int listSize = list.size();
-		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트
+		List<Integer> bmList = ps.selectBm(m_id);		// 로그인 유저가 북마크한 피넛번호 리스트
 		List<Integer> renutList = ps.selectRenut(m_id);	// 로그인 유저가 리넛한 피넛번호 리스트
-
 		if (listSize > 0) {
 			for (Peanuts peanut : list) {
 				peanut.setContent(ps.setHashtag(peanut.getContent(),"hashtag"));	// list 피넛 해시태그 처리
+				// List<String> myFollowLt = ms.followList(m_id);
+				// boolean isFollow = myFollowLt.contains(peanut.getWriter());
 				if (peanut.getRenut() == null) {									// 리넛이 아닐 때
 					peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
 					peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
 					peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
+					
 					if (bmList.contains(peanut.getPeanut_no())) peanut.setBookmarked(true);
 					if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);
 				} else {															// 리넛일 때
@@ -129,7 +132,6 @@ public class PeanutsController {
 				}
 			}
 		}
-		
 		model.addAttribute("list", list);
 		model.addAttribute("m_id", m_id);
 		model.addAttribute("amt", amt);
