@@ -102,10 +102,11 @@ public class PeanutsDaoImpl implements PeanutsDao {
 	public int deletePd(Integer peanut_no) {
 		return sst.update("peanutsns.deletePd", peanut_no);
 	}
-	public List<Peanuts> selectProfilePn(String m_id, Integer amt) {
+	public List<Peanuts> selectProfilePn(String m_id, Integer amt, String type) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("m_id", m_id);
 		map.put("amt", amt);
+		map.put("type", type);
 		return sst.selectList("peanutsns.selectProfilePn",map);
 	}
 }

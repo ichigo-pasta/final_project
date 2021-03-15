@@ -164,6 +164,10 @@
 				(select p.*, m_nickname, m_profile 
 				from pn_peanuts p, pn_member m 
 				where p.del='n' and p.writer=m.m_id
+				and p.writer = #{m_id}
+				<if test="type=='peanutPic'">
+					and p.picture1 is not null
+				</if>
 				order by p.peanut_no desc) a)
 		where rn between 1 and #{amt}
 	</select>
