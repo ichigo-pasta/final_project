@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <%@ include file="../getMyId.jsp" %>
+<jsp:useBean id="today" class="java.util.Date" />
+<fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <div id="container">
 	<div class="pic_container d-flex align-items-end">
 		<img alt="" src="${path}/resources/images/${member.m_profile}"
