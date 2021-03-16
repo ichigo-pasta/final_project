@@ -205,8 +205,7 @@ public class MemberController {
 	@RequestMapping("block")
 	public String block(String m_id, HttpSession session, Model model) {
 		int result;
-		String my_id = (String) session.getAttribute("m_id");
-		System.out.println(my_id + ", "+ m_id);
+		String my_id = (String) session.getAttribute("m_id");		
 		int isBlocked = ms.checkBlock(my_id, m_id);	// 내가 상대를 이미 차단중인지 체크
 		if (isBlocked == 1) result = -1;	// result -1 : 이미 차단중 
 		else {

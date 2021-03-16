@@ -67,16 +67,35 @@
 	</c:if>
 	<c:if test="${not empty list}">
 		<c:forEach items="${list }" var="pn">
-			<div class="row peanut_container">
+			<div class="row peanut_container">			
+			<c:if test="${not empty pn.renut }">
+			<div class="row">
+				<div class="col">
+					<i class="bi bi-arrow-repeat"></i><c:out value="${pn.writer}"/> 님이 리넛하셨습니다.
+				</div>
+			</div>
+			</c:if>
 			<div style="width: 110px">
+		<c:if test="${empty pn.renut }">
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
 						width="100" height="100" onclick="profile('${pn.writer}')"
 						class="profile_pic">
+		</c:if>
+		<c:if test="${not empty pn.renut }">					
+					<img alt="" src="${path}/resources/images/${pn.member.re_pf}"
+						width="100" height="100" onclick="profile('${pn.re_writer}')"
+						class="profile_pic">
+		</c:if>
 				</div>
 				<div class="col">
 					<div class="row">
 						<div class="col">
-							<c:out value="${pn.member.m_nickname}, ${pn.writer}" />
+				<c:if test="${empty pn.renut }">
+							<c:out value="${pn.member.m_nickname} @${pn.writer}" />
+				</c:if>
+				<c:if test="${not empty pn.renut }">
+							<c:out value="${pn.member.re_nick} @${pn.re_writer}" />
+				</c:if>
 							<c:choose>
 								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
 									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일" />
