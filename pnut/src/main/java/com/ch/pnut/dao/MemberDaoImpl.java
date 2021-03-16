@@ -99,7 +99,7 @@ public class MemberDaoImpl implements MemberDao {
 		Map<String, Object> map = new HashMap<>();
 		map.put("myBlockList", myBlockList);
 		map.put("amt", amt);
-		return sst.selectList("blockns.myBlockingList", map);
+		return sst.selectList("memberns.myBlockingList", map);
 	}
 	
 	public int noticeCount(String attribute) {

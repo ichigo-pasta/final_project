@@ -20,14 +20,4 @@
 	<select id="blockList" parameterType="string" resultType="string">
 		select active from pn_block where passive = #{m_id}
 	</select>
-	<select id="myBlockingList" parameterType="hashmap" resultMap="blockResult">
-		select * from
-			(select a.*, rownum rn from 	
-				(select * from pn_member where m_del = 'n' and m_id in 
-					<foreach collection="myBlockList" item="item" open="(" separator="," close=")">
-						#{item}
-					</foreach>
-				) a)
-				where rn between 1 and #{amt}
-	</select>
 </mapper>
