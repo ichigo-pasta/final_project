@@ -89,6 +89,10 @@
 			btnReset();
 			document.getElementById('profileBt').setAttribute('class','btn btn-dark menuBt');
 		}
+		else if (currentPage.startsWith('profileUpdateForm.do')) {
+			btnReset();
+			document.getElementById('profileBt').setAttribute('class','btn btn-dark menuBt');
+		}
 		else if (currentPage.startsWith('writeForm.do')) {
 			btnReset();
 			document.getElementById('writeFormBt').setAttribute('class','btn btn-dark menuBt');

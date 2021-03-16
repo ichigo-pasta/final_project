@@ -134,15 +134,68 @@
 								<a class="btn btn-light dropdown" type="button"
 									id="dropdownMenuButton" data-bs-toggle="dropdown"
 									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
-								<c:if test="${pn.writer == m_id }">
+						<c:if test="${pn.renut != null }">
+								<c:if test="${pn.re_writer == m_id }">
 									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 										<li>
-											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${peanut.peanut_no}">
+											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${pn.peanut_no}">
 											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
 									</ul>
 								</c:if>
+								<c:if test="${pn.re_writer != m_id }">
+									<c:if test="${isFollow == true }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<button class="bi bi-person-x" id="followbt">&nbsp;&nbsp;팔로우 중</button></a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
+												<button class="bi bi-x-circle" id="blockbt"
+													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>	
+										</ul>
+									</c:if>	
+									<c:if test="${isFollow == false }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<button class="bi bi-person-plus" id="followbt"
+													>&nbsp;&nbsp;팔로우</button></a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
+												<button class="bi bi-x-circle" id="blockbt"
+													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
+										</ul>
+									</c:if>
+								</c:if>
+						</c:if>
+						<c:if test="${pn.renut == null }">
+								<c:if test="${pn.writer == m_id }">
+									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+										<li>
+											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${pn.peanut_no}">
+											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
+									</ul>
+								</c:if>
+								<c:if test="${pn.writer != m_id }">
+									<c:if test="${isFollow == true }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<button class="bi bi-person-x" id="followbt">&nbsp;&nbsp;팔로우 중</button></a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
+												<button class="bi bi-x-circle" id="blockbt"
+													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>	
+										</ul>
+									</c:if>	
+									<c:if test="${isFollow == false }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<button class="bi bi-person-plus" id="followbt"
+													>&nbsp;&nbsp;팔로우</button></a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
+												<button class="bi bi-x-circle" id="blockbt"
+													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
+										</ul>
+									</c:if>
+								</c:if>
+						</c:if>
 							</div>
-						</div>
+						</div>  <!-- 삭제/팔로우,차단 드롭다운 메뉴 끝 -->
 					</div>
 					<div class="row">
 						<div class="col">${pn.content}</div>
@@ -195,7 +248,7 @@
 							<button
 								onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
 								<c:if test="${pn.repCnt != 0}">
-									<i class="bi-chat" style="color: blue"></i>
+									<i class="bi-chat" style="color: #D27D32;"></i>
 							${pn.repCnt }
 						</c:if>
 								<c:if test="${pn.repCnt == 0}">
@@ -216,7 +269,7 @@
 							<c:if test="${pn.renuted == true }">
 								<button data-bs-toggle="modal"
 									data-bs-target="#cancel${pn.peanut_no}">
-									<i class="bi-arrow-clockwise" style="color: blue"></i>
+									<i class="bi-arrow-clockwise" style="color: #D27D32;"></i>
 									<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>
 								</button>
 							</c:if>
@@ -227,7 +280,7 @@
 							<c:if test="${pn.bookmarked == true}">
 								<button onclick="deleteBm('${pn.peanut_no}')"
 									id="bmBtn${pn.peanut_no}">
-									<i class="bi-bookmark" style="color: blue;"
+									<i class="bi-bookmark" style="color: #D27D32;""
 										id="bmBtnI${pn.peanut_no}"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 								</button>
