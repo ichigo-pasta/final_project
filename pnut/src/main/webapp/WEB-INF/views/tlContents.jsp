@@ -12,7 +12,7 @@
 		<div class="peanut_container">
 		<c:if test="${pn.renut != null}"> <!-- 리넛 여부 표시 -->
 			<div class="row">
-				<div class="col col-10">
+				<div class="col col-10" style="padding-bottom: 13px;">
 					<i class="bi bi-arrow-repeat"></i><c:out value="${pn.writer}"/> 님이 리넛하셨습니다.
 				</div>
 			</div>
@@ -22,7 +22,7 @@
 		<c:if test="${pn.renut != null}"> 
 					<img alt="" src="${path}/resources/images/${pn.member.re_pf}"
 						width="100" height="100" onclick="profile('${pn.re_writer}')"
-						class="profile_pic">
+						class="profile_pic" >
 		</c:if>
 		<c:if test="${pn.renut == null}"> 
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
