@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
-<div style="display: flex; flex-direction: column; justify-content: space-between; height: 88vh; top: 85px" class="sticky-top">
-	<div class="btn-group-vertical" role="group" style="width: 123px;">
+<div style="display: flex; flex-direction: column; justify-content: space-between; height: 91.35vh; top: 85px" class="sticky-top">
+	<div class="btn-group-vertical" role="group" style="width: 123px; margin-top: 10px">
 		<button type="button"
 			onclick="location.href='${path}/home/timeline.do'"
 			class="btn btn-outline-secondary menuBt" id="timelineBt" style="text-align: left">
@@ -27,7 +27,7 @@
 			<i class="bi-pencil-fill"></i>&nbsp;&nbsp;글쓰기
 		</button>
 	</div>
-	<div style="padding: 10px 10px 10px 10px; border: 1px solid white; border-radius: 5px; background: #f0aa5f"  >
+	<div style="padding: 10px 10px 10px 10px; border: 1px solid white; border-radius: 5px; background: #f0aa5f; margin-bottom: 10px">
 		<div style="display: flex; justify-content: space-between;">
 			<img alt="" src="${path}/resources/images/${m_profile}" width="50"
 				height="50" style="border-radius: 5px;">

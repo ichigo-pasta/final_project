@@ -12,7 +12,7 @@
 <body>
 	<div class="container">
 		<div class="row sticky-top" id="headline" style="background-color: #323232; z-index: 50">
-			<div class="col col-lg-2 col-md-3 col-sm-4 col-4" style="padding: 5px 12px; height: 90px">
+			<div class="col col-lg-2 col-md-3 col-sm-4 col-4" style="padding: 5px 12px; height: 85px">
 				<img alt="" src="${path }/resources/images/PnutLogo.png" height="80" 
 					onclick="location.href='${path}/home/timeline.do'"> 
 			</div>

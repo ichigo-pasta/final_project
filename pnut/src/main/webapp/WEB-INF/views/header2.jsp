@@ -96,5 +96,11 @@
 		border: 0;
 		outline: 0;
 	}
-	
+	/* body {
+    	-ms-overflow-style: none;
+    	scrollbar-width: none;
+	}
+	body::-webkit-scrollbar {
+    	display: none;
+	}	 */
 </style>
