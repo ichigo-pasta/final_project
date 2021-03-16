@@ -93,4 +93,9 @@
 		border: 0;
 		outline: 0;
 	}
+	/* 드롭다운 버튼  */
+	.dropdown-item {
+		color: lightgray;
+	}
+	
 </style>

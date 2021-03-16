@@ -131,9 +131,9 @@
 						</div>
 						<div class="col col-1">		<!-- 삭제/팔로우,차단 드롭다운 메뉴 -->
 							<div class="btn-group">
-								<a class="btn btn-light dropdown" type="button"
+								<a class="btn dropdown" type="button"
 									id="dropdownMenuButton" data-bs-toggle="dropdown"
-									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+									aria-expanded="false"><i class="bi bi-three-dots" style="color: lightgray"></i></a>
 						<c:if test="${pn.renut != null }">
 								<c:if test="${pn.re_writer == m_id }">
 									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">

@@ -3,7 +3,7 @@
 <%@ include file="../header.jsp" %>
 <div class="container">
 <form action="${path}/home/write.do" method="post" enctype="multipart/form-data">
-	<div class="row">
+	<div class="row" style="padding-top: 30px">
 		<div style="width: 120px">
 			<img alt="" src="${path}/resources/images/${m_profile}"
 					width="100" height="100" class="profile_pic">
@@ -11,8 +11,8 @@
 		<div class="col">
 			<div class="row">
 				<textarea rows="9" required="required" 
-					name="content" id="content" style="resize: none;" 
-					onchange="checkByte(e);"></textarea>
+					name="content" id="content" style="resize: none; background: #3c3c3c; color: lightgray" 
+					onchange="checkByte(e);" ></textarea>
 			</div>
 			<div class="row" align="right">
 				<span id="count">0/0</span>
@@ -20,13 +20,15 @@
 			<div class="row" align="right">
 				<div class="col">
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-outline-warning" onclick="img_upload();" style="display: flex; align-items:center; padding: 0 12px">
+						<button type="button" class="btn btn-outline-warning" onclick="img_upload();" 
+							style="display: flex; align-items:center; padding: 5px 12px; background: #3c3c3c;">
 							<i class="bi bi-card-image" style="font-size: 2rem; color: skyblue; line-height: 36px"></i> 
-							<font style="color: black;">사진추가</font>
+							<font style="color: lightgray;">&nbsp;사진추가</font>
 						</button>
-						<button type="button" class="btn btn-outline-warning" onclick="img_delete();" style="display: flex; align-items: center; padding: 0 12px">
+						<button type="button" class="btn btn-outline-warning" onclick="img_delete();" 
+							style="display: flex; align-items: center; padding: 5px 12px; background: #3c3c3c;">
 							<i class="bi bi-card-image" style="font-size: 2rem; color: red; line-height: 36px"></i>
-							<font style="color: black;">사진삭제</font>
+							<font style="color: lightgray;">&nbsp;사진삭제</font>
 						</button>
 					</div>
 				</div>
