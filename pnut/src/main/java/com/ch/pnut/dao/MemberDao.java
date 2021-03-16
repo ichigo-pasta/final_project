@@ -3,6 +3,7 @@ package com.ch.pnut.dao;
 import java.util.List;
 
 import com.ch.pnut.model.Member;
+import com.ch.pnut.model.Notice;
 
 public interface MemberDao {
 
@@ -38,6 +39,10 @@ public interface MemberDao {
 	List<Member> myBlockingList(List<String> myBlockList, Integer amt);
 
 	int noticeCount(String attribute);
+
+	List<Notice> noticeList(String m_id);
+
+	void noticeAllRead(String m_id);
 
 
 }

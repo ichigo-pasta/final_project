@@ -215,7 +215,7 @@ select * from pn_bookmark;
 select * from pn_notice;
 select * from pn_message;
 
-delete PN_FOLLOW; 
+delete PN_FOLLOW;
 delete pn_bookmark;
 delete pn_block;
 delete pn_notice;

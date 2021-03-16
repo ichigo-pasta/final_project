@@ -13,8 +13,30 @@
 		<result property="reply_no" column="reply_no" />
 		<result property="regdate" column="regdate" />
 		<result property="read" column="read" />
+		<result property="n_content" column="n_content" />
+		<result property="active_nn" column="active_nn" />
+		<result property="active_pf" column="active_pf" />
 	</resultMap>	
 	<select id="noticeCount" parameterType="string" resultType="int">
 		select count(notice_no) from pn_notice where passive = #{attribute} and read = 'n'
 	</select>
+	<select id="noticeList" parameterType="string" resultMap="noticeResult">
+		<![CDATA[
+		select * from
+			(select distinct n.*,
+				case  n.n_type when 'renut' then p.content
+					when 'reply' then r.content
+					else null
+				end n_content
+				, m1.m_nickname active_nn, m1.m_profile active_pf
+			from pn_notice n, pn_peanuts p, pn_replies r, pn_member m1
+			where n.peanut_no = p.renut(+) and n.active = m1.m_id
+    			and n.reply_no = r.reply_no(+) and n.passive = #{m_id}
+			order by n.notice_no desc)
+		where rownum <= 100
+		]]>
+	</select>
+	<update id="noticeAllRead" parameterType="string">
+		update pn_notice set read = 'y' where passive = #{m_id}
+	</update>
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ch.pnut.model.Member;
+import com.ch.pnut.model.Notice;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -105,6 +106,16 @@ public class MemberDaoImpl implements MemberDao {
 	public int noticeCount(String attribute) {
 		return sst.selectOne("noticens.noticeCount", attribute);
 
+	}
+
+	@Override
+	public List<Notice> noticeList(String m_id) {
+		return sst.selectList("noticens.noticeList", m_id);
+	}
+
+	@Override
+	public void noticeAllRead(String m_id) {
+		sst.update("noticens.noticeAllRead", m_id);
 	}
 
 }

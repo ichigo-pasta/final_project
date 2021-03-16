@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ch.pnut.dao.MemberDao;
 import com.ch.pnut.model.Member;
+import com.ch.pnut.model.Notice;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -61,5 +62,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 	public int noticeCount(String attribute) {
 		return md.noticeCount(attribute);
+	}
+	@Override
+	public List<Notice> noticeList(String m_id) {
+		return md.noticeList(m_id);
+	}
+	@Override
+	public void noticeAllRead(String m_id) {
+		md.noticeAllRead(m_id);
 	}	
 }

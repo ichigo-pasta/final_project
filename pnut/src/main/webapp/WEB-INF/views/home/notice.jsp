@@ -1,3 +1,65 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-알림
+<%@ include file="../header.jsp" %>
+<jsp:useBean id="today" class="java.util.Date" />
+<fmt:parseNumber value="${today.time}" var="now" scope="page"/>
+<style>
+	.bi {
+		font-size: 30px;
+	}
+</style>
+<c:if test="${empty list }">
+	<p>알림이 존재하지 않습니다</p>
+</c:if>
+<c:if test="${not empty list }">
+	<c:forEach items="${list }" var="notice">
+	<div class="notice_container">
+		<div class="row">
+			<div style="padding: 10px; width: 110px">
+		<c:if test="${notice.n_type == 'renut' }">
+				<i class="bi bi-arrow-clockwise text-success"></i>
+		</c:if>
+		<c:if test="${notice.n_type == 'reply' }">
+				<i class="bi bi-arrow-return-right text-warning"></i>
+		</c:if>
+		<c:if test="${notice.n_type == 'follow' }">
+				<i class="bi bi-person-plus text-primary"></i>
+		</c:if>
+				<img alt="" src="${path }/resources/images/${notice.active_pf}" width="50" height="50">
+			</div>
+			<div class="col" style="padding: 10px;">
+		<c:if test="${notice.n_type == 'renut' }">
+				<c:out value="${notice.active_nn }"/>님이 리넛하셨습니다
+				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
+				<br>
+				<pre style="padding-left: 20px"><c:out value="${notice.n_content }"/></pre>
+		</c:if>
+		<c:if test="${notice.n_type == 'reply' }">
+				<c:out value="${notice.active_nn }"/>님이 댓글을 다셨습니다
+				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
+				<br>
+				<pre style="padding-left: 20px"><c:out value="${notice.n_content }"/></pre>
+		</c:if>
+		<c:if test="${notice.n_type == 'follow' }">
+				<c:out value="${notice.active_nn }"/>님이 팔로우하셨습니다
+				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
+		</c:if>
+			</div>
+		</div>
+	</div>
+	</c:forEach>
+</c:if>
+<script type="text/javascript">
+	window.addEventListener('load', function() {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('read check success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.open("get","${path}/noticeAllRead.do",true);
+		xhr.send(null);
+	});
+</script>
