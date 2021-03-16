@@ -284,6 +284,7 @@
 							<!-- 북마크 아이콘 -->
 							<c:if test="${pn.bookmarked == true}">
 								<button onclick="deleteBm('${pn.peanut_no}')"
+
 									id="bmBtn${pn.peanut_no}" class="btnBox" >
 									<i class="bi-bookmark" style="color: #D27D32;"
 										id="bmBtnI${pn.peanut_no}"></i>

@@ -121,7 +121,7 @@
 		</c:if>
 					<div class="row btBox">
 						<div class="col col-4">
-							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'" class="btnBox"">
+							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'" class="btnBox">
 							<c:if test="${pn.repCnt != 0}">
 								<i class="bi-chat" style="color: #D27D32"></i>
 								${pn.repCnt }
