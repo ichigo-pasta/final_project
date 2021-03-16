@@ -44,5 +44,7 @@ public interface MemberDao {
 
 	void noticeAllRead(String m_id);
 
+	Notice selectNotice(Integer notice_no);
+
 
 }

@@ -109,4 +109,8 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("type", type);
 		return sst.selectList("peanutsns.selectProfilePn",map);
 	}
+	@Override
+	public Integer repsPno(int reply_no) {
+		return sst.selectOne("repliesns.repsPno", reply_no);
+	}
 }

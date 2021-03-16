@@ -39,4 +39,7 @@
 	<update id="noticeAllRead" parameterType="string">
 		update pn_notice set read = 'y' where passive = #{m_id}
 	</update>
+	<select id="selectNotice" parameterType="integer" resultType="notice">
+		select * from pn_notice where notice_no = #{notice_no}
+	</select>
 </mapper>

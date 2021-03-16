@@ -13,7 +13,7 @@
 </c:if>
 <c:if test="${not empty list }">
 	<c:forEach items="${list }" var="notice">
-	<div class="notice_container">
+	<div class="notice_container" onclick="link_to('${notice.notice_no }')">
 		<div class="row">
 			<div style="padding: 10px; width: 110px">
 		<c:if test="${notice.n_type == 'renut' }">
@@ -62,4 +62,7 @@
 		xhr.open("get","${path}/noticeAllRead.do",true);
 		xhr.send(null);
 	});
+	function link_to(notice_no) {
+		location.href="${path}/linkTo.do?notice_no="+notice_no;
+	}
 </script>

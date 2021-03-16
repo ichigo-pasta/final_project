@@ -118,4 +118,9 @@ public class MemberDaoImpl implements MemberDao {
 		sst.update("noticens.noticeAllRead", m_id);
 	}
 
+	@Override
+	public Notice selectNotice(Integer notice_no) {
+		return sst.selectOne("noticens.selectNotice", notice_no);
+	}
+
 }

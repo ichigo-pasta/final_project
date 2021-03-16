@@ -170,5 +170,5 @@
 				</if>
 				order by p.peanut_no desc) a)
 		where rn between 1 and #{amt}
-	</select>
+	</select>	
 </mapper>

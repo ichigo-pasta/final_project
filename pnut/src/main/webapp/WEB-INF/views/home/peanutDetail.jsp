@@ -228,13 +228,13 @@
 							<fmt:formatDate value="${rep.regdate }" pattern="yyyy년 MM월 dd일"/>
 						</c:when>
 						<c:when test="${(now - rep.regdate.time) <= (1000*60*60*24*7*4) and (now - rep.regdate.time) > (1000*60*60*24*7)}">
-							<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60*24*7) }" integerOnly="true"/>주 전
+							<fmt:parseNumber value="${(now - rep.regdate.time) / (1000*60*60*24*7) }" integerOnly="true"/>주 전
 						</c:when>
 						<c:when test="${(now - rep.regdate.time) <= (1000*60*60*24*7) and (now - rep.regdate.time) > (1000*60*60*24)}">
-							<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60*24) }" integerOnly="true"/>일 전
+							<fmt:parseNumber value="${(now - rep.regdate.time) / (1000*60*60*24) }" integerOnly="true"/>일 전
 						</c:when>
 						<c:when test="${(now - rep.regdate.time) <= (1000*60*60*24) and (now - rep.regdate.time) > (1000*60*60)}">
-							<fmt:parseNumber value="${(now - peanut.regdate.time) / (1000*60*60) }" integerOnly="true"/>시간 전
+							<fmt:parseNumber value="${(now - rep.regdate.time) / (1000*60*60) }" integerOnly="true"/>시간 전
 						</c:when>
 						<c:when test="${(now - rep.regdate.time) <= (1000*60*60) and (now - rep.regdate.time) > (1000*60)}">
 							<fmt:parseNumber value="${(now - rep.regdate.time) / (1000*60) }" integerOnly="true"/>분 전

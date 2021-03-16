@@ -50,5 +50,5 @@ public interface PeanutsService {
 
 	List<Peanuts> selectProfilePn(String m_id, Integer amt, String type);
 
-
+	Integer repsPno(int reply_no);
 }

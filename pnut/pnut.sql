@@ -212,7 +212,7 @@ select * from pn_replies;
 select * from pn_follow;
 select * from pn_block;
 select * from pn_bookmark;
-select * from pn_notice;
+select * from pn_notice order by notice_no desc;
 select * from pn_message;
 
 delete PN_FOLLOW;

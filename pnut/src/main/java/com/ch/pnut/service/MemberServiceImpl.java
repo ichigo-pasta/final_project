@@ -70,5 +70,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void noticeAllRead(String m_id) {
 		md.noticeAllRead(m_id);
+	}
+	@Override
+	public Notice selectNotice(Integer notice_no) {
+		return md.selectNotice(notice_no);
 	}	
 }
