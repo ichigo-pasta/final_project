@@ -41,7 +41,7 @@ public class MemberController {
 		String msg = "";
 		Member member = ms.select(m_id);
 		if (member == null) msg = "사용가능한 아이디입니다.";
-		else msg = "이미 사용중인 아이디입니다. 다른 아이디를 입력해주세요";
+		else msg = "이미 사용중인 아이디입니다.";
 		return msg;
 	}
 	@RequestMapping("join")

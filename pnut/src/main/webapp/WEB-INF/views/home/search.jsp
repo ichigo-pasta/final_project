@@ -53,17 +53,17 @@
 							</c:choose>
 						</div>
 							<div class="col">
-								<c:if test="${mem.m_id == my_id}">
-									<a href="${path}/home/profileUpdateForm.do?m_id=${mem.m_id }">프로필 수정</a>
+								<c:if test="${pn.member.m_id == my_id}">
+									<a href="${path}/home/profileUpdateForm.do?m_id=${pn.member.m_id }">프로필 수정</a>
 								</c:if>
-								<c:if test="${mem.m_id != my_id}">
-									<c:if test="${isFollow == true }">
-										<button id="followbt" onclick="unfollow('${mem.m_id}')"
+								<c:if test="${pn.member.m_id != my_id}">
+									<c:if test="${pn.followPn == true }">
+										<button id="followbt${pn.member.m_id}" onclick="unfollow('${pn.member.m_id}')"
 											onmouseover="this.innerText='언팔로우'"
 											onmouseout="this.innerText='팔로우 중'">팔로우 중</button>
 									</c:if>
-									<c:if test="${isFollow == false }">
-										<button id="followbt" onclick="follow('${mem.m_id}')">팔로우</button>
+									<c:if test="${pn.followPn == false }">
+										<button id="followbt${pn.member.m_id}" onclick="follow('${pn.member.m_id}')">팔로우</button>
 									</c:if>
 								</c:if>
 							</div>
@@ -221,13 +221,13 @@
 							<a href="${path}/home/profileUpdateForm.do?m_id=${mem.m_id }">프로필 수정</a>
 						</c:if>
 						<c:if test="${mem.m_id != my_id}">
-							<c:if test="${isFollow == true }">
-								<button id="followbt" onclick="unfollow('${mem.m_id}')"
+							<c:if test="${mem.followMe == true }">
+								<button id="followbt${mem.m_id}" onclick="unfollow('${mem.m_id}')"
 									onmouseover="this.innerText='언팔로우'"
 									onmouseout="this.innerText='팔로우 중'">팔로우 중</button>
 							</c:if>
-							<c:if test="${isFollow == false }">
-								<button id="followbt" onclick="follow('${mem.m_id}')">팔로우</button>
+							<c:if test="${mem.followMe == false }">
+								<button id="followbt${mem.m_id}" onclick="follow('${mem.m_id}')">팔로우</button>
 							</c:if>
 						</c:if>
 					</div>
@@ -332,27 +332,35 @@
 		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "setBm('"+peanut_no+"')");
 		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: gray");		
 	}
-	function follow(m_id) {
-		buttonChange();
+	function follow(m_id) {		
 		var xhr = new XMLHttpRequest();
 		xhr.open("get","${path}/follow.do?m_id="+m_id,true);
 		xhr.onload = function() {
-			if (xhr.status == 200 || xhr.status == 201) {
-				console.log('success');
+			if (xhr.status == 200 || xhr.status == 201) {  	// 통신 성공
+				if (xhr.responseText == 1) {				// 팔로우 성공
+					console.log('follow success');
+					buttonChange(m_id);					
+				} else if (xhr.responseText == -2) {		// 차단한 사용하는 팔로우 못하게
+					alert('팔로우 할 수 없는 사용자입니다');
+				} else if (xhr.responseText == -1) {		// 본인 팔로우를 못하게
+					alert('자기자신은 팔로우할 수 없습니다');
+				} else {
+					alert('팔로우 과정에서 오류가 발생했습니다');
+				}				
 			} else {
 				alert('요청오류: '+xhr.status);
 			}
 		}
 		xhr.send(null);
 	}
-	function buttonChange() {
-		var btn = document.getElementById('followbt');		
-		btn.setAttribute("onclick","unfollow('${member.m_id}')");
+	function buttonChange(m_id) {
+		var btn = document.getElementById('followbt'+m_id);		
+		btn.setAttribute("onclick","unfollow('"+m_id+"')");
 		btn.setAttribute("onmouseover","this.innerText='언팔로우'");
 		btn.setAttribute("onmouseout","this.innerText='팔로우 중'");
 	}
 	function unfollow(m_id) {
-		buttonChange2();
+		buttonChange2(m_id);
 		var xhr = new XMLHttpRequest();
 		xhr.open("get","${path}/unfollow.do?m_id="+m_id,true);
 		xhr.onload = function() {
@@ -362,10 +370,10 @@
 		}
 		xhr.send(null);
 	}
-	function buttonChange2() {
-		var btn = document.getElementById('followbt');
+	function buttonChange2(m_id) {
+		var btn = document.getElementById('followbt'+m_id);
 		btn.innerText = '팔로우';
-		btn.setAttribute("onclick","follow('${member.m_id}')");
+		btn.setAttribute("onclick","follow('"+m_id+"')");
 		btn.removeAttribute("onmouseover");
 		btn.removeAttribute("onmouseout");
 	}	
