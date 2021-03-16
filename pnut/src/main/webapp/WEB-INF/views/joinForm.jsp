@@ -41,7 +41,7 @@
 			required="required" autofocus="autofocus">
 			<input type="button" onclick="idChk()"
 				class="btn btn-info btn-sm" value="중복체크"
-				style="background: #D27D32"">
+				style="background: #D27D32">
 			<div id="disp" class="err"></div></td>
 	</tr>
 <!-- 비밀번호, 비밀번호 확인 체크 -->	
