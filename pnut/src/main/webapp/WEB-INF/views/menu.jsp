@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
-<div style="display: flex; flex-direction: column; justify-content: space-between; height: 90vh; top: 60px" class="sticky-top">
+<div style="display: flex; flex-direction: column; justify-content: space-between; height: 88vh; top: 85px" class="sticky-top">
 	<div class="btn-group-vertical" role="group" style="width: 123px;">
 		<button type="button"
 			onclick="location.href='${path}/home/timeline.do'"
@@ -12,11 +12,6 @@
 			class="btn btn-outline-secondary menuBt" id="noticeBt" style="text-align: left">
 			<i class="bi-bell-fill"></i>&nbsp;&nbsp;알림
 			<span class="badge rounded-pill bg-info text-dark invisible" id="notice_cnt"></span>
-		</button>
-		<button type="button"
-			onclick="location.href='${path}/home/message.do'"
-			class="btn btn-outline-secondary menuBt" id="messageBt" style="text-align: left">
-			<i class="bi-envelope-fill"></i>&nbsp;&nbsp;메시지
 		</button>
 		<button type="button" onclick="bookmark('${m_id}');"
 			class="btn btn-outline-secondary menuBt" id="bookmarkBt" style="text-align: left">
@@ -32,10 +27,10 @@
 			<i class="bi-pencil-fill"></i>&nbsp;&nbsp;글쓰기
 		</button>
 	</div>
-	<div style="padding: 10px 5px; border: 1px solid white; border-radius: 5px; background: #f0aa5f"  >
+	<div style="padding: 10px 10px 10px 10px; border: 1px solid white; border-radius: 5px; background: #f0aa5f"  >
 		<div style="display: flex; justify-content: space-between;">
 			<img alt="" src="${path}/resources/images/${m_profile}" width="50"
-				height="50">
+				height="50" style="border-radius: 5px;">
 			<div class="btn-group dropup">
 				<a class="btn dropdown" type="button"
 					id="dropdownMenuButton" data-bs-toggle="dropdown"
@@ -72,30 +67,30 @@
 		var currentPage = location.href.split("/")[location.href.split("/").length-1];
 		if (currentPage.startsWith('timeline.do')) {
 			btnReset();
-			document.getElementById('timelineBt').setAttribute('class','btn btn-dark menuBt');
+			document.getElementById('timelineBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
 		} else if (currentPage.startsWith('notice.do')) {
 			btnReset();
-			document.getElementById('noticeBt').setAttribute('class','btn btn-dark menuBt');
+			document.getElementById('noticeBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
 		}
 		else if (currentPage.startsWith('message.do')) {
 			btnReset();
-			document.getElementById('messageBt').setAttribute('class','btn btn-dark menuBt');
+			document.getElementById('messageBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
 		}
 		else if (currentPage.startsWith('bookmarkForm.do')) {
 			btnReset();
-			document.getElementById('bookmarkBt').setAttribute('class','btn btn-dark menuBt');
+			document.getElementById('bookmarkBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
 		}
 		else if (currentPage.startsWith('profileForm.do')) {
 			btnReset();
-			document.getElementById('profileBt').setAttribute('class','btn btn-dark menuBt');
+			document.getElementById('profileBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
 		}
 		else if (currentPage.startsWith('profileUpdateForm.do')) {
 			btnReset();
-			document.getElementById('profileBt').setAttribute('class','btn btn-dark menuBt');
+			document.getElementById('profileBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
 		}
 		else if (currentPage.startsWith('writeForm.do')) {
 			btnReset();
-			document.getElementById('writeFormBt').setAttribute('class','btn btn-dark menuBt');
+			document.getElementById('writeFormBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
 		}
 	});	
 	function btnReset() {

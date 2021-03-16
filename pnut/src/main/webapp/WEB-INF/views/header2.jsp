@@ -27,6 +27,7 @@
 		align-items: center;
 		background: #282828;
 		color: gray;
+		font-size: 14px;
 	}
 	.container {
 		min-width: 576px;
@@ -35,13 +36,15 @@
 		border: none;
 		background-color: transparent;
 	}
-	/* div {
-		border: 1px solid black;
-	} */
 	#headline {
 		display: flex;
 		align-items: center;
-		height: 60px;
+		height: 85px;
+	}
+	.menuBtn {
+		background: red;
+		color: white;
+		border: 1px solid green;
 	}
 	.peanut_container {		
 		padding: 10px 0;
@@ -92,10 +95,6 @@
 	#blockbt {
 		border: 0;
 		outline: 0;
-	}
-	/* 드롭다운 버튼  */
-	.dropdown-item {
-		color: lightgray;
 	}
 	
 </style>
