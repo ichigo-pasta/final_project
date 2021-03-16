@@ -29,11 +29,11 @@
 </script>
 </head>
 <body>
-<div class="container" align="center">
+<div class="container" align="center" style="width: 400px;">
 	<h2 class="text-primary">회원가입</h2>
 <form action="join.do" method="post" 
 	onsubmit="return chk()" name="form">
-<table class="table table-striped">
+<table class="table table-striped" style="width: 400px;">
 <!-- 아이디 체크 -->
 	<tr>
 		<td style="color: #D27D32">아이디</td>
@@ -70,7 +70,7 @@
 		<td><input type="tel" name="m_tel" required="required"></td>
 	</tr>
 	<tr>	
-		<td colspan="2"><input type="submit" value="가입" style="background: #D27D32; align-items: center"></td>
+		<td colspan="2" align="center"><input type="submit" value="가입" style="background: #D27D32;"></td>
 	</tr>
 </table>
 </form>
