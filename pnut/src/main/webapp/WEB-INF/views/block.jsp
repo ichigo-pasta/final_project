@@ -19,3 +19,9 @@
 		location.href = "${path}/home/timeline.do";
 	</script>
 </c:if>
+<c:if test="${result == -2 }">
+	<script type="text/javascript">
+		alert('자기자신은 차단할 수 없습니다');
+		history.go(-1);
+	</script>
+</c:if>
