@@ -75,9 +75,11 @@ public class MemberController {
 	}
 	@RequestMapping("home/profileForm")
 	public String profile(String m_id, Model model, HttpSession session,
-			Integer amt, String type) {
+			Integer amt, String type, Integer more, Integer pf_scroll) {
 		if(type == null) type = "peanut";
 		if(amt == null) amt = 20;
+		if(more == null) more = 0;
+		if(pf_scroll == null) pf_scroll = 0;
 		Member member = ms.select(m_id);
 		String my_id = (String) session.getAttribute("m_id");
 		List<String> myFollowLt = ms.followList(my_id);
@@ -85,7 +87,34 @@ public class MemberController {
 		List<String> followLt = ms.followList(m_id);
 		int followLtSize = followLt.size();
 		int followerLtSize = ms.followerList(m_id).size();
-		List<Peanuts> list = ps.selectProfilePn(m_id, amt, type);  // 프로필 리넛 표시 리스트
+		List<Peanuts> list = ps.selectProfilePn(m_id, amt+1, type);  // 프로필 리넛 표시 리스트
+		if (list.size() > amt) {
+			more = 1;	// amt 값보다 데이터가 더 많으면 more = 1
+			list.remove(amt.intValue());	// amt 범위 초과 피넛 리스트에서 제거
+		}
+		list = ps.distinctList(list);	// 리넛 중복제거
+		int listSize = list.size();
+		List<Integer> bmList = ps.selectBm(m_id);		// 로그인 유저가 북마크한 피넛번호 리스트
+		List<Integer> renutList = ps.selectRenut(m_id);	// 로그인 유저가 리넛한 피넛번호 리스트
+		if (listSize > 0) {
+			for (Peanuts peanut : list) {
+				peanut.setContent(ps.setHashtag(peanut.getContent(),"hashtag"));	// list 피넛 해시태그 처리
+				if (peanut.getRenut() == null) {									// 리넛이 아닐 때
+					peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
+					peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
+					peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
+					if (bmList.contains(peanut.getPeanut_no())) peanut.setBookmarked(true);
+					if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);
+					
+				} else {															// 리넛일 때
+					peanut.setRepCnt(ps.repCnt(peanut.getRenut()));
+					peanut.setRenutCnt(ps.renutCnt(peanut.getRenut()));
+					peanut.setBmCnt(ps.bmCnt(peanut.getRenut()));
+					if (bmList.contains(peanut.getRenut())) peanut.setBookmarked(true);
+					if (renutList.contains(peanut.getRenut())) peanut.setRenuted(true);
+				}
+			}
+		}
 		Member member2 = ms.select(my_id);
 		String m_profile = member2.getM_profile();
 		String m_nickname = member2.getM_nickname();
@@ -98,6 +127,9 @@ public class MemberController {
 		model.addAttribute("list", list);
 		model.addAttribute("my_id", my_id);
 		model.addAttribute("type", type);
+		model.addAttribute("amt", amt);
+		model.addAttribute("more", more);
+		model.addAttribute("pf_scroll", pf_scroll);
 		return "home/profileForm";
 	}
 	@RequestMapping("home/profileUpdateForm")

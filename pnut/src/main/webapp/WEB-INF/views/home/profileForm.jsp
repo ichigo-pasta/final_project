@@ -355,6 +355,12 @@
 				</div>
 			</div>	<!-- peanut_container 종료 -->
 		</c:forEach>
+		<c:if test="${more == 1 }">
+			<div class="d-grid gap-2">
+				<br>		
+	  			<button class="btn btn-outline-info btn-lg" type="button" onclick="more_read_pf('${amt+20}', '${type }')">more...</button>
+			</div>
+		</c:if>	
 	</c:if>
 </div>
 
@@ -366,6 +372,8 @@
 		} else {
 			document.getElementById("peanPic").setAttribute("class","nav-link active");
 		}
+		document.body.scrollTop = ${pf_scroll};
+		
 	}
 	function follow(m_id) {		
 		var xhr = new XMLHttpRequest();
@@ -417,7 +425,8 @@
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
 	}
 	
-	//	$(function () {
-	//		$('#peanut').load('${path}/nolay/peanutList.do?amt=20');
-	//	});	
+	function more_read_pf(num, ty) {
+		var pf_scroll = document.scrollingElement.scrollTop;
+		location.href = "${path}/home/profileForm.do?m_id=${member.m_id}&amt="+num+"&type="+ty+"&pf_scroll="+pf_scroll;
+	}
 </script>
