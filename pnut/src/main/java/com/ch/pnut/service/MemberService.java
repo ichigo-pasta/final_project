@@ -3,6 +3,7 @@ package com.ch.pnut.service;
 import java.util.List;
 
 import com.ch.pnut.model.Member;
+import com.ch.pnut.model.Notice;
 
 public interface MemberService {
 
@@ -38,5 +39,9 @@ public interface MemberService {
 	List<Member> myBlockingList(List<String> myBlockList, Integer amt);
 
 	int noticeCount(String attribute);
+
+	List<Notice> noticeList(String m_id);
+
+	void noticeAllRead(String m_id);
 
 }

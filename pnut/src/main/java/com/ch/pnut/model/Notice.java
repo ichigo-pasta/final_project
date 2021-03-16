@@ -14,4 +14,8 @@ public class Notice {
 	private int reply_no;
 	private Date regdate;
 	private String read;
+	
+	private String n_content;
+	private String active_nn;
+	private String active_pf;
 }
