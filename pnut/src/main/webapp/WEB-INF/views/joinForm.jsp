@@ -36,40 +36,41 @@
 <table class="table table-striped">
 <!-- 아이디 체크 -->
 	<tr>
-		<td>아이디</td>
+		<td style="color: #D27D32">아이디</td>
 		<td><input type="text" name="m_id" 
 			required="required" autofocus="autofocus">
 			<input type="button" onclick="idChk()"
-				class="btn btn-info btn-sm" value="중복체크">
+				class="btn btn-info btn-sm" value="중복체크"
+				style="background: #D27D32"">
 			<div id="disp" class="err"></div></td>
 	</tr>
 <!-- 비밀번호, 비밀번호 확인 체크 -->	
 	<tr>
-		<td>비밀번호</td>
+		<td style="color: #D27D32">비밀번호</td>
 		<td><input type="password" name="m_pw" required="required"></td>
 	</tr>
 	<tr>
-		<td>비밀번호 확인</td>
+		<td style="color: #D27D32">비밀번호 확인</td>
 		<td><input type="password" name="m_pwConfirm" required="required"></td>	
 	</tr>
 	<tr>
-		<td>이름</td>
+		<td style="color: #D27D32">이름</td>
 		<td><input type="text" name="m_name" required="required"></td>
 	</tr>
 	<tr>
-		<td>별명</td>
+		<td style="color: #D27D32">별명</td>
 		<td><input type="text" name="m_nickname" required="required"></td>
 	</tr>
 	<tr>
-		<td>이메일</td>
+		<td style="color: #D27D32">이메일</td>
 		<td><input type="email" name="m_email" required="required"></td>
 	</tr>
 	<tr>	
-		<td>전화번호</td>
+		<td style="color: #D27D32">전화번호</td>
 		<td><input type="tel" name="m_tel" required="required"></td>
 	</tr>
 	<tr>	
-		<td colspan="2"><input type="submit" value="가입"></td>
+		<td colspan="2"><input type="submit" value="가입" style="background: #D27D32; align-items: center"></td>
 	</tr>
 </table>
 </form>
