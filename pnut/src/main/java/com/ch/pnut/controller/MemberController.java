@@ -187,12 +187,22 @@ public class MemberController {
 		model.addAttribute("m_nickname", m_nickname);
 		return "home/followerList"; 
 	}
-	@RequestMapping(value = "follow", produces = "text/html;charset=utf-8")
+	@RequestMapping("follow")
 	@ResponseBody
-	public void follow(String m_id, HttpSession session) {
+	public int follow(String m_id, HttpSession session) {
 		String active = (String) session.getAttribute("m_id");
 		String passive = m_id;
-		ms.insert(active , passive);		
+		int result;
+		if (passive.equals(active)) {
+			result = -1;
+			return result;
+		}
+		if(ms.blockList(active).contains(m_id) || ms.myBlockList(active).contains(m_id)) {
+			result = -2;
+			return result;
+		}
+		result = ms.insert(active , passive);
+		return result;
 	}
 	@RequestMapping(value = "unfollow", produces = "text/html;charset=utf-8")
 	@ResponseBody

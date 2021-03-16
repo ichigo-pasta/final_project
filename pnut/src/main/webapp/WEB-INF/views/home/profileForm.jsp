@@ -314,13 +314,21 @@
 			document.getElementById("peanPic").setAttribute("class","nav-link active");
 		}
 	}
-	function follow(m_id) {
-		buttonChange();
+	function follow(m_id) {		
 		var xhr = new XMLHttpRequest();
 		xhr.open("get","${path}/follow.do?m_id="+m_id,true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
-				console.log('success');
+				if (xhr.responseText == 1) {
+					console.log('follow success');
+					buttonChange();
+				} else if (xhr.responseText == -2) {
+					alert('팔로우할 수 없는 사용자입니다');
+				} else if (xhr.responseText == -1) {
+					alert('자기자신은 팔로우할 수 없습니다');
+				} else {
+					alert('팔로우 과정에서 오류가 발생했습니다');
+				}				
 			} else {
 				alert('요청오류: '+xhr.status);
 			}

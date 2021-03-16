@@ -23,8 +23,8 @@ public class MemberServiceImpl implements MemberService {
 	public int update(Member member) {
 		return md.update(member);
 	}
-	public void insert(String active, String passive) {
-		md.insert(active, passive);
+	public int insert(String active, String passive) {
+		return md.insert(active, passive);
 	}
 	public void delete(String active, String passive) {
 		md.delete(active, passive);

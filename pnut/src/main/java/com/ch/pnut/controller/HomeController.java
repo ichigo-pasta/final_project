@@ -76,7 +76,9 @@ public class HomeController {
 		if (notice == null) return "noticeError";
 		switch (notice.getN_type()) {
 		case "reply":
+			System.out.println(notice.getReply_no());
 			peanut_no = ps.repsPno(notice.getReply_no());
+			System.out.println(peanut_no);
 			rd = "redirect:home/peanutDetail.do?peanut_no=" + peanut_no;
 			break;
 		case "renut":
