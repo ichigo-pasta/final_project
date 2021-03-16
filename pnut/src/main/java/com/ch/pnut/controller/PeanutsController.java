@@ -119,18 +119,16 @@ public class PeanutsController {
 					peanut.setRenutCnt(ps.renutCnt(peanut.getPeanut_no()));
 					peanut.setBmCnt(ps.bmCnt(peanut.getPeanut_no()));
 					if (bmList.contains(peanut.getPeanut_no())) peanut.setBookmarked(true);
-					if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);
-					List<String> myFollowLt = ms.followList(m_id);
-					boolean isFollow = myFollowLt.contains(peanut.getWriter());
+					if (renutList.contains(peanut.getPeanut_no())) peanut.setRenuted(true);					
+					boolean isFollow = followList.contains(peanut.getWriter());
 					model.addAttribute("isFollow", isFollow);
 				} else {															// 리넛일 때
 					peanut.setRepCnt(ps.repCnt(peanut.getRenut()));
 					peanut.setRenutCnt(ps.renutCnt(peanut.getRenut()));
 					peanut.setBmCnt(ps.bmCnt(peanut.getRenut()));
 					if (bmList.contains(peanut.getRenut())) peanut.setBookmarked(true);
-					if (renutList.contains(peanut.getRenut())) peanut.setRenuted(true);
-					List<String> myFollowLt = ms.followList(m_id);
-					boolean isFollow = myFollowLt.contains(peanut.getRe_writer());
+					if (renutList.contains(peanut.getRenut())) peanut.setRenuted(true);					
+					boolean isFollow = followList.contains(peanut.getRe_writer());
 					model.addAttribute("isFollow", isFollow);
 				}
 			}
