@@ -41,11 +41,6 @@
 		align-items: center;
 		height: 85px;
 	}
-	.menuBtn {
-		background: red;
-		color: white;
-		border: 1px solid green;
-	}
 	.peanut_container {		
 		padding: 10px 0;
 		border-bottom: 1px solid gray;
