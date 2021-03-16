@@ -10,12 +10,13 @@
 			width="100" height="100">
 	</div> 
 	<div class="row">
-		<div class="col col-10" style="margin: 2px 0;">
+		<div class="col col-9" style="margin: 2px 0;">
 			<c:out value="${member.m_nickname }"></c:out>
 		</div>
 		<div class="col" style="margin: 2px 0;"> <!-- 본인 : 프로필 수정, 다른 사람 : 팔로우, 언팔로우 -->
 			<c:if test="${member.m_id == my_id}"> <!-- 본인일시 프로필 수정 -->
-				<a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a>
+				<a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }"
+					class="btn btn-outline-info">프로필 수정</a>
 			</c:if>
 			<c:if test="${member.m_id != my_id}"> <!-- 다른 사람 프로필에서는 팔로우 언팔로우 -->
 				<c:if test="${isFollow == true }">
@@ -72,7 +73,7 @@
 			<div class="row peanut_container">			
 			<c:if test="${not empty pn.renut }">
 			<div class="row">
-				<div class="col">
+				<div class="col" style="padding-bottom: 10px ">
 					<i class="bi bi-arrow-repeat"></i><c:out value="${pn.writer}"/> 님이 리넛하셨습니다.
 				</div>
 			</div>
@@ -284,7 +285,7 @@
 							<c:if test="${pn.bookmarked == true}">
 								<button onclick="deleteBm('${pn.peanut_no}')"
 									id="bmBtn${pn.peanut_no}" class="btnBox" >
-									<i class="bi-bookmark" style="color: #D27D32;""
+									<i class="bi-bookmark" style="color: #D27D32;"
 										id="bmBtnI${pn.peanut_no}"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 								</button>
