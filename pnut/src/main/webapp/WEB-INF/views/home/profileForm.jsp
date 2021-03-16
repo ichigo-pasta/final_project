@@ -282,7 +282,7 @@
 							<c:if test="${pn.bookmarked == true}">
 								<button onclick="deleteBm('${pn.peanut_no}')"
 									id="bmBtn${pn.peanut_no}">
-									<i class="bi-bookmark" style="color: #D27D32;""
+									<i class="bi-bookmark" style="color: #D27D32;"
 										id="bmBtnI${pn.peanut_no}"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 								</button>

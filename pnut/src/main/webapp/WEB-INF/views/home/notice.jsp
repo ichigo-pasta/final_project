@@ -3,11 +3,6 @@
 <%@ include file="../header.jsp" %>
 <jsp:useBean id="today" class="java.util.Date" />
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
-<style>
-	.bi {
-		font-size: 30px;
-	}
-</style>
 <c:if test="${empty list }">
 	<p>알림이 존재하지 않습니다</p>
 </c:if>
@@ -30,19 +25,19 @@
 			<div class="col" style="padding: 10px;">
 		<c:if test="${notice.n_type == 'renut' }">
 				<c:out value="${notice.active_nn }"/>님이 리넛하셨습니다
-				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
+				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark" style="font-size: 30px">new</span></c:if>
 				<br>
 				<pre style="padding-left: 20px"><c:out value="${notice.n_content }"/></pre>
 		</c:if>
 		<c:if test="${notice.n_type == 'reply' }">
 				<c:out value="${notice.active_nn }"/>님이 댓글을 다셨습니다
-				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
+				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark" style="font-size: 30px">new</span></c:if>
 				<br>
 				<pre style="padding-left: 20px"><c:out value="${notice.n_content }"/></pre>
 		</c:if>
 		<c:if test="${notice.n_type == 'follow' }">
 				<c:out value="${notice.active_nn }"/>님이 팔로우하셨습니다
-				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
+				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark" style="font-size: 30px">new</span></c:if>
 		</c:if>
 			</div>
 		</div>
