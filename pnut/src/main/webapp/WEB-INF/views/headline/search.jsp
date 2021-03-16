@@ -42,9 +42,17 @@
 		if(arguments.length < 3) amt.setAttribute('value', '20');
 		else amt.setAttribute('value', arguments[2]);
 		
+		if(arguments.length == 3) {
+			var search_scr = document.createElement('input');
+			search_scr.setAttribute('type', 'hidden');
+			search_scr.setAttribute('name', 'search_scroll');
+			search_scr.setAttribute('value', document.scrollingElement.scrollTop);
+		}
+		
 		form.appendChild(type);
 		form.appendChild(keyword);
 		form.appendChild(amt);
+		if(arguments.length == 3) form.appendChild(search_scr);
 		
 		document.body.appendChild(form);
 		form.submit();		

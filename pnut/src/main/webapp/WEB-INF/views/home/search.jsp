@@ -247,6 +247,7 @@
 <input type="hidden" value="${type}" id="type"> 
 <script type="text/javascript">
 	window.onpageshow = function() {
+		document.body.scrollTop = ${search_scroll};
 		document.getElementById("kw").value = document.getElementById("keyword").value;
 		if (document.getElementById("type").value == "peanut") {
 			document.getElementById("peanut").setAttribute("class","nav-link active");
