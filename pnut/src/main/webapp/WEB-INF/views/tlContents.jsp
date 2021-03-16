@@ -12,13 +12,13 @@
 		<div class="peanut_container">
 		<c:if test="${pn.renut != null}"> <!-- 리넛 여부 표시 -->
 			<div class="row">
-				<div class="col col-10" style="padding-bottom: 13px;">
-					<i class="bi bi-arrow-repeat"></i><c:out value="${pn.writer}"/> 님이 리넛하셨습니다.
+				<div class="col col-10">
+					<i class="bi bi-arrow-repeat"></i>&nbsp;<c:out value="${pn.writer}"/> 님이 리넛하셨습니다.
 				</div>
 			</div>
 		</c:if>
 			<div class="row">	<!-- 리넛 여부 표시줄 -->
-				<div style="width: 120px">
+				<div style="width: 120px; padding-top: 8px;">
 		<c:if test="${pn.renut != null}"> 
 					<img alt="" src="${path}/resources/images/${pn.member.re_pf}"
 						width="100" height="100" onclick="profile('${pn.re_writer}')"
@@ -31,7 +31,7 @@
 		</c:if>
 				</div>			<!-- 리넛 여부 표시줄  끝 -->
 				<div class="col">	
-					<div class="row">
+					<div class="row" style="padding-top: 8px;">
 						<div class="col-11">	<!-- 리넛 여부에 따른 닉네임, 아이디, 작성일 표시줄 -->
 		<c:if test="${pn.renut != null}">
 							<c:out value=" ${pn.member.re_nick} @${pn.re_writer}"/>							
@@ -146,12 +146,12 @@
 							</div>
 						</div>		<!-- 삭제/팔로우,차단 드롭다운 메뉴 끝 -->
 					</div>
-					<div class="row">
+					<div class="row">	<!-- 내용 -->
 						<div class="col content_col" id="content${pn.peanut_no }" style="min-height: 5vw; cursor: pointer">
 							<pre id="contpre${pn.peanut_no }">${pn.content}</pre>
 						</div>
 					</div>
-		<c:if test="${pn.picture1 != null}">					
+		<c:if test="${pn.picture1 != null}">	<!-- 갤러리 -->					
 					<div class="row gallery">
 						<div class="col col-6 tl_image">
 							<a href="${path}/resources/images/${pn.picture1}">							

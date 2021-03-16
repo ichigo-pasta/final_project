@@ -32,6 +32,9 @@
 	.container {
 		min-width: 576px;
 	}
+	.btBox {
+		padding-top: 5px;
+	}
 	.btBox button {
 		border: none;
 		background-color: transparent;
@@ -40,11 +43,6 @@
 		display: flex;
 		align-items: center;
 		height: 85px;
-	}
-	.menuBtn {
-		background: red;
-		color: white;
-		border: 1px solid green;
 	}
 	.peanut_container {		
 		padding: 10px 0;

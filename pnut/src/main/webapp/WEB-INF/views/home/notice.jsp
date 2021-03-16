@@ -10,7 +10,7 @@
 	<c:forEach items="${list }" var="notice">
 	<div class="notice_container" onclick="link_to('${notice.notice_no }')">
 		<div class="row">
-			<div style="padding: 10px; width: 110px">
+			<div style="padding: 12px; margin: 10px 0 0 5px; width: 110px;">
 		<c:if test="${notice.n_type == 'renut' }">
 				<i class="bi bi-arrow-clockwise text-success"></i>
 		</c:if>
@@ -22,7 +22,7 @@
 		</c:if>
 				<img alt="" src="${path }/resources/images/${notice.active_pf}" width="50" height="50">
 			</div>
-			<div class="col" style="padding: 10px;">
+			<div class="col" style="padding: 5px; margin: 10px 10px 0 0; border-bottom: 1px solid gray;">
 		<c:if test="${notice.n_type == 'renut' }">
 				<c:out value="${notice.active_nn }"/>님이 리넛하셨습니다
 				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark" style="font-size: 30px">new</span></c:if>
