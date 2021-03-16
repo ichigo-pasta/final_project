@@ -100,8 +100,8 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("myBlockList", myBlockList);
 		map.put("amt", amt);
 		return sst.selectList("blockns.myBlockingList", map);
-
-
+	}
+	
 	public int noticeCount(String attribute) {
 		return sst.selectOne("noticens.noticeCount", attribute);
 

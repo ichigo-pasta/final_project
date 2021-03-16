@@ -58,9 +58,8 @@ public class MemberServiceImpl implements MemberService {
 
 	public List<Member> myBlockingList(List<String> myBlockList, Integer amt) {
 		return md.myBlockingList(myBlockList, amt);
-
+	}
 	public int noticeCount(String attribute) {
 		return md.noticeCount(attribute);
-
 	}	
 }
