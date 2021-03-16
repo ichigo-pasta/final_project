@@ -11,7 +11,7 @@
 	<c:forEach items="${bmList }" var="pn">
 		<div class="peanut_container">
 			<div class="row">
-				<div style="width: 120px">
+				<div style="width: 120px; margin: 8px;">
 					<img class="profile_pic" alt="" src="${path}/resources/images/${pn.member.m_profile}"
 						width="100" height="100" onclick="profile('${pn.writer}')">
 				</div>

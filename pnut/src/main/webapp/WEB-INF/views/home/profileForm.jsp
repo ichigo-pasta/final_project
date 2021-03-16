@@ -5,15 +5,15 @@
 <jsp:useBean id="today" class="java.util.Date" />
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <div id="container">
-	<div class="pic_container d-flex align-items-end">
+	<div class="pic_container d-flex align-items-end" style="margin: 12px 0;">
 		<img alt="" src="${path}/resources/images/${member.m_profile}"
 			width="100" height="100">
 	</div> 
 	<div class="row">
-		<div class="col col-10">
+		<div class="col col-10" style="margin: 2px 0;">
 			<c:out value="${member.m_nickname }"></c:out>
 		</div>
-		<div class="col"> <!-- 본인 : 프로필 수정, 다른 사람 : 팔로우, 언팔로우 -->
+		<div class="col" style="margin: 2px 0;"> <!-- 본인 : 프로필 수정, 다른 사람 : 팔로우, 언팔로우 -->
 			<c:if test="${member.m_id == my_id}"> <!-- 본인일시 프로필 수정 -->
 				<a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a>
 			</c:if>
@@ -30,25 +30,25 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col"> 
-			<c:out value="${member.m_id }"/>
+		<div class="col" style="margin: 2px 0;"> 
+			<c:out value="@${member.m_id }"/>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col"> 
+		<div class="col" style="margin: 2px 0;"> 
 			<c:out value="${member.m_intro }"/>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col"> 
+		<div class="col" style="margin: 2px 0;"> 
 			<c:out value="${member.m_regdate }"/>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col col-2"> 
+		<div class="col col-2" style="margin: 2px 0;"> 
 			<a href="${path}/home/followingList.do?m_id=${member.m_id}">${followLtSize } 팔로우 중</a>
 		</div>
-		<div class="col col-2"> 
+		<div class="col col-2" style="margin: 2px 0;"> 
 			<a href="${path}/home/followerList.do?m_id=${member.m_id}">${followerLtSize } 팔로워</a>
 		</div>
 	</div>
@@ -247,7 +247,7 @@
 						<!-- 댓글, 리넛, 북마크 박스 -->
 						<div class="col col-4">
 							<!-- 댓글 아이콘 -->
-							<button
+							<button class="btnBox" 
 								onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
 								<c:if test="${pn.repCnt != 0}">
 									<i class="bi-chat" style="color: #D27D32;"></i>
@@ -263,14 +263,16 @@
 							<!-- 리넛 아이콘 -->
 							<c:if test="${pn.renuted == false }">
 								<button data-bs-toggle="modal"
-									data-bs-target="#set${pn.peanut_no}">
+									data-bs-target="#set${pn.peanut_no}"
+									class="btnBox">
 									<i class="bi-arrow-clockwise" style="color: gray"></i>
 									<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>
 								</button>
 							</c:if>
 							<c:if test="${pn.renuted == true }">
 								<button data-bs-toggle="modal"
-									data-bs-target="#cancel${pn.peanut_no}">
+									data-bs-target="#cancel${pn.peanut_no}"
+									class="btnBox">
 									<i class="bi-arrow-clockwise" style="color: #D27D32;"></i>
 									<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>
 								</button>
@@ -281,7 +283,7 @@
 							<!-- 북마크 아이콘 -->
 							<c:if test="${pn.bookmarked == true}">
 								<button onclick="deleteBm('${pn.peanut_no}')"
-									id="bmBtn${pn.peanut_no}">
+									id="bmBtn${pn.peanut_no}" class="btnBox" >
 									<i class="bi-bookmark" style="color: #D27D32;""
 										id="bmBtnI${pn.peanut_no}"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
@@ -289,7 +291,7 @@
 							</c:if>
 							<c:if test="${pn.bookmarked == false}">
 								<button onclick="setBm('${pn.peanut_no}')"
-									id="bmBtn${pn.peanut_no}">
+									id="bmBtn${pn.peanut_no}" class="btnBox" >
 									<i class="bi-bookmark" style="color: gray"
 										id="bmBtnI${pn.peanut_no}"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>

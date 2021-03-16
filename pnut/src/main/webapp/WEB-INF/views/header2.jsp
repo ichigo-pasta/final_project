@@ -32,6 +32,9 @@
 	.container {
 		min-width: 576px;
 	}
+	.btBox {
+		padding-top: 5px;
+	}
 	.btBox button {
 		border: none;
 		background-color: transparent;
@@ -91,5 +94,4 @@
 		border: 0;
 		outline: 0;
 	}
-	
 </style>
