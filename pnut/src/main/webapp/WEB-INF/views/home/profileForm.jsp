@@ -11,11 +11,11 @@
 		<div class="col col-10">
 			<c:out value="${member.m_nickname }"></c:out>
 		</div>
-		<div class="col">
-			<c:if test="${member.m_id == my_id}">
+		<div class="col"> <!-- 본인 : 프로필 수정, 다른 사람 : 팔로우, 언팔로우 -->
+			<c:if test="${member.m_id == my_id}"> <!-- 본인일시 프로필 수정 -->
 				<a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }">프로필 수정</a>
 			</c:if>
-			<c:if test="${member.m_id != my_id}">
+			<c:if test="${member.m_id != my_id}"> <!-- 다른 사람 프로필에서는 팔로우 언팔로우 -->
 				<c:if test="${isFollow == true }">
 					<button id="followbt" onclick="unfollow('${member.m_id}')" 
 						onmouseover="this.innerText='언팔로우'" 

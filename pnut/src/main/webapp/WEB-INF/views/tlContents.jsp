@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ include file="getMyId.jsp" %>
 <jsp:useBean id="today" class="java.util.Date" />
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <c:if test="${empty list }">
@@ -84,10 +85,40 @@
 								<a class="btn btn-light dropdown" type="button"
 									id="dropdownMenuButton" data-bs-toggle="dropdown"
 									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+						<c:if test="${pn.renut != null }">
+								<c:if test="${pn.re_writer == m_id }">
+									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+										<li>
+											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${pn.peanut_no}">
+											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
+									</ul>
+								</c:if>
+								<c:if test="${pn.re_writer != m_id }">
+									<c:if test="${isFollow == true }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<button class="bi bi-person-x" id="followbt">&nbsp;팔로우 중</button></a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
+												<button class="bi bi-x-circle" id="blockbt"
+													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>	
+										</ul>
+									</c:if>	
+									<c:if test="${isFollow == false }">
+										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#">
+												<button class="bi bi-person-plus" id="followbt"
+													>팔로우</button></a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
+												<button class="bi bi-x-circle" onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
+										</ul>
+									</c:if>
+								</c:if>
+						</c:if>
+						<c:if test="${pn.renut == null }">
 								<c:if test="${pn.writer == m_id }">
 									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 										<li>
-											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${peanut.peanut_no}">
+											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${pn.peanut_no}">
 											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
 									</ul>
 								</c:if>
@@ -96,9 +127,9 @@
 										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 											<li><a class="dropdown-item" href="#">
 												<button class="bi bi-person-x" id="followbt">&nbsp;팔로우 중</button></a></li>
-											<li><a class="dropdown-item" href="${path}/block.do?m_id=${peanut.writer}">
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
 												<button class="bi bi-x-circle" id="blockbt"
-													onclick="location.href='${path}/block.do?m_id=${peanut.writer}'"></button>&nbsp;차단</a></li>	
+													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>	
 										</ul>
 									</c:if>	
 									<c:if test="${isFollow == false }">
@@ -106,11 +137,12 @@
 											<li><a class="dropdown-item" href="#">
 												<button class="bi bi-person-plus" id="followbt"
 													>팔로우</button></a></li>
-											<li><a class="dropdown-item" href="${path}/block.do?m_id=${peanut.writer}">
-												<button class="bi bi-x-circle" onclick="location.href='${path}/block.do?m_id=${peanut.writer}'"></button>&nbsp;차단</a></li>
+											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
+												<button class="bi bi-x-circle" onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
 										</ul>
 									</c:if>
-								</c:if>				
+								</c:if>
+						</c:if>
 							</div>
 						</div>		<!-- 삭제/팔로우,차단 드롭다운 메뉴 끝 -->
 					</div>
