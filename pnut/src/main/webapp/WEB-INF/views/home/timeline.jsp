@@ -101,4 +101,42 @@
 		stopRefresh();
 		startRefresh();
 	}
+	// 팔로우 언팔로우 표시 버튼
+	function follow(m_id) {
+		buttonChange();
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/follow.do?m_id="+m_id,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('success');
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);
+	}
+	function buttonChange() {
+		var btn = document.getElementById('followbt');		
+		btn.setAttribute("onclick","unfollow('${m_id}')");
+		btn.setAttribute("onmouseover","this.innerText='언팔로우'");
+		btn.setAttribute("onmouseout","this.innerText='팔로우 중'");
+	}
+	function unfollow(m_id) {
+		buttonChange2();
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/unfollow.do?m_id="+m_id,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				console.log('success');
+			} else {alert('요청오류: '+xhr.status);}
+		}
+		xhr.send(null);
+	}
+	function buttonChange2() {
+		var btn = document.getElementById('followbt');
+		btn.innerText = '팔로우';
+		btn.setAttribute("onclick","follow('${m_id}')");
+		btn.removeAttribute("onmouseover");
+		btn.removeAttribute("onmouseout");
+	}	
 </script>

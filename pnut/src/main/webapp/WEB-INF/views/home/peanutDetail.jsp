@@ -60,7 +60,7 @@
 									<c:if test="${isFollow == true }">
 										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-person-x" id="followbt">&nbsp;팔로우 중</button></a></li>
+												<button class="bi bi-person-x" id="followbt">&nbsp;&nbsp;팔로우 중</button></a></li>
 											<li><a class="dropdown-item" href="${path}/block.do?m_id=${peanut.writer}">
 												<button class="bi bi-x-circle" id="blockbt"
 													onclick="location.href='${path}/block.do?m_id=${peanut.writer}'"></button>&nbsp;차단</a></li>	
@@ -70,9 +70,10 @@
 										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 											<li><a class="dropdown-item" href="#">
 												<button class="bi bi-person-plus" id="followbt"
-													>팔로우</button></a></li>
+													>&nbsp;&nbsp;팔로우</button></a></li>
 											<li><a class="dropdown-item" href="${path}/block.do?m_id=${peanut.writer}">
-												<button class="bi bi-x-circle" onclick="location.href='${path}/block.do?m_id=${peanut.writer}'"></button>&nbsp;차단</a></li>
+												<button class="bi bi-x-circle" id="blockbt"
+													onclick="location.href='${path}/block.do?m_id=${peanut.writer}'"></button>&nbsp;차단</a></li>
 										</ul>
 									</c:if>
 								</c:if>				
