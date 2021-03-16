@@ -46,14 +46,15 @@
 						</div>
 						<div class="col col-1">
 							<div class="btn-group">
-								<a class="btn btn-light dropdown" type="button"
+								<a class="btn dropdown" type="button"
 									id="dropdownMenuButton" data-bs-toggle="dropdown"
-									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+									aria-expanded="false"><i class="bi bi-three-dots" style="color: lightgray"></i></a>
 								<c:if test="${peanut.writer == my_id }">
-									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton" 
+										style="background: #464646;">
 										<li>
-											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${peanut.peanut_no}">
-											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
+											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${peanut.peanut_no}" style="color: lightgray">
+											<i class="bi bi-trash" style="color: red"></i>&nbsp;&nbsp;삭제</a></li>
 									</ul>
 								</c:if>
 								<c:if test="${peanut.writer != my_id }">
@@ -138,13 +139,13 @@
 						</div>
 						<div class="col col-4">
 							<c:if test="${peanut.renuted == false }">
-							<button data-bs-toggle="modal" data-bs-target="#set${peanut.peanut_no}">
+							<button data-bs-toggle="modal" data-bs-target="#set${peanut.peanut_no}" class="btnBox">
 								<i class="bi-arrow-clockwise" style="color: gray"></i>
 								<c:if test="${peanut.renutCnt != 0}">${peanut.renutCnt }</c:if>								
 							</button>
 							</c:if>
 							<c:if test="${peanut.renuted == true }">
-							<button data-bs-toggle="modal" data-bs-target="#cancel${peanut.peanut_no}">
+							<button data-bs-toggle="modal" data-bs-target="#cancel${peanut.peanut_no}" class="btnBox">
 								<i class="bi-arrow-clockwise" style="color: #D27D32"></i>
 								<c:if test="${peanut.renutCnt != 0}">${peanut.renutCnt }</c:if>								
 							</button>
@@ -152,13 +153,13 @@
 						</div>
 						<div class="col col-4">
 							<c:if test="${peanut.bookmarked == true}">
-								<button onclick="deleteBm2('${peanut.peanut_no}')">
+								<button onclick="deleteBm2('${peanut.peanut_no}')" class="btnBox">
 									<i class="bi-bookmark" style="color: #D27D32"></i>
 									<c:if test="${peanut.bmCnt != 0}">${peanut.bmCnt }</c:if>
 								</button>
 							</c:if>							
 							<c:if test="${peanut.bookmarked == false}">								
-								<button onclick="setBm2('${peanut.peanut_no}')">
+								<button onclick="setBm2('${peanut.peanut_no}')" class="btnBox">
 									<i class="bi-bookmark" style="color: gray"></i>
 									<c:if test="${peanut.bmCnt != 0}">${peanut.bmCnt }</c:if>
 								</button>
@@ -221,7 +222,7 @@
 						width="80" height="80" onclick="profile('${rep.writer}')"
 						align="right" class="profile_pic">
 				</div>
-				<div class="col" style="background: #eee; border-radius: 10px" >
+				<div class="col" style="background: #3c3c3c; color: lightgray; border-radius: 10px" >
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
 					<c:choose>
@@ -246,7 +247,7 @@
 					</c:choose>
 					&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
 				</div>
-				
+				<!-- 대댓글 쓰기 -->
 				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
 					<div style="width: 90px"></div>
 					<div class="col">
@@ -259,7 +260,7 @@
 								<div class="row">
 									to : ${rep.member.m_nickname}
 									<textarea id="cont${rep.reply_no}"
-										rows="5" style="resize: none" 
+										rows="5" style="resize: none; background: #3c3c3c; color: lightgray" 
 										name="content" required="required" 
 										placeholder="답글을 입력해주세요"></textarea>
 								</div>
@@ -276,7 +277,7 @@
 						<input type="hidden" value="${my_id }" name="writer">
 					</form>
 					</div>
-				</div>
+				</div> <!-- 대댓글 쓰기 끝 -->
 			</div>
 		</c:if>	
 		<c:if test="${rep.ref_level == 1}">
@@ -288,7 +289,7 @@
 							align="right" class="profile_pic">
 					</div>					
 				</div>
-				<div class="col" style="background: #eee; border-radius: 10px" >
+				<div class="col" style="background: #3c3c3c; color: lightgray; border-radius: 10px" >
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre><b>${rep.member.target_nn}</b>&nbsp;${rep.content}</pre>
 					<c:choose>
@@ -354,7 +355,7 @@
 				<div class="row">
 					<div class="col col-10">
 						<div class="row">
-							<textarea rows="5" style="resize: none" 
+							<textarea rows="5" style="resize: none; background: #3c3c3c; color: lightgray" 
 								name="content" required="required" 
 								placeholder="댓글을 입력해주세요"></textarea>
 						</div>

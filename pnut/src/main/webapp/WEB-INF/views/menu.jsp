@@ -32,28 +32,28 @@
 			<i class="bi-pencil-fill"></i>&nbsp;&nbsp;글쓰기
 		</button>
 	</div>
-	<div>
+	<div style="padding: 10px 5px; border: 1px solid white; border-radius: 5px; background: #f0aa5f"  >
 		<div style="display: flex; justify-content: space-between;">
 			<img alt="" src="${path}/resources/images/${m_profile}" width="50"
 				height="50">
 			<div class="btn-group dropup">
-				<a class="btn btn-light dropdown" type="button"
+				<a class="btn dropdown" type="button"
 					id="dropdownMenuButton" data-bs-toggle="dropdown"
 					aria-expanded="false"><i class="bi bi-three-dots"></i></a>
 				<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 					<li>
 						<a class="dropdown-item" 
-							href="${path}/logout.do">로그아웃</a></li>
+							href="${path}/logout.do" style="color: black">로그아웃</a></li>
 					<li>
 						<a class="dropdown-item" 
-							href="${path}/home/blockList.do?m_id=${m_id}">차단 목록</a></li>
+							href="${path}/home/blockList.do?m_id=${m_id}"  style="color: black">차단 목록</a></li>
 				</ul>
 			</div>
 		</div>
 		<div>
 			<div>
-				<div class="col"><b>${m_nickname}</b></div>
-				<div class="col">@${m_id}</div>
+				<div class="col" style="color: black"><b>${m_nickname}</b></div>
+				<div class="col" style="color: black">@${m_id}</div>
 			</div>
 		</div>
 	</div>
@@ -86,6 +86,10 @@
 			document.getElementById('bookmarkBt').setAttribute('class','btn btn-dark menuBt');
 		}
 		else if (currentPage.startsWith('profileForm.do')) {
+			btnReset();
+			document.getElementById('profileBt').setAttribute('class','btn btn-dark menuBt');
+		}
+		else if (currentPage.startsWith('profileUpdateForm.do')) {
 			btnReset();
 			document.getElementById('profileBt').setAttribute('class','btn btn-dark menuBt');
 		}

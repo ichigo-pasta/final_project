@@ -82,9 +82,9 @@
 						</div>			<!-- 리넛 여부에 따른 닉네임, 아이디, 작성일 표시줄  끝 -->
 						<div class="col col-1">		<!-- 삭제/팔로우,차단 드롭다운 메뉴 -->
 							<div class="btn-group">
-								<a class="btn btn-light dropdown" type="button"
+								<a class="btn dropdown" type="button"
 									id="dropdownMenuButton" data-bs-toggle="dropdown"
-									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+									aria-expanded="false"><i class="bi bi-three-dots" style="color: lightgray"></i></a>
 						<c:if test="${pn.renut != null }">
 								<c:if test="${pn.re_writer == m_id }">
 									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
@@ -97,7 +97,7 @@
 									<c:if test="${isFollow == true }">
 										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-person-x" id="followbt">&nbsp;팔로우 중</button></a></li>
+												<button class="bi bi-person-x" id="followbt">&nbsp;&nbsp;팔로우 중</button></a></li>
 											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
 												<button class="bi bi-x-circle" id="blockbt"
 													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>	
@@ -106,10 +106,10 @@
 									<c:if test="${isFollow == false }">
 										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-person-plus" id="followbt"
-													>팔로우</button></a></li>
+												<button class="bi bi-person-plus" id="followbt">&nbsp;&nbsp;팔로우</button></a></li>
 											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
-												<button class="bi bi-x-circle" onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
+												<button class="bi bi-x-circle" id="blockbt"
+													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
 										</ul>
 									</c:if>
 								</c:if>
@@ -126,7 +126,7 @@
 									<c:if test="${isFollow == true }">
 										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-person-x" id="followbt">&nbsp;팔로우 중</button></a></li>
+												<button class="bi bi-person-x" id="followbt">&nbsp;&nbsp;팔로우 중</button></a></li>
 											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
 												<button class="bi bi-x-circle" id="blockbt"
 													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>	
@@ -135,10 +135,10 @@
 									<c:if test="${isFollow == false }">
 										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-person-plus" id="followbt"
-													>팔로우</button></a></li>
+												<button class="bi bi-person-plus" id="followbt">&nbsp;&nbsp;팔로우</button></a></li>
 											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
-												<button class="bi bi-x-circle" onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
+												<button class="bi bi-x-circle" id="blockbt"
+													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
 										</ul>
 									</c:if>
 								</c:if>

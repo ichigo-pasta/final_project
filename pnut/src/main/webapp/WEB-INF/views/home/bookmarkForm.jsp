@@ -42,9 +42,9 @@
 						</div>
 						<div class="col col-1">		<!-- 삭제/팔로우,차단 드롭다운 메뉴 -->
 							<div class="btn-group">
-								<a class="btn btn-light dropdown" type="button"
+								<a class="btn dropdown" type="button"
 									id="dropdownMenuButton" data-bs-toggle="dropdown"
-									aria-expanded="false"><i class="bi bi-three-dots"></i></a>
+									aria-expanded="false"><i class="bi bi-three-dots" style="color: lightgray"></i></a>
 								<c:if test="${pn.writer == m_id }">
 									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 										<li>
@@ -121,7 +121,7 @@
 		</c:if>
 					<div class="row btBox">
 						<div class="col col-4">
-							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'">
+							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'" class="btnBox"">
 							<c:if test="${pn.repCnt != 0}">
 								<i class="bi-chat" style="color: #D27D32"></i>
 								${pn.repCnt }
@@ -133,20 +133,20 @@
 						</div>
 						<div class="col col-4">
 							<c:if test="${pn.renuted == false }">
-							<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}">
+							<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}" class="btnBox">
 								<i class="bi-arrow-clockwise" style="color: gray"></i>
 								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
 							</button>
 							</c:if>
 							<c:if test="${pn.renuted == true }">
-							<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}">
+							<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}" class="btnBox">
 								<i class="bi-arrow-clockwise" style="color: #D27D32"></i>
 								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
 							</button>
 							</c:if>
 						</div>
 						<div class="col col-4">
-							<button onclick="confirmDelBm('${pn.peanut_no}')" id="bmBtn${pn.peanut_no}">
+							<button onclick="confirmDelBm('${pn.peanut_no}')" id="bmBtn${pn.peanut_no}" class="btnBox">
 									<i class="bi-bookmark" style="color: #D27D32;" id="bmBtnI${pn.peanut_no}"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 							</button>
