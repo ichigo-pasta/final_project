@@ -28,11 +28,11 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.update("memberns.update", member);
 	}
 
-	public void insert(String active, String passive) {
+	public int insert(String active, String passive) {
 		Map<String, String> map = new HashMap<>();
 		map.put("active", active);
 		map.put("passive", passive);
-		sst.insert("followns.insert", map);
+		return sst.insert("followns.insert", map);
 	}
 
 	public void delete(String active, String passive) {
