@@ -384,7 +384,7 @@
 					console.log('follow success');
 					buttonChange();
 				} else if (xhr.responseText == -2) {
-					alert('팔로우할 수 없는 사용자입니다');
+					alert('팔로우 할 수 없는 사용자입니다');
 				} else if (xhr.responseText == -1) {
 					alert('자기자신은 팔로우할 수 없습니다');
 				} else {
