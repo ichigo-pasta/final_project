@@ -43,6 +43,9 @@
 					<li>
 						<a class="dropdown-item" 
 							href="${path}/home/blockList.do"  style="color: black">차단 목록</a></li>
+					<li>
+						<a class="dropdown-item" 
+							style="color: black" onclick="del()">회원탈퇴</a></li>
 				</ul>
 			</div>
 		</div>
@@ -121,5 +124,13 @@
 		}
 		xhr.open("get","${path}/noticeLoad.do",true);
 		xhr.send(null);
+	}
+	function del() {
+		var con = confirm("정말로 탈퇴하시겠습니까?");
+		if (con) location.href = "${path}/deleteMember.do";
+		else {
+			alert("탈퇴가 취소되었습니다.");
+			return;
+		}
 	}
 </script>

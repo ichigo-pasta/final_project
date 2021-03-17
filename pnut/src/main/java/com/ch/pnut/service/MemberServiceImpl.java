@@ -78,5 +78,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int unblock(String my_id, String m_id) {
 		return md.unblock(my_id, m_id);
+	}
+	public int deleteMember(String m_id) {
+		return md.deleteMember(m_id);
 	}	
 }

@@ -313,4 +313,12 @@ public class MemberController {
 		int result = ms.noticeCount((String) session.getAttribute("m_id"));		
 		return result;
 	}
+	@RequestMapping("deleteMember")
+	public String deleteMember(Model model, HttpSession session) {
+		String m_id = (String)session.getAttribute("m_id");
+		int result = ms.deleteMember(m_id);
+		if (result > 0) session.invalidate();
+		model.addAttribute("result", result);
+		return "deleteMember";
+	}
 }

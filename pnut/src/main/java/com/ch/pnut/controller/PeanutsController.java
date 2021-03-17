@@ -134,7 +134,7 @@ public class PeanutsController {
 			}
 		}
 		model.addAttribute("list", list);
-		model.addAttribute("m_id", m_id);
+		model.addAttribute("m_id", m_id); 
 		model.addAttribute("amt", amt);
 		model.addAttribute("more", more);
 		return "tlContents";
