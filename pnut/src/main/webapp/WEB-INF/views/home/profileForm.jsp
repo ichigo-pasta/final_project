@@ -58,11 +58,11 @@
 	</div>
 	<ul class="nav nav-tabs nav-fill">
   		<li class="nav-item">
-  			<a class="nav-link" id="pean" 
+  			<a class="nav-link" id="pean"  style="color: #D27D32"
   				href="${path}/home/profileForm.do?m_id=${member.m_id}&type=peanut">피넛</a>
  		</li>
  		<li class="nav-item">
-  			<a class="nav-link" id="peanPic" 
+  			<a class="nav-link" id="peanPic"  style="color: #D27D32"
   				href="${path}/home/profileForm.do?m_id=${member.m_id}&type=peanutPic">사진 피넛</a>
   		</li>
 	</ul>

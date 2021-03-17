@@ -6,13 +6,13 @@
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <ul class="nav nav-tabs nav-fill">
   <li class="nav-item">
-    <a class="nav-link" id="peanut" href="javascript:search('peanut');">피넛</a>
+    <a class="nav-link" id="peanut" href="javascript:search('peanut');" style="color: #D27D32">피넛</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="hashtag" href="javascript:search('hashtag');">해시태그</a>
+    <a class="nav-link" id="hashtag" href="javascript:search('hashtag');" style="color: #D27D32">해시태그</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="user" href="javascript:search('user');">사용자</a>
+    <a class="nav-link" id="user" href="javascript:search('user');" style="color: #D27D32">사용자</a>
   </li>
 </ul>
 <div>
@@ -23,9 +23,10 @@
 		<c:if test="${not empty list}">
 		<c:forEach items="${list }" var="pn">
 			<div class="row peanut_container">
-				<div style="width: 110px">
+				<div style="width: 110px;">
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
-						width="100" height="100" onclick="profile('${pn.writer}')" class="profile_pic">
+						width="100" height="100" onclick="profile('${pn.writer}')" 
+						class="profile_pic">
 				</div>
 				<div class="col">
 					<div class="row">
@@ -218,7 +219,6 @@
 					</div>
 					<div class="col">
 						<c:if test="${mem.m_id == my_id}">
-							<a href="${path}/home/profileUpdateForm.do?m_id=${mem.m_id }">프로필 수정</a>
 						</c:if>
 						<c:if test="${mem.m_id != my_id}">
 							<c:if test="${mem.followMe == true }">

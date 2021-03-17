@@ -7,12 +7,12 @@
 </c:if>
 <c:if test="${not empty list}">
 	<c:forEach items="${list }" var="mem">
-		<div class="row">
+		<div class="row" style="margin: 25px 15px 12px 3px">
 			<div style="width: 80px">
 				<img alt="" src="${path}/resources/images/${mem.m_profile}" width="80px" height="80px"
 					onclick="profile('${mem.m_id}')" class="profile_pic">
 			</div>
-			<div class="col">
+			<div class="col" style="margin: 0 25px; padding: 0px; border-bottom: 1px solid gray;">
 				<b>${mem.m_nickname}</b><br>
 				@${mem.m_id }<br>
 			<c:if test="${mem.followMe == true}">
@@ -20,10 +20,11 @@
 			</c:if>				
 				${mem.m_intro } 
 			</div>
-			<div class="col col-1" style="width: 100px">
+			<div class="col col-1 align-self-center" style="width: 120px">
 				<button id="fbt${mem.m_id}" onclick="unfollow('${mem.m_id}')" 
 					onmouseover="this.innerText='언팔로우'" 
-					onmouseout="this.innerText='팔로우 중'">팔로우 중</button>
+					onmouseout="this.innerText='팔로우 중'"
+					class="btn btn-outline-info">팔로우 중</button>
 			</div>
 		</div>
 	</c:forEach>
