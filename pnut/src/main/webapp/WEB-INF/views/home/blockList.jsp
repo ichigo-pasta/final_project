@@ -7,20 +7,22 @@
 </c:if>
 <c:if test="${not empty list}">
 	<c:forEach items="${list }" var="mem">
-		<div class="row">
+		<div class="row" style="margin: 25px 15px 12px 3px">
 			<div style="width: 80px">
-				<img alt="" src="${path}/resources/images/${mem.m_profile}" width="80px" height="80px"
+				<img alt="" src="${path}/resources/images/${mem.m_profile}" 
+					width="80px" height="80px"
 					onclick="profile('${mem.m_id}')" class="profile_pic">
 			</div>
-			<div class="col">
+			<div class="col" style="margin: 0 25px; padding: 0px; border-bottom: 1px solid gray;">
 				<b>${mem.m_nickname}</b><br>
 				@${mem.m_id }<br>
 				${mem.m_intro } 
 			</div>
-			<div class="col col-1" style="width: 100px">
+			<div class="col col-1 align-self-center" style="width: 120px">
 				<button id="bbt${mem.m_id}" onclick="unblock('${mem.m_id}')" 
 					onmouseover="this.innerText='차단 해제'" 
-					onmouseout="this.innerText='차단됨'">차단됨</button>
+					onmouseout="this.innerText='차단됨'"
+					class="btn btn-outline-danger">차단됨</button>
 			</div>
 		</div>
 	</c:forEach>

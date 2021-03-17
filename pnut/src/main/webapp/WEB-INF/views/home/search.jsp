@@ -18,17 +18,17 @@
 <div>
 	<c:if test="${type != 'user'}" >
 		<c:if test="${empty list}">
-			데이터가 없습니다.
+			<div align="center"><br>데이터가 없습니다.</div>
 		</c:if>
 		<c:if test="${not empty list}">
 		<c:forEach items="${list }" var="pn">
-			<div class="row peanut_container">
-				<div style="width: 110px;">
+			<div class="row peanut_container" style="margin: 10px 15px 0 3px">
+				<div style="width: 80px;">
 					<img alt="" src="${path}/resources/images/${pn.member.m_profile}"
-						width="100" height="100" onclick="profile('${pn.writer}')" 
+						width="80px" height="80px" onclick="profile('${pn.writer}')" 
 						class="profile_pic">
 				</div>
-				<div class="col">
+				<div class="col" style="margin: 0 25px; padding: 0px;">
 					<div class="row">
 						<div class="col col-10">
 							<c:out value="${pn.member.m_nickname}, ${pn.writer}"/>
@@ -205,29 +205,32 @@
 	</c:if>
 	<c:if test="${type == 'user'}" >
 		<c:if test="${empty list2 }">
-			데이터가 없습니다.
+			<div align="center"><br>데이터가 없습니다.</div>
 		</c:if>
 		<c:if test="${not empty list2 }">
 			<c:forEach items="${list2 }" var="mem">
-				<div class="row">
-					<div class="col col-2">
+				<div class="row" style="margin: 25px 15px 12px 3px">
+					<div style="width: 80px">
 						<img alt="" src="${path}/resources/images/${mem.m_profile}"
-							width="100" height="100" onclick="profile('${mem.m_id}')">
+							width="80" height="80" onclick="profile('${mem.m_id}')"
+							class="profile_pic">
 					</div>
-					<div class="col col-8">
+					<div class="col" style="margin: 0 25px; padding: 0px; border-bottom: 1px solid gray;">
 						<c:out value="${mem.m_nickname}, ${mem.m_id}, ${mem.m_regdate}" />
 					</div>
-					<div class="col">
+					<div class="col col-1 align-self-center" style="width: 120px">
 						<c:if test="${mem.m_id == my_id}">
 						</c:if>
 						<c:if test="${mem.m_id != my_id}">
 							<c:if test="${mem.followMe == true }">
 								<button id="followbt${mem.m_id}" onclick="unfollow('${mem.m_id}')"
 									onmouseover="this.innerText='언팔로우'"
-									onmouseout="this.innerText='팔로우 중'">팔로우 중</button>
+									onmouseout="this.innerText='팔로우 중'"
+									class="btn btn-outline-info">팔로우 중</button>
 							</c:if>
 							<c:if test="${mem.followMe == false }">
-								<button id="followbt${mem.m_id}" onclick="follow('${mem.m_id}')">팔로우</button>
+								<button id="followbt${mem.m_id}" onclick="follow('${mem.m_id}')"
+									class="btn btn-outline-info">팔로우</button>
 							</c:if>
 						</c:if>
 					</div>
