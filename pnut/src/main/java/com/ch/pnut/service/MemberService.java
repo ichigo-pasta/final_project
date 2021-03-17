@@ -46,4 +46,6 @@ public interface MemberService {
 
 	Notice selectNotice(Integer notice_no);
 
+	int unblock(String my_id, String m_id);
+
 }

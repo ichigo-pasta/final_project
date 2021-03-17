@@ -123,4 +123,12 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.selectOne("noticens.selectNotice", notice_no);
 	}
 
+	@Override
+	public int unblock(String my_id, String m_id) {
+		Map<String, String> map = new HashMap<>();
+		map.put("my_id", my_id);
+		map.put("m_id", m_id);
+		return sst.delete("blockns.unblock", map);
+	}
+
 }

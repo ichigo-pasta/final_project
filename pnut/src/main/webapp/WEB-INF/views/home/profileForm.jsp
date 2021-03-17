@@ -4,7 +4,7 @@
 <%@ include file="../getMyId.jsp" %>
 <jsp:useBean id="today" class="java.util.Date" />
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
-<div id="container">
+<div>
 	<div class="pic_container d-flex align-items-end" style="margin: 12px 0;">
 		<img alt="" src="${path}/resources/images/${member.m_profile}"
 			width="100" height="100">
@@ -24,11 +24,28 @@
 						onmouseover="this.innerText='언팔로우'" 
 						onmouseout="this.innerText='팔로우 중'"
 						class="btn btn-outline-info">팔로우 중</button>
+					<button id="blockbt" onclick="block('${member.m_id}')"						
+						class="btn btn-outline-info">차단하기</button>
 				</c:if>
 				<c:if test="${isFollow == false }">
-					<button id="followbt" 
-						onclick="follow('${member.m_id}')"
-						class="btn btn-outline-info">팔로우</button>	
+					<c:if test="${member.blockByMe == true }">
+					<button id="blockbt" onclick="unblock('${member.m_id}')"						
+						class="btn btn-outline-info"
+						onmouseover="this.innerText='차단 해제'" 
+						onmouseout="this.innerText='차단됨'">차단 해제</button>
+					</c:if>
+					<c:if test="${member.blockByMe == false }">
+						<c:if test="${member.blockMe == true }">
+					<button id="blockbt" onclick="block('${member.m_id}')"						
+						class="btn btn-outline-info">차단하기</button>	
+						</c:if>
+						<c:if test="${member.blockMe == false }">
+					<button id="followbt" onclick="follow('${member.m_id}')"						
+						class="btn btn-outline-info">팔로우</button>
+					<button id="blockbt" onclick="block('${member.m_id}')"						
+						class="btn btn-outline-info">차단하기</button>	
+						</c:if>
+					</c:if>
 				</c:if>
 			</c:if>
 		</div>
@@ -38,14 +55,15 @@
 			<c:out value="@${member.m_id }"/>
 		</div>
 	</div>
+	<c:if test="${member.blockMe == false && member.blockByMe == false }">
 	<div class="row">
 		<div class="col" style="margin: 2px 0;"> 
-			<c:out value="${member.m_intro }"/>
+			<pre>${member.m_intro }</pre>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col" style="margin: 2px 0;"> 
-			<c:out value="${member.m_regdate }"/>
+			가입일 : <c:out value="${member.m_regdate }"/>
 		</div>
 	</div>
 	<div class="row">
@@ -66,7 +84,12 @@
   				href="${path}/home/profileForm.do?m_id=${member.m_id}&type=peanutPic">사진 피넛</a>
   		</li>
 	</ul>
+	</c:if>
+	<c:if test="${member.blockMe == true || member.blockByMe == true }">
+		<h5 class="text-info">정보를 볼 수 없습니다</h5>
+	</c:if>
 </div>
+<c:if test="${member.blockMe == false && member.blockByMe == false }">
 <div>
 	<c:if test="${empty list}">
 			데이터가 없습니다.
@@ -135,76 +158,12 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-						<div class="col col-1">		<!-- 삭제/팔로우,차단 드롭다운 메뉴 -->
-							<div class="btn-group">
-								<a class="btn dropdown" type="button"
-									id="dropdownMenuButton" data-bs-toggle="dropdown"
-									aria-expanded="false"><i class="bi bi-three-dots" style="color: lightgray"></i></a>
-						<c:if test="${pn.renut != null }">
-								<c:if test="${pn.re_writer == m_id }">
-									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
-										<li>
-											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${pn.peanut_no}">
-											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
-									</ul>
-								</c:if>
-								<c:if test="${pn.re_writer != m_id }">
-									<c:if test="${isFollow == true }">
-										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
-											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-person-x" id="followbt">&nbsp;&nbsp;팔로우 중</button></a></li>
-											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
-												<button class="bi bi-x-circle" id="blockbt"
-													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>	
-										</ul>
-									</c:if>	
-									<c:if test="${isFollow == false }">
-										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
-											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-person-plus" id="followbt"
-													>&nbsp;&nbsp;팔로우</button></a></li>
-											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
-												<button class="bi bi-x-circle" id="blockbt"
-													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
-										</ul>
-									</c:if>
-								</c:if>
-						</c:if>
-						<c:if test="${pn.renut == null }">
-								<c:if test="${pn.writer == m_id }">
-									<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
-										<li>
-											<a class="dropdown-item" href="${path}/deletePd.do?peanut_no=${pn.peanut_no}">
-											<i class="bi bi-trash" style="color: red"></i>&nbsp;삭제</a></li>
-									</ul>
-								</c:if>
-								<c:if test="${pn.writer != m_id }">
-									<c:if test="${isFollow == true }">
-										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
-											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-person-x" id="followbt">&nbsp;&nbsp;팔로우 중</button></a></li>
-											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
-												<button class="bi bi-x-circle" id="blockbt"
-													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>	
-										</ul>
-									</c:if>	
-									<c:if test="${isFollow == false }">
-										<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
-											<li><a class="dropdown-item" href="#">
-												<button class="bi bi-person-plus" id="followbt"
-													>&nbsp;&nbsp;팔로우</button></a></li>
-											<li><a class="dropdown-item" href="${path}/block.do?m_id=${pn.writer}">
-												<button class="bi bi-x-circle" id="blockbt"
-													onclick="location.href='${path}/block.do?m_id=${pn.writer}'"></button>&nbsp;차단</a></li>
-										</ul>
-									</c:if>
-								</c:if>
-						</c:if>
-							</div>
-						</div>  <!-- 삭제/팔로우,차단 드롭다운 메뉴 끝 -->
+						
 					</div>
 					<div class="row">
-						<div class="col">${pn.content}</div>
+						<div class="col content_col" id="content${pn.peanut_no }" style="min-height: 5vw; cursor: pointer">
+							<pre id="contpre${pn.peanut_no }">${pn.content}</pre>
+						</div>						
 					</div>
 					<c:if test="${pn.picture1 != null}">
 						<div class="row gallery">
@@ -368,11 +327,29 @@
 	  			<button class="btn btn-outline-info btn-lg" type="button" onclick="more_read_pf('${amt+20}', '${type }')">more...</button>
 			</div>
 		</c:if>	
-	</c:if>
+	</c:if>	
 </div>
-
+</c:if>
 <input type="hidden" value="${type}" id="types">
 <script type="text/javascript">
+	var cont_rows = document.getElementsByClassName('content_col');
+	var startX;
+	var startY;
+	const judge = 5;
+	for(var cont_row of cont_rows) {
+		cont_row.addEventListener('mousedown', function(event) {				
+			startX = event.pageX;
+			startY = event.pageY;
+		});			
+		cont_row.addEventListener('mouseup', function(event) {
+			var diffX = Math.abs(startX - event.pageX);
+			var diffY = Math.abs(startY - event.pageY);
+			if(diffX < judge && diffY < judge && event.button == 0) {					
+				var cr_id = event.target.id.substring(7);					
+				location.href="${path}/home/peanutDetail.do?peanut_no="+cr_id;
+			}				
+		});
+	}
 	window.onload = function() {
 		if (document.getElementById("types").value == "peanut") {
 			document.getElementById("pean").setAttribute("class","nav-link active");
@@ -409,13 +386,13 @@
 		btn.setAttribute("onmouseover","this.innerText='언팔로우'");
 		btn.setAttribute("onmouseout","this.innerText='팔로우 중'");
 	}
-	function unfollow(m_id) {
-		buttonChange2();
+	function unfollow(m_id) {		
 		var xhr = new XMLHttpRequest();
 		xhr.open("get","${path}/unfollow.do?m_id="+m_id,true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
-				console.log('success');
+				console.log('unfollow success');
+				buttonChange2();
 			} else {alert('요청오류: '+xhr.status);}
 		}
 		xhr.send(null);
@@ -435,5 +412,47 @@
 	function more_read_pf(num, ty) {
 		var pf_scroll = document.scrollingElement.scrollTop;
 		location.href = "${path}/home/profileForm.do?m_id=${member.m_id}&amt="+num+"&type="+ty+"&pf_scroll="+pf_scroll;
+	}
+	function block(m_id) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/block.do?m_id="+m_id,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				if (xhr.responseText == 1) {
+					alert("유저 "+m_id+"를 차단목록에 등록했습니다");
+					location.reload();
+				} else if (xhr.responseText == 0) {
+					alert('차단 과정에서 오류가 발생했습니다');
+				} else if (xhr.responseText == -1) {
+					alert('이미 차단한 사용자입니다')
+				} else if (xhr.responseText == -2) {
+					alert('차단할 아이디 정보가 누락되었습니다');
+				} else {
+					alert('자기자신은 차단할 수 없습니다');
+				}
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);
+	}
+	function unblock(m_id) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/unblock.do?m_id="+m_id,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				if (xhr.responseText == 1) {
+					alert("유저 "+m_id+"의 차단을 해제했습니다");
+					location.reload();
+				} else if (xhr.responseText == 0) {
+					alert('차단 해제 과정에서 오류가 발생했습니다');
+				} else if (xhr.responseText == -1) {
+					alert('차단 해제할 아이디 정보가 누락되었습니다');				
+				}
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);
 	}
 </script>

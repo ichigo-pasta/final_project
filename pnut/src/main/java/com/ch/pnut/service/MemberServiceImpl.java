@@ -74,5 +74,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Notice selectNotice(Integer notice_no) {
 		return md.selectNotice(notice_no);
+	}
+	@Override
+	public int unblock(String my_id, String m_id) {
+		return md.unblock(my_id, m_id);
 	}	
 }
