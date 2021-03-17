@@ -6,13 +6,13 @@
 	method="post" enctype="multipart/form-data">
 <input type="hidden" name="m_id" value="${member.m_id }"> 
 
-<div class="pic_container d-flex align-items-end">
+<div class="pic_container d-flex align-items-end" style="margin-top: 10px">
 	<img alt="" src="${path}/resources/images/${member.m_profile}"
 		width="100" height="100" id="profileArea">
 </div> 
 <div class="row">
 	<div class="col">
-		<div class="row" id="profileUpdateBorder">
+		<div class="row" id="profileUpdateBorder" style="margin: 10px 0;">
 			<div class="col">
 				프로필&nbsp;<input type="file" name="file_p">
 			</div>
