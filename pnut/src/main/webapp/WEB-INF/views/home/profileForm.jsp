@@ -245,19 +245,14 @@
 						<div class="col col-4">
 							<!-- 북마크 아이콘 -->
 							<c:if test="${pn.bookmarked == true}">
-								<button onclick="deleteBm('${pn.peanut_no}')"
-
-									id="bmBtn${pn.peanut_no}" class="btnBox" >
-									<i class="bi-bookmark" style="color: #D27D32;"
-										id="bmBtnI${pn.peanut_no}"></i>
+								<button onclick="deleteBm('${pn.peanut_no}')" class="btnBox">
+									<i class="bi-bookmark" style="color: #D27D32;"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 								</button>
 							</c:if>
-							<c:if test="${pn.bookmarked == false}">
-								<button onclick="setBm('${pn.peanut_no}')"
-									id="bmBtn${pn.peanut_no}" class="btnBox" >
-									<i class="bi-bookmark" style="color: gray"
-										id="bmBtnI${pn.peanut_no}"></i>
+							<c:if test="${pn.bookmarked == false}">		
+								<button onclick="setBm('${pn.peanut_no}')" class="btnBox">
+									<i class="bi-bookmark" style="color: gray"></i>
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>&nbsp;
 								</button>
 							</c:if>
@@ -286,7 +281,7 @@
 									<a type="button" class="btn btn-secondary"
 										data-bs-dismiss="modal">닫기</a> <a type="button"
 										class="btn btn-primary"
-										onclick="rn_from_search('${pn.peanut_no}')">리넛</a>
+										onclick="location.href='${path}/renut.do?peanut_no=${pn.peanut_no}&redirect=profile&m_id=${member.m_id }'">리넛</a>
 								</div>
 							</div>
 						</div>
@@ -313,7 +308,7 @@
 									<a type="button" class="btn btn-secondary"
 										data-bs-dismiss="modal">닫기</a> <a type="button"
 										class="btn btn-primary"
-										onclick="cancelRenut('${pn.peanut_no}','timeline')">리넛 취소</a>
+										onclick="location.href='${path}/cancelRenut.do?peanut_no=${pn.peanut_no}&redirect=profile&m_id=${member.m_id }'">리넛 취소</a>
 								</div>
 							</div>
 						</div>
@@ -415,7 +410,6 @@
 	}
 	function block(m_id) {
 		var xhr = new XMLHttpRequest();
-		xhr.open("get","${path}/block.do?m_id="+m_id,true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
 				if (xhr.responseText == 1) {
@@ -434,11 +428,11 @@
 				alert('요청오류: '+xhr.status);
 			}
 		}
+		xhr.open("get","${path}/block.do?m_id="+m_id,true);
 		xhr.send(null);
 	}
 	function unblock(m_id) {
 		var xhr = new XMLHttpRequest();
-		xhr.open("get","${path}/unblock.do?m_id="+m_id,true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
 				if (xhr.responseText == 1) {
@@ -453,6 +447,31 @@
 				alert('요청오류: '+xhr.status);
 			}
 		}
+		xhr.open("get","${path}/unblock.do?m_id="+m_id,true);
 		xhr.send(null);
+	}
+	function setBm(peanut_no) {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				location.reload();
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.open("get","${path}/setBm.do?peanut_no="+peanut_no,true);
+		xhr.send(null);		
+	}
+	function deleteBm(peanut_no) {		
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				location.reload();
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.open("get","${path}/deleteBm.do?peanut_no="+peanut_no,true);
+		xhr.send(null);				
 	}
 </script>
