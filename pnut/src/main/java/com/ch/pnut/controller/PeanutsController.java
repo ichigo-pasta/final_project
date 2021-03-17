@@ -239,13 +239,17 @@ public class PeanutsController {
 	}
 	@RequestMapping("home/bookmarkForm")
 	public String bookmarkForm(Integer amt, Model model, 
-			HttpSession session) {
+			HttpSession session, Integer more) {
 		if (amt == null) amt = 20;
+		if (more == null) more = 0;
 		String m_id = (String)session.getAttribute("m_id");
-		List<Peanuts> bmList = ps.selectBmList(m_id, amt);	// 로그인 유저가 북마크한 피넛번호 리스트		
-		List<Integer> renutList = ps.selectRenut(m_id);
-		int listLen = bmList.size();
-		if (listLen > 0) {
+		List<Peanuts> bmList = ps.selectBmList(m_id, amt+1);	// 로그인 유저가 북마크한 피넛번호 리스트
+		if (bmList.size() > amt) {
+			more = 1;	// amt 값보다 데이터가 더 많으면 more = 1
+			bmList.remove(amt.intValue());	// amt 범위 초과 피넛 리스트에서 제거
+		}
+		List<Integer> renutList = ps.selectRenut(m_id);		
+		if (bmList.size() > 0) {
 			for (Peanuts peanut : bmList) {				
 				peanut.setContent(ps.setHashtag(peanut.getContent(),"hashtag"));
 				peanut.setRepCnt(ps.repCnt(peanut.getPeanut_no()));
@@ -263,6 +267,7 @@ public class PeanutsController {
 		model.addAttribute("m_id", m_id);
 		model.addAttribute("bmList", bmList);
 		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("more", more);
 		return "home/bookmarkForm";
 	}	
 

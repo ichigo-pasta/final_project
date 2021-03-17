@@ -39,7 +39,7 @@
 		</div>
 		<div class="row" id="profileUpdateBorder" style="padding: 0 12px 5px 12px">
 			자기소개<br>
-			<textarea rows="5" name="m_intro" style="resize: none;"></textarea>
+			<textarea rows="5" name="m_intro" style="resize: none;" maxlength="200"></textarea>
 		</div>
 	</div>
 </div>
