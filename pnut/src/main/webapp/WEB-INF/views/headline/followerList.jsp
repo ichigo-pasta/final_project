@@ -3,7 +3,7 @@
 <%@ include file="../header.jsp" %>
 <div class="row">
 	<div class="col col-7" style="color: #eeeeee">
-		<h5>팔로워 목록</h5>
+		<h5>Follower List</h5>
 	</div>
 	<div class="col col-5">
 	<span class="input-group input-group-sm" align="right">

@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <div class="row">
-	<div class="col col-7" style="color: #eeeeee">
-		<h5>프로필 수정</h5>
+	<div class="col col-7" style="color: #eeeeee;">
+		<h5>Profile Update</h5>
 	</div>
 	<div class="col col-5">
 	<span class="input-group input-group-sm" align="right">

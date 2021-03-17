@@ -4,7 +4,7 @@
 <div class="container">
 <div class="row">
 	<div class="col col-7" style="color: #eeeeee">
-		<h5>검색 결과</h5>
+		<h5>Search</h5>
 	</div>
 	<div class="col col-5">
 	<span class="input-group input-group-sm" align="right">

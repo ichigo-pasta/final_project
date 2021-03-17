@@ -215,14 +215,14 @@
 		</div> <%-- peanut_container --%>
 		<div class="reply_container"> <!-- 댓글 -->
 			<c:forEach items="${list}" var="rep">
-		<c:if test="${rep.ref_level == 0}">
-			<div class="row rep_row">
-				<div style="width: 90px">
+		<c:if test="${rep.ref_level == 0}"> <!-- 댓글일 때(들여쓰기가 0일때) -->
+			<div class="row rep_row">	<!-- 댓글 Form -->
+				<div class="col col-2 align-self-center" style="width: 100px;">
 					<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
 						width="80" height="80" onclick="profile('${rep.writer}')"
 						align="right" class="profile_pic">
 				</div>
-				<div class="col" style="background: #3c3c3c; color: lightgray; border-radius: 10px" >
+				<div class="col" style="background: #3c3c3c; color: lightgray; border-radius: 10px; margin: 0 10px 0 0 ;" >
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
 					<c:choose>
@@ -245,11 +245,13 @@
 							1분 이내
 						</c:otherwise>
 					</c:choose>
-					&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
-				</div>
-				<!-- 대댓글 쓰기 -->
+					&nbsp;&nbsp;
+					<button id="commentbt" onclick="comIns('${rep.reply_no}')" 
+						style="border: none; color: lightgray; background: none" >답글 쓰기</button>
+				</div>	<!-- 댓글 Form 끝 -->
+				<!-- 댓글에 대한 답글(대댓글) 쓰기 -->
 				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
-					<div style="width: 90px"></div>
+					<div style="width: 100px"></div>
 					<div class="col">
 						<div class="row">
 							<div class="col"><b><c:out value="${m_nickname}"/></b></div>
@@ -265,9 +267,9 @@
 										placeholder="답글을 입력해주세요"></textarea>
 								</div>
 							</div>
-							<div class="col col-2">
+							<div class="col col-2 align-self-end">
 								<div class="row">
-									<button class="btn btn-info">등록</button>
+									<button class="btn" style="height: 111px; background: #D27D32">등록</button>
 								</div>
 							</div>
 						</div>
@@ -277,19 +279,20 @@
 						<input type="hidden" value="${my_id }" name="writer">
 					</form>
 					</div>
-				</div> <!-- 대댓글 쓰기 끝 -->
+				</div> <!-- 댓글에 대한 답글(대댓글) 쓰기 끝 -->
 			</div>
-		</c:if>	
-		<c:if test="${rep.ref_level == 1}">
+		</c:if>		<!-- 댓글일 때(들여쓰기가 0일때)끝 -->
+		<c:if test="${rep.ref_level == 1}">	<!-- 대댓글 일 때(들여쓰기가 1일때) -->
 			<div class="row rep_row">						
-				<div style="width: 150px">					
+				<div class="align-self-center" style="width: 150px">					
 					<div class="col">
 						<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
 							width="80" height="80" onclick="profile('${rep.writer}')"
 							align="right" class="profile_pic">
 					</div>					
 				</div>
-				<div class="col" style="background: #3c3c3c; color: lightgray; border-radius: 10px" >
+				<div class="col" 
+					style="background: #3c3c3c; color: lightgray; border-radius: 10px; margin-right: 10px;" >	<!-- 대댓글 Form -->
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre><b>${rep.member.target_nn}</b>&nbsp;${rep.content}</pre>
 					<c:choose>
@@ -312,10 +315,12 @@
 							1분 이내
 						</c:otherwise>
 					</c:choose>
-					&nbsp;&nbsp;<button id="commentbt" onclick="comIns('${rep.reply_no}')">답글 쓰기</button>
-				</div>			
+					&nbsp;&nbsp;
+					<button id="commentbt" onclick="comIns('${rep.reply_no}')"
+						style="border: none; color: lightgray; background: none">답글 쓰기</button>
+				</div>	<!-- 대댓글 Form 끝 -->			
 						
-				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
+				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">	<!-- 대댓글 쓰기 -->
 					<div style="width: 150px"></div>
 					<div class="col">
 						<div class="row">
@@ -327,14 +332,14 @@
 								<div class="row">
 									to : ${rep.member.m_nickname}
 									<textarea id="cont${rep.reply_no}"
-										rows="5" style="resize: none" 
+										rows="5" style="resize: none; background: #3c3c3c; color: lightgray"
 										name="content" required="required" 
 										placeholder="답글을 입력해주세요"></textarea>
 								</div>
 							</div>
-							<div class="col col-2">
+							<div class="col col-2 align-self-end">
 								<div class="row">
-									<button class="btn btn-info">등록</button>
+									<button class="btn" style="height: 111px; background: #D27D32">등록</button>
 								</div>
 							</div>
 						</div>
@@ -346,23 +351,24 @@
 					</div>
 				</div>
 			</div>
-		</c:if>		
+		</c:if>	<!-- 대댓글 일 때(들여쓰기가 1일때) 끝 -->	
 			</c:forEach>
 			<form action="${path}/home/reply.do" method="post">
-				<div class="row">
+				<div class="row" style="margin: 0 5px;">
 					<div class="col"><b><c:out value="${m_nickname}"/></b></div>
 				</div>
-				<div class="row">
+				<div class="row" style="margin: 0 5px;">
 					<div class="col col-10">
 						<div class="row">
-							<textarea rows="5" style="resize: none; background: #3c3c3c; color: lightgray" 
+							<textarea rows="5" style="resize: none; border-radius: 5px;
+								background: #3c3c3c; color: lightgray" 
 								name="content" required="required" 
 								placeholder="댓글을 입력해주세요"></textarea>
 						</div>
 					</div>
 					<div class="col col-2">
 						<div class="row">
-							<button class="btn btn-info">등록</button>
+							<button class="btn" style="height: 110px; background: #D27D32;">등록</button>
 						</div>
 					</div>
 				</div>
