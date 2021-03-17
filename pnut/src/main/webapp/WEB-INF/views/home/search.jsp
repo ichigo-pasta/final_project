@@ -15,7 +15,7 @@
     <a class="nav-link" id="user" href="javascript:search('user');">사용자</a>
   </li>
 </ul>
-<div class="container">
+<div>
 	<c:if test="${type != 'user'}" >
 		<c:if test="${empty list}">
 			데이터가 없습니다.

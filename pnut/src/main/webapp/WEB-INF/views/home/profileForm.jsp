@@ -67,7 +67,7 @@
   		</li>
 	</ul>
 </div>
-<div class="container">
+<div>
 	<c:if test="${empty list}">
 			데이터가 없습니다.
 	</c:if>

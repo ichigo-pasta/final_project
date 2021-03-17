@@ -4,7 +4,7 @@
 <%@ include file="../getMyId.jsp" %>
 <jsp:useBean id="today" class="java.util.Date" />
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
-<div class="container">	
+<div>	
 <c:if test="${empty peanut }">
 	<script type="text/javascript">
 		alert('삭제되었거나 접근할 수 없는 피넛입니다');

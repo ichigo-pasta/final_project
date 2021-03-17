@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-<div class="container" style="padding: 0px 12px;">
+<div style="padding: 0px 12px;">
 <form action="${path}/home/write.do" method="post" enctype="multipart/form-data">
 	<div class="row" style="padding-top: 20px">
 		<div style="width: 120px"; >
