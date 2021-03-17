@@ -27,7 +27,8 @@
 			<i class="bi-pencil-fill"></i>&nbsp;&nbsp;글쓰기
 		</button>
 	</div>
-	<div style="padding: 10px 10px 10px 10px; border: 1px solid white; border-radius: 5px; background: #f0aa5f; margin-bottom: 10px">
+	<div style="padding: 10px 10px 10px 10px; border: 1px solid white; border-radius: 5px; background: #f0aa5f;
+		 margin-bottom: 3vh">
 		<div style="display: flex; justify-content: space-between;">
 			<img alt="" src="${path}/resources/images/${m_profile}" width="50"
 				height="50" style="border-radius: 5px;">

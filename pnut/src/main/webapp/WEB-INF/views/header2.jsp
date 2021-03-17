@@ -29,9 +29,10 @@
 		color: gray;
 		font-size: 14px;
 	}
-	.container {
-		min-width: 576px;
+	.main_container {
+		min-width: 992px;
 	}
+	
 	.btBox {
 		padding-top: 5px;
 	}
