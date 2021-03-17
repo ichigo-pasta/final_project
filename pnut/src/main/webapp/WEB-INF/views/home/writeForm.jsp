@@ -4,7 +4,7 @@
 <div style="padding: 0px 12px;">
 <form action="${path}/home/write.do" method="post" enctype="multipart/form-data">
 	<div class="row" style="padding-top: 20px">
-		<div style="width: 120px"; >
+		<div style="width: 120px">
 			<img alt="" src="${path}/resources/images/${m_profile}"
 					width="100" height="100" class="profile_pic">
 		</div>

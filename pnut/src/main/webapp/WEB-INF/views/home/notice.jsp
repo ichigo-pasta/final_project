@@ -12,32 +12,32 @@
 		<div class="row">
 			<div style="padding: 12px; margin: 10px 0 0 5px; width: 110px;">
 		<c:if test="${notice.n_type == 'renut' }">
-				<i class="bi bi-arrow-clockwise text-success"></i>
+				<i class="bi bi-arrow-clockwise text-success" style="font-size: 30px"></i>
 		</c:if>
 		<c:if test="${notice.n_type == 'reply' }">
-				<i class="bi bi-arrow-return-right text-warning"></i>
+				<i class="bi bi-arrow-return-right text-warning" style="font-size: 30px"></i>
 		</c:if>
 		<c:if test="${notice.n_type == 'follow' }">
-				<i class="bi bi-person-plus text-primary"></i>
+				<i class="bi bi-person-plus text-primary" style="font-size: 30px"></i>
 		</c:if>
 				<img alt="" src="${path }/resources/images/${notice.active_pf}" width="50" height="50">
 			</div>
 			<div class="col" style="padding: 5px; margin: 10px 10px 0 0; border-bottom: 1px solid gray;">
 		<c:if test="${notice.n_type == 'renut' }">
 				<c:out value="${notice.active_nn }"/>님이 리넛하셨습니다
-				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark" style="font-size: 30px">new</span></c:if>
+				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
 				<br>
 				<pre style="padding-left: 20px"><c:out value="${notice.n_content }"/></pre>
 		</c:if>
 		<c:if test="${notice.n_type == 'reply' }">
 				<c:out value="${notice.active_nn }"/>님이 댓글을 다셨습니다
-				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark" style="font-size: 30px">new</span></c:if>
+				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
 				<br>
 				<pre style="padding-left: 20px"><c:out value="${notice.n_content }"/></pre>
 		</c:if>
 		<c:if test="${notice.n_type == 'follow' }">
 				<c:out value="${notice.active_nn }"/>님이 팔로우하셨습니다
-				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark" style="font-size: 30px">new</span></c:if>
+				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
 		</c:if>
 			</div>
 		</div>
