@@ -48,4 +48,6 @@ public interface MemberService {
 
 	int unblock(String my_id, String m_id);
 
+	int deleteMember(String m_id);
+
 }

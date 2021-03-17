@@ -131,4 +131,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sst.delete("blockns.unblock", map);
 	}
 
+	@Override
+	public int deleteMember(String m_id) {
+		return sst.update("memberns.deleteMember", m_id);
+	}
+
 }

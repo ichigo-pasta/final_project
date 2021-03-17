@@ -48,5 +48,7 @@ public interface MemberDao {
 
 	int unblock(String my_id, String m_id);
 
+	int deleteMember(String m_id);
+
 
 }

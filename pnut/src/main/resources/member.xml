@@ -68,4 +68,7 @@
 				) a)
 				where rn between 1 and #{amt}
 	</select>
+	<update id="deleteMember" parameterType="string">
+		update pn_member set m_del='y' where m_id=#{m_id}
+	</update>
 </mapper>
