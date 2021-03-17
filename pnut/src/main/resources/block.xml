@@ -20,4 +20,7 @@
 	<select id="blockList" parameterType="string" resultType="string">
 		select active from pn_block where passive = #{m_id}
 	</select>
+	<delete id="unblock" parameterType="hashmap">
+		delete pn_block where active = #{my_id} and passive = #{m_id}
+	</delete>
 </mapper>

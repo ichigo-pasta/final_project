@@ -18,7 +18,7 @@
 				${mem.m_intro } 
 			</div>
 			<div class="col col-1" style="width: 100px">
-				<button id="bbt${mem.m_id}" onclick="unblock('${mem.m_id}')" 
+				<button onclick="unblock1('${mem.m_id}')" 
 					onmouseover="this.innerText='차단 해제'" 
 					onmouseout="this.innerText='차단됨'">차단됨</button>
 			</div>
@@ -28,44 +28,26 @@
 </div>
 
 <script type="text/javascript">
-function profile(m_id) {
+	function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
 	}
-function block(m_id) {
-	buttonChange();
-	var xhr = new XMLHttpRequest();
-	xhr.open("get","${path}/block.do?m_id="+m_id,true);
-	xhr.onload = function() {
-		if (xhr.status == 200 || xhr.status == 201) {
-			console.log('success');
-		} else {
-			alert('요청오류: '+xhr.status);
+	function unblock1(m_id) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/unblock.do?m_id="+m_id,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {
+				if (xhr.responseText == 1) {
+					alert("유저 "+m_id+"의 차단을 해제했습니다");
+					location.reload();
+				} else if (xhr.responseText == 0) {
+					alert('차단 해제 과정에서 오류가 발생했습니다');
+				} else if (xhr.responseText == -1) {
+					alert('차단 해제할 아이디 정보가 누락되었습니다');				
+				}
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
 		}
+		xhr.send(null);
 	}
-	xhr.send(null);
-}
-function buttonChange() {
-	var btn = document.getElementById('followbt');		
-	btn.setAttribute("onclick","unblock('${mem.m_id}')");
-	btn.setAttribute("onmouseover","this.innerText='차단 해제'");
-	btn.setAttribute("onmouseout","this.innerText='팔로우 중'");
-}
-function unblock(m_id) {
-	buttonChange4(m_id);
-	var xhr = new XMLHttpRequest();
-	xhr.open("get","${path}/unblock.do?m_id="+m_id,true);
-	xhr.onload = function() {
-		if (xhr.status == 200 || xhr.status == 201) {
-			console.log('success');
-		} else {alert('요청오류: '+xhr.status);}
-	}
-	xhr.send(null);
-}
-function buttonChange4(m_id) {
-	var btn = document.getElementById('fbt'+m_id);
-	btn.innerText = '차단';
-	btn.setAttribute("onclick","block('${mem.m_id}')");
-	btn.removeAttribute("onmouseover");
-	btn.removeAttribute("onmouseout");
-}	
 </script>

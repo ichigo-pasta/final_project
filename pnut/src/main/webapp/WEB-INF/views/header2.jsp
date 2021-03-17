@@ -35,6 +35,7 @@
 	
 	.btBox {
 		padding-top: 5px;
+		text-align: center;
 	}
 	.btBox button {
 		border: none;

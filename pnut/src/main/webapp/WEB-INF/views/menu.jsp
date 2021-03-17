@@ -42,7 +42,7 @@
 							href="${path}/logout.do" style="color: black">로그아웃</a></li>
 					<li>
 						<a class="dropdown-item" 
-							href="${path}/home/blockList.do?m_id=${m_id}"  style="color: black">차단 목록</a></li>
+							href="${path}/home/blockList.do"  style="color: black">차단 목록</a></li>
 				</ul>
 			</div>
 		</div>
