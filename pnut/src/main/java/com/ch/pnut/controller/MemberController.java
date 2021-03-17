@@ -80,8 +80,13 @@ public class MemberController {
 		if(amt == null) amt = 20;
 		if(more == null) more = 0;
 		if(pf_scroll == null) pf_scroll = 0;
-		Member member = ms.select(m_id);
 		String my_id = (String) session.getAttribute("m_id");
+		List<String> blockList = ms.blockList(my_id);	// 로그인 유저를 차단한 ID 리스트
+		List<String> myBlockList = ms.myBlockList(my_id);	// 로그인 유저가 차단한 ID 리스트
+		Member member = ms.select(m_id);
+		member.setM_intro(ps.setHashtag(member.getM_intro(), "user"));
+		if(blockList.contains(m_id)) member.setBlockMe(true);
+		if(myBlockList.contains(m_id)) member.setBlockByMe(true);
 		List<String> myFollowLt = ms.followList(my_id);
 		boolean isFollow = myFollowLt.contains(m_id);
 		List<String> followLt = ms.followList(m_id);
@@ -96,6 +101,7 @@ public class MemberController {
 		int listSize = list.size();
 		List<Integer> bmList = ps.selectBm(m_id);		// 로그인 유저가 북마크한 피넛번호 리스트
 		List<Integer> renutList = ps.selectRenut(m_id);	// 로그인 유저가 리넛한 피넛번호 리스트
+		
 		if (listSize > 0) {
 			for (Peanuts peanut : list) {
 				peanut.setContent(ps.setHashtag(peanut.getContent(),"hashtag"));	// list 피넛 해시태그 처리
@@ -124,8 +130,7 @@ public class MemberController {
 		model.addAttribute("followLtSize", followLtSize);
 		model.addAttribute("followerLtSize", followerLtSize);
 		model.addAttribute("m_profile", m_profile);
-		model.addAttribute("list", list);
-		model.addAttribute("my_id", my_id);
+		model.addAttribute("list", list);		
 		model.addAttribute("type", type);
 		model.addAttribute("amt", amt);
 		model.addAttribute("more", more);
@@ -189,7 +194,7 @@ public class MemberController {
 		// 내가 팔로우한 멤버 리스트
 		if (myFollowList.size() > 0) list = ms.followingList(myFollowList, amt); 
 		for (Member mem : list) {
-			mem.setM_intro(ps.setHashtag(mem.getM_intro(),"user")); // 자기소개 해시태그 
+			mem.setM_intro(ps.setHashtag(mem.getM_intro(),"user")); // 자기소개 해시태그
 			if (followList.size() > 0) {
 				if (followList.contains(mem.getM_id())) {
 					mem.setFollowMe(true);
@@ -226,14 +231,12 @@ public class MemberController {
 		String passive = m_id;
 		int result;
 		if (passive.equals(active)) {
-			result = -1;
-			return result;
+			result = -1;	// 자기자신 팔로우 시도			
+		} else if(passive == null || ms.blockList(active).contains(m_id) || ms.myBlockList(active).contains(m_id)){			 
+			result = -2;	// 아이디 미입력이나 차단관계 사용자
+		} else {
+			result = ms.insert(active , passive);
 		}
-		if(ms.blockList(active).contains(m_id) || ms.myBlockList(active).contains(m_id)) {
-			result = -2;
-			return result;
-		}
-		result = ms.insert(active , passive);
 		return result;
 	}
 	@RequestMapping(value = "unfollow", produces = "text/html;charset=utf-8")
@@ -245,22 +248,37 @@ public class MemberController {
 	}
 	
 	@RequestMapping("block")
-	public String block(String m_id, HttpSession session, Model model) {
+	@ResponseBody
+	public int block(String m_id, HttpSession session, Model model) {
 		int result;
 		String my_id = (String) session.getAttribute("m_id");
 		if (my_id.equals(m_id)) {
+			result = -3;	// 자기자신을 차단시도
+		} else if (m_id == null){
 			result = -2;
-			model.addAttribute("result", result);
-			return "block";
-		}
-		int isBlocked = ms.checkBlock(my_id, m_id);	// 내가 상대를 이미 차단중인지 체크
-		if (isBlocked == 1) result = -1;	// result -1 : 이미 차단중 
-		else {
-			result = ms.insertBlock(my_id, m_id);	// result 0 : 차단 등록 실패, result 1 : 차단 성공
-		}
-		model.addAttribute("result", result);
-		return "block";
+		} else {			
+			int isBlocked = ms.checkBlock(my_id, m_id);	// 내가 상대를 이미 차단중인지 체크
+			if (isBlocked == 1) result = -1;	// result -1 : 이미 차단중이거나 아이디 미입력
+			else {
+				result = ms.insertBlock(my_id, m_id);	// result 0 : 차단 등록 실패, result 1 : 차단 성공
+			}			
+		}		
+		return result;
 	}
+	
+	@RequestMapping("unblock")
+	@ResponseBody
+	public int unblock(String m_id, Model model, HttpSession session) {
+		String my_id = (String) session.getAttribute("m_id");
+		int result;
+		if(m_id == null) {
+			result = -1;			
+		} else {
+			result = ms.unblock(my_id, m_id);			
+		}
+		return result;
+	}
+	
 	@RequestMapping("home/blockList")
 	public String blockList(Model model, 
 			HttpSession session, Integer amt) {
