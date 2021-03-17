@@ -15,7 +15,7 @@
 					onchange="checkByte(e);" ></textarea>
 			</div>
 			<div class="row" align="right">
-				<span id="count">0/0</span>
+				<span id="count">0/400</span>
 			</div>
 			<div class="row" align="right">
 				<div class="col">

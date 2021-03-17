@@ -35,40 +35,40 @@
 function profile(m_id) {
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
 	}
-function follow(m_id) {
-	buttonChange();
+function follow(m_id) {	
 	var xhr = new XMLHttpRequest();
-	xhr.open("get","${path}/follow.do?m_id="+m_id,true);
 	xhr.onload = function() {
 		if (xhr.status == 200 || xhr.status == 201) {
-			console.log('success');
+			console.log('follow success');
+			buttonChange3(m_id);
 		} else {
 			alert('요청오류: '+xhr.status);
 		}
 	}
+	xhr.open("get","${path}/follow.do?m_id="+m_id,false);
 	xhr.send(null);
 }
-function buttonChange() {
-	var btn = document.getElementById('followbt');		
-	btn.setAttribute("onclick","unfollow('${mem.m_id}')");
+function buttonChange3() {
+	var btn = document.getElementById('fbt' + arguments[0]);		
+	btn.setAttribute("onclick","unfollow('" + arguments[0] + "')");
 	btn.setAttribute("onmouseover","this.innerText='언팔로우'");
 	btn.setAttribute("onmouseout","this.innerText='팔로우 중'");
 }
-function unfollow(m_id) {
-	buttonChange4(m_id);
+function unfollow(m_id) {	
 	var xhr = new XMLHttpRequest();
-	xhr.open("get","${path}/unfollow.do?m_id="+m_id,true);
 	xhr.onload = function() {
 		if (xhr.status == 200 || xhr.status == 201) {
-			console.log('success');
+			console.log('unfollow success');
+			buttonChange4(m_id);
 		} else {alert('요청오류: '+xhr.status);}
 	}
+	xhr.open("get","${path}/unfollow.do?m_id="+m_id,false);
 	xhr.send(null);
 }
-function buttonChange4(m_id) {
-	var btn = document.getElementById('fbt'+m_id);
+function buttonChange4() {
+	var btn = document.getElementById('fbt' + arguments[0]);
 	btn.innerText = '팔로우';
-	btn.setAttribute("onclick","follow('${mem.m_id}')");
+	btn.setAttribute("onclick","follow('" + arguments[0] + "')");
 	btn.removeAttribute("onmouseover");
 	btn.removeAttribute("onmouseout");
 }	

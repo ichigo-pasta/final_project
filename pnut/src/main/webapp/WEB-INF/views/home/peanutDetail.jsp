@@ -264,7 +264,7 @@
 									<textarea id="cont${rep.reply_no}"
 										rows="5" style="resize: none; background: #3c3c3c; color: lightgray" 
 										name="content" required="required" 
-										placeholder="답글을 입력해주세요"></textarea>
+										placeholder="답글을 입력해주세요" maxlength="200"></textarea>
 								</div>
 							</div>
 							<div class="col col-2 align-self-end">
@@ -334,7 +334,7 @@
 									<textarea id="cont${rep.reply_no}"
 										rows="5" style="resize: none; background: #3c3c3c; color: lightgray"
 										name="content" required="required" 
-										placeholder="답글을 입력해주세요"></textarea>
+										placeholder="답글을 입력해주세요" maxlength="200"></textarea>
 								</div>
 							</div>
 							<div class="col col-2 align-self-end">
@@ -363,7 +363,7 @@
 							<textarea rows="5" style="resize: none; border-radius: 5px;
 								background: #3c3c3c; color: lightgray" 
 								name="content" required="required" 
-								placeholder="댓글을 입력해주세요"></textarea>
+								placeholder="댓글을 입력해주세요" maxlength="200"></textarea>
 						</div>
 					</div>
 					<div class="col col-2">

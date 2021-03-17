@@ -166,6 +166,12 @@
 			</div>	<%-- peanut row --%>
 		</div> <%-- peanut_container --%>
 	</c:forEach>
+	<c:if test="${more == 1 }">
+		<div class="d-grid gap-2">
+			<br>		
+  			<button class="btn btn-outline-info btn-lg" type="button" onclick="more_read_bm('${amt+20}')">more...</button>
+		</div>
+	</c:if>
 </c:if>	<%-- test="${not empty list }" --%>
 <script type="text/javascript">
 	var startX;
@@ -208,5 +214,8 @@
 			}
 		}
 		xhr.send(null);				
-	}	
+	}
+	function more_read_bm(num) {		
+		location.href = "${path}/home/bookmarkForm.do?m_id=${member.m_id}&amt="+num;
+	}
 </script>
