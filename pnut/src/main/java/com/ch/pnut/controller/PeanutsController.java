@@ -256,42 +256,40 @@ public class PeanutsController {
 		model.addAttribute("bmList", bmList);
 		model.addAttribute("m_profile", m_profile);
 		return "home/bookmarkForm";
-	}
-	@RequestMapping("/nolay/peanutList")
-	public String peanutList() {
-		return "nolay/peanutList";
-	}
+	}	
 
-	@RequestMapping("renut")	// 타임라인에서 리넛 실행
-	public String renut(Integer peanut_no, String redirect, 
+	@RequestMapping("renut")	// 타임라인, 프로필페이지에서 실행
+	public String renut(Integer peanut_no, String redirect, String m_id,
 			HttpSession session, HttpServletRequest request) {
 		if (peanut_no == null) peanut_no = 0;
-		String m_id = (String)session.getAttribute("m_id");
+		String my_id = (String)session.getAttribute("m_id");		
 		Integer isRenut = ps.isRenut(peanut_no);	// 리넛 대상 글이 리넛이면 원본 피넛번호, 리넛이 아니면 null
 		Peanuts peanut;
 		if(isRenut == null) {
 			peanut = ps.selectDetail(peanut_no);
 			if (peanut == null) {
 				return "peanutError";
-			}
-			peanut.setWriter(m_id);
-			peanut.setRenut(peanut_no);
-			peanut.setIp(request.getRemoteAddr());
-			ps.insert(peanut);
+			}			
+			peanut.setRenut(peanut_no);						
 		} else {
 			peanut = ps.selectDetail(isRenut);
 			if (peanut == null) {
 				return "peanutError";
-			}
-			peanut.setWriter(m_id);
-			peanut.setRenut(isRenut);
-			peanut.setIp(request.getRemoteAddr());
-			ps.insert(peanut);
+			}			
+			peanut.setRenut(isRenut);				
 		}
+		List<String> blockList = ms.blockList(my_id);	// 나를 차단한 ID 리스트		
+		if (blockList.contains(peanut.getWriter())) {	// 리넛할 게시글 작성자가 나를 차단한 리스트에 포함되어 있으면
+			return "peanutError";
+		}
+		peanut.setWriter(my_id);
+		peanut.setIp(request.getRemoteAddr());
+		ps.insert(peanut);
 		if (redirect == null) return "redirect:home/timeline.do"; 
 		String rd = "";
 		switch (redirect) {
-		case "a":
+		case "profile":
+			rd = "redirect:home/profileForm.do?m_id=" + m_id;
 			break;
 		default:
 			rd = "redirect:home/timeline.do";
@@ -307,6 +305,10 @@ public class PeanutsController {
 		String m_id = (String)session.getAttribute("m_id");
 		Peanuts peanut = ps.selectDetail(peanut_no);
 		if (peanut == null) return "peanutError";
+		List<String> blockList = ms.blockList(m_id);	// 나를 차단한 ID 리스트
+		if (blockList.contains(peanut.getWriter())) {	// 리넛할 게시글 작성자가 나를 차단한 리스트에 포함되어 있으면
+			return "peanutError";
+		}
 		peanut.setWriter(m_id);
 		peanut.setRenut(peanut_no);
 		peanut.setIp(request.getRemoteAddr());
@@ -331,8 +333,11 @@ public class PeanutsController {
 		String result;
 		String m_id = (String)session.getAttribute("m_id");
 		Peanuts peanut = ps.selectDetail(peanut_no);
+		List<String> blockList = ms.blockList(m_id);	// 나를 차단한 ID 리스트
 		if (peanut == null) result = "fail";
-		else {
+		else if (blockList.contains(peanut.getWriter())) {	// 리넛할 게시글 작성자가 나를 차단한 리스트에 포함되어 있으면
+			result = "fail";
+		} else {
 			peanut.setWriter(m_id);
 			peanut.setRenut(peanut_no);
 			peanut.setIp(request.getRemoteAddr());
@@ -342,19 +347,20 @@ public class PeanutsController {
 		return result;
 	}
 
-	@RequestMapping("cancelRenut") // 타임라인에서 리넛 취소
+	@RequestMapping("cancelRenut") // 타임라인, 프로필에서 리넛 취소
 	public String cancelRenut(Integer peanut_no, HttpSession session,
-			HttpServletRequest request, String redirect) {
+			HttpServletRequest request, String redirect, String m_id) {
 		if (peanut_no == null) peanut_no = 0;
-		String m_id = (String)session.getAttribute("m_id");
+		String my_id = (String)session.getAttribute("m_id");
 		Integer renut = ps.isRenut(peanut_no);
 		if(renut == null) renut = peanut_no;
-		int result = ps.cancelRenut(renut, m_id);
+		int result = ps.cancelRenut(renut, my_id);
 		if (result == 0) return "peanutError";
 		if (redirect == null) return "redirect:home/timeline.do"; 
 		String rd = "";
 		switch (redirect) {
-		case "a":
+		case "profile":
+			rd = "redirect:home/profileForm.do?m_id=" + m_id;
 			break;
 		default:
 			rd = "redirect:home/timeline.do";

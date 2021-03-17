@@ -224,4 +224,5 @@ insert into pn_follow values ('k1', 'k2');
 insert into pn_follow values ('k1', 'k3');
 insert into pn_member values ('k1', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n',null,null);
 insert into pn_block values ('k1', 'k2');
+insert into pn_block values ('k2', 'k1');
 insert into pn_block values ('k1', 'k3');

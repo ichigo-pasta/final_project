@@ -99,8 +99,8 @@ public class MemberController {
 		}
 		list = ps.distinctList(list);	// 리넛 중복제거
 		int listSize = list.size();
-		List<Integer> bmList = ps.selectBm(m_id);		// 로그인 유저가 북마크한 피넛번호 리스트
-		List<Integer> renutList = ps.selectRenut(m_id);	// 로그인 유저가 리넛한 피넛번호 리스트
+		List<Integer> bmList = ps.selectBm(my_id);		// 로그인 유저가 북마크한 피넛번호 리스트
+		List<Integer> renutList = ps.selectRenut(my_id);	// 로그인 유저가 리넛한 피넛번호 리스트
 		
 		if (listSize > 0) {
 			for (Peanuts peanut : list) {
