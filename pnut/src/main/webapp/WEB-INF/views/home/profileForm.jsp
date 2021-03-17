@@ -7,7 +7,7 @@
 <div>
 	<div class="pic_container d-flex align-items-end" style="margin: 12px 0;">
 		<img alt="" src="${path}/resources/images/${member.m_profile}"
-			width="100" height="100">
+			width="100" height="100" class="profile_pic">
 	</div> 
 	<div class="row">
 		<div class="col col-9 align-self-center" style="margin: 2px 0;">
@@ -108,7 +108,7 @@
 			<c:if test="${not empty pn.renut }">
 			<div class="row">
 				<div class="col" style="padding-bottom: 10px ">
-					<i class="bi bi-arrow-repeat"></i><c:out value="${pn.writer}"/> 님이 리넛하셨습니다.
+					<i class="bi bi-arrow-repeat"></i><c:out value="${pn.member.m_nickname} @${pn.writer}"/> 님이 리넛하셨습니다.
 				</div>
 			</div>
 			</c:if>

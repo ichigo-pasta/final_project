@@ -13,7 +13,7 @@
 		<c:if test="${pn.renut != null}"> <!-- 리넛 여부 표시 -->
 			<div class="row">
 				<div class="col col-10">
-					<i class="bi bi-arrow-repeat"></i>&nbsp;<c:out value="${pn.writer}"/> 님이 리넛하셨습니다.
+					<i class="bi bi-arrow-repeat"></i>&nbsp;<c:out value="${pn.member.m_nickname} @${pn.writer}"/> 님이 리넛하셨습니다.
 				</div>
 			</div>
 		</c:if>
@@ -34,7 +34,7 @@
 					<div class="row" style="padding-top: 8px;">
 						<div class="col-11">	<!-- 리넛 여부에 따른 닉네임, 아이디, 작성일 표시줄 -->
 		<c:if test="${pn.renut != null}">
-							<c:out value=" ${pn.member.re_nick} @${pn.re_writer}"/>							
+							<c:out value="${pn.member.re_nick} @${pn.re_writer}"/>
 							<c:choose>
 								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
 									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일"/>
@@ -57,7 +57,7 @@
 							</c:choose>
 		</c:if>
 		<c:if test="${pn.renut == null}">
-							<c:out value="${pn.member.m_nickname} @${pn.writer}"/>							
+							<c:out value="${pn.member.m_nickname} @${pn.writer}"/>
 							<c:choose>
 								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
 									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일"/>

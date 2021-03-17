@@ -24,19 +24,19 @@
 			</div>
 			<div class="col" style="padding: 5px; margin: 10px 10px 0 0; border-bottom: 1px solid gray;">
 		<c:if test="${notice.n_type == 'renut' }">
-				<c:out value="${notice.active_nn }"/>님이 리넛하셨습니다
+				<c:out value="${notice.active_nn } @${notice.active}"/>님이 리넛하셨습니다
 				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
 				<br>
 				<pre style="padding-left: 20px"><c:out value="${notice.n_content }"/></pre>
 		</c:if>
 		<c:if test="${notice.n_type == 'reply' }">
-				<c:out value="${notice.active_nn }"/>님이 댓글을 다셨습니다
+				<c:out value="${notice.active_nn } @${notice.active}"/>님이 댓글을 다셨습니다
 				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
 				<br>
 				<pre style="padding-left: 20px"><c:out value="${notice.n_content }"/></pre>
 		</c:if>
 		<c:if test="${notice.n_type == 'follow' }">
-				<c:out value="${notice.active_nn }"/>님이 팔로우하셨습니다
+				<c:out value="${notice.active_nn } @${notice.active}"/>님이 팔로우하셨습니다
 				<c:if test="${notice.read == 'n' }"><span class="badge bg-info text-dark">new</span></c:if>
 		</c:if>
 			</div>
