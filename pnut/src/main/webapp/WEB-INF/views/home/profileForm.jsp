@@ -92,7 +92,7 @@
 <c:if test="${member.blockMe == false && member.blockByMe == false }">
 <div>
 	<c:if test="${empty list}">
-			데이터가 없습니다.
+		<div style="text-align: center;"><br>데이터가 없습니다.</div>
 	</c:if>
 	<c:if test="${not empty list}">
 		<c:forEach items="${list }" var="pn">
@@ -218,7 +218,7 @@
 						</c:if>
 								<c:if test="${pn.repCnt == 0}">
 									<i class="bi-chat" style="color: gray"></i>
-								</c:if>
+								</c:if>&nbsp;
 							</button>
 						</div>
 						<!-- 댓글 아이콘 종료 -->
@@ -229,7 +229,7 @@
 									data-bs-target="#set${pn.peanut_no}"
 									class="btnBox">
 									<i class="bi-arrow-clockwise" style="color: gray"></i>
-									<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>
+									<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>&nbsp;
 								</button>
 							</c:if>
 							<c:if test="${pn.renuted == true }">
@@ -250,10 +250,10 @@
 									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
 								</button>
 							</c:if>
-							<c:if test="${pn.bookmarked == false}">
+							<c:if test="${pn.bookmarked == false}">		
 								<button onclick="setBm('${pn.peanut_no}')" class="btnBox">
 									<i class="bi-bookmark" style="color: gray"></i>
-									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
+									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>&nbsp;
 								</button>
 							</c:if>
 						</div>

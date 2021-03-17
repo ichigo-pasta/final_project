@@ -4,7 +4,7 @@
 <jsp:useBean id="today" class="java.util.Date" />
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <c:if test="${empty list }">
-	<p>알림이 존재하지 않습니다</p>
+	<div style="text-align: center;"><br>알림이 존재하지 않습니다</div>
 </c:if>
 <c:if test="${not empty list }">
 	<c:forEach items="${list }" var="notice">

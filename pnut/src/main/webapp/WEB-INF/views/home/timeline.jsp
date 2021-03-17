@@ -48,7 +48,7 @@
 	}
 	function changeBmBtn1(peanut_no) {		
 		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "deleteBm('"+peanut_no+"')");
-		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: blue");
+		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: #D27D32");
 	}
 	function deleteBm(peanut_no) {		
 		changeBmBtn2(peanut_no);
