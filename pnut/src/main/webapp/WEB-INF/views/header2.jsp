@@ -63,10 +63,13 @@
 		align-items: center;
 		justify-content: center
 	}
-	.pic_container {
-		height: 200px;
+	.pic_container {		
 		background-image: url('${path}/resources/images/${member.m_bg}');
-		background-size: 100% 100%;
+		background-size: contain;		
+		background-repeat: no-repeat;
+		height: 0;
+		width: 100%;
+		padding-top: 56.25%;
 	}
 	.bi::before {
 		vertical-align: -.125em;
