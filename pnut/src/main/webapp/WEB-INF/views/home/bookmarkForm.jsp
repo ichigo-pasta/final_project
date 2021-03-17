@@ -5,7 +5,7 @@
 <jsp:useBean id="today" class="java.util.Date" />
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <c:if test="${empty bmList }">
-	간직하고 싶은 피넛들을 북마크해보세요
+	<div style="text-align: center;"><br>간직하고 싶은 피넛들을 북마크해보세요</div>
 </c:if>
 <c:if test="${not empty bmList }">
 	<c:forEach items="${bmList }" var="pn">
@@ -94,14 +94,14 @@
 							</c:if>
 							<c:if test="${pn.repCnt == 0}">
 								<i class="bi-chat" style="color: gray"></i>								
-							</c:if>
+							</c:if>&nbsp;
 							</button>
 						</div>
 						<div class="col col-4">
 							<c:if test="${pn.renuted == false }">
 							<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}" class="btnBox">
 								<i class="bi-arrow-clockwise" style="color: gray"></i>
-								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
+								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>&nbsp;								
 							</button>
 							</c:if>
 							<c:if test="${pn.renuted == true }">

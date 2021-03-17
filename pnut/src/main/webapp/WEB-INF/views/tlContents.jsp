@@ -5,7 +5,7 @@
 <jsp:useBean id="today" class="java.util.Date" />
 <fmt:parseNumber value="${today.time}" var="now" scope="page"/>
 <c:if test="${empty list }">
-	일상에서 일어나는 작은 일들을 간단하게 기록해보세요
+	<div style="text-align: center;"><br>일상에서 일어나는 작은 일들을 간단하게 기록해보세요</div>
 </c:if>
 <c:if test="${not empty list }">
 	<c:forEach items="${list }" var="pn">
@@ -126,7 +126,7 @@
 					</div>
 		</c:if> <!-- 사진 없을 때 -->
 					<div class="row btBox"> <!-- 댓글, 리넛, 북마크 박스 -->
-						<div class="col col-4">
+						<div class="col col-4" style="display: flex; align-items: center;">
 							<button onclick="location.href='${path}/home/peanutDetail.do?peanut_no=${pn.peanut_no}'"
 								class="btnBox">
 							<c:if test="${pn.repCnt != 0}">
@@ -135,26 +135,30 @@
 							</c:if>
 							<c:if test="${pn.repCnt == 0}">
 								<i class="bi-chat" style="color: gray"></i>								
-							</c:if>
+							</c:if>&nbsp;
 							</button>
 						</div>
-						<div class="col col-4">
+						<div class="col col-4" style="display: flex; align-items: center;">
 							<c:if test="${pn.renuted == false }">
-							<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}" onclick="stopRefresh()"
-								class="btnBox">
-								<i class="bi-arrow-clockwise" style="color: gray"></i>
-								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
-							</button>
+							<div>
+								<button data-bs-toggle="modal" data-bs-target="#set${pn.peanut_no}" onclick="stopRefresh()"
+									class="btnBox">
+									<i class="bi-arrow-clockwise" style="color: gray;"></i>
+									<c:if test="${pn.renutCnt != 0}">&nbsp;${pn.renutCnt }</c:if>&nbsp;								
+								</button>
+							</div>
 							</c:if>
 							<c:if test="${pn.renuted == true }">
-							<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}" onclick="stopRefresh()"
-								class="btnBox">
-								<i class="bi-arrow-clockwise" style="color: #D27D32"></i>
-								<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
-							</button>
+							<div>
+								<button data-bs-toggle="modal" data-bs-target="#cancel${pn.peanut_no}" onclick="stopRefresh()"
+									class="btnBox">
+									<i class="bi-arrow-clockwise" style="color: #D27D32"></i>
+									<c:if test="${pn.renutCnt != 0}">${pn.renutCnt }</c:if>								
+								</button>
+							</div>
 							</c:if>
 						</div>
-						<div class="col col-4">
+						<div class="col col-4" style="display: flex; align-items: center;">
 							<c:if test="${pn.bookmarked == true}">
 								<button onclick="deleteBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}"
 									class="btnBox">
@@ -166,7 +170,7 @@
 								<button onclick="setBm('${pn.peanut_no}'); refreshTl('${amt }');" id="bmBtn${pn.peanut_no}"
 									class="btnBox">
 									<i class="bi-bookmark" style="color: gray" id="bmBtnI${pn.peanut_no}"></i>
-									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>
+									<c:if test="${pn.bmCnt != 0}">${pn.bmCnt }</c:if>&nbsp;
 								</button>
 							</c:if>
 						</div>

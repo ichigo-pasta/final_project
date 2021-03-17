@@ -3,7 +3,7 @@
 <%@ include file="../header.jsp" %>
 <div>
 <c:if test="${empty list}">
-	팔로워가 없습니다.
+	<div style="text-align: center;"><br>팔로워가 없습니다.</div>
 </c:if>
 <c:if test="${not empty list}">
 	<c:forEach items="${list }" var="pn">
