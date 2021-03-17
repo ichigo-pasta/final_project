@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-<div class="container">
+<div class="container" style="padding: 0px 12px;">
 <form action="${path}/home/write.do" method="post" enctype="multipart/form-data">
-	<div class="row" style="padding-top: 30px">
-		<div style="width: 120px">
+	<div class="row" style="padding-top: 20px">
+		<div style="width: 120px"; >
 			<img alt="" src="${path}/resources/images/${m_profile}"
 					width="100" height="100" class="profile_pic">
 		</div>
@@ -33,7 +33,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row" align="right">
+			<div class="row" align="right" style="margin-top: 10px;">
 				<div class="col">
 					<button class="btn btn-warning">피넛</button>
 				</div>

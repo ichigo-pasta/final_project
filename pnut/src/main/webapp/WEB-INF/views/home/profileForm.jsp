@@ -10,10 +10,10 @@
 			width="100" height="100">
 	</div> 
 	<div class="row">
-		<div class="col col-9" style="margin: 2px 0;">
+		<div class="col col-9 align-self-center" style="margin: 2px 0;">
 			<c:out value="${member.m_nickname }"></c:out>
 		</div>
-		<div class="col" style="margin: 2px 0;"> <!-- 본인 : 프로필 수정, 다른 사람 : 팔로우, 언팔로우 -->
+		<div class="col row justify-content-end" style="margin: 2px 0;"> <!-- 본인 : 프로필 수정, 다른 사람 : 팔로우, 언팔로우 -->
 			<c:if test="${member.m_id == my_id}"> <!-- 본인일시 프로필 수정 -->
 				<a href="${path}/home/profileUpdateForm.do?m_id=${member.m_id }"
 					class="btn btn-outline-info">프로필 수정</a>
@@ -22,10 +22,13 @@
 				<c:if test="${isFollow == true }">
 					<button id="followbt" onclick="unfollow('${member.m_id}')" 
 						onmouseover="this.innerText='언팔로우'" 
-						onmouseout="this.innerText='팔로우 중'">팔로우 중</button>
+						onmouseout="this.innerText='팔로우 중'"
+						class="btn btn-outline-info">팔로우 중</button>
 				</c:if>
 				<c:if test="${isFollow == false }">
-					<button id="followbt" onclick="follow('${member.m_id}')">팔로우</button>	
+					<button id="followbt" 
+						onclick="follow('${member.m_id}')"
+						class="btn btn-outline-info">팔로우</button>	
 				</c:if>
 			</c:if>
 		</div>
