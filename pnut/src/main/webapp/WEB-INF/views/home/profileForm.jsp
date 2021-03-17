@@ -96,6 +96,14 @@
 	</c:if>
 	<c:if test="${not empty list}">
 		<c:forEach items="${list }" var="pn">
+			<c:if test="${pn.blockMe == true }">
+			<div class="row peanut_container">				
+				<div class="col" style="padding: 10px 0">	
+					<h5 class="text-info" align="center">확인할 수 없는 피넛입니다</h5>
+				</div>
+			</div>
+			</c:if>
+			<c:if test="${pn.blockMe == false }">
 			<div class="row peanut_container">			
 			<c:if test="${not empty pn.renut }">
 			<div class="row">
@@ -315,6 +323,7 @@
 					</div>	<!-- 취소 Modal 종료 -->
 				</div>
 			</div>	<!-- peanut_container 종료 -->
+			</c:if>
 		</c:forEach>
 		<c:if test="${more == 1 }">
 			<div class="d-grid gap-2">
@@ -329,7 +338,7 @@
 <script type="text/javascript">
 	var cont_rows = document.getElementsByClassName('content_col');
 	var startX;
-	var startY;
+	var startY;	
 	const judge = 5;
 	for(var cont_row of cont_rows) {
 		cont_row.addEventListener('mousedown', function(event) {				
@@ -350,9 +359,7 @@
 			document.getElementById("pean").setAttribute("class","nav-link active");
 		} else {
 			document.getElementById("peanPic").setAttribute("class","nav-link active");
-		}
-		document.body.scrollTop = ${pf_scroll};
-		
+		}		
 	}
 	function follow(m_id) {		
 		var xhr = new XMLHttpRequest();
@@ -404,9 +411,8 @@
 		location.href = "${path}/home/profileForm.do?m_id="+m_id;
 	}
 	
-	function more_read_pf(num, ty) {
-		var pf_scroll = document.scrollingElement.scrollTop;
-		location.href = "${path}/home/profileForm.do?m_id=${member.m_id}&amt="+num+"&type="+ty+"&pf_scroll="+pf_scroll;
+	function more_read_pf(num, ty) {		
+		location.href = "${path}/home/profileForm.do?m_id=${member.m_id}&amt="+num+"&type="+ty;
 	}
 	function block(m_id) {
 		var xhr = new XMLHttpRequest();
@@ -454,7 +460,13 @@
 		var xhr = new XMLHttpRequest();
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
-				location.reload();
+				if (xhr.responseText == 1) {					
+					location.reload();
+				} else if (xhr.responseText == 0) {
+					alert('북마크 과정에서 오류가 발생했습니다');
+				} else if (xhr.responseText == -1) {
+					alert('유효하지 않은 피넛입니다');				
+				}
 			} else {
 				alert('요청오류: '+xhr.status);
 			}
