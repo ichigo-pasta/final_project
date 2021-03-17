@@ -70,8 +70,8 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public List<Integer> selectBm(String m_id) {
 		return pd.selectBm(m_id);
 	}
-	public void insertBm(int peanut_no, String m_id) {
-		pd.insertBm(peanut_no, m_id);
+	public int insertBm(int peanut_no, String m_id) {
+		return pd.insertBm(peanut_no, m_id);
 	}
 
 	public void insertComment(Replies reply) {

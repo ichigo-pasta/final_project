@@ -23,7 +23,7 @@ public interface PeanutsDao {
 
 	List<Integer> selectBm(String m_id);
 
-	void insertBm(int peanut_no, String m_id);
+	int insertBm(int peanut_no, String m_id);
 
 
 	void insertComment(Replies reply);

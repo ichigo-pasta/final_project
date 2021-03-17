@@ -38,5 +38,6 @@ public class Peanuts {
 	private Integer renutCnt;		// 리넛 개수
 	private Integer bmCnt;			// 북마크 개수
 	
-	private Boolean followPn;		// 내가 팔로우 한 사람의 피넛인가? 
+	private boolean followPn;		// 내가 팔로우 한 사람의 피넛인가? 
+	private boolean blockMe;		// 나를 차단하거나 내가 차단한 사람의 피넛인가?
 }

@@ -142,13 +142,21 @@ public class PeanutsController {
 
 	@RequestMapping("setBm")
 	@ResponseBody
-	public void setBm(int peanut_no, HttpSession session) {
+	public int setBm(int peanut_no, HttpSession session) {
+		int result;
 		String m_id = (String)session.getAttribute("m_id");
 		int num;
 		if (ps.selectDetail(peanut_no).getRenut() == null) {
 			num = peanut_no;
 		} else  num = ps.selectDetail(peanut_no).getRenut();
-		ps.insertBm(num, m_id);
+		List<String> blockList = ms.blockList(m_id);
+		Peanuts peanut = ps.selectDetail(num);
+		if (peanut == null || blockList.contains(peanut.getWriter())) {
+			result = -1;	// 잘못된 피넛번호이거나 나를 블락한 사람의 피넛일 경우
+		} else {
+			result = ps.insertBm(num, m_id);
+		}
+		return result;
 	}
 	@RequestMapping("deleteBm")
 	@ResponseBody
