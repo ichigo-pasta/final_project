@@ -216,11 +216,13 @@
 							class="profile_pic">
 					</div>
 					<div class="col" style="margin: 0 25px; padding: 0px; border-bottom: 1px solid gray;">
-						<c:out value="${mem.m_nickname}, ${mem.m_id}, ${mem.m_regdate}" />
+						<b><c:out value="${mem.m_nickname}"/></b> <c:out value="@${mem.m_id}"/><br>
+					<c:if test="${mem.followMe == true}">
+						나를 팔로우중입니다	
+					</c:if><br>
+						<pre>${mem.m_intro }</pre>
 					</div>
-					<div class="col col-1 align-self-center" style="width: 120px">
-						<c:if test="${mem.m_id == my_id}">
-						</c:if>
+					<div class="col col-1 align-self-center" style="width: 120px">						
 						<c:if test="${mem.m_id != my_id}">
 							<c:if test="${mem.followMe == true }">
 								<button id="followbt${mem.m_id}" onclick="unfollow('${mem.m_id}')"
@@ -304,8 +306,8 @@
 		changeBmBtn1(peanut_no);		
 		var xhr = new XMLHttpRequest();
 		xhr.onload = function() {
-			if (xhr.status == 200 || xhr.status == 201) {
-				console.log('set bm success');
+			if (xhr.status == 200 || xhr.status == 201) {				
+				location.reload();
 			} else {
 				alert('요청오류: '+xhr.status);
 			}
@@ -321,8 +323,8 @@
 		changeBmBtn2(peanut_no);
 		var xhr = new XMLHttpRequest();
 		xhr.onload = function() {
-			if (xhr.status == 200 || xhr.status == 201) {
-				console.log('remove bm success');
+			if (xhr.status == 200 || xhr.status == 201) {				
+				location.reload();
 			} else {
 				alert('요청오류: '+xhr.status);
 			}

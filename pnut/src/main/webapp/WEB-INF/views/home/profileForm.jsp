@@ -366,9 +366,9 @@
 		xhr.open("get","${path}/follow.do?m_id="+m_id,true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {  	// 통신 성공
-				if (xhr.responseText == 1) {				// 팔로우 성공
-					console.log('follow success');
-					buttonChange();					
+				if (xhr.responseText == 1) {				// 팔로우 성공					
+					buttonChange();
+					location.reload();
 				} else if (xhr.responseText == -2) {		// 차단한 사용하는 팔로우 못하게
 					alert('팔로우 할 수 없는 사용자입니다');
 				} else if (xhr.responseText == -1) {		// 본인 팔로우를 못하게
@@ -392,9 +392,9 @@
 		var xhr = new XMLHttpRequest();
 		xhr.open("get","${path}/unfollow.do?m_id="+m_id,true);
 		xhr.onload = function() {
-			if (xhr.status == 200 || xhr.status == 201) {
-				console.log('unfollow success');
+			if (xhr.status == 200 || xhr.status == 201) {				
 				buttonChange2();
+				location.reload();
 			} else {alert('요청오류: '+xhr.status);}
 		}
 		xhr.send(null);

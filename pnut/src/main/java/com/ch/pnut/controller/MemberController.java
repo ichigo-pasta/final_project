@@ -212,12 +212,18 @@ public class MemberController {
 		if(amt == null) {
 			amt = 20;
 		}
-		Member member = ms.select((String) session.getAttribute("m_id"));
+		String my_id = (String) session.getAttribute("m_id");
+		Member member = ms.select(my_id);
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
-		List<String> followerList = ms.followerList(m_id);
+		List<String> followerList = ms.followerList(m_id);	// 조회중인 아이디의 팔로워 리스트
 		List<Member> list = new ArrayList<>();
+		List<String> myFollowList = ms.followList(my_id);	// 내 팔로잉 리스트
 		if (followerList.size() > 0) list = ms.followedList(followerList, amt);
+		for (Member mem : list) {
+			mem.setM_intro(ps.setHashtag(mem.getM_intro(),"user")); // 자기소개 해시태그
+			if (myFollowList.contains(mem.getM_id())) mem.setFollowByMe(true);
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);
