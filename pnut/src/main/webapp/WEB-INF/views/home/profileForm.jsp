@@ -330,7 +330,7 @@
 				<br>		
 	  			<button class="btn btn-outline-info btn-lg" type="button" onclick="more_read_pf('${amt+20}', '${type }')">more...</button>
 			</div>
-		</c:if>	
+		</c:if>
 	</c:if>	
 </div>
 </c:if>

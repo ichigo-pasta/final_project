@@ -224,6 +224,7 @@
 				</div>
 				<div class="col" style="background: #3c3c3c; color: lightgray; border-radius: 10px; margin: 0 10px 0 0 ;" >
 				<c:if test="${rep.del == 'n'}">
+					<c:if test="${rep.blockRep == false }">
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
 					<c:choose>
@@ -249,10 +250,15 @@
 					&nbsp;&nbsp;
 					<button id="commentbt" onclick="comIns('${rep.reply_no}')" 
 						style="border: none; color: lightgray; background: none" >답글 쓰기</button>
-				<c:if test="${rep.writer == my_id }">
+						<c:if test="${rep.writer == my_id }">
 					<button id="deletebt" onclick="comDel('${rep.reply_no}')"
 						style="border: none; color: lightgray; background: none">삭제</button>
-			</c:if>
+						</c:if>
+					</c:if>
+					<c:if test="${rep.blockRep == true }">
+					<br>
+					<p align="center"><b class="text-secondary">[조회할 수 없는 댓글입니다]</b></p>
+					</c:if>
 				</c:if>
 			<c:if test="${rep.del == 'y'}">
 				${rep.member.m_nickname}, @${rep.writer}<br>
@@ -304,6 +310,7 @@
 				<div class="col" 
 					style="background: #3c3c3c; color: lightgray; border-radius: 10px; margin-right: 10px;" >	<!-- 대댓글 Form -->
 			<c:if test="${rep.del == 'n'}">
+				<c:if test="${rep.blockRep == false }">
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre><b>${rep.member.target_nn}</b>&nbsp;${rep.content}</pre>
 					<c:choose>
@@ -329,11 +336,16 @@
 					&nbsp;&nbsp;
 					<button id="commentbt" onclick="comIns('${rep.reply_no}')"
 						style="border: none; color: lightgray; background: none">답글 쓰기</button>
-				<c:if test="${rep.writer == my_id }">
+					<c:if test="${rep.writer == my_id }">
 					<button id="deletebt" onclick="comDel('${rep.reply_no}')"
 						style="border: none; color: lightgray; background: none">삭제</button>
+					</c:if>
+				</c:if>	<!-- rep.blockRep == false end -->
+				<c:if test="${rep.blockRep == true }">
+					<br>
+					<p align="center"><b class="text-secondary">[조회할 수 없는 댓글입니다]</b></p>
+				</c:if>				
 			</c:if>
-				</c:if>
 			<c:if test="${rep.del == 'y'}">
 				${rep.member.m_nickname}, @${rep.writer}<br>
 				<p align="center"><b class="text-secondary">[삭제된 댓글입니다]</b>
@@ -373,6 +385,12 @@
 			</div>	<!-- 대댓글 Form 끝-->
 		</c:if>	<!-- 대댓글 일 때(들여쓰기가 1일때) 끝 -->	
 			</c:forEach>
+			<c:if test="${more == 1 }">
+			<div class="d-grid gap-2">
+				<br>		
+	  			<button class="btn btn-outline-info btn-lg" type="button" onclick="more_read('${peanut.peanut_no}','${amt+20}')">more...</button>
+			</div>
+			</c:if>
 			<form action="${path}/home/reply.do" method="post">
 				<div class="row" style="margin: 0 5px;">
 					<div class="col"><b><c:out value="${m_nickname}"/></b></div>
@@ -500,5 +518,8 @@
 		btn.setAttribute("onclick","follow('${peanut.member.m_id}')");
 		btn.removeAttribute("onmouseover");
 		btn.removeAttribute("onmouseout");
-	}	
+	}
+	function more_read(peanut_no, amt) {
+		location.href="${path}/home/peanutDetail.do?peanut_no="+peanut_no+"&amt="+amt;
+	}
 </script>

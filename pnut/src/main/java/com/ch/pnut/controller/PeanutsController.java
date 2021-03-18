@@ -171,14 +171,16 @@ public class PeanutsController {
 
 	@RequestMapping("home/peanutDetail")
 	public String peanutDetail(Integer peanut_no, Model model,
-			HttpSession session, Integer amt) {
+			HttpSession session, Integer amt, Integer more) {
 		if (peanut_no == null) {
 			peanut_no = 0;
 		}
 		if (amt == null) {
 			amt = 20;
 		}
-
+		if (more == null) {
+			more = 0;
+		}
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
@@ -206,12 +208,24 @@ public class PeanutsController {
 
 		List<String> myFollowLt = ms.followList(m_id);
 		boolean isFollow = myFollowLt.contains(peanut.getWriter());
-		List<Replies> list = ps.replyList(peanut.getPeanut_no(), amt);
+		List<Replies> list = ps.replyList(peanut.getPeanut_no(), amt+1);
+		if (list.size() > amt) {
+			more = 1;	// amt 값보다 데이터가 더 많으면 more = 1
+			list.remove(amt.intValue());	// amt 범위 초과 피넛 리스트에서 제거
+		}
+		for(Replies rp: list) {
+			if (myBlock.contains(rp.getWriter()) || block.contains(rp.getWriter())) {
+				rp.setBlockRep(true);
+			}
+		}
+		model.addAttribute("peanut_no", peanut_no);
 		model.addAttribute("peanut", peanut);
 		model.addAttribute("m_nickname", m_nickname);
 		model.addAttribute("list", list);
 		model.addAttribute("isFollow", isFollow);
 		model.addAttribute("m_profile", m_profile);
+		model.addAttribute("amt", amt);
+		model.addAttribute("more", more);
 		return "home/peanutDetail";
 	}
 	@RequestMapping("deletePd")

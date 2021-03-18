@@ -19,7 +19,6 @@ public class Replies {
 	// 조인용
 	private Member member;
 	
-
-
+	private boolean blockRep;	//	블락하거나 블락당한 유저의 댓글인지 여부
 }
 
