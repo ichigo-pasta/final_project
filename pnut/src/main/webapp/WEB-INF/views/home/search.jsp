@@ -325,8 +325,7 @@
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		xhr.send("peanut_no="+peanut_no);
 	}
-	function setBm(peanut_no) {		
-		changeBmBtn1(peanut_no);		
+	function setBm(peanut_no) {	
 		var xhr = new XMLHttpRequest();
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {				
@@ -342,8 +341,7 @@
 		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "deleteBm('"+peanut_no+"')");
 		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: #D27D32");
 	}
-	function deleteBm(peanut_no) {		
-		changeBmBtn2(peanut_no);
+	function deleteBm(peanut_no) {
 		var xhr = new XMLHttpRequest();
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {				
@@ -354,19 +352,14 @@
 		}
 		xhr.open("get","${path}/deleteBm.do?peanut_no="+peanut_no,false);
 		xhr.send(null);				
-	}
-	function changeBmBtn2(peanut_no) {		
-		document.getElementById('bmBtn'+peanut_no).setAttribute("onclick", "setBm('"+peanut_no+"')");
-		document.getElementById('bmBtnI'+peanut_no).setAttribute("style", "color: gray");		
-	}
+	}	
 	function follow(m_id) {		
 		var xhr = new XMLHttpRequest();
 		xhr.open("get","${path}/follow.do?m_id="+m_id,true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {  	// 통신 성공
 				if (xhr.responseText == 1) {				// 팔로우 성공
-					console.log('follow success');
-					buttonChange(m_id);					
+					location.reload();		
 				} else if (xhr.responseText == -2) {		// 차단한 사용하는 팔로우 못하게
 					alert('팔로우 할 수 없는 사용자입니다');
 				} else if (xhr.responseText == -1) {		// 본인 팔로우를 못하게
@@ -380,28 +373,15 @@
 		}
 		xhr.send(null);
 	}
-	function buttonChange(m_id) {
-		var btn = document.getElementById('followbt'+m_id);		
-		btn.setAttribute("onclick","unfollow('"+m_id+"')");
-		btn.setAttribute("onmouseover","this.innerText='언팔로우'");
-		btn.setAttribute("onmouseout","this.innerText='팔로우 중'");
-	}
-	function unfollow(m_id) {
-		buttonChange2(m_id);
+	
+	function unfollow(m_id) {		
 		var xhr = new XMLHttpRequest();
 		xhr.open("get","${path}/unfollow.do?m_id="+m_id,true);
 		xhr.onload = function() {
 			if (xhr.status == 200 || xhr.status == 201) {
-				console.log('success');
+				location.reload();
 			} else {alert('요청오류: '+xhr.status);}
 		}
 		xhr.send(null);
-	}
-	function buttonChange2(m_id) {
-		var btn = document.getElementById('followbt'+m_id);
-		btn.innerText = '팔로우';
-		btn.setAttribute("onclick","follow('"+m_id+"')");
-		btn.removeAttribute("onmouseover");
-		btn.removeAttribute("onmouseout");
 	}	
 </script>
