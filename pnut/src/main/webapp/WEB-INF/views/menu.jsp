@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div>
-			<div id="account_info">
+			<div>
 				<div class="col" style="color: black"><b>${m_nickname}</b></div>
 				<div class="col" style="color: black">
 					<small>
