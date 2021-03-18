@@ -82,7 +82,7 @@
 						</div>			<!-- 리넛 여부에 따른 닉네임, 아이디, 작성일 표시줄  끝 -->
  					</div>
 					<div class="row">	<!-- 내용 -->
-						<div class="col content_col" id="content${pn.peanut_no }" style="min-height: 5vw; cursor: pointer">
+						<div class="col content_col" id="content${pn.peanut_no }">
 							<pre id="contpre${pn.peanut_no }">${pn.content}</pre>
 						</div>
 					</div>
