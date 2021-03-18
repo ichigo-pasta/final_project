@@ -52,7 +52,16 @@
 		<div>
 			<div>
 				<div class="col" style="color: black"><b>${m_nickname}</b></div>
-				<div class="col" style="color: black">@${m_id}</div>
+				<div class="col" style="color: black">
+					<small>
+						<c:if test="${fn:length(m_id) gt 14 }">
+							<c:out value="@${fn:substring(m_id, 0, 12) }..." />	
+						</c:if>
+						<c:if test="${fn:length(m_id) lt 15 }">
+							<c:out value="${m_id }"/>
+						</c:if>
+					</small>
+				</div>
 			</div>
 		</div>
 	</div>

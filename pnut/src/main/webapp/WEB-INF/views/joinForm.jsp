@@ -6,6 +6,7 @@
 <meta charset="UTF-8"><%@ include file="header.jsp" %><%@ include file="header2.jsp" %>
 <title>P-Nut</title>
 <script type="text/javascript">
+	var id_pw_regexp = /^[a-zA-Z0-9]{5,20}$/;	// 영문/숫자 5~20자리 가능한 정규식
 	function chk() {
 		if (form.m_pw.value != form.m_pwConfirm.value) {
 			alert("비밀번호와 비밀번호 확인이 다릅니다.");
@@ -17,6 +18,10 @@
 	function idChk() {
 		if (!form.m_id.value) {
 			alert("아이디를 입력하고 중복체크 하세요");
+			form.m_id.focus();
+			return false;
+		} else if(!id_pw_regexp.test(form.m_id.value)) {
+			alert("영문/숫자만으로 5~20자로 만들어주세요");
 			form.m_id.focus();
 			return false;
 		}
@@ -37,21 +42,21 @@
 <!-- 아이디 체크 -->
 	<tr>
 		<td style="color: #D27D32">아이디</td>
-		<td><input type="text" name="m_id" 
-			required="required" autofocus="autofocus">
+		<td><input type="text" name="m_id" required="required" autofocus="autofocus"
+				pattern="^([a-zA-Z0-9]){5,20}$" placeholder="영문/숫자 5~20자" title="영문/숫자 5~20자">
 			<input type="button" onclick="idChk()"
 				class="btn btn-info btn-sm" value="중복체크"
-				style="background: #D27D32">
+				style="background: #D27D32;">
 			<div id="disp" class="err"></div></td>
 	</tr>
 <!-- 비밀번호, 비밀번호 확인 체크 -->	
 	<tr>
 		<td style="color: #D27D32">비밀번호</td>
-		<td><input type="password" name="m_pw" required="required"></td>
+		<td><input type="password" name="m_pw" required="required" pattern="^([a-zA-Z0-9]){5,20}$" placeholder="영문/숫자 5~20자" title="영문/숫자 5~20자"></td>
 	</tr>
 	<tr>
 		<td style="color: #D27D32">비밀번호 확인</td>
-		<td><input type="password" name="m_pwConfirm" required="required"></td>	
+		<td><input type="password" name="m_pwConfirm" required="required" pattern="^([a-zA-Z0-9]){5,20}$"></td>	
 	</tr>
 	<tr>
 		<td style="color: #D27D32">이름</td>
@@ -67,7 +72,8 @@
 	</tr>
 	<tr>	
 		<td style="color: #D27D32">전화번호</td>
-		<td><input type="tel" name="m_tel" required="required"></td>
+		<td><input type="tel" name="m_tel" required="required" placeholder="00*-000*-0000"
+			pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" title="00*-000*-0000"></td>
 	</tr>
 	<tr>	
 		<td colspan="2" align="center"><input type="submit" value="가입" style="background: #D27D32;"></td>
