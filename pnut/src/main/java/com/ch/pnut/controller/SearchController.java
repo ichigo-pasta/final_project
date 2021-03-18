@@ -23,10 +23,9 @@ public class SearchController {
 	private PeanutsService ps;	
 	@RequestMapping("home/search")
 	public String search(String type, String keyword, Integer amt
-			, Integer more, Integer search_scroll, Model model, HttpSession session) {
+			, Integer more, Model model, HttpSession session) {
 		if(amt == null) amt = 20;
-		if(more == null) more = 0;
-		if(search_scroll == null) search_scroll = 0;
+		if(more == null) more = 0;		
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
@@ -76,8 +75,7 @@ public class SearchController {
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("amt", amt);
-		model.addAttribute("more", more);
-		model.addAttribute("search_scroll", search_scroll);
+		model.addAttribute("more", more);		
 		return "home/search";
 	}
 }
