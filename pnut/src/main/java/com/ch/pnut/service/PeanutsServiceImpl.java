@@ -132,8 +132,10 @@ public class PeanutsServiceImpl implements PeanutsService {
 	public List<Peanuts> selectProfilePn(String m_id, Integer amt, String type) {
 		return pd.selectProfilePn(m_id, amt, type);
 	}
-	@Override
 	public Integer repsPno(int reply_no) {
 		return pd.repsPno(reply_no);
+	}
+	public int deleteReply(Integer reply_no, String m_id) {
+		return pd.deleteReply(reply_no, m_id);
 	}
 }

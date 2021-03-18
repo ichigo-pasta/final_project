@@ -217,15 +217,13 @@
 			<c:forEach items="${list}" var="rep">
 		<c:if test="${rep.ref_level == 0}"> <!-- 댓글일 때(들여쓰기가 0일때) -->
 			<div class="row rep_row">	<!-- 댓글 Form -->
-				<c:if test="${rep.del = 'y'}">
-					삭제된 글입니다.
-				</c:if>
 				<div class="col col-2 align-self-center" style="width: 100px;">
 					<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
 						width="80" height="80" onclick="profile('${rep.writer}')"
 						align="right" class="profile_pic">
 				</div>
 				<div class="col" style="background: #3c3c3c; color: lightgray; border-radius: 10px; margin: 0 10px 0 0 ;" >
+				<c:if test="${rep.del == 'n'}">
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre>${rep.content}</pre>
 					<c:choose>
@@ -252,9 +250,14 @@
 					<button id="commentbt" onclick="comIns('${rep.reply_no}')" 
 						style="border: none; color: lightgray; background: none" >답글 쓰기</button>
 				<c:if test="${rep.writer == my_id }">
-					<button id="deletebt" onclick="comDel()"
+					<button id="deletebt" onclick="comDel('${rep.reply_no}')"
 						style="border: none; color: lightgray; background: none">삭제</button>
+			</c:if>
 				</c:if>
+			<c:if test="${rep.del == 'y'}">
+				${rep.member.m_nickname}, @${rep.writer}<br>
+				<p align="center"><b class="text-secondary">[삭제된 댓글입니다]</b>
+			</c:if>
 				</div>	<!-- 댓글 Form 끝 -->
 				<!-- 댓글에 대한 답글(대댓글) 작성 Form -->
 				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
@@ -300,6 +303,7 @@
 				</div>
 				<div class="col" 
 					style="background: #3c3c3c; color: lightgray; border-radius: 10px; margin-right: 10px;" >	<!-- 대댓글 Form -->
+			<c:if test="${rep.del == 'n'}">
 					${rep.member.m_nickname}, @${rep.writer}<br>
 					<pre><b>${rep.member.target_nn}</b>&nbsp;${rep.content}</pre>
 					<c:choose>
@@ -328,7 +332,12 @@
 				<c:if test="${rep.writer == my_id }">
 					<button id="deletebt" onclick="comDel('${rep.reply_no}')"
 						style="border: none; color: lightgray; background: none">삭제</button>
+			</c:if>
 				</c:if>
+			<c:if test="${rep.del == 'y'}">
+				${rep.member.m_nickname}, @${rep.writer}<br>
+				<p align="center"><b class="text-secondary">[삭제된 댓글입니다]</b>
+			</c:if>
 				</div>	<!-- 대댓글 Form 끝 -->			
 						
 				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">	<!-- 대댓글 쓰기 -->
@@ -401,7 +410,25 @@
 		$("#cont"+reply_no).focus();
 	}
 	function comDel(reply_no) {
-		
+		var comD = confirm('댓글을 삭제하시겠습니까?');
+		if(comD) replyDel(reply_no);
+		else return false;
+	}
+	function replyDel(reply_no) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","${path}/replyDel.do?reply_no="+reply_no,true);
+		xhr.onload = function() {
+			if (xhr.status == 200 || xhr.status == 201) {  	// 통신 성공
+				if (xhr.responseText == 1) {				// 댓글 제거 성공
+					location.reload();						// 리로드 
+				} else {
+					alert('잘못된 접근입니다.');				// 댓글 제거 실페
+				}				
+			} else {
+				alert('요청오류: '+xhr.status);
+			}
+		}
+		xhr.send(null);
 	}
 	// 댓글, 리넛, 북마크 자바스크립트
 	function profile(m_id) {
