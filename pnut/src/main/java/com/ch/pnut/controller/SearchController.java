@@ -63,7 +63,11 @@ public class SearchController {
 			break;
 		case "user":
 			List<Member> list2 = new ArrayList<>();
-			if (arrayLen > 0) list2 = ms.search(arrayKw, amt);
+			if (arrayLen > 0) list2 = ms.search(arrayKw, amt+1);
+			if (list2.size() > amt) {
+				more = 1;
+				list2.remove(amt.intValue());
+			}
 			for (Member mem : list2) {
 				mem.setFollowMe(myFollowLt.contains(mem.getM_id()));
 				mem.setM_intro(ps.setHashtag(mem.getM_intro(),"user")); // 자기소개 해시태그 
