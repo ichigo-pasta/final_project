@@ -53,21 +53,17 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-							<div class="col">
-								<c:if test="${pn.member.m_id == my_id}">
-									<a href="${path}/home/profileUpdateForm.do?m_id=${pn.member.m_id }"
-										class="btn btn-outline-info">프로필 수정</a>
-								</c:if>
-								<c:if test="${pn.member.m_id != my_id}">
+							<div class="col" align="right">								
+								<c:if test="${pn.writer != my_id}">
 									<c:if test="${pn.followPn == true }">
-										<button id="followbt${pn.member.m_id}" onclick="unfollow('${pn.member.m_id}')"
+										<button id="followbt${pn.writer}" onclick="unfollow('${pn.writer}')"
 											onmouseover="this.innerText='언팔로우'"
 											onmouseout="this.innerText='팔로우 중'"
-											class="btn btn-outline-info">팔로우 중</button>
+											class="btn btn-outline-info" style="width: 96px">팔로우 중</button>
 									</c:if>
 									<c:if test="${pn.followPn == false }">
-										<button id="followbt${pn.member.m_id}" onclick="follow('${pn.member.m_id}')"
-											class="btn btn-outline-info">팔로우</button>
+										<button id="followbt${pn.writer}" onclick="follow('${pn.writer}')"
+											class="btn btn-outline-info" style="width: 96px">팔로우</button>
 									</c:if>
 								</c:if>
 							</div>
@@ -253,8 +249,7 @@
 <input type="hidden" value="${keyword}" id="keyword">
 <input type="hidden" value="${type}" id="type"> 
 <script type="text/javascript">
-	window.onpageshow = function() {
-		document.body.scrollTop = ${search_scroll};
+	window.onpageshow = function() {		
 		document.getElementById("kw").value = document.getElementById("keyword").value;
 		if (document.getElementById("type").value == "peanut") {
 			document.getElementById("peanut").setAttribute("class","nav-link active");

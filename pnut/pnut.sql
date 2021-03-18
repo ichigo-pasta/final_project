@@ -203,6 +203,20 @@ begin
 end;
 /
 
+create or replace trigger member_del_trig
+    before update on pn_member
+    for each row
+begin
+    if :new.m_del = 'y' then
+        update pn_peanuts set del = 'y' where writer = :new.m_id or renut in (select peanut_no from pn_peanuts where writer = :new.m_id);
+        delete pn_follow where active = :new.m_id or passive = :new.m_id;
+        delete pn_bookmark where bm_user = :new.m_id;
+        delete pn_block where active = :new.m_id or passive = :new.m_id;
+        update pn_replies set del = 'y' where writer = :new.m_id;
+    end if;
+end;
+/
+
 
 select * from pn_member;
 select * from pn_member where m_id='k2';
