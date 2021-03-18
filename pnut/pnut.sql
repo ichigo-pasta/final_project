@@ -241,3 +241,50 @@ insert into pn_block values ('k1', 'k2');
 insert into pn_block values ('k2', 'k1');
 insert into pn_block values ('k1', 'k3');
 insert into pn_block values ('k1', 'k4');
+
+insert into pn_follow values ('k2', 'k1');
+insert into pn_follow values ('k3', 'k1');
+insert into pn_follow values ('k4', 'k1');
+insert into pn_follow values ('k5', 'k1');
+insert into pn_follow values ('k6', 'k1');
+insert into pn_follow values ('k7', 'k1');
+insert into pn_follow values ('k8', 'k1');
+insert into pn_follow values ('k9', 'k1');
+insert into pn_follow values ('k10', 'k1');
+insert into pn_follow values ('k11', 'k1');
+insert into pn_follow values ('k12', 'k1');
+insert into pn_follow values ('k13', 'k1');
+insert into pn_follow values ('k14', 'k1');
+insert into pn_follow values ('k15', 'k1');
+insert into pn_follow values ('k16', 'k1');
+insert into pn_follow values ('k17', 'k1');
+insert into pn_follow values ('k18', 'k1');
+insert into pn_follow values ('k19', 'k1');
+insert into pn_follow values ('k20', 'k1');
+insert into pn_follow values ('k21', 'k1');
+insert into pn_follow values ('k22', 'k1');
+
+
+
+insert into pn_member values ('k7', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k8', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k9', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k10', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k11', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k12', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k13', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k14', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k15', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k16', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k17', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k18', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k20', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k19', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k21', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k22', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k23', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k24', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k25', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k26', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
+insert into pn_member values ('k27', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PnutLogo.png','gray.png');
+

@@ -176,22 +176,27 @@ public class MemberController {
 	}
 
 	@RequestMapping("home/followingList") 
-	public String followingList(Model model, 
-			HttpSession session, Integer amt) {
+	public String followingList(Model model, Integer more,
+			HttpSession session, Integer amt, String m_id) {
 		if(amt == null) {
 			amt = 20;
 		}
+		if (more == null) more = 0;
 		Member member = ms.select((String) session.getAttribute("m_id"));
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
 		//
 		String my_id = (String)session.getAttribute("m_id");  // 접속 ID
-		List<String> myFollowList = ms.followList(my_id); // 내가 팔로우한 아이디 리스트
-		List<String> followList = ms.followerList(my_id); // 나를 팔로우한 아이디 리스트 
+		List<String> myFollowList = ms.followList(m_id); 	// 조회 대상이 팔로우중인 아이디 리스트
+		List<String> followList = ms.followerList(my_id); 	// 나를 팔로우한 아이디 리스트 
 		
 		List<Member> list = new ArrayList<>(); 
 		// 내가 팔로우한 멤버 리스트
-		if (myFollowList.size() > 0) list = ms.followingList(myFollowList, amt); 
+		if (myFollowList.size() > 0) list = ms.followingList(myFollowList, amt+1); 
+		if (list.size() > amt) {
+			more = 1;	// amt 값보다 데이터가 더 많으면 more = 1
+			list.remove(amt.intValue());	// amt 범위 초과 피넛 리스트에서 제거
+		}
 		for (Member mem : list) {
 			mem.setM_intro(ps.setHashtag(mem.getM_intro(),"user")); // 자기소개 해시태그
 			if (followList.size() > 0) {
@@ -200,6 +205,9 @@ public class MemberController {
 				}
 			}
 		}
+		model.addAttribute("m_id", m_id);
+		model.addAttribute("more", more);
+		model.addAttribute("amt", amt);
 		model.addAttribute("list", list);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);
@@ -208,10 +216,11 @@ public class MemberController {
 
 	@RequestMapping("home/followerList") 
 	public String followerList(String m_id, Model model, 
-			HttpSession session, Integer amt) { 
+			HttpSession session, Integer amt, Integer more) { 
 		if(amt == null) {
 			amt = 20;
 		}
+		if (more == null) more = 0;
 		String my_id = (String) session.getAttribute("m_id");
 		Member member = ms.select(my_id);
 		String m_profile = member.getM_profile();
@@ -219,12 +228,19 @@ public class MemberController {
 		List<String> followerList = ms.followerList(m_id);	// 조회중인 아이디의 팔로워 리스트
 		List<Member> list = new ArrayList<>();
 		List<String> myFollowList = ms.followList(my_id);	// 내 팔로잉 리스트
-		if (followerList.size() > 0) list = ms.followedList(followerList, amt);
+		if (followerList.size() > 0) list = ms.followedList(followerList, amt+1);
+		if (list.size() > amt) {
+			more = 1;	// amt 값보다 데이터가 더 많으면 more = 1
+			list.remove(amt.intValue());	// amt 범위 초과 피넛 리스트에서 제거
+		}
 		for (Member mem : list) {
 			mem.setM_intro(ps.setHashtag(mem.getM_intro(),"user")); // 자기소개 해시태그
 			if (myFollowList.contains(mem.getM_id())) mem.setFollowByMe(true);
 		}
+		model.addAttribute("more", more);
+		model.addAttribute("amt", amt);
 		model.addAttribute("list", list);
+		model.addAttribute("m_id", m_id);
 		model.addAttribute("m_profile", m_profile);
 		model.addAttribute("m_nickname", m_nickname);
 		return "home/followerList"; 
