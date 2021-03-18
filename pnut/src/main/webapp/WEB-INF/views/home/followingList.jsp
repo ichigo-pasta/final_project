@@ -28,6 +28,12 @@
 		</div>
 	</c:forEach>
 </c:if>
+<c:if test="${more == 1 }">
+	<div class="d-grid gap-2">
+		<br>		
+ 			<button class="btn btn-outline-info btn-lg" type="button" onclick="more_read('${amt+20}')">more...</button>
+	</div>
+</c:if>	
 </div>
 <script type="text/javascript">
 	var startX;
@@ -88,4 +94,7 @@
 		btn.removeAttribute("onmouseover");
 		btn.removeAttribute("onmouseout");
 	}	
+	function more_read(num) {		
+		location.href = "${path}/home/followingList.do?m_id=${m_id}&amt="+num;
+	}
 </script>
