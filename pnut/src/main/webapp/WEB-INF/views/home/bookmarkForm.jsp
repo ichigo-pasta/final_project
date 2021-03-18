@@ -42,8 +42,8 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col content_col" id="content${pn.peanut_no }" style="min-height: 5vw; cursor: pointer">
-							${pn.content}
+						<div class="col content_col" id="content${pn.peanut_no }">
+							<pre id="contpre${pn.peanut_no }">${pn.content}</pre>
 						</div>
 					</div>
 		<c:if test="${pn.picture1 != null}">					
@@ -186,7 +186,7 @@
 		cont_row.addEventListener('mouseup', function(event) {
 			var diffX = Math.abs(startX - event.pageX);
 			var diffY = Math.abs(startY - event.pageY);
-			if(diffX < judge || diffY < judge) {
+			if(diffX < judge && diffY < judge && event.button == 0) {
 				var cr_id = event.target.id.substring(7);
 				location.href="${path}/home/peanutDetail.do?peanut_no="+cr_id;
 			}				

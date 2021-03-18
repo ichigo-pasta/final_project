@@ -69,8 +69,8 @@
 							</div>
 						</div>
 					<div class="row">
-						<div class="col">
-							${pn.content}
+						<div class="col content_col" id="content${pn.peanut_no }" style="margin: 0 25px; padding: 0px;">
+							<pre id="contpre${pn.peanut_no }">${pn.content}</pre>
 						</div>
 					</div>
 			<c:if test="${pn.picture1 != null}">					
@@ -215,12 +215,12 @@
 							width="80" height="80" onclick="profile('${mem.m_id}')"
 							class="profile_pic">
 					</div>
-					<div class="col" style="margin: 0 25px; padding: 0px; border-bottom: 1px solid gray;">
-						<b><c:out value="${mem.m_nickname}"/></b> <c:out value="@${mem.m_id}"/><br>
+					<div class="col content_col" id="content${mem.m_id}" style="border-bottom: 1px solid gray; margin: 0 25px; padding: 0px;">
+						<b id="conbold${mem.m_id}"><c:out value="${mem.m_nickname}"/></b> <c:out value="@${mem.m_id}"/><br>
 					<c:if test="${mem.followMe == true}">
 						나를 팔로우중입니다	
 					</c:if><br>
-						<pre>${mem.m_intro }</pre>
+						<pre id="contpre${mem.m_id}">${mem.m_intro }</pre>
 					</div>
 					<div class="col col-1 align-self-center" style="width: 120px">						
 						<c:if test="${mem.m_id != my_id}">
@@ -251,6 +251,29 @@
 <input type="hidden" value="${keyword}" id="keyword">
 <input type="hidden" value="${type}" id="type"> 
 <script type="text/javascript">
+	var startX;
+	var startY;
+	const judge = 5;
+	var cont_rows = document.getElementsByClassName('content_col');
+	for(var cont_row of cont_rows) {
+		cont_row.addEventListener('mousedown', function(event) {				
+			startX = event.pageX;
+			startY = event.pageY;
+		});			
+		cont_row.addEventListener('mouseup', function(event) {
+			var diffX = Math.abs(startX - event.pageX);
+			var diffY = Math.abs(startY - event.pageY);
+			if(diffX < judge && diffY < judge && event.button == 0) {
+				var cr_id = event.target.id.substring(7);
+				if (document.getElementById('type').value == 'user') {
+					location.href="${path}/home/profileForm.do?m_id="+cr_id;
+				} else {
+					location.href="${path}/home/peanutDetail.do?peanut_no="+cr_id;					
+				}
+			}				
+		});
+	}
+	
 	window.onpageshow = function() {		
 		document.getElementById("kw").value = document.getElementById("keyword").value;
 		if (document.getElementById("type").value == "peanut") {
