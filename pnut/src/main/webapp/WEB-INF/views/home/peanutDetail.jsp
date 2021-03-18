@@ -217,6 +217,9 @@
 			<c:forEach items="${list}" var="rep">
 		<c:if test="${rep.ref_level == 0}"> <!-- 댓글일 때(들여쓰기가 0일때) -->
 			<div class="row rep_row">	<!-- 댓글 Form -->
+				<c:if test="${rep.del = 'y'}">
+					삭제된 글입니다.
+				</c:if>
 				<div class="col col-2 align-self-center" style="width: 100px;">
 					<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
 						width="80" height="80" onclick="profile('${rep.writer}')"
@@ -248,8 +251,12 @@
 					&nbsp;&nbsp;
 					<button id="commentbt" onclick="comIns('${rep.reply_no}')" 
 						style="border: none; color: lightgray; background: none" >답글 쓰기</button>
+				<c:if test="${rep.writer == my_id }">
+					<button id="deletebt" onclick="comDel()"
+						style="border: none; color: lightgray; background: none">삭제</button>
+				</c:if>
 				</div>	<!-- 댓글 Form 끝 -->
-				<!-- 댓글에 대한 답글(대댓글) 쓰기 -->
+				<!-- 댓글에 대한 답글(대댓글) 작성 Form -->
 				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">
 					<div style="width: 100px"></div>
 					<div class="col">
@@ -279,11 +286,11 @@
 						<input type="hidden" value="${my_id }" name="writer">
 					</form>
 					</div>
-				</div> <!-- 댓글에 대한 답글(대댓글) 쓰기 끝 -->
+				</div> <!-- 댓글에 대한 답글(대댓글) 작성 Form 끝 -->
 			</div>
 		</c:if>		<!-- 댓글일 때(들여쓰기가 0일때)끝 -->
 		<c:if test="${rep.ref_level == 1}">	<!-- 대댓글 일 때(들여쓰기가 1일때) -->
-			<div class="row rep_row">						
+			<div class="row rep_row">	<!-- 대댓글 Form -->					
 				<div class="align-self-center" style="width: 150px">					
 					<div class="col">
 						<img alt="" src="${path}/resources/images/${rep.member.m_profile}"
@@ -318,6 +325,10 @@
 					&nbsp;&nbsp;
 					<button id="commentbt" onclick="comIns('${rep.reply_no}')"
 						style="border: none; color: lightgray; background: none">답글 쓰기</button>
+				<c:if test="${rep.writer == my_id }">
+					<button id="deletebt" onclick="comDel('${rep.reply_no}')"
+						style="border: none; color: lightgray; background: none">삭제</button>
+				</c:if>
 				</div>	<!-- 대댓글 Form 끝 -->			
 						
 				<div class="row recome" id="comIns${rep.reply_no}" style="display: none">	<!-- 대댓글 쓰기 -->
@@ -350,7 +361,7 @@
 					</form>
 					</div>
 				</div>
-			</div>
+			</div>	<!-- 대댓글 Form 끝-->
 		</c:if>	<!-- 대댓글 일 때(들여쓰기가 1일때) 끝 -->	
 			</c:forEach>
 			<form action="${path}/home/reply.do" method="post">
@@ -388,6 +399,9 @@
 		$(".recome").hide();
 		$("#comIns"+reply_no).show();
 		$("#cont"+reply_no).focus();
+	}
+	function comDel(reply_no) {
+		
 	}
 	// 댓글, 리넛, 북마크 자바스크립트
 	function profile(m_id) {
