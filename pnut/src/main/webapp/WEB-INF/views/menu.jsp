@@ -101,6 +101,14 @@
 			btnReset();
 			document.getElementById('profileBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
 		}
+		else if (currentPage.startsWith('followingList.do')) {
+			btnReset();
+			document.getElementById('profileBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
+		}
+		else if (currentPage.startsWith('followerList.do')) {
+			btnReset();
+			document.getElementById('profileBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
+		}
 		else if (currentPage.startsWith('writeForm.do')) {
 			btnReset();
 			document.getElementById('writeFormBt').setAttribute('class','btn btn-dark btn-outline-light menuBt');
