@@ -19,31 +19,31 @@
 					class="btn btn-outline-info">프로필 수정</a>
 			</c:if>
 			<c:if test="${member.m_id != my_id}"> <!-- 다른 사람 프로필에서는 팔로우 언팔로우 -->
-				<c:if test="${isFollow == true }">
+				<c:if test="${isFollow == true }">	<!-- 내가 다른 계정을 팔로우할 때 -->
 					<button id="followbt" onclick="unfollow('${member.m_id}')" 
 						onmouseover="this.innerText='언팔로우'" 
 						onmouseout="this.innerText='팔로우 중'"
 						class="btn btn-outline-info">팔로우 중</button>
 					<button id="blockbt" onclick="block('${member.m_id}')"						
-						class="btn btn-outline-info">차단하기</button>
+						class="btn btn-outline-danger">차단하기</button>
 				</c:if>
-				<c:if test="${isFollow == false }">
-					<c:if test="${member.blockByMe == true }">
+				<c:if test="${isFollow == false }">	<!-- 내가 다른 계정을 팔로우하지 않을 때 -->
+					<c:if test="${member.blockByMe == true }">		<!-- 내가 다른 사람을 팔로우하지 않고 그 사람을 차단했을 때 -->
 					<button id="blockbt" onclick="unblock('${member.m_id}')"						
-						class="btn btn-outline-info"
+						class="btn btn-outline-danger"
 						onmouseover="this.innerText='차단 해제'" 
 						onmouseout="this.innerText='차단됨'">차단 해제</button>
 					</c:if>
-					<c:if test="${member.blockByMe == false }">
-						<c:if test="${member.blockMe == true }">
+					<c:if test="${member.blockByMe == false }"> 	<!-- 내가 다른 사람을 팔로우하지 않고 그 사람을 차단하지 않았을 때 -->
+						<c:if test="${member.blockMe == true }">	<!-- 내가 다른 사람을 팔로우와 차단하지 않았고 그 사람이 나를 차단했을 때 -->	
 					<button id="blockbt" onclick="block('${member.m_id}')"						
-						class="btn btn-outline-info">차단하기</button>	
+						class="btn btn-outline-danger">차단하기</button>	
 						</c:if>
-						<c:if test="${member.blockMe == false }">
+						<c:if test="${member.blockMe == false }">	<!-- 내가 다른 사람을 팔로우와 차단하지 않았고 그 사람이 나를 차단하지 않았을 때 -->
 					<button id="followbt" onclick="follow('${member.m_id}')"						
 						class="btn btn-outline-info">팔로우</button>
 					<button id="blockbt" onclick="block('${member.m_id}')"						
-						class="btn btn-outline-info">차단하기</button>	
+						class="btn btn-outline-danger">차단하기</button>	
 						</c:if>
 					</c:if>
 				</c:if>
