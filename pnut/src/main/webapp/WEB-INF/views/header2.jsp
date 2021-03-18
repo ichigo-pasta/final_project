@@ -109,5 +109,5 @@
 	.content_col {
 		min-height: 5vw;
 		cursor: pointer
-	}
+	}	
 </style>
