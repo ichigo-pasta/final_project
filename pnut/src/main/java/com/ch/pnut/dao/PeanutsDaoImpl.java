@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.metadata.Db2CallMetaDataProvider;
 import org.springframework.stereotype.Repository;
 
 import com.ch.pnut.model.Peanuts;
@@ -109,8 +110,13 @@ public class PeanutsDaoImpl implements PeanutsDao {
 		map.put("type", type);
 		return sst.selectList("peanutsns.selectProfilePn",map);
 	}
-	@Override
 	public Integer repsPno(int reply_no) {
 		return sst.selectOne("repliesns.repsPno", reply_no);
+	}
+	public int deleteReply(Integer reply_no, String m_id) {
+		Map<String, Object> map  = new HashMap<>();
+		map.put("reply_no", reply_no);
+		map.put("m_id", m_id);
+		return sst.update("repliesns.deleteReply", map);
 	}
 }

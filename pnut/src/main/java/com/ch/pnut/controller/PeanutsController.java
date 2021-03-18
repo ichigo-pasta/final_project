@@ -228,9 +228,13 @@ public class PeanutsController {
 		model.addAttribute("peanut_no", reply.getPeanut_no());
 		return "home/reply";
 	}
-	@RequestMapping("home/replyDel")
-	public String replyDel() {
-		return "home/replyDel";
+	@RequestMapping("replyDel")
+	@ResponseBody
+	public int replyDel(Integer reply_no, HttpSession session) {
+		if (reply_no == null) reply_no = 0;
+		String m_id =  (String)session.getAttribute("m_id");
+		int result = ps.deleteReply(reply_no, m_id);
+		return result;
 	}
 	@RequestMapping("home/comment")
 	public String comment(Replies reply, Model model, HttpServletRequest request) {
@@ -240,10 +244,6 @@ public class PeanutsController {
 		model.addAttribute("reply_no", reply.getReply_no());
 		model.addAttribute("peanut_no", reply.getPeanut_no());
 		return "home/comment";
-	}
-	@RequestMapping("home/commentDel")
-	public String commentDel() {
-		return "home/commentDel";
 	}
 	@RequestMapping("home/bookmarkForm")
 	public String bookmarkForm(Integer amt, Model model, 

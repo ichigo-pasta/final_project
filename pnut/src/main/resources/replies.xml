@@ -56,4 +56,7 @@
 	<select id="repsPno" parameterType="int" resultType="integer">
 		select peanut_no from pn_replies where reply_no = #{reply_no}
 	</select>
+	<update id="deleteReply" parameterType="hashmap">
+		update pn_replies set del = 'y' where reply_no = #{reply_no} and writer = #{m_id}
+	</update>
 </mapper>
