@@ -1,13 +1,11 @@
 -- 테이블 삭제
 DROP table pn_member CASCADE CONSTRAINTS;
-DROP table pn_master CASCADE CONSTRAINTS;
 DROP table pn_peanuts CASCADE CONSTRAINTS;
 DROP table pn_replies CASCADE CONSTRAINTS;
 DROP table pn_follow CASCADE CONSTRAINTS;
 DROP table pn_block CASCADE CONSTRAINTS;
 DROP table pn_bookmark CASCADE CONSTRAINTS;
 DROP table pn_notice CASCADE CONSTRAINTS;
-DROP table pn_message CASCADE CONSTRAINTS;
 
 -- 회원 테이블 생성
 create table pn_member (
@@ -22,12 +20,6 @@ create table pn_member (
 	m_del		char(1)			not null,		-- 탈퇴여부
 	m_profile   varchar2(200),					-- 사진 파일명 uuid로 길게 생성, 파일명만 데이터베이스에 넣기
 	m_bg 		varchar2(200)    				-- 배경사진 파일명
-);
-
--- 관리자 테이블 생성
-create table pn_master (
-	mas_id	varchar2(20)	primary key,		-- 관리자 ID(pk)	
-	mas_pw	varchar2(20)	not null			-- 관리자 비밀번호
 );
 
 -- 게시글 테이블 생성
@@ -106,31 +98,27 @@ create table pn_notice (
 );
 	
 
--- 쪽지 테이블 생성
-create table pn_message (
-	message_no	number			primary key,	-- 쪽지 번호(pk)
-	sender		varchar2(20)	not null,		-- 보내는 사람(fk)
-	receiver	varchar2(20)	not null,		-- 받는 사람(fk)
-	content		varchar2(600)	not null,		-- 내용
-	ip			varchar2(20)	not null,		-- ip
-	reg_date	date			not null,		-- 받은 시간
-	checked		char(1)			not null,		-- 확인 여부
-	del			char(1)			not null,		-- 삭제 여부
-	foreign key (sender) references pn_member(m_id),
-	foreign key (receiver) references pn_member(m_id)
-);
 
 -- 시퀀스 생성
+
+	-- 피넛 넘버 시퀀스
 drop SEQUENCE peanut_no_seq;
 create SEQUENCE peanut_no_seq;
 
+	-- 댓글 넘버 시퀀스
 drop SEQUENCE reply_no_seq;
 create SEQUENCE reply_no_seq;
 
+	-- 알림 넘버 시퀀스
 drop SEQUENCE notice_no_seq;
 create SEQUENCE notice_no_seq;
 
+
+
 -- 트리거 생성
+
+	-- 차단 등록 시 작동할 기능 트리거
+	-- 차단 시 상호 팔로우 해제, 상호 리넛 해제, 상호 북마크 해제, 상호 알림 삭제
 create or replace trigger block_trig
     before insert on pn_block
     for each row
@@ -144,6 +132,10 @@ begin
 end;
 /
 
+	-- 리넛 등록 시 작동할 트리거
+	-- 피넛이 등록됐을때, 그것이 리넛이었을 경우 작동
+	-- 리넛일 경우 원본 피넛 작성자를 조회해 원본 작성자에게 리넛알림 보냄
+	-- 자기 자신의 피넛을 리넛한 경우엔 작동하지 않음
 create or replace trigger renut_trig
     before insert on pn_peanuts
     for each row
@@ -159,6 +151,9 @@ begin
 end;
 /
 
+	-- 리넛 취소 시 작동할 트리거
+	-- 피넛 수정기능이 없기때문에 pn_peanuts 테이블에서 update 쿼리가 실행되는 경우는 피넛삭제 or 리넛취소 뿐
+	-- 삭제처리하는 피넛이 리넛인 경우에 이 트리거가 발동해 해당 리넛으로 인한 알림이 미독상태인 경우 삭제
 create or replace trigger cancel_rn_trig
     after update on pn_peanuts
     for each row
@@ -169,6 +164,8 @@ begin
 end;
 /
 
+	-- 팔로우 시 작동할 트리거
+	-- 팔로우 당한 사람에게 알림 추가	
 create or replace trigger follow_trig
     after insert on pn_follow
     for each row
@@ -177,6 +174,8 @@ begin
 end;
 /
 
+	-- 언팔로우 시 작동할 트리거
+	-- 언팔로우 당한 사람이 아직 팔로우 알림을 읽지 않은 경우 알림 삭제
 create or replace trigger unfollow_trig
     after delete on pn_follow
     for each row
@@ -185,6 +184,9 @@ begin
 end;
 /
 
+	-- 댓글 등록 시 작동할 트리거
+	-- 자신에게 쓴 댓글에선 작동하지 않음
+	-- 댓글의 대상에게 알림 추가
 create or replace trigger reply_trig
     after insert on pn_replies
     for each row
@@ -195,6 +197,9 @@ begin
 end;
 /
 
+	-- 댓글 삭제 시 작동할 트리거
+	-- pn_replies 에서 update가 작동하는 경우는 삭제 뿐
+	-- 해당 댓글의 알림을 상대가 아직 읽지 않은 경우 알림 삭제
 create or replace trigger del_reply_trig
     after update on pn_replies
     for each row
@@ -203,6 +208,11 @@ begin
 end;
 /
 
+	-- 회원탈퇴시 작동할 트리거
+	-- 작성한 모든 피넛 삭제처리
+	-- 자신의 피넛을 리넛한 게시물도 전부 삭제처리
+	-- 자신에 대한 팔로우, 북마크 해제
+	-- 자신이 작성한 댓글 모두 삭제 처리
 create or replace trigger member_del_trig
     before update on pn_member
     for each row
@@ -216,75 +226,3 @@ begin
     end if;
 end;
 /
-
-
-select * from pn_member;
-select * from pn_member where m_id='k2';
-select * from pn_master;
-select * from pn_peanuts order by peanut_no desc;
-select * from pn_replies;
-select * from pn_follow;
-select * from pn_block;
-select * from pn_bookmark;
-select * from pn_notice order by notice_no desc;
-select * from pn_message;
-
-delete PN_FOLLOW;
-delete pn_bookmark;
-delete pn_block;
-delete pn_notice;
-
-insert into pn_follow values ('k1', 'k2');
-insert into pn_follow values ('k1', 'k3');
-insert into pn_member values ('k1', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n',null,null);
-insert into pn_block values ('k1', 'k2');
-insert into pn_block values ('k2', 'k1');
-insert into pn_block values ('k1', 'k3');
-insert into pn_block values ('k1', 'k4');
-
-insert into pn_follow values ('k2', 'k1');
-insert into pn_follow values ('k3', 'k1');
-insert into pn_follow values ('k4', 'k1');
-insert into pn_follow values ('k5', 'k1');
-insert into pn_follow values ('k6', 'k1');
-insert into pn_follow values ('k7', 'k1');
-insert into pn_follow values ('k8', 'k1');
-insert into pn_follow values ('k9', 'k1');
-insert into pn_follow values ('k10', 'k1');
-insert into pn_follow values ('k11', 'k1');
-insert into pn_follow values ('k12', 'k1');
-insert into pn_follow values ('k13', 'k1');
-insert into pn_follow values ('k14', 'k1');
-insert into pn_follow values ('k15', 'k1');
-insert into pn_follow values ('k16', 'k1');
-insert into pn_follow values ('k17', 'k1');
-insert into pn_follow values ('k18', 'k1');
-insert into pn_follow values ('k19', 'k1');
-insert into pn_follow values ('k20', 'k1');
-insert into pn_follow values ('k21', 'k1');
-insert into pn_follow values ('k22', 'k1');
-
-
-
-insert into pn_member values ('k7', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k8', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k9', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k10', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k11', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k12', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k13', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k14', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k15', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k16', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k17', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k18', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k20', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k19', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k21', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k22', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k23', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k24', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k25', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k26', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PNutLogo.png','gray.png');
-insert into pn_member values ('k27', '1','탁','강','k1@k.com','010-1111-1111',null,sysdate,'n','PnutLogo.png','gray.png');
-
