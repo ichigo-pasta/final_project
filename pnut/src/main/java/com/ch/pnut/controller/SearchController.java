@@ -34,7 +34,8 @@ public class SearchController {
 		List<String> block = ms.blockList(m_id);
 		List<Integer> bmList = ps.selectBm(m_id);	// 로그인 유저가 북마크한 피넛번호 리스트
 		List<Integer> renutList = ps.selectRenut(m_id);	// 로그인 유저가 리넛한 피넛번호 리스트
-		List<String> myFollowLt = ms.followList(m_id);  // 팔로우 리스트 조회
+		List<String> myFollowLt = ms.followList(m_id);  // 로그인 유저가 팔로우한 ID 리스트
+		List<String> followMe = ms.followerList(m_id);	// 로그인 유저를 팔로우한 ID 리스트
 		keyword = keyword.replaceAll(" +", " ");
 		String[] arrayKw = keyword.split(" ");
 		int arrayLen = arrayKw.length;
@@ -69,7 +70,8 @@ public class SearchController {
 				list2.remove(amt.intValue());
 			}
 			for (Member mem : list2) {
-				mem.setFollowMe(myFollowLt.contains(mem.getM_id()));
+				mem.setFollowMe(followMe.contains(mem.getM_id()));
+				mem.setFollowByMe(myFollowLt.contains(mem.getM_id()));
 				mem.setM_intro(ps.setHashtag(mem.getM_intro(),"user")); // 자기소개 해시태그 
 			}
 			model.addAttribute("list2", list2);
