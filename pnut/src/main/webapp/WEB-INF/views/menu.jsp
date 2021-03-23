@@ -58,7 +58,7 @@
 							<c:out value="@${fn:substring(m_id, 0, 12) }..." />	
 						</c:if>
 						<c:if test="${fn:length(m_id) lt 15 }">
-							<c:out value="${m_id }"/>
+							<c:out value="@${m_id }"/>
 						</c:if>
 					</small>
 				</div>
