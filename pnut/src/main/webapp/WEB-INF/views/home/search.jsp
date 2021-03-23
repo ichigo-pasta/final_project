@@ -224,13 +224,13 @@
 					</div>
 					<div class="col col-1 align-self-center" style="width: 120px">						
 						<c:if test="${mem.m_id != my_id}">
-							<c:if test="${mem.followMe == true }">
+							<c:if test="${mem.followByMe == true }">
 								<button id="followbt${mem.m_id}" onclick="unfollow('${mem.m_id}')"
 									onmouseover="this.innerText='언팔로우'"
 									onmouseout="this.innerText='팔로우 중'"
 									class="btn btn-outline-info">팔로우 중</button>
 							</c:if>
-							<c:if test="${mem.followMe == false }">
+							<c:if test="${mem.followByMe == false }">
 								<button id="followbt${mem.m_id}" onclick="follow('${mem.m_id}')"
 									class="btn btn-outline-info">팔로우</button>
 							</c:if>
