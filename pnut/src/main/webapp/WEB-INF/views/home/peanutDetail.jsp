@@ -23,6 +23,7 @@
 					<div class="row">
 						<div class="col col-11">							
 							<c:out value="${peanut.member.m_nickname} @${peanut.writer}"/>
+							<small>
 							<c:choose>
 								<c:when test="${(now - peanut.regdate.time) > (1000*60*60*24*7*4)}">
 									<fmt:formatDate value="${peanut.regdate }" pattern="yyyy년 MM월 dd일"/>
@@ -43,6 +44,7 @@
 									1분 이내
 								</c:otherwise>
 							</c:choose>
+							</small>
 						</div>
 						<div class="col col-1">
 							<div class="btn-group">

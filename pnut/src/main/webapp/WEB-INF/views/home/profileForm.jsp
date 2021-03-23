@@ -133,6 +133,7 @@
 				<c:if test="${not empty pn.renut }">
 							<c:out value="${pn.member.re_nick} @${pn.re_writer}" />
 				</c:if>
+							<small>
 							<c:choose>
 								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
 									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일" />
@@ -165,6 +166,7 @@
 									1분 이내
 								</c:otherwise>
 							</c:choose>
+							</small>
 						</div>
 						
 					</div>

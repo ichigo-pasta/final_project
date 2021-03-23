@@ -19,6 +19,7 @@
 					<div class="row">
 						<div class="col">
 							<c:out value="${pn.member.m_nickname} @${pn.writer}"/>
+							<small>
 							<c:choose>
 								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
 									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일"/>
@@ -39,6 +40,7 @@
 									1분 이내
 								</c:otherwise>
 							</c:choose>
+							</small>
 						</div>
 					</div>
 					<div class="row">

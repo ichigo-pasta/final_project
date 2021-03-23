@@ -35,6 +35,7 @@
 						<div class="col-11">	<!-- 리넛 여부에 따른 닉네임, 아이디, 작성일 표시줄 -->
 		<c:if test="${pn.renut != null}">
 							<c:out value="${pn.member.re_nick} @${pn.re_writer}"/>
+							<small>
 							<c:choose>
 								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
 									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일"/>
@@ -55,9 +56,11 @@
 									1분 이내
 								</c:otherwise>
 							</c:choose>
+							</small>
 		</c:if>
 		<c:if test="${pn.renut == null}">
 							<c:out value="${pn.member.m_nickname} @${pn.writer}"/>
+							<small>
 							<c:choose>
 								<c:when test="${(now - pn.regdate.time) > (1000*60*60*24*7*4)}">
 									<fmt:formatDate value="${pn.regdate }" pattern="yyyy년 MM월 dd일"/>
@@ -78,6 +81,7 @@
 									1분 이내
 								</c:otherwise>
 							</c:choose>
+							</small>
 		</c:if>
 						</div>			<!-- 리넛 여부에 따른 닉네임, 아이디, 작성일 표시줄  끝 -->
  					</div>
