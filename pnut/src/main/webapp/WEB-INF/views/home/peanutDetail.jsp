@@ -314,7 +314,7 @@
 			<c:if test="${rep.del == 'n'}">
 				<c:if test="${rep.blockRep == false }">
 					${rep.member.m_nickname}, @${rep.writer}<br>
-					<pre><b>${rep.member.target_nn}</b>&nbsp;${rep.content}</pre>
+					<pre><small><b>${rep.member.target_nn}</b></small>&nbsp;${rep.content}</pre>
 					<c:choose>
 						<c:when test="${(now - rep.regdate.time) > (1000*60*60*24*7*4)}">
 							<fmt:formatDate value="${rep.regdate }" pattern="yyyy년 MM월 dd일"/>
