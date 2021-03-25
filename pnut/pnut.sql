@@ -43,7 +43,7 @@ create table pn_replies (
 	reply_no	number			primary key,	-- 댓글 번호(pk)
 	peanut_no 	number 			not null,		-- 게시글 번호(fk)
 	rep_target	varchar2(20)	,				-- 댓글의 대상 id(fk) 
-	writer		varchar2(20)	not null,		-- 댓글 작성자
+	writer		varchar2(20)	not null,		-- 댓글 작성자(fk)
 	content		varchar2(600)	not null,		-- 댓글 내용
 	regdate		date			not null,		-- 작성일
 	ip			varchar2(40)	null,			-- IP
@@ -51,7 +51,8 @@ create table pn_replies (
 	ref_level	number			not null,		-- 참조레벨
 	del			char(1)			not null,		-- 삭제여부
 	foreign key (peanut_no) references pn_peanuts(peanut_no),
-	foreign key (rep_target) references pn_member(m_id)
+	foreign key (rep_target) references pn_member(m_id),
+	foreign key (writer) references pn_member(m_id)
 );
 
 -- 팔로우 테이블 생성
@@ -100,7 +101,6 @@ create table pn_notice (
 
 
 -- 시퀀스 생성
-
 	-- 피넛 넘버 시퀀스
 drop SEQUENCE peanut_no_seq;
 create SEQUENCE peanut_no_seq;
@@ -113,12 +113,9 @@ create SEQUENCE reply_no_seq;
 drop SEQUENCE notice_no_seq;
 create SEQUENCE notice_no_seq;
 
-
-
 -- 트리거 생성
-
 	-- 차단 등록 시 작동할 기능 트리거
-	-- 차단 시 상호 팔로우 해제, 상호 리넛 해제, 상호 북마크 해제, 상호 알림 삭제
+	-- 차단 시 상호 팔로우 해제, 상호 리넛, 상호 북마크 해제, 상호 알림 삭제
 create or replace trigger block_trig
     before insert on pn_block
     for each row
