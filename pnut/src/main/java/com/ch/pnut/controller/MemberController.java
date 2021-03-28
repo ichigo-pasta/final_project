@@ -187,6 +187,10 @@ public class MemberController {
 		String m_nickname = member.getM_nickname();
 		//
 		String my_id = (String)session.getAttribute("m_id");  // 접속 ID
+		List<String> blockList = ms.blockList(my_id);	// 로그인 유저를 차단한 ID 리스트
+		List<String> myBlockList = ms.myBlockList(my_id);	// 로그인 유저가 차단한 ID 리스트
+		if (m_id == null || blockList.contains(m_id) || myBlockList.contains(m_id) || ms.select(m_id) == null ) return "followListErr";
+		
 		List<String> myFollowList = ms.followList(m_id); 	// 조회 대상이 팔로우중인 아이디 리스트
 		List<String> followList = ms.followerList(my_id); 	// 나를 팔로우한 아이디 리스트 
 		
@@ -222,6 +226,10 @@ public class MemberController {
 		}
 		if (more == null) more = 0;
 		String my_id = (String) session.getAttribute("m_id");
+		List<String> blockList = ms.blockList(my_id);	// 로그인 유저를 차단한 ID 리스트
+		List<String> myBlockList = ms.myBlockList(my_id);	// 로그인 유저가 차단한 ID 리스트
+		if (m_id == null || blockList.contains(m_id) || myBlockList.contains(m_id) || ms.select(m_id) == null ) return "followListErr";
+		
 		Member member = ms.select(my_id);
 		String m_profile = member.getM_profile();
 		String m_nickname = member.getM_nickname();
